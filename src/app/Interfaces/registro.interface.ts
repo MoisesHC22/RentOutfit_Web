@@ -3,8 +3,8 @@ export interface RegistroInterface {
     codigoPostal?: string;
     colonia?: string;
     calle?: string;
-    noInt?: number;
-    noExt?: number;
+    noInt?: string;
+    noExt?: string;
     municipio?: string;
     email?: string;
     contrasena?: string;

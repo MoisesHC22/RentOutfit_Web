@@ -7,7 +7,7 @@
    
     <form [formGroup]="datos" (ngSubmit)="iniciarSesion()">
       <label for="email">Correo</label>
-      <input type="email" id="email" formControlName="email" placeholder="correo@gmail.com" required maxlength="50"/>
+      <input type="email" id="email" formControlName="email" placeholder="correo@gmail.com" required maxlength="50" (keypress)="ValidarCorreo($event)" (input)="ValidarInputCorreo($event)" autocomplete="email"/>
 
       <div class="ContValidaciones" *ngIf="datos.get('email')?.invalid && (datos.get('email')?.touched || datos.get('email')?.dirty)">
         <small *ngIf="datos.get('email')?.errors?.['required']" class="Mensaje-Error">El correo es requerido</small>
@@ -19,7 +19,7 @@
         <a href="#">¿Olvidaste Tu contraseña?</a>
       </div>
 
-      <input type="password" id="contrasena" formControlName="contrasena" placeholder="**********" required maxlength="15"/>
+      <input type="password" id="contrasena" formControlName="contrasena" placeholder="**********" required maxlength="15" autocomplete="new-password"/>
       <div class="ContValidaciones" *ngIf="datos.get('contrasena')?.invalid && (datos.get('contrasena')?.touched || datos.get('contrasena')?.dirty)">
         <small *ngIf="datos.get('email')?.errors?.['required']" class="Mensaje-Error">La contraseña es requerida</small>
       </div>

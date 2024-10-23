@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit} from '@angular/core';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FuncionesService } from '../../../Services/funciones.service';
 import { EstadoInterface } from '../../../Interfaces/estado.interface';
@@ -52,6 +52,18 @@ export function MatchContrasenaValidacion(contrasena: string, contrasenaConfirma
     };
 }
 
+export function SoloLetras(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
+    const soloLetrasRagExp = /^[a-zA-ZÁ-ÿ\s]+$/;
+
+    if(!value || soloLetrasRagExp.test(value)) {
+      return null;
+    }
+    return { SoloLetras: true}
+  }
+}
+
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -86,18 +98,19 @@ export class RegisterComponent implements OnInit {
       codigoPostal: ['', [Validators.required]],
       colonia: ['', [Validators.required]],
       calle: ['', [Validators.required]],
-      noInt: [0, [Validators.required]],
-      noExt: [0,  [Validators.required]],
+      noInt: ['', [Validators.required]],
+      noExt: ['',  [Validators.required]],
       municipio: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       contrasena: ['', [Validators.required, CaracteresContrasenaValidacion()]],
       contrasenaValidar: ['',Validators.required],
-      nombre: ['', Validators.required],
+      nombre: ['', [Validators.required]],
       apellidoPaterno: ['', [Validators.required]],
       apellidoMaterno: ['', [Validators.required]],
-      imagen: [null, [Validators.required]],
       telefono: ['', [Validators.required]],
-      genero: [0, [Validators.required]]
+      genero: [0, [Validators.required]],
+      terminos: [false, Validators.requiredTrue],
+      imagen: [null, [Validators.required]]
     },{
       validator: MatchContrasenaValidacion('contrasena','contrasenaValidar')
     });
@@ -114,8 +127,6 @@ export class RegisterComponent implements OnInit {
     path: '/Animaciones/Registro.json'
   }
 
-
-
   siguientePaso() 
   {
     if (this.paso < 3) {
@@ -123,17 +134,17 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-
-
   AnteriorPaso()
   {
     if (this.paso > 1)
     {
       this.paso--;
+
+      if(this.paso === 2 && this.imagenPerfil){
+        this.statusImg = true;
+      }
     }
   }
-
-
 
   ListaEstados(){
     this.Funciones.ObtenerEstados().subscribe({
@@ -146,8 +157,6 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-
-
   ListaMunicipios(estadoID: number){
     this.Funciones.ObtenerMunicipios(estadoID).subscribe({
       next: (result) => {
@@ -159,8 +168,6 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-
-
   ListaGeneros(){
     this.Funciones.ObtenerGeneros().subscribe({
       next: (result) => {
@@ -171,8 +178,6 @@ export class RegisterComponent implements OnInit {
       }
     })
   }
-
-
 
 EstadoSeleccionado(event: Event)
 {
@@ -214,23 +219,31 @@ imagenSeleccionada(event: Event): void{
        reader.onload = () => {
           this.imagenPrevisualizacion = reader.result;
        };
+      
+       this.datos.get('imagen')?.setValue(file);
        this.statusImg = true;
        reader.readAsDataURL(this.imagenPerfil);
+    }else {
+      this.datos.get('imagen')?.setValue(null);
+      this.statusImg = false;
     }
-
-    console.log(this.imagenPerfil);
 }
 
 
 Registro(): void
 {
   const formData = new FormData();
+
+  const noInt = this.datos.value.noInt === "0" ? "S/N" : this.datos.value.noInt;
+  const noExt = this.datos.value.noExt === "0" ? "S/N" : this.datos.value.noExt;
+
+
   formData.append('estadoID', this.datos.value.estado);
   formData.append('codigoPostal', this.datos.value.codigoPostal);
   formData.append('colonia', this.datos.value.colonia);
   formData.append('calle', this.datos.value.calle);
-  formData.append('noInt', this.datos.value.noInt);
-  formData.append('noExt', this.datos.value.noExt);
+  formData.append('noInt', noInt);
+  formData.append('noExt', noExt);
   formData.append('municipio', this.datos.value.municipio);
   formData.append('email', this.datos.value.email);
   formData.append('contrasena', this.datos.value.contrasena);  
@@ -248,10 +261,95 @@ Registro(): void
       this.rutas.navigate(['/Login']);
     },
     error: (err) => {
-      console.log('Error: ', err);
+      console.log('Ocurrio un error.');
     }
   });
  }
+
+  ValidarSoloLetras(event: KeyboardEvent){
+   const charCode = event.charCode;
+   const charStr = String.fromCharCode(charCode);
+
+   const regex = /^[a-zA-ZÁ-ÿ\s]+$/;
+
+   if (!regex.test(charStr)) {
+    event.preventDefault();
+   }
+  }
+
+  ValidarInputLetras(event: Event) {
+   const input = event.target as HTMLInputElement;
+   const valor = input.value;
+
+   input.value = valor.replace(/[^a-zA-ZÁ-ÿ\s]/g, '');
+  }
+
+
+  ValidarNumerosIyE(event: KeyboardEvent): void {
+    const charCode = event.charCode;
+    const charStr = String.fromCharCode(charCode);
+  
+    const regex = /^[0-9sSnN\/]$/;
+  
+    if (!regex.test(charStr)) {
+      event.preventDefault();
+    }
+  }
+
+  ValidarInputNumerosIyE(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    let valor = input.value;
+  
+    const regex = /^[0-9]{0,3}$|^[sS]$|^[sS][\/]$|^[sS][\/][nN]$/;
+  
+    if (!regex.test(valor)) {
+
+      valor = valor.replace(/[^0-9sSnN\/]/g, '');
+
+      if (!regex.test(valor)){
+        valor = ''
+      }
+    }
+    input.value = valor;
+  }
+
+
+  ValidarSoloNumero(event: KeyboardEvent){
+   const charCode = event.charCode;
+   const charStr = String.fromCharCode(charCode);
+
+   const regex = /^[0-9]$/;
+
+   if (!regex.test(charStr)) {
+    event.preventDefault();
+   }
+  }
+  
+  ValidarInputNumero(event: Event): void {
+   const input = event.target as HTMLInputElement;
+   const valor = input.value;
+    
+   input.value = valor.replace(/[^0-9\/]/g, '');
+  }
+
+  ValidarCorreo(event: KeyboardEvent){
+    const charCode = event.charCode || event.keyCode;
+    const charStr = String.fromCharCode(charCode);
+
+    const regex = /^[a-zA-Z0-9@._-]$/;
+
+    if(!regex.test(charStr)) {
+      event.preventDefault();
+    }
+  }
+
+  ValidarInputCorreo(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const valor = input.value;
+
+    input.value = valor.replace(/[^a-zA-Z0-9@._-]/g, '');
+    input.value = input.value.trim();
+  }
 
  }  
 

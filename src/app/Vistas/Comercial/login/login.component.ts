@@ -1,9 +1,9 @@
-import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit,} from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterOutlet, RouterModule, RouterLink } from '@angular/router';
 import { LottieComponent, AnimationOptions } from 'ngx-lottie';
-import { IniciarSesionInterface, RequerimientosIniciarSesion } from '../../../Interfaces/iniciarSesion.interface';
+import { RequerimientosIniciarSesion } from '../../../Interfaces/iniciarSesion.interface';
 import { FuncionesService } from '../../../Services/funciones.service';
 import { CommonModule } from '@angular/common';
 import { CookieService} from 'ngx-cookie-service';
@@ -25,6 +25,7 @@ import { CookieService} from 'ngx-cookie-service';
 export class LoginComponent implements OnInit{
   
   datos: any;
+  mensajeError: string | null = null;
 
   constructor(private rutas: Router, private form: FormBuilder, private funciones: FuncionesService, private cookie: CookieService){}
   
@@ -53,9 +54,30 @@ export class LoginComponent implements OnInit{
         this.rutas.navigate(['/Cliente/home']);
       },
       error: (err) => {
-        console.log('Error: ', err);
+        console.log('Ocurrio algo inesperado.');
       }
     });
   }
   
+ 
+  ValidarCorreo(event: KeyboardEvent){
+    const charCode = event.charCode || event.keyCode;
+    const charStr = String.fromCharCode(charCode);
+
+    const regex = /^[a-zA-Z0-9@._-]$/;
+
+    if(!regex.test(charStr)) {
+      event.preventDefault();
+    }
+  }
+
+  ValidarInputCorreo(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const valor = input.value;
+
+    input.value = valor.replace(/[^a-zA-Z0-9@._-]/g, '');
+    input.value = input.value.trim();
+  }
+
+
 }
