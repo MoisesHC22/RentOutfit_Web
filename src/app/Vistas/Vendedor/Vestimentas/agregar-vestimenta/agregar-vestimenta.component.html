@@ -1,1 +1,87 @@
-<p>agregar-vestimenta works!</p>
+<h2>Agrega una prenda</h2>
+<div class="container">
+    <div class="form-columns">
+        <!-- Columna izquierda (cuadros de imagen) -->
+        <div class="left-column">
+            <div class="image-grid">
+                <!-- Primer cuadro de imagen -->
+                <div class="image-banner" (click)="cargarImagen(0)">
+                    <img [src]="imagenesPrevisualizacion[0]" *ngIf="imagenesPrevisualizacion[0]" alt="Previsualización de la imagen 1" />
+                    <span *ngIf="!imagenesPrevisualizacion[0]" class="upload-label">Selecciona una foto de 2 MB (Imagen 1)</span>
+                    <input type="file" id="fileInput1" (change)="imagenSeleccionada($event, 0)" accept="image/*" style="display: none;" />
+                </div>
+
+                <!-- Segundo cuadro de imagen -->
+                <div class="image-banner" (click)="cargarImagen(1)">
+                    <img [src]="imagenesPrevisualizacion[1]" *ngIf="imagenesPrevisualizacion[1]" alt="Previsualización de la imagen 2" />
+                    <span *ngIf="!imagenesPrevisualizacion[1]" class="upload-label">Selecciona una foto de 2 MB (Imagen 2)</span>
+                    <input type="file" id="fileInput2" (change)="imagenSeleccionada($event, 1)" accept="image/*" style="display: none;" />
+                </div>
+
+                <!-- Tercer cuadro de imagen -->
+                <div class="image-banner" (click)="cargarImagen(2)">
+                    <img [src]="imagenesPrevisualizacion[2]" *ngIf="imagenesPrevisualizacion[2]" alt="Previsualización de la imagen 3" />
+                    <span *ngIf="!imagenesPrevisualizacion[2]" class="upload-label">Selecciona una foto de 2 MB (Imagen 3)</span>
+                    <input type="file" id="fileInput3" (change)="imagenSeleccionada($event, 2)" accept="image/*" style="display: none;" />
+                </div>
+
+                <!-- Cuarto cuadro de imagen -->
+                <div class="image-banner" (click)="cargarImagen(3)">
+                    <img [src]="imagenesPrevisualizacion[3]" *ngIf="imagenesPrevisualizacion[3]" alt="Previsualización de la imagen 4" />
+                    <span *ngIf="!imagenesPrevisualizacion[3]" class="upload-label">Selecciona una foto de 2 MB (Imagen 4)</span>
+                    <input type="file" id="fileInput4" (change)="imagenSeleccionada($event, 3)" accept="image/*" style="display: none;" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Columna derecha (campos del formulario) -->
+        <div class="right-column">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre de la prenda">
+            </div>
+
+            <div class="form-group">
+                <label for="precio">Precio (MXN)</label>
+                <input type="number" id="precio" name="precio" min="0" step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="stock">Stock</label>
+                <input type="number" id="stock" name="stock" value="1" min="1">
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" name="descripcion" placeholder="Descripción de la prenda"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="talla">Talla</label>
+                <select id="talla" name="talla">
+                    <option value="">Selecciona una talla</option>
+                    <option value="XS">XS</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="categoria">Categoría</label>
+                <select id="categoria" name="categoria">
+                    <option value="">Selecciona una categoría</option>
+                    <option value="trajes">Trajes</option>
+                    <option value="camisas">Camisas</option>
+                    <option value="pantalones">Pantalones</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="buttons">
+        <button type="button" class="cancel-btn">Cancelar</button>
+        <button type="button" class="submit-btn">Agregar</button>
+    </div>
+</div>
