@@ -34,7 +34,7 @@
            <div class="row">
              <div class="form-group">
                <label for="password">Contraseña</label>
-               <input type="password" id="contrasena" name="contrasena" formControlName="contrasena" placeholder="**********" maxlength="12"/>
+               <input type="password" id="contrasena" name="contrasena" formControlName="contrasena" placeholder="**********" maxlength="15"/>
                
                <div class="ContValidaciones" *ngIf="datos.get('contrasena')?.errors?.contrasenaVal && datos.get('contrasena')?.invalid && (datos.get('contrasena')?.touched || datos.get('contrasena')?.dirty)">
                 <small class="Mensaje-Error" *ngIf="datos.get('contrasena')?.errors?.['required']">Este campo es obligatorio!</small>

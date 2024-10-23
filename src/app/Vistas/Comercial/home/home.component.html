@@ -1,1 +1,62 @@
-<p>home works!</p>
+
+<!-- Mapa -->
+
+<div class="contenedorIframe">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14991.679986089333!2d-99.34277175833029!3d20.05379348983999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d22d5c4921c57d%3A0x8c4bd5d305605fc6!2sCuidado%20Con%20el%20Perro%20Centro%20Hidalgo!5e0!3m2!1ses!2smx!4v1728955948414!5m2!1ses!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+
+<!-- Mapa End -->
+
+<div class="contenedor-tienda">
+    <h5>Cerca de ti</h5>
+    <p>Encuentra todo lo que estás buscando a la medida</p>
+    <hr />
+    <h6>Tiendas</h6>
+    <div class="tienda-galeria">
+      <div *ngFor="let tienda of tiendas" class="tarjeta-tienda">
+        <img [src]="tienda.imagenUrl" alt="{{ tienda.nombre }}">
+        <div class="info-tienda">
+          <p>{{ tienda.ubicacion }}</p>
+          <h4>{{ tienda.nombre }}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br><br><br>
+<!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Rent Outfit</h3>
+            <p>Fácil de usar, accesible y flexible, Rent Outfit te permite alquilar con comodidad y seguridad, brindándote una experiencia sin complicaciones desde la búsqueda hasta la devolución. ¡Haz de tu evento algo especial sin esfuerzo!</p>
+            <div class="social-icons">
+                <a href="#"><fa-icon id="Facebook" [icon]="faFacebook" class="icon-custom"></fa-icon></a>
+                <a href="#"><fa-icon id="Instagram" [icon]="faInstagram" class="icon-custom"></fa-icon></a>
+                <a href="#"><fa-icon id="Whatsapp" [icon]="faWhatsapp" class="icon-custom"></fa-icon></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Nosotros</h3>
+            <ul>
+                <li><a href="#">Sobre nosotros</a></li>
+                <li><a href="#">Contactanos</a></li>
+                <li><a href="#">Servicio personalizado</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Productos</h3>
+            <ul>
+                <li><a href="#">Calzado</a></li>
+                <li><a href="#">Trajes</a></li>
+                <li><a href="#">Disfraces</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Suscríbete y entérate de las novedades de Rent Outfit</h3>
+            <input type="email" placeholder="Escribe tu correo">
+            <button>Registrarse</button>
+        </div>
+    </div>
+</footer>
+<!-- Footer End -->
