@@ -10,11 +10,11 @@
     
     <div class="right-panel">
       <div class="form-container">
-        <h2 *ngIf="paso === 1">Crea una cuenta</h2>
-        <h2 *ngIf="paso === 2">Información personal</h2>
-        <h2 *ngIf="paso === 3">Direccion</h2>
+        <h2 style="text-align: center; font-weight: bold;" *ngIf="paso === 1">Crea una cuenta</h2>
+        <h2 style="text-align: center; font-weight: bold;" *ngIf="paso === 2">Información personal</h2>
+        <h2 style="text-align: center; font-weight: bold;" *ngIf="paso === 3">Direccion</h2>
 
-        <p>Para eventos especiales y festivales</p>
+        <p style="text-align: center;">Para eventos especiales y festivales</p>
         
         <form>
           <div *ngIf="paso === 1">
@@ -44,10 +44,9 @@
             
               <!--Esta parte es el elemento elegir imagen-->
 
-              <h2>Sube tu imagen</h2>
               <div class="image-preview" id="imagePreview">
                 <img id="previewImg" src="" alt="Previsualización de la imagen" style="display: none;" />
-                <label for="imageUpload" id="uploadLabel" class="upload-label">Selecciona una imagen</label>
+                <label for="imageUpload" id="uploadLabel" class="upload-label">Selecciona una foto</label>
                 <input type="file" id="imageUpload" accept="image/*" style="display: none;" />
               </div>
 
