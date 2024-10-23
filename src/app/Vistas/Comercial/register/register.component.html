@@ -4,7 +4,7 @@
         <img src="RentOutfitLogo.png" alt="Rent Outfit Logo" />
       </div>
       <div class="gif-container">
-        <img src="assets/animated.gif" alt="Rent Outfit GIF" />
+        <ng-lottie [options]="animationOptions"></ng-lottie>
       </div>
     </div>
     
@@ -41,6 +41,16 @@
            </div>
         
            <div *ngIf="paso === 2">
+            
+              <!--Esta parte es el elemento elegir imagen-->
+
+              <h2>Sube tu imagen</h2>
+              <div class="image-preview" id="imagePreview">
+                <img id="previewImg" src="" alt="Previsualización de la imagen" style="display: none;" />
+                <label for="imageUpload" id="uploadLabel" class="upload-label">Selecciona una imagen</label>
+                <input type="file" id="imageUpload" accept="image/*" style="display: none;" />
+              </div>
+
            <div class="row">
             <div class="form-group">
               <label for="firstName">Nombre del cliente</label>
@@ -70,15 +80,18 @@
               <label for="genero">Genero</label>
               <select id="genero" name="genero" >
                  <option value="" disabled selected>Selecciona tu genero</option>
+                 <option *ngFor="let genero of GenerosList" [value]="genero.generoID">{{genero.nombreGenero}}</option>
               </select>
             </div>
           </div>
-  
-  
-          <button type="button" (click)="AnteriorPaso()" class="submit-button">Anterior</button>
-          <button type="button" (click)="siguientePaso()" class="submit-button">Siguiente</button>
-   
-          </div>
+
+
+        <div class="ContBtn">
+             <button type="button" (click)="AnteriorPaso()" class="btnRegresar"> <fa-icon id="Icono" [icon]="faArrow"></fa-icon></button>
+             <button type="button" (click)="siguientePaso()" class="btnContinuar">Siguiente</button>
+        </div>
+
+      </div>
           
           <div *ngIf="paso === 3">
             <div class="row">
@@ -117,7 +130,7 @@
               <div class="row">
                 <div class="form-group">
                   <label for="estado">Estado</label>
-                  <select id="estado" name="estado" >
+                  <select id="estado" name="estado" (change)="EstadoSeleccionado($event)">
                      <option value="" disabled selected>Selecciona aqui</option>
                      <option *ngFor="let estado of EstadosList" [value]="estado.estadoID">{{estado.nombreEstado}}</option>
                   </select>
@@ -139,8 +152,10 @@
                 <label for="terms">Acepto los términos y condiciones</label>
               </div>
       
-              <button type="button" (click)="AnteriorPaso()" class="submit-button">Anterior</button>
-              <button type="submit" class="submit-button">Crear cuenta</button>
+              <div class="ContBtn">
+                 <button type="button" (click)="AnteriorPaso()" class="btnRegresar"><fa-icon id="Icono" [icon]="faArrow"></fa-icon></button>
+                 <button type="submit" class="btnContinuar">Crear cuenta</button>
+              </div>
           </div>
 
         </form>

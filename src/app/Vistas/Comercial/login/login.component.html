@@ -1,6 +1,6 @@
 <div class="login-container">
   <div class="login-form">
-    <img src="../../assets/rent outfit recolor.jpg" alt="Rent Outfit Logo" class="logo" />
+    <img src="RentOutfitLogo.png" alt="Rent Outfit Logo" class="logo" />
     <h2>Bienvenido de vuelta</h2>
     <h1>Iniciar sesión</h1>
     <form>
@@ -14,10 +14,6 @@
 
       <input type="password" id="password" placeholder="**********" />
 
-      <div class="checkbox-group">
-        <input type="checkbox" id="rememberMe" name="rememberMe" />
-        <label for="rememberMe">Recuérdame</label>
-      </div>
 
       <div class="button-container">
         <button type="submit">INGRESAR ➔</button>
@@ -26,7 +22,9 @@
     <p>¿No tienes cuenta? <a routerLink="/Register">Crea una aquí</a></p>
   </div>
 
-  <div class="login-gif">
-    <img src="../../assets/LoginGif.gif" alt="Login Animation" />
+  <div class="ContAnimacion">
+    <div class="login-gif">
+      <ng-lottie [options]="animationOptions"></ng-lottie>
+    </div>
   </div>
 </div>

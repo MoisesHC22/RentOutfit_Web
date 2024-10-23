@@ -5,7 +5,10 @@
   }
   
   .left-panel {
-    background-color: #f0f0f0; /* Franja gris */
+    background-image: url('/Recursos/Fondo_Registro.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; /* Franja gris */
     width: 35%; /* Ajustar según se desee */
     display: flex;
     flex-direction: column;
@@ -178,3 +181,62 @@ option {
 option:disabled {
     color: #aaa;
 }
+
+.btnRegresar { 
+  background-color: black;
+  color: #fff;
+  border-radius: 50px;
+  border: none;
+  width: 50px;
+  height: 50px;
+}
+
+.btnContinuar {
+   background-color: #4a90e2;
+   width: 90%;
+   max-width: 500px;
+   height: 50px;
+   color: #fff;
+   text-align: center;
+   border: none;
+   border-radius: 50px;
+   font-size: 18px;
+}
+
+.btnContinuar:hover {
+  background-color: #357abd;
+  }
+
+.ContBtn{
+   display: flex;
+   justify-content: center;
+   gap: 20px;
+   margin-top: 20px;
+}  
+
+img {
+  border-radius: 20%;
+  border: 2px solid #ddd;
+  display: block;
+  margin: 20px auto;
+}
+
+.image-preview {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed #ccc;
+  border-radius: 20%;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 20%;
+  display: block;
+  object-fit: cover;
+}
+

@@ -101,13 +101,26 @@ p a {
   text-decoration: none;
 }
 
-.login-gif {
+.ContAnimacion {
   margin-left: 50px;
+  background-image: url('/Recursos/Fonde_Login.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 40%;
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.login-gif img {
-  width: 300px;
+.login-gif {
+
+
 }
+
+
 
 .password-label-container {
   display: flex;

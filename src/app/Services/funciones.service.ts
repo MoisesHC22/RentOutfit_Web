@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { EstadoInterface } from '../Interfaces/estado.interface';
 import { response } from 'express';
 import { MunicipioInterface } from '../Interfaces/municipios.interfaces';
+import { GeneroInterface } from '../Interfaces/genero.interfaces';
 
 
 @Injectable({
@@ -28,6 +29,10 @@ export class FuncionesService {
 
   ObtenerMunicipios(estadoID: number) : Observable<MunicipioInterface[]> {
     return this.httpClient.post<MunicipioInterface[]>(this.API_RentOutfit + '/Listas/ObtenerMunicipios', estadoID);
+  }
+
+  ObtenerGeneros() : Observable<GeneroInterface[]> {
+    return this.httpClient.post<GeneroInterface[]>(this.API_RentOutfit + '/Listas/ObtenerGeneros', {})
   }
 
 }

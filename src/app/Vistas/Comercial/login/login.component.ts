@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterModule, RouterLink } from '@angular/router';
+import { LottieComponent, AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'app-login',
@@ -7,11 +8,16 @@ import { RouterOutlet, RouterModule, RouterLink } from '@angular/router';
   imports: [
     RouterOutlet,
     RouterLink,
-    RouterModule
+    RouterModule,
+    LottieComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  
+  animationOptions: AnimationOptions = {
+    path: '/Animaciones/Login.json'
+  }
 
 }

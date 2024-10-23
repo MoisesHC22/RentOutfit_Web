@@ -6,13 +6,13 @@ import { RegisterComponent } from './Vistas/Comercial/register/register.componen
 
 export const routes: Routes = [
 
-    {path: '', redirectTo:'/Cliente/Home', pathMatch: 'full'},
+    {path: '', redirectTo:'/Cliente/home', pathMatch: 'full'},
     
     {
      path: 'Cliente',
      component: MenuComponent,
      children: [
-        {path: 'Home', component: HomeComponent},
+        {path: 'home', component: HomeComponent},
 
      ],
     }, 
