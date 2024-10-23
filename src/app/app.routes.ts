@@ -3,6 +3,8 @@ import { HomeComponent } from './Vistas/Comercial/home/home.component';
 import { LoginComponent } from './Vistas/Comercial/login/login.component';
 import { MenuComponent } from './Vistas/menu/menu.component';
 import { RegisterComponent } from './Vistas/Comercial/register/register.component';
+import { InformacionUsuarioComponent } from './Vistas/Comercial/informacion-usuario/informacion-usuario.component';
+import { VestimentasComponent } from './Vistas/Comercial/vestimentas/vestimentas.component';
 
 export const routes: Routes = [
 
@@ -13,7 +15,9 @@ export const routes: Routes = [
      component: MenuComponent,
      children: [
         {path: 'home', component: HomeComponent},
-
+        {path: 'informacion', component: InformacionUsuarioComponent} ,
+        {path: 'vestimentas', component: VestimentasComponent}
+        
      ],
     }, 
 

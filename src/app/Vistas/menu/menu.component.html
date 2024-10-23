@@ -10,16 +10,16 @@
   
   
         <li class="nav-item">
-          <a routerLink="Home" class="nav-link">
+          <a routerLink="home" class="nav-link">
             <fa-icon id="Icono" [icon]="faHouse"></fa-icon>
             Home
           </a>
         </li>
   
         <li class="nav-item">
-          <a class="nav-link">
+          <a routerLink="vestimentas" class="nav-link">
             <fa-icon id="Icono" [icon]="faBag"></fa-icon>
-            Tiendas
+             Vestimentas
           </a>
         </li>
   
@@ -53,15 +53,31 @@
          <li *ngIf="token">
             <div class="d-flex">
               <img [src]="img" *ngIf="img" id="imgPerfil" alt="Profile">
-              <p>{{nombre}}</p>
-              <a class="nav-link"><fa-icon id="Icono" [icon]="faGear"></fa-icon></a>
-              <button type="button" (click)="CerrarSesion()">Cerrar sesion</button>
+              <p id="nombreUsuario">{{nombre}}</p>
+
+
+              <a class="nav-link dropdown-menu-toggle" id="dropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <fa-icon id="Icono" [icon]="faGear"></fa-icon>
+              </a>
+
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+                
+                <li> <a routerLink="informacion">Mi información</a> </li>
+                <li> <a>Adminstrar mi negocio</a> </li>
+                <li> 
+                  <button id="CerrarSesion" type="button" (click)="CerrarSesion()">
+                    <fa-icon id="Icono" [icon]="faDoorOpen"></fa-icon>
+                    Cerrar sesion
+                  </button> 
+                </li>
+             </ul>
+   
             </div>  
           </li>
 
-
+        
         <li class="nav-item dropdown" *ngIf="!token">
-          <button id="btnPerfil" routerLink="/Login">Iniciar sesión</button>
+          <button id="btnIniciarSesion" routerLink="/Login">Iniciar sesión</button>
         </li>
 
       </ul>

@@ -46,6 +46,9 @@ export class FuncionesService {
     return this.httpClient.post(this.API_RentOutfit + '/Cliente/RegistrarCliente', formData);
   }
 
-  
+  ObtenerCliente(usuarioID: number) : Observable<any>
+  {
+    return this.httpClient.post(this.API_RentOutfit + '/Cliente/ObtenerCliente', usuarioID)
+  }
   
 }
