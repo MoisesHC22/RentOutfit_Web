@@ -18,19 +18,30 @@ import { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 })
 export class AgregarVestimentaComponent {
 
-  datos: any;
-
-  // Declaramos que las imágenes pueden ser File o null
+  formPrenda: FormGroup;
   imagenesPerfil: (File | null)[] = [null, null, null, null];
   imagenesPrevisualizacion: (string | ArrayBuffer | null)[] = [null, null, null, null];
 
-  // Método para activar el input file de la imagen correspondiente
+  constructor(private fb: FormBuilder) {
+    this.formPrenda = this.fb.group({
+      nombre: ['', Validators.required],
+      precio: [null, Validators.required],
+      stock: [1, Validators.required],
+      descripcion: ['', Validators.required],
+      talla: ['', Validators.required],
+      categoria: ['', Validators.required],
+      imagen1: [null, Validators.required],
+      imagen2: [null, Validators.required],
+      imagen3: [null, Validators.required],
+      imagen4: [null, Validators.required],
+    });
+  }
+
   cargarImagen(index: number) {
     const input = document.querySelectorAll('input[type="file"]')[index] as HTMLInputElement;
     input.click();
   }
 
-  // Método para manejar la selección de una imagen en un cuadro específico
   imagenSeleccionada(event: Event, index: number): void {
     const input = event.target as HTMLInputElement;
 
@@ -40,7 +51,7 @@ export class AgregarVestimentaComponent {
       const tamanoMaximoBytes = tamanoMaximoMB * 1024 * 1024;
 
       if (file.size > tamanoMaximoBytes) {
-        this.datos.get('imagen')?.setErrors({ maxSize: true });
+        this.formPrenda.get(`imagen${index + 1}`)?.setErrors({ maxSize: true });
         this.imagenesPerfil[index] = null;
         this.imagenesPrevisualizacion[index] = null;
         return;
@@ -54,7 +65,14 @@ export class AgregarVestimentaComponent {
       };
       reader.readAsDataURL(this.imagenesPerfil[index]);
     }
+  }
 
-    console.log(this.imagenesPerfil[index]);
+  onSubmit() {
+    if (this.formPrenda.valid) {
+      console.log('Formulario válido:', this.formPrenda.value);
+      // Lógica para enviar los datos
+    } else {
+      console.log('Formulario inválido');
+    }
   }
 }

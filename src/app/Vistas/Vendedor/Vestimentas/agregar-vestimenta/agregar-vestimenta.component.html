@@ -7,81 +7,95 @@
                 <!-- Primer cuadro de imagen -->
                 <div class="image-banner" (click)="cargarImagen(0)">
                     <img [src]="imagenesPrevisualizacion[0]" *ngIf="imagenesPrevisualizacion[0]" alt="Previsualización de la imagen 1" />
-                    <span *ngIf="!imagenesPrevisualizacion[0]" class="upload-label">Selecciona una foto de 2 MB (Imagen 1)</span>
+                    <span *ngIf="!imagenesPrevisualizacion[0]" class="upload-label">Selecciona una foto de 2 MB</span>
                     <input type="file" id="fileInput1" (change)="imagenSeleccionada($event, 0)" accept="image/*" style="display: none;" />
+                    <div style="color: red;" *ngIf="formPrenda.controls['imagen1'].touched && formPrenda.controls['imagen1'].hasError('required')" class="error">La imagen es obligatoria</div>
+                    <div style="color: red;" *ngIf="formPrenda.controls['imagen1'].touched && formPrenda.controls['imagen1'].hasError('maxSize')" class="error">La imagen excede el tamaño máximo permitido de 2 MB</div>
                 </div>
 
                 <!-- Segundo cuadro de imagen -->
                 <div class="image-banner" (click)="cargarImagen(1)">
                     <img [src]="imagenesPrevisualizacion[1]" *ngIf="imagenesPrevisualizacion[1]" alt="Previsualización de la imagen 2" />
-                    <span *ngIf="!imagenesPrevisualizacion[1]" class="upload-label">Selecciona una foto de 2 MB (Imagen 2)</span>
+                    <span *ngIf="!imagenesPrevisualizacion[1]" class="upload-label">Selecciona una foto de 2 MB</span>
                     <input type="file" id="fileInput2" (change)="imagenSeleccionada($event, 1)" accept="image/*" style="display: none;" />
+                    <div style="color: red;" *ngIf="formPrenda.controls['imagen2'].touched && formPrenda.controls['imagen2'].hasError('maxSize')" class="error">La imagen excede el tamaño máximo permitido de 2 MB</div>
                 </div>
 
                 <!-- Tercer cuadro de imagen -->
                 <div class="image-banner" (click)="cargarImagen(2)">
                     <img [src]="imagenesPrevisualizacion[2]" *ngIf="imagenesPrevisualizacion[2]" alt="Previsualización de la imagen 3" />
-                    <span *ngIf="!imagenesPrevisualizacion[2]" class="upload-label">Selecciona una foto de 2 MB (Imagen 3)</span>
+                    <span *ngIf="!imagenesPrevisualizacion[2]" class="upload-label">Selecciona una foto de 2 MB</span>
                     <input type="file" id="fileInput3" (change)="imagenSeleccionada($event, 2)" accept="image/*" style="display: none;" />
+                    <div style="color: red;" *ngIf="formPrenda.controls['imagen3'].touched && formPrenda.controls['imagen3'].hasError('maxSize')" class="error">La imagen excede el tamaño máximo permitido de 2 MB</div>
                 </div>
 
                 <!-- Cuarto cuadro de imagen -->
                 <div class="image-banner" (click)="cargarImagen(3)">
                     <img [src]="imagenesPrevisualizacion[3]" *ngIf="imagenesPrevisualizacion[3]" alt="Previsualización de la imagen 4" />
-                    <span *ngIf="!imagenesPrevisualizacion[3]" class="upload-label">Selecciona una foto de 2 MB (Imagen 4)</span>
+                    <span *ngIf="!imagenesPrevisualizacion[3]" class="upload-label">Selecciona una foto de 2 MB</span>
                     <input type="file" id="fileInput4" (change)="imagenSeleccionada($event, 3)" accept="image/*" style="display: none;" />
+                    <div style="color: red;" *ngIf="formPrenda.controls['imagen4'].touched && formPrenda.controls['imagen4'].hasError('maxSize')" class="error">La imagen excede el tamaño máximo permitido de 2 MB</div>
                 </div>
             </div>
         </div>
 
         <!-- Columna derecha (campos del formulario) -->
         <div class="right-column">
-            <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Nombre de la prenda">
-            </div>
+            <form [formGroup]="formPrenda" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" formControlName="nombre" placeholder="Nombre de la prenda">
+                    <div style="color: red;" *ngIf="formPrenda.controls['nombre'].touched && formPrenda.controls['nombre'].hasError('required')" class="error">El nombre es obligatorio</div>
+                </div>
 
-            <div class="form-group">
-                <label for="precio">Precio (MXN)</label>
-                <input type="number" id="precio" name="precio" min="0" step="0.01">
-            </div>
+                <div class="form-group">
+                    <label for="precio">Precio (MXN)</label>
+                    <input type="number" id="precio" name="precio" formControlName="precio" min="0" step="0.01">
+                    <div style="color: red;" *ngIf="formPrenda.controls['precio'].touched && formPrenda.controls['precio'].hasError('required')" class="error">El precio es obligatorio</div>
+                </div>
 
-            <div class="form-group">
-                <label for="stock">Stock</label>
-                <input type="number" id="stock" name="stock" value="1" min="1">
-            </div>
+                
+                <div class="form-group">
+                    <label for="stock">Stock</label>
+                    <input type="number" id="stock" name="stock" formControlName="stock" min="1" step="1">
+                    <div style="color: red;" *ngIf="formPrenda.controls['stock'].touched && formPrenda.controls['stock'].hasError('min')" class="error">El stock no puede ser negativo o cero</div>
+                </div>
 
-            <div class="form-group">
-                <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" name="descripcion" placeholder="Descripción de la prenda"></textarea>
-            </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" formControlName="descripcion" placeholder="Descripción de la prenda"></textarea>
+                    <div style="color: red;" *ngIf="formPrenda.controls['descripcion'].touched && formPrenda.controls['descripcion'].hasError('required')" class="error">La descripción es obligatoria</div>
+                </div>
 
-            <div class="form-group">
-                <label for="talla">Talla</label>
-                <select id="talla" name="talla">
-                    <option value="">Selecciona una talla</option>
-                    <option value="XS">XS</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                    <option value="XL">XL</option>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="talla">Talla</label>
+                    <select id="talla" name="talla" formControlName="talla">
+                        <option value="">Selecciona una talla</option>
+                        <option value="XS">XS</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                    <div style="color: red;" *ngIf="formPrenda.controls['talla'].touched && formPrenda.controls['talla'].hasError('required')" class="error">La talla es obligatoria</div>
+                </div>
 
-            <div class="form-group">
-                <label for="categoria">Categoría</label>
-                <select id="categoria" name="categoria">
-                    <option value="">Selecciona una categoría</option>
-                    <option value="trajes">Trajes</option>
-                    <option value="camisas">Camisas</option>
-                    <option value="pantalones">Pantalones</option>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="categoria">Categoría</label>
+                    <select id="categoria" name="categoria" formControlName="categoria">
+                        <option value="">Selecciona una categoría</option>
+                        <option value="trajes">Trajes</option>
+                        <option value="camisas">Camisas</option>
+                        <option value="pantalones">Pantalones</option>
+                    </select>
+                    <div style="color: red;" *ngIf="formPrenda.controls['categoria'].touched && formPrenda.controls['categoria'].hasError('required')" class="error">La categoría es obligatoria</div>
+                </div>
+
+                <!-- Botones -->
+                <div class="buttons">
+                    <button type="button" class="cancel-btn">Cancelar</button>
+                    <button type="submit" class="submit-btn">Agregar</button>
+                </div>
+            </form>
         </div>
-    </div>
-
-    <!-- Botones -->
-    <div class="buttons">
-        <button type="button" class="cancel-btn">Cancelar</button>
-        <button type="button" class="submit-btn">Agregar</button>
     </div>
 </div>
