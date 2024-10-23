@@ -1,0 +1,90 @@
+<h2>Agregar rentador</h2>
+<div class="container">
+  <!-- Banner para subir imagen -->
+  <div class="image-banner" id="imageBanner" (click)="cargarImagen()">
+    <img id="previewImg" [src]="imagenPrevisualizacion" *ngIf="imagenPrevisualizacion" alt="Previsualización de la imagen" />
+    <span *ngIf="!imagenPrevisualizacion" id="uploadLabel" class="upload-label">Selecciona una foto de 2 MB</span>
+    <input type="file" id="imageUpload" (change)="imagenSeleccionada($event)" accept="image/*" style="display: none;" />
+  </div>
+
+  <!-- Formulario en dos columnas -->
+  <form [formGroup]="rentadorForm" (ngSubmit)="onSubmit()">
+    <div class="form-columns">
+      <div class="form-group">
+        <label for="codigo-postal">Código Postal</label>
+        <input type="text" id="codigo-postal" formControlName="codigoPostal" placeholder="Código Postal">
+        <div *ngIf="codigoPostal?.touched && codigoPostal?.invalid" class="error">
+          <small style="color: red;" *ngIf="codigoPostal?.errors?.['required']">El código postal es obligatorio.</small>
+          <small style="color: red;" *ngIf="codigoPostal?.errors?.['pattern']">Debe tener 5 dígitos numéricos.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="estado">Estado</label>
+        <select id="estado" formControlName="estado">
+          <option value="">Seleccione un estado</option>
+          <option value="estado1">Estado 1</option>
+          <option value="estado2">Estado 2</option>
+          <option value="estado3">Estado 3</option>
+        </select>
+        <div *ngIf="estado?.touched && estado?.invalid" class="error">
+          <small style="color: red;" *ngIf="estado?.errors?.['required']">El estado es obligatorio.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="municipio">Municipio</label>
+        <select id="municipio" formControlName="municipio">
+          <option value="">Seleccione un municipio</option>
+          <option value="municipio1">Municipio 1</option>
+          <option value="municipio2">Municipio 2</option>
+          <option value="municipio3">Municipio 3</option>
+        </select>
+        <div *ngIf="municipio?.touched && municipio?.invalid" class="error">
+          <small style="color: red;" *ngIf="municipio?.errors?.['required']">El municipio es obligatorio.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="localidad">Localidad</label>
+        <select id="localidad" formControlName="localidad">
+          <option value="">Seleccione una localidad</option>
+          <option value="localidad1">Localidad 1</option>
+          <option value="localidad2">Localidad 2</option>
+          <option value="localidad3">Localidad 3</option>
+        </select>
+        <div *ngIf="localidad?.touched && localidad?.invalid" class="error">
+          <small style="color: red;" *ngIf="localidad?.errors?.['required']">La localidad es obligatoria.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" formControlName="nombre" placeholder="Nombre completo">
+        <div *ngIf="nombre?.touched && nombre?.invalid" class="error">
+          <small style="color: red;" *ngIf="nombre?.errors?.['required']">El nombre es obligatorio.</small>
+          <small style="color: red;" *ngIf="nombre?.errors?.['minlength']">Debe tener al menos 3 caracteres.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="direccion">Dirección</label>
+        <input type="text" id="direccion" formControlName="direccion" placeholder="Dirección">
+        <div *ngIf="direccion?.touched && direccion?.invalid" class="error">
+          <small style="color: red;" *ngIf="direccion?.errors?.['required']">La dirección es obligatoria.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="referencias">Referencias</label>
+        <textarea id="referencias" formControlName="referencias" placeholder="Referencias"></textarea>
+      </div>
+    </div>
+
+    <!-- Botones de acción al final -->
+    <div class="buttons">
+      <button type="button" class="cancel-btn">Cancelar</button>
+      <button type="submit" class="submit-btn" [disabled]="rentadorForm.invalid">Enviar</button>
+    </div>
+  </form>
+</div>
