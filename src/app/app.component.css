@@ -1,0 +1,48 @@
+
+.navbar-brand{
+    margin-right: 10px;
+}
+
+.nav-link{
+    margin-left: 30px;
+}
+
+
+.d-flex{
+
+  #contBuscar {
+     width: 300px;
+     height: 40px;
+     border-radius: 20px;
+  }
+
+  #btnBuscar {
+     border-radius: 50px;
+     width: 38px;
+     height: 38px;
+
+     #Icono{
+        margin-left: -2px;
+     }
+  }
+}
+
+#ContContrato {
+    margin-left: 28px;
+}
+
+
+#imgPerfil {
+    height: 38px;
+    width: 38px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+
+#btnPerfil {
+    width: 130px;
+    height: 38px;
+    border-radius: 10px;
+}
+
