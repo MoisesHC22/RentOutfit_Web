@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { EstadoInterface } from '../Interfaces/estado.interface';
-import { response } from 'express';
 import { MunicipioInterface } from '../Interfaces/municipios.interfaces';
 import { GeneroInterface } from '../Interfaces/genero.interfaces';
+import { RequerimientosIniciarSesion } from '../Interfaces/iniciarSesion.interface';
 
 
 @Injectable({
@@ -14,6 +14,7 @@ export class FuncionesService {
 
 
   private API_RentOutfit: string = 'https://localhost:7110';
+
 
   constructor(private httpClient: HttpClient) { }
 
@@ -35,4 +36,16 @@ export class FuncionesService {
     return this.httpClient.post<GeneroInterface[]>(this.API_RentOutfit + '/Listas/ObtenerGeneros', {})
   }
 
+  IniciarSesion(data: RequerimientosIniciarSesion) : Observable<any> 
+  {
+    return this.httpClient.post(this.API_RentOutfit + '/Cliente/IniciarSesion', data);
+  }
+
+  RegistrarCliente( formData: FormData) : Observable<any>
+  {
+    return this.httpClient.post(this.API_RentOutfit + '/Cliente/RegistrarCliente', formData);
+  }
+
+  
+  
 }
