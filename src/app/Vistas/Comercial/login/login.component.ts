@@ -2,16 +2,16 @@ import { Component } from '@angular/core';
 import { RouterOutlet, RouterModule, RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-login',
   standalone: true,
   imports: [
     RouterOutlet,
     RouterLink,
-    RouterModule,
+    RouterModule
   ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css'
 })
-export class AppComponent {
-  title = 'RentOutfit';
+export class LoginComponent {
+
 }
