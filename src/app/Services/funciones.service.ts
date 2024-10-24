@@ -5,6 +5,8 @@ import { EstadoInterface } from '../Interfaces/estado.interface';
 import { MunicipioInterface } from '../Interfaces/municipios.interfaces';
 import { GeneroInterface } from '../Interfaces/genero.interfaces';
 import { RequerimientosIniciarSesion } from '../Interfaces/iniciarSesion.interface';
+import { InformacionVestimenta, ListaVestimenta, RequerimientosVestimentas } from '../Interfaces/Vestimenta.interface';
+import { RequerimientosTiendasCercanas, TiendasCercanas } from '../Interfaces/tienda.interface';
 
 
 @Injectable({
@@ -49,6 +51,21 @@ export class FuncionesService {
   ObtenerCliente(usuarioID: number) : Observable<any>
   {
     return this.httpClient.post(this.API_RentOutfit + '/Cliente/ObtenerCliente', usuarioID)
+  }
+
+
+
+  
+  MostrarVestimentas(data: RequerimientosVestimentas): Observable<ListaVestimenta[]> {
+    return this.httpClient.post<ListaVestimenta[]>(this.API_RentOutfit + '/Cliente/MostrarVestimentas', data);
+  }
+
+  EstablecimientosCercanos(data: RequerimientosTiendasCercanas): Observable<TiendasCercanas[]> {
+    return this.httpClient.post<TiendasCercanas[]>(this.API_RentOutfit + '/Cliente/EstablecimientosCercanos', data);
+  }
+
+  InformacionVestimenta(vestimenta: number): Observable<any> {
+    return this.httpClient.post(this.API_RentOutfit + '/Cliente/InformacionVestimenta', vestimenta);
   }
   
 }

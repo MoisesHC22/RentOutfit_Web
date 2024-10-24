@@ -1,0 +1,22 @@
+<p>Bienvenido a vestimentas EXAMPLE</p>
+
+<div class="centrar">
+
+
+<div class="contenedor">
+    @for (item of VestimentasList; track $index) 
+    {
+        <div class="vestimenta">
+             
+            <div>
+                <img id="img" [src]="item.imagen1"  (click)="MasInformacion(item.vestimentaID)">
+
+                <h5>{{item.nombrePrenda}}</h5>
+                <p>{{item.nombreTalla}}</p>
+                <p>$ {{item.precioPorDia}}</p>
+                <p>{{item.nombreEstablecimiento}}</p>
+            </div>
+        </div>
+    }
+</div>
+</div>

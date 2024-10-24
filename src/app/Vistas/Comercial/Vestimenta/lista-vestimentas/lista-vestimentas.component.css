@@ -1,0 +1,24 @@
+.centrar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .contenedor{
+        margin: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 2px;
+
+        .Producto{
+            margin: 14px;
+            position: relative;
+        }
+    }
+
+}
+
+#img {
+    width: 210px;
+    height: 300px;
+    border-radius: 8px;
+}

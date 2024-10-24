@@ -4,7 +4,9 @@ import { LoginComponent } from './Vistas/Comercial/login/login.component';
 import { MenuComponent } from './Vistas/menu/menu.component';
 import { RegisterComponent } from './Vistas/Comercial/register/register.component';
 import { InformacionUsuarioComponent } from './Vistas/Comercial/informacion-usuario/informacion-usuario.component';
-import { VestimentasComponent } from './Vistas/Comercial/vestimentas/vestimentas.component';
+import { ListaVestimentasComponent } from './Vistas/Comercial/Vestimenta/lista-vestimentas/lista-vestimentas.component';
+import { InformacionVestimentaComponent } from './Vistas/Comercial/Vestimenta/informacion-vestimenta/informacion-vestimenta.component';
+
 
 export const routes: Routes = [
 
@@ -16,7 +18,8 @@ export const routes: Routes = [
      children: [
         {path: 'home', component: HomeComponent},
         {path: 'informacion', component: InformacionUsuarioComponent} ,
-        {path: 'vestimentas', component: VestimentasComponent}
+        {path: 'vestimentas', component: ListaVestimentasComponent},
+        {path: 'masInformacion/:vestimenta', component: InformacionVestimentaComponent} 
         
      ],
     }, 
