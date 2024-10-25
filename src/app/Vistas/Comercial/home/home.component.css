@@ -65,6 +65,129 @@ iframe {
 }
 
 
+.showcase {
+    background: url('/Recursos/fondoPublicidad.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+  
+  .showcase h1 {
+    margin-bottom: 20px;
+    color: #fff;
+    font-weight: 400;
+    font-size: 22px;
+  }
+  
+  .showcase p {
+    margin-bottom: 25px;
+    color: #fff;
+  }
+  
+  .device {
+    position: relative;
+    height: 676px;
+    width: 359px;
+    background: url('/Recursos/iphone.png') no-repeat center center;
+    margin: 0 auto;
+  }
+  
+  .device-content {
+    position: absolute;
+    top: 115px;
+    left: 56px;
+    width: 247px;
+    height: 445px;
+  }
+  
+  .device-content img {
+    width: 247px;
+    height: 445px;
+}
+.showcase-wrap {
+    position: relative;
+    padding: 100px 0;
+    min-height: 600px;
+}
+.showcase-slider ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+  
+  .slides {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .showcase .download-btn {
+    margin-top: 20px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .download-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .team-quote {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .avatar img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+  }
+  
+  .logo-quote img {
+    max-width: 80px;
+  }
+  
+  @media (max-width: 768px) {
+    .row {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .col-md-6 {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  
+    .device {
+        width: 90%; /* Ajusta el dispositivo al 90% del ancho de la pantalla */
+        min-height: 500px;
+    }
+  
+    .device-content {
+        top: 17%; /* Ajuste más fino para la posición vertical en pantallas pequeñas */
+        left: 5%; /* Ajuste más fino para la posición horizontal en pantallas pequeñas */
+        width: 90%; /* Se ajusta mejor al dispositivo en pantallas pequeñas */
+        height: 80%; /* Mantiene la proporción */
+    }
+  
+    h1 {
+      font-size: 20px;
+    }
+  }
+
+
+
+  
 
 /* Footer */
   body {
