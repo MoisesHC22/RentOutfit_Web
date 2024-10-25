@@ -3,7 +3,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
 import { FuncionesService } from '../../../Services/funciones.service';
 import { response } from 'express';
-import { GeneroInterface } from '../../../Interfaces/genero.interfaces';
 
 
 @Component({
@@ -17,19 +16,18 @@ import { GeneroInterface } from '../../../Interfaces/genero.interfaces';
 })
 export class InformacionUsuarioComponent implements OnInit {
 
-  datos: any;
-
   constructor(private Funciones: FuncionesService ,private cookie: CookieService){}
 
-  GenerosList: GeneroInterface[]=[];
   token: string | null = null;
   usuarioID: number | null = null
+
   nombre: string | null = null;
   apellidoP: string | null = null;
   apellidoM: string | null = null;
   img: string | null = null;
   email: string | null = null;
   telefono: string | null = null;
+  codigoPostal: string | null = null;
   genero:string | null = null;
 
   ngOnInit(): void {
@@ -75,17 +73,6 @@ export class InformacionUsuarioComponent implements OnInit {
     case 3: base64 += '='; break;
   }
   return atob(base64);
-  }
-
-  ListaGeneros(){
-    this.Funciones.ObtenerGeneros().subscribe({
-      next: (result) => {
-        this.GenerosList = result;
-      },
-      error: (err) => {
-        console.log(err)
-      }
-    })
   }
 
 
