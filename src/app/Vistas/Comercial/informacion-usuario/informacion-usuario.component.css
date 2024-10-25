@@ -1,0 +1,216 @@
+/* Estructura base */
+.container {
+    display: flex;
+    height: 100vh;
+    justify-content: center; /* Centrar el contenido horizontalmente */
+    align-items: center; /* Centrar el contenido verticalmente */
+  }
+  
+  /* Estilo del sidebar */
+  .sidebar {
+    background-color: #1e4e7e;
+    width: 200px;
+    padding: 20px;
+    height: 100vh;
+    position: fixed; /* Fija el sidebar en el borde izquierdo */
+    top: 0;
+    left: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para mayor profundidad */
+    display: flex; 
+    flex-direction: column; /* Asegura que el contenido esté en columna */
+    justify-content: space-between; /* Distribuye espacio entre los elementos */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    padding: 15px 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;  /* Para alinear ícono y texto */
+    align-items: center;
+    transition: background-color 0.3s ease; /* Transición suave para hover */
+  }
+  
+  .sidebar ul li i {
+    margin-right: 10px; /* Espacio entre el ícono y el texto */
+    font-size: 20px;
+  }
+  
+  /* Efecto hover */
+  .sidebar ul li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+  }
+  
+  /* Estilo del botón para mejorar consistencia */
+  .sidebar ul li button {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+  }
+  
+  /* Ajustes para el contenido principal de la página para que no quede debajo del sidebar */
+  .main-content {
+    margin-left: 270px; /* Espacio a la izquierda para que el contenido no esté debajo del sidebar */
+    padding: 20px;
+  }
+  
+  .card {
+    padding: 20px;
+    background-color: #f9fdff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+    margin-left: 200px; /* Deja espacio para el sidebar */
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  #editButton {
+    position: relative;
+    left: calc(100% - 100px);
+    top: -50px;
+    padding: 8px 16px;
+    background-color: #1e4e7e;
+    color: white;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #editButton:disabled {
+    background-color: #d6d6d6;
+    cursor: not-allowed;
+  }
+  
+  /* Imagen de perfil */
+  .profile-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  #imgPerfil {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ddd;
+  }
+  
+  .profile-info-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .field {
+    background-color: #dee3e7;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    width: 96%;
+  }
+  
+  .field label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .field p {
+    padding: 8px;
+    font-size: 0.9rem;
+    background-color: #f9f9f9;
+    border: 1px solid black;
+    border-radius: 8px;
+    width: 95%;
+    margin: 0 auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Media Queries para hacer el diseño responsivo */
+  
+  /* Dispositivos más pequeños */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .sidebar {
+      position: fixed; /* Fijar sidebar siempre visible en la izquierda */
+      width: 100%;
+      height: auto;
+      padding: 10px;
+      top: 0;
+    }
+  
+    .card {
+      margin: 20px;
+      width: 90%;
+      max-width: none;
+    }
+  
+    #editButton {
+      left: 85%;
+      top: 0;
+    }
+  
+    #imgPerfil {
+      width: 120px;
+      height: 120px;
+    }
+  }
+  
+  /* Dispositivos muy pequeños */
+  @media (max-width: 480px) {
+    .sidebar ul li {
+      margin: 10px 0;
+    }
+  
+    .sidebar ul li a {
+      padding: 6px 8px;
+      font-size: 0.9rem;
+    }
+  
+    .card {
+      width: 95%;
+      margin-left: 0; /* Elimina el margen a la izquierda para pantallas muy pequeñas */
+    }
+  
+    #editButton {
+      left: 80%;
+    }
+  
+    #imgPerfil {
+      width: 100px;
+      height: 100px;
+    }
+  
+    .field p {
+      font-size: 0.8rem;
+      padding: 6px;
+    }
+  }
+  
+  label{
+    color: black;
+  }
+  

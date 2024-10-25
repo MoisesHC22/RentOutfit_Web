@@ -1,22 +1,59 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-<h4>Informacion personal</h4>
 
-<img [src]="img" *ngIf="img" id="imgPerfil" alt="Profile">
-<p>{{ nombre }}</p>
-<p>{{ apellidoP }}</p>
-<p>{{ apellidoM }}</p>
-<p>{{ genero}}</p>
+<div class="container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <ul>
+      <li><i class="fas fa-user"></i> Información personal</li>
+      <li><i class="fas fa-cog"></i> Configuración</li>
+      <li><i class="fas fa-shield-alt"></i> Seguridad</li>
+      <li><i class="fas fa-question-circle"></i> Ayuda</li>
+    </ul>
+  </div>
 
-<h4>Contactos</h4>
+  <div class="card">
+    <h2>Información personal</h2> <!-- Título principal -->
 
-<p>{{ email }}</p>
-<p>{{ telefono }}</p>
+    <button id="editButton">Editar</button> <!-- Botón Editar en la parte superior derecha -->
 
-<h4>Direccion</h4>
-<p>{{ codigoPostal }}</p>
-<p>{{ colonia }}</p>
-<p>{{ calle }}</p>
-<p>{{ noExt }}</p>
-<p>{{ noInt }}</p>
-<p>{{ municipio }}</p>
-<p>{{ estado }}</p>
+    <!-- Imagen de perfil -->
+    <img [src]="img" *ngIf="img" id="imgPerfil" alt="Profile">
+
+    <div class="profile-info-column">
+      <div class="field">
+        <label>Nombre</label>
+        <p>{{nombre}}</p> <!-- Campo sin input -->
+      </div>
+      <div class="field">
+        <label>Apellido Paterno</label>
+        <p>{{apellidoP}}</p> <!-- Campo sin input -->
+      </div>
+      <div class="field">
+        <label>Apellido Materno</label>
+        <p>{{apellidoM}}</p> <!-- Campo sin input -->
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <p>{{email}}</p> <!-- Campo sin input -->
+      </div>
+      <div class="field">
+        <label>Teléfono</label>
+        <p>{{telefono}}</p> <!-- Campo sin input -->
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label for="genero">Genero</label>
+          <select id="genero" name="genero" formControlName="genero">
+             <option value="" disabled selected>Selecciona tu genero</option>
+             <option *ngFor="let genero of GenerosList" [value]="genero.generoID">{{genero.nombreGenero}}</option>
+          </select>
+
+          <div class="ContValidaciones" *ngIf="datos.get('genero')?.invalid && (datos.get('genero')?.touched || datos.get('genero')?.dirty)">
+            <small *ngIf="datos.get('genero')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
