@@ -1,11 +1,15 @@
-import { Component } from '@angular/core';
-import { TiendaInterface } from '../../../Interfaces/tienda.interface';
+import { Component, OnInit } from '@angular/core';
+import { RequerimientosTiendasCercanas, TiendasCercanas } from '../../../Interfaces/tienda.interface';
 import { CommonModule } from '@angular/common';
 import { AppComponent } from '../../../app.component';
 import { faHouse, faBagShopping, faShirt, faMagnifyingGlass, faBell,} from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faInstagram, faWhatsapp} from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { LottieComponent, AnimationOptions } from 'ngx-lottie';
+import { LottieComponent} from 'ngx-lottie';
+import { FuncionesService } from '../../../Services/funciones.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { CookieService } from 'ngx-cookie-service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @Component({
@@ -15,23 +19,16 @@ import { LottieComponent, AnimationOptions } from 'ngx-lottie';
     AppComponent,
     FontAwesomeModule,
     LottieComponent,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
   
 })
 
-export class HomeComponent {
-  tiendas: TiendaInterface[] = [
-    { nombre: 'Disfraces Diana', ubicacion: 'Centro, 42950 Tula, Hgo.', imagenUrl: '/Recursos/DisfracesDiana.png' },
-    { nombre: 'Trajes y calzado Zoto', ubicacion: 'Centro, 42844 EL Carmen, Hgo.', imagenUrl: '/Recursos/TiendaZoto.png' },
-    { nombre: 'King of Flow', ubicacion: 'Tepeji', imagenUrl: '/Recursos/King.png' },
-    { nombre: 'Suelas y disfraces', ubicacion: '16 de Enero', imagenUrl: '/Recursos/Suelas.png' },
-    { nombre: 'My Outfit', ubicacion: 'San Marcos', imagenUrl: '/Recursos/My Outfit.png' },
-    { nombre: 'Rent', ubicacion: 'La sesenta y uno', imagenUrl: '/Recursos/perro.jpg' },
-  ];
-
+export class HomeComponent implements OnInit{
+  
   faHouse = faHouse;
   faBag = faBagShopping;
   faShirt = faShirt;
@@ -40,5 +37,123 @@ export class HomeComponent {
   faFacebook = faFacebook;
   faInstagram = faInstagram;
   faWhatsapp = faWhatsapp;
+
+  constructor(private Funciones: FuncionesService, private sanitizer: DomSanitizer, private cookie: CookieService){}
+
+  token: string | null = null;
+  estado: string | null = null;
+  municipio: string | null = null;
+  pagina: number | null = null;
+
+  TiendaList: TiendasCercanas[]=[];
+
+  latitud!: number;
+  longitud!: number;
+  mapaSafeUrl!: SafeResourceUrl;
+  error!: string;
+
+  ngOnInit(): void {  
+
+    this.cookie.delete('ubicacion', '/');
+
+    this.obtenerUbicacion();
+  }
+
+  ListaTiendas(estado: string, municipio: string){
+    
+    const data: RequerimientosTiendasCercanas = {
+      estado: this.estado!,
+      municipio: this.municipio!,
+      pagina: this.pagina!
+    };
+
+    this.Funciones.EstablecimientosCercanos(data).subscribe({
+      next: (result) => {
+        this.TiendaList = result;
+      },
+      error: (err) =>{
+        console.log("Ocurrio un error.");
+      }
+    });
+  }
+  
+  obtenerUbicacion(): void {
+    if (typeof window !== 'undefined' && navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.latitud = position.coords.latitude;
+        this.longitud = position.coords.longitude;
+        this.generarMapaConMarcador();
+        this.obtenerEstadoMunicipio(this.latitud, this.longitud);
+      },
+      (error) => {
+        this.error = 'No se pudo obtener la ubicación';
+        console.error('Error obteniendo la ubicación:', error);
+      }
+    );
+    } else {
+      this.error = 'La geolocalización no es compatible con este navegador';
+    }
+  }
+
+  generarMapaConMarcador(): void {
+    const url = `https://www.google.com/maps/embed/v1/view?key=AIzaSyCDTIozOvb6f5hDCDyvkWziUMrfQzDjQQk&center=${this.latitud},${this.longitud}&zoom=14`;
+    
+    this.mapaSafeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  obtenerEstadoMunicipio(latitud: number, longitud: number): void {
+    const apiKey = 'AIzaSyCDTIozOvb6f5hDCDyvkWziUMrfQzDjQQk';
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitud},${longitud}&key=${apiKey}`;
+    
+    this.Funciones.obtenerDatosDesdeGeocoding(url).subscribe(
+      (response: any) => {
+
+        // console.log('Respuesta completa de la API:', response);
+
+        let estado: string | null = null;
+        let municipio: string | null = null;
+
+        if (response && response.status === 'OK' && Array.isArray(response.results) && response.results.length > 0) {
+          response.results.forEach((resultado: any) => {
+
+            if (resultado && Array.isArray(resultado.address_components)) {
+              resultado.address_components.forEach((componente: any) => {
+                if (componente.types.includes('administrative_area_level_1')) {
+                  estado = componente.long_name;
+                }
+                if (componente.types.includes('administrative_area_level_2')) {
+                  municipio = componente.long_name;
+                }
+              });
+            }
+          });
+  
+          if (estado && (estado as string).startsWith('Estado de')) {
+            estado = (estado as string).replace('Estado de ', '');
+          }
+
+          if (estado && municipio) {
+            console.log(`Estado: ${estado}, Municipio: ${municipio}`);
+            this.estado = estado;
+            this.municipio = municipio;
+
+            const ubicación = {estado: this.estado, municipio: this.municipio};
+            this.cookie.set('ubicacion', JSON.stringify(ubicación), 1, '/');
+
+            this.ListaTiendas(this.estado, this.municipio);
+
+          } else {
+            console.log('No se encontraron los datos de estado y municipio.');
+          }
+        } else {
+          console.error('La respuesta de la API no es válida o no contiene resultados.');
+        }
+      },
+      (error) => {
+        console.error('Error llamando a la API de Google Geocoding:', error);
+      }
+    );
+  }
 
 }

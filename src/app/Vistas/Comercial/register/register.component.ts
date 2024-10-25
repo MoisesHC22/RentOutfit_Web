@@ -94,13 +94,6 @@ export class RegisterComponent implements OnInit {
     this.ListaEstados();
     this.ListaGeneros();
     this.datos = this.form.group({
-      estado: [0, [Validators.required]],
-      codigoPostal: ['', [Validators.required]],
-      colonia: ['', [Validators.required]],
-      calle: ['', [Validators.required]],
-      noInt: ['', [Validators.required]],
-      noExt: ['',  [Validators.required]],
-      municipio: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       contrasena: ['', [Validators.required, CaracteresContrasenaValidacion()]],
       contrasenaValidar: ['',Validators.required],
@@ -234,17 +227,6 @@ Registro(): void
 {
   const formData = new FormData();
 
-  const noInt = this.datos.value.noInt === "0" ? "S/N" : this.datos.value.noInt;
-  const noExt = this.datos.value.noExt === "0" ? "S/N" : this.datos.value.noExt;
-
-
-  formData.append('estadoID', this.datos.value.estado);
-  formData.append('codigoPostal', this.datos.value.codigoPostal);
-  formData.append('colonia', this.datos.value.colonia);
-  formData.append('calle', this.datos.value.calle);
-  formData.append('noInt', noInt);
-  formData.append('noExt', noExt);
-  formData.append('municipio', this.datos.value.municipio);
   formData.append('email', this.datos.value.email);
   formData.append('contrasena', this.datos.value.contrasena);  
   formData.append('nombreCliente',this.datos.value.nombre);

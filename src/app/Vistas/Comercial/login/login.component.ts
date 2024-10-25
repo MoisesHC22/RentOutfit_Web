@@ -27,6 +27,8 @@ export class LoginComponent implements OnInit{
   datos: any;
   mensajeError: string | null = null;
 
+  mostrarAnimacionExito = false;
+
   constructor(private rutas: Router, private form: FormBuilder, private funciones: FuncionesService, private cookie: CookieService){}
   
   ngOnInit(): void {
@@ -41,6 +43,9 @@ export class LoginComponent implements OnInit{
     path: '/Animaciones/Login.json'
   }
 
+  animacionExitoOptions: AnimationOptions = {
+    path: '/Animaciones/LoginCarga.json'
+  }
  
   iniciarSesion(): void{
     const data: RequerimientosIniciarSesion = {
@@ -51,7 +56,12 @@ export class LoginComponent implements OnInit{
     this.funciones.IniciarSesion(data).subscribe({
       next: (response) => {
         this.cookie.set('token', response.token, { path: '/', secure: true });
-        this.rutas.navigate(['/Cliente/home']);
+
+        this.mostrarAnimacionExito = true;
+
+        setTimeout(() => {
+          this.rutas.navigate(['/Cliente/home']);
+        }, 1800);
       },
       error: (err) => {
         console.log('Ocurrio algo inesperado.');

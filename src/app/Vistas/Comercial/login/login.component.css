@@ -1,4 +1,17 @@
 
+.animacion{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.animacion-exito{
+  width: 200px;
+  height: 200px;
+  text-align: center;
+}
+
 
 .login-container {
   display: flex;

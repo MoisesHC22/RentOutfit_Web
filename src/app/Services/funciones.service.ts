@@ -68,4 +68,8 @@ export class FuncionesService {
     return this.httpClient.post(this.API_RentOutfit + '/Cliente/InformacionVestimenta', vestimenta);
   }
   
+  obtenerDatosDesdeGeocoding(url: string): Observable<any> {
+    return this.httpClient.get(url);
+  }
+  
 }
