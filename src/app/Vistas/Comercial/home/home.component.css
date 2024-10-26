@@ -104,6 +104,21 @@ iframe {
   font-size: 22px;
 }
 
+.showcase h3 {
+  margin-bottom: 20px;
+  color: #fff;
+  font-weight: 400;
+  font-size: 25px;
+}
+
+.showcase li {
+  margin-bottom: 20px;
+  color: #fff;
+  font-weight: 400;
+  font-size: 23px;
+}
+
+
 .showcase p {
   margin-bottom: 25px;
   color: #fff;

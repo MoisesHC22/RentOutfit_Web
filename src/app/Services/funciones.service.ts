@@ -15,7 +15,7 @@ import { RequerimientosTiendasCercanas, TiendasCercanas } from '../Interfaces/ti
 export class FuncionesService {
 
 
-  private API_RentOutfit: string = 'https://localhost:7110';
+  private API_RentOutfit: string = 'http://moiseshc-001-site1.ktempurl.com';
 
 
   constructor(private httpClient: HttpClient) { }

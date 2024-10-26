@@ -1,14 +1,22 @@
-<p>informacion-vestimenta works!</p>
+<p class="vestimenta-title">Información de la Vestimenta</p>
 
-<h4>{{informacion?.nombrePrenda}}</h4>
-<h4>Fecha de publicación: {{informacion?.fechaPublicacion}}</h4>
-<h4>{{informacion?.descripcion}}</h4>
-<img [src]="informacion?.imagen1">
-<img [src]="informacion?.imagen2">
-<img [src]="informacion?.imagen3">
-<img [src]="informacion?.imagen4">
-<p>{{informacion?.precioPorDia}}</p>
-<p>{{informacion?.nombreEstilo}}</p>
-<p>{{informacion?.stock}}</p>
-<p>{{informacion?.nombreTalla}}</p>
-<p>{{informacion?.vestimentaEstatus}}</p>
+<div class="vestimenta-info">
+  <h4>{{informacion?.nombrePrenda}}</h4>
+  <p>Fecha de publicación: {{informacion?.fechaPublicacion}}</p>
+  <p>{{informacion?.descripcion}}</p>
+
+  <div class="vestimenta-gallery">
+    <img [src]="informacion?.imagen1" alt="Imagen 1 de {{informacion?.nombrePrenda}}">
+    <img [src]="informacion?.imagen2" alt="Imagen 2 de {{informacion?.nombrePrenda}}">
+    <img [src]="informacion?.imagen3" alt="Imagen 3 de {{informacion?.nombrePrenda}}">
+    <img [src]="informacion?.imagen4" alt="Imagen 4 de {{informacion?.nombrePrenda}}">
+  </div>
+
+  <div class="vestimenta-details">
+    <p>Precio por día: $ {{informacion?.precioPorDia}}</p>
+    <p>Estilo: {{informacion?.nombreEstilo}}</p>
+    <p>Stock disponible: {{informacion?.stock}}</p>
+    <p>Talla: {{informacion?.nombreTalla}}</p>
+    <p>Estatus: {{informacion?.vestimentaEstatus}}</p>
+  </div>
+</div>
