@@ -13,9 +13,10 @@
 
 
 <div class="contenedor-tienda">
-  <h4>Tiendas cerca de ti</h4>
+  <h5>Cerca de ti</h5>
   <p>Encuentra todo lo que estás buscando a la medida</p>
   <hr />
+  <h6>Tiendas</h6>
   <div class="tienda-galeria">
    @for (item of TiendaList; track $index) 
    {
@@ -31,74 +32,87 @@
 </div>
 
 
-  <section class="showcase">
-    <div class="showcase-wrap">
-      <div class="texture-overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="device">
-              <div class="device-content">
-                <ul class="slides" id="showcaseSlider">
-                  <li>
-                    <img src="/Recursos/publiRO.png" alt="Rent Outfit Logo" />
-                  </li>
-                </ul>
-              </div>
+
+<!-- Footer -->
+<section class="showcase">
+  <div class="showcase-wrap">
+    <div class="texture-overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="device">
+            <div class="device-content">
+              <ul class="slides" id="showcaseSlider">
+                <li>
+                  <img src="/Recursos/publiRO.png" alt="Rent Outfit Logo" />
+                </li>
+              </ul>
             </div>
           </div>
-          <div class="col-md-8 contenedorAnuncio">
-            <h1 id="TituloAnuncio">Descarga nuestra App Móvil</h1>
-            <p id="TextoAnuncio">
-              ¡Descubre la forma más fácil de lucir espectacular sin gastar de más! 🎉 
-              Con nuestra app, alquila trajes, disfraces y vestimenta para cualquier ocasión 
-              especial. Encuentra lo que necesitas con nuestra amplia variedad de opciones, 
-              filtra por categoría, talla y disponibilidad, y realiza tu reserva en minutos.
-            </p>
+        </div>
+        <div class="col-md-8 contenedorAnuncio">
+          <h1 id="TituloAnuncio">Descarga nuestra App Móvil</h1>
+          <p id="TextoAnuncio">
+            ¡Descubre la forma más fácil de lucir espectacular sin gastar de más! 🎉 
+            Con nuestra app, alquila trajes, disfraces y vestimenta para cualquier ocasión 
+            especial. Encuentra lo que necesitas con nuestra amplia variedad de opciones, 
+            filtra por categoría, talla y disponibilidad, y realiza tu reserva en minutos.
+          </p>
 
-            <div class="contenedorBtnDescargar">
-              <a href="#" class="download-btn">Descarga! <i class="fa fa-download"></i></a>
-            </div>
+          <div class="contenedorBtnDescargar">
+            <a href="#" class="download-btn">Descarga! <i class="fa fa-download"></i></a>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  
+
+
+
+
+<br>
+
+
+
 <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-        <div class="footer-section">
-            <h3>Rent Outfit</h3>
-            <p>Fácil de usar, accesible y flexible, Rent Outfit te permite alquilar con comodidad y seguridad, brindándote una experiencia sin complicaciones desde la búsqueda hasta la devolución. ¡Haz de tu evento algo especial sin esfuerzo!</p>
-            <div class="social-icons">
-                <a href="#"><fa-icon id="Facebook" [icon]="faFacebook" class="icon-custom"></fa-icon></a>
-                <a href="#"><fa-icon id="Instagram" [icon]="faInstagram" class="icon-custom"></fa-icon></a>
-                <a href="#"><fa-icon id="Whatsapp" [icon]="faWhatsapp" class="icon-custom"></fa-icon></a>
-            </div>
-        </div>
-        <div class="footer-section">
-            <h3>Nosotros</h3>
-            <ul>
-                <li><a href="#">Sobre nosotros</a></li>
-                <li><a href="#">Contactanos</a></li>
-                <li><a href="#">Servicio personalizado</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h3>Productos</h3>
-            <ul>
-                <li><a href="#">Calzado</a></li>
-                <li><a href="#">Trajes</a></li>
-                <li><a href="#">Disfraces</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h3>Suscríbete y entérate de las novedades de Rent Outfit</h3>
-            <input type="email" placeholder="Escribe tu correo">
-            <button>Registrarse</button>
-        </div>
-    </div>
+<footer class="footer">
+  <div class="footer-container">
+      <div class="footer-section">
+          <h3>Rent Outfit</h3>
+          <p>Fácil de usar, accesible y flexible, Rent Outfit te permite alquilar con comodidad y seguridad, brindándote una experiencia sin complicaciones desde la búsqueda hasta la devolución. ¡Haz de tu evento algo especial sin esfuerzo!</p>
+          <div class="social-icons">
+              <a href="#"><fa-icon id="Facebook" [icon]="faFacebook" class="icon-custom"></fa-icon></a>
+              <a href="#"><fa-icon id="Instagram" [icon]="faInstagram" class="icon-custom"></fa-icon></a>
+              <a href="#"><fa-icon id="Whatsapp" [icon]="faWhatsapp" class="icon-custom"></fa-icon></a>
+          </div>
+      </div>
+      <div class="footer-section">
+          <h3>Nosotros</h3>
+          <ul>
+              <li><a href="#">Sobre nosotros</a></li>
+              <li><a href="#">Contactanos</a></li>
+              <li><a href="#">Servicio personalizado</a></li>
+          </ul>
+      </div>
+      <div class="footer-section">
+          <h3>Mi cuenta</h3>
+          <ul>
+              <li *ngIf="!OpcionDarDeAlta">
+                <a [routerLink]="'/Login'">Ingresar</a>
+              </li>
+
+              <li *ngIf="OpcionDarDeAlta">
+                <a (click)="darDeAltaVendedor(usuario!)">Quiero vender!</a>
+              </li>
+          </ul>
+      </div>
+      <div class="footer-section">
+          <h3>Suscríbete y entérate de las novedades de Rent Outfit</h3>
+          <input type="email" placeholder="Escribe tu correo">
+          <button>Registrarse</button>
+      </div>
+  </div>
 </footer>
 <!-- Footer End -->

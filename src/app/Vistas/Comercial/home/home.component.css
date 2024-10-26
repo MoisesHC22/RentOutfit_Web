@@ -15,7 +15,7 @@ iframe {
 /* Cards de las tiendas disponibles */
 .contenedor-tienda {
   text-align: center;
-  margin: 60px 0 60px 0;
+  margin: 20px 0 40px 0;
 }
 
 .tienda-galeria {
@@ -64,6 +64,8 @@ iframe {
   color: #151515; /* Cambia esto al color que prefieras */
 }
 
+
+
 .contenedorAnuncio{
     
   
@@ -85,7 +87,6 @@ iframe {
   }
 
 }
-
 
 
 
@@ -349,4 +350,3 @@ body {
   background-color: #333;
 }
 /* End to Footer */
-

@@ -18,3 +18,16 @@ export interface RequerimientosTiendasCercanas {
     municipio?: string;
     pagina?: number;
 }
+
+export interface DarDeAltaUnaTienda{
+    usuarioID?: number;
+    nombreEstablecimiento?: string;
+    codigoPostal?: string;
+    colonia?: string;
+    calle?: string;
+    noInt?: string;
+    noExt?: string;
+    estadoID?: number;
+    municipio?: string;
+    imagen?: File;
+ }

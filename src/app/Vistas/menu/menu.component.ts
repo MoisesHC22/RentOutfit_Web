@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet, RouterModule, RouterLink } from '@angular/router';
+import { RouterOutlet, RouterModule, RouterLink, Router } from '@angular/router';
 import { faHouse, faBagShopping, faShirt, faMagnifyingGlass, faBell, faGear, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CookieService } from 'ngx-cookie-service';
@@ -29,7 +29,7 @@ export class MenuComponent implements OnInit {
   faGear = faGear;
   faDoorOpen = faDoorOpen;
 
-  constructor(private Funciones: FuncionesService, private cookie: CookieService){}
+  constructor(private Funciones: FuncionesService, private cookie: CookieService, private Rutas: Router){}
 
   token: string | null = null;
   usuarioID: number | null = null

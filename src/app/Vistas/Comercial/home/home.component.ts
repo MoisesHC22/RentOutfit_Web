@@ -1,34 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { RequerimientosTiendasCercanas, TiendasCercanas } from '../../../Interfaces/tienda.interface';
+import { RequerimientosTiendasCercanas, TiendaInterface, TiendasCercanas } from '../../../Interfaces/tienda.interface';
 import { CommonModule } from '@angular/common';
 import { AppComponent } from '../../../app.component';
 import { faHouse, faBagShopping, faShirt, faMagnifyingGlass, faBell,} from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faInstagram, faWhatsapp} from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { LottieComponent} from 'ngx-lottie';
-import { FuncionesService } from '../../../Services/funciones.service';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { CookieService } from 'ngx-cookie-service';
+import { LottieComponent, AnimationOptions } from 'ngx-lottie';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { FuncionesService } from '../../../Services/funciones.service';
+import { CookieService } from 'ngx-cookie-service';
+import { BrowserModule, DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { RouterOutlet, RouterModule, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
+    RouterOutlet,
+    RouterLink,
+    RouterModule,
     AppComponent,
     FontAwesomeModule,
     LottieComponent,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
   
 })
 
-export class HomeComponent implements OnInit{
-  
+export class HomeComponent implements OnInit {
+
   faHouse = faHouse;
   faBag = faBagShopping;
   faShirt = faShirt;
@@ -38,7 +43,7 @@ export class HomeComponent implements OnInit{
   faInstagram = faInstagram;
   faWhatsapp = faWhatsapp;
 
-  constructor(private Funciones: FuncionesService, private sanitizer: DomSanitizer, private cookie: CookieService){}
+  constructor(private rutas: Router, private Funciones: FuncionesService, private sanitizer: DomSanitizer, private cookie: CookieService){}
 
   token: string | null = null;
   estado: string | null = null;
@@ -52,13 +57,35 @@ export class HomeComponent implements OnInit{
   mapaSafeUrl!: SafeResourceUrl;
   error!: string;
 
-  ngOnInit(): void {  
+  usuario: number | null = null;
+  rol: number | null = null;
+  OpcionDarDeAlta = false;
+  
 
+  ngOnInit(): void {
     this.cookie.delete('ubicacion', '/');
 
     this.obtenerUbicacion();
-  }
 
+
+    this.token = this.cookie.get('token');
+
+    if(this.token){
+      const obtener = this.DecodificarToken(this.token);
+
+      this.rol = obtener?.role || null;
+      this.usuario = obtener?.usuario ? Number(obtener.usuario) : null;
+
+
+      if(this.rol == 1){
+        this.OpcionDarDeAlta = true;
+      }
+      
+
+    }
+
+  }
+  
   ListaTiendas(estado: string, municipio: string){
     
     const data: RequerimientosTiendasCercanas = {
@@ -155,5 +182,54 @@ export class HomeComponent implements OnInit{
       }
     );
   }
+  
+
+
+
+  DecodificarToken(token: string): any {
+    try 
+    {
+      const payload = token.split('.')[1];
+      const descodificacionPayload = this.base64UrlCode(payload);
+    return JSON.parse(decodeURIComponent(escape(descodificacionPayload)));
+    }
+    catch(error) {
+      console.error('Error al decodificar el token:', error);
+      return null;
+    }
+  }
+
+  base64UrlCode(str: string): string {
+    let base64 = str.replace(/-/g, '+').replace(/_/g, '/');
+    
+    switch (base64.length % 4) {
+    case 2: base64 += '=='; break;
+    case 3: base64 += '='; break;
+  }
+  return atob(base64);
+  }
+
+
+
+
+
+
+
+
+  darDeAltaVendedor(usuario : number){
+    this.Funciones.DarDeAltaUnVendedor(usuario).subscribe({
+      next: (result) => {
+        this.OpcionDarDeAlta = false;
+        this.rutas.navigate(['/Cliente/NuevoVendedor']);
+      },
+      error: (err) =>{
+        console.log("Ocurrio un error.");
+      }
+    });
+  }
+
+
+
 
 }
+ 

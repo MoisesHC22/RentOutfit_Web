@@ -72,4 +72,21 @@ export class FuncionesService {
     return this.httpClient.get(url);
   }
   
+
+
+    
+  DarDeAltaUnVendedor(usuario: number): Observable<any>{
+    return this.httpClient.post(this.API_RentOutfit + '/Vendedor/DarDeAltaUnVendedor', usuario);
+   }
+   
+   DarDeAltaEstablecimiento(formData: FormData) : Observable<any>
+   {
+     return this.httpClient.post(this.API_RentOutfit + '/Vendedor/DarDeAltaEstablecimiento', formData);
+   }
+
+   RegistrarVestimenta(formData: FormData) : Observable<any>
+   {
+     return this.httpClient.post(this.API_RentOutfit + '/Vendedor/RegistrarVestimenta', formData);
+   }
+
 }
