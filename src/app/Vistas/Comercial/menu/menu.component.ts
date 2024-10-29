@@ -4,7 +4,7 @@ import { faHouse, faBagShopping, faShirt, faMagnifyingGlass, faBell, faGear, faD
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
-import { FuncionesService } from '../../Services/funciones.service';
+import { FuncionesService } from '../../../Services/funciones.service'; 
 import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({

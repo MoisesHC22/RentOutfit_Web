@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { FuncionesService } from '../../../Services/funciones.service';
-import { MunicipioInterface } from '../../../Interfaces/municipios.interfaces';
 import { EstadoInterface } from '../../../Interfaces/estado.interface';
+import { MunicipioInterface } from '../../../Interfaces/municipios.interfaces';
 import { CookieService } from 'ngx-cookie-service';
 
 export function SoloLetras(): ValidatorFn {
@@ -19,20 +19,19 @@ export function SoloLetras(): ValidatorFn {
   }
 }
 
-
 @Component({
-  selector: 'app-add-rentador',
+  selector: 'app-nuevo-vendedor',
   standalone: true,
   imports: [
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    RouterLink,
+    RouterLink
   ],
-  templateUrl: './add-rentador.component.html',
-  styleUrl: './add-rentador.component.css'
+  templateUrl: './nuevo-vendedor.component.html',
+  styleUrl: './nuevo-vendedor.component.css'
 })
-export class AddRentadorComponent implements OnInit {
+export class NuevoVendedorComponent implements OnInit {
 
   datos: any;
 
@@ -263,5 +262,4 @@ export class AddRentadorComponent implements OnInit {
 
   }
   
-
 }

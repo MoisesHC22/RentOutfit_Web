@@ -1,0 +1,60 @@
+.menu-lateral {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100%;
+    background-color: #467FB4;
+    color: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+
+
+    h6{
+        text-align: center;
+    }
+    
+
+    .InfVendedor{
+        display: flex;
+
+        #ImgVendedor {
+            width: 45px;
+            height: 45px;
+            border-radius: 5px;
+            margin-right: 7px;
+        }
+
+        #NomVendedor {
+            font-size: 15px;
+        }
+
+    }
+  }
+
+  .menu-lateral button {
+    margin-bottom: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .menu-lateral ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .menu-lateral li {
+    margin-bottom: 10px;
+  }
+  
+  .menu-lateral a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .menu-lateral a:hover {
+    color: #007bff;
+  }

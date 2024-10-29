@@ -1,0 +1,115 @@
+
+<div class="container">
+
+    <!-- Formulario en dos columnas -->
+    <form [formGroup]="datos" (ngSubmit)="darDeAlta(usuario!)">
+  
+      <div class="form-columns centrar">
+  
+        <div>
+           <div class="form-group">
+            <h6 id="principal" for="nombre">¿Qué nombre quieres registrar tu establecimiento?</h6>
+            <input type="text" id="nombre" formControlName="nombre" placeholder="Nombre completo">
+          </div>
+          
+          <div class="ContValidaciones" *ngIf="datos.get('nombre')?.invalid && (datos.get('nombre')?.touched || datos.get('nombre')?.dirty)">
+            <small *ngIf="datos.get('nombre')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+           </div>
+        </div>
+      </div>
+  
+      <div class="image-banner" id="imageBanner" (click)="cargarImagen()">
+        <img id="previewImg" [src]="imagenPrevisualizacion" *ngIf="imagenPrevisualizacion" alt="Previsualización de la imagen" />
+        <span *ngIf="!imagenPrevisualizacion" id="uploadLabel" class="upload-label">Selecciona una foto de 2 MB</span>
+        <input type="file" id="imageUpload" (change)="imagenSeleccionada($event)" accept="image/*" style="display: none;" />
+      </div>
+  
+  
+      <div class="form-columns"> 
+  
+        <div class="form-group">
+          <label for="codigo-postal">Código Postal</label>
+          <input type="text" id="codigo-postal" name="codigoPostal" formControlName="codigoPostal"  placeholder="Código postal" maxlength="5"/>
+                
+          <div class="ContValidaciones" *ngIf="datos.get('codigoPostal')?.invalid && (datos.get('codigoPostal')?.touched || datos.get('codigoPostal')?.dirty)">
+            <small *ngIf="datos.get('codigoPostal')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+           </div>
+        </div>
+  
+        <div class="form-group juntar">
+          
+          <div class="noIE">
+          <label for="numeroInterior">Número interior</label>
+          <input type="text" id="noInt" name="noInt" formControlName="noInt" placeholder="Número interior" maxlength="3" (input)="ValidarInputNumerosIyE($event)"/>
+  
+          <div class="ContValidaciones" *ngIf="datos.get('noInt')?.invalid && (datos.get('noInt')?.touched || datos.get('noInt')?.dirty)">
+            <small *ngIf="datos.get('noInt')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+           </div>
+          </div>
+  
+          <div class="noIE">
+          <label for="numeroExterior">Número exterior</label>
+          <input type="text" id="noExt" name="noExt" formControlName="noExt" placeholder="Número exterior" maxlength="3"  (input)="ValidarInputNumerosIyE($event)"/>
+  
+          <div class="ContValidaciones" *ngIf="datos.get('noExt')?.invalid && (datos.get('noExt')?.touched || datos.get('noExt')?.dirty)">
+            <small *ngIf="datos.get('noExt')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+           </div>
+          </div>
+        </div>
+  
+      
+      </div>
+  
+      <div class="form-columns">
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <select id="estado" name="estado" (change)="EstadoSeleccionado($event)" formControlName="estado">
+            <option value="" disabled selected>Selecciona aqui</option>
+            <option *ngFor="let estado of EstadosList" [value]="estado.estadoID">{{estado.nombreEstado}}</option>
+          </select>
+  
+          <div class="ContValidaciones" *ngIf="datos.get('estado')?.invalid && (datos.get('estado')?.touched || datos.get('estado')?.dirty)">
+            <small *ngIf="datos.get('estado')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+           </div>
+         </div>
+  
+         <div class="form-group">
+          <label for="municipio">Municipio</label>
+          <select id="municipio" name="municipio" formControlName="municipio">
+            <option value="" disabled selected>Selecciona aqui</option>
+            <option *ngFor="let municipio of MunicipioList" [value]="municipio.nombreMunicipio">{{municipio.nombreMunicipio}}</option>
+          </select>
+        </div>
+      </div>
+      
+  
+  
+      <div  class="form-columns">
+        <div class="form-group">
+          <div class="form-group">
+            <label for="colonia">Colonia</label>
+            <input type="text" id="colonia" name="colonia" formControlName="colonia" placeholder="Colonia" maxlength="50"/>
+  
+            <div class="ContValidaciones" *ngIf="datos.get('colonia')?.invalid && (datos.get('colonia')?.touched || datos.get('colonia')?.dirty)">
+              <small *ngIf="datos.get('colonia')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+             </div>
+          </div> 
+        </div>
+  
+        <div class="form-group">
+          <label for="calle">Calle</label>
+          <input type="text" id="calle" name="calle" formControlName="calle" placeholder="Calle" maxlength="50"/>
+          
+          <div class="ContValidaciones" *ngIf="datos.get('calle')?.invalid && (datos.get('calle')?.touched || datos.get('calle')?.dirty)">
+            <small *ngIf="datos.get('calle')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+           </div>
+        </div>
+      </div>
+  
+      <div class="buttons">
+        <button type="button" class="cancel-btn">Cancelar</button>
+        <button type="submit" class="submit-btn" [disabled]="datos.invalid">Enviar</button>
+      </div>
+    </form>
+  </div>
+  

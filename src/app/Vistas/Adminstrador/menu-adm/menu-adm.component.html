@@ -1,0 +1,19 @@
+<div class="menu-lateral">
+
+    <h6>Panel de Administrador</h6>
+  
+    <div class="InfVendedor">
+      <img [src]="img" *ngIf="img" id="ImgVendedor">
+      <p id="NomVendedor">{{nombre}}</p>
+    </div>
+
+    <ul>
+      <li><a>Nuevas peticiones</a></li>
+      <li><a routerLink="">Establecimientos</a></li>
+      <li><a routerLink="">Vendedores</a></li>
+    </ul>
+
+    <button (click)="regresarCliente()">Regresar</button>
+   </div>
+  
+    <router-outlet></router-outlet>
