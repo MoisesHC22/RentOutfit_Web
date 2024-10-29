@@ -5,8 +5,8 @@ import { EstadoInterface } from '../Interfaces/estado.interface';
 import { MunicipioInterface } from '../Interfaces/municipios.interfaces';
 import { GeneroInterface } from '../Interfaces/genero.interfaces';
 import { RequerimientosIniciarSesion } from '../Interfaces/iniciarSesion.interface';
-import { InformacionVestimenta, ListaVestimenta, RequerimientosVestimentas } from '../Interfaces/Vestimenta.interface';
-import { RequerimientosTiendasCercanas, TiendasCercanas } from '../Interfaces/tienda.interface';
+import { InformacionVestimenta, ListaVestimenta, RequerimientosVestimentas, VestimentaEstablecimientos } from '../Interfaces/Vestimenta.interface';
+import { MisEstablecimientos, RequerimientosDeMisEstablecimientos, RequerimientosTiendasCercanas, TiendasCercanas } from '../Interfaces/tienda.interface';
 
 
 @Injectable({
@@ -88,5 +88,21 @@ export class FuncionesService {
    {
      return this.httpClient.post(this.API_RentOutfit + '/Vendedor/RegistrarVestimenta', formData);
    }
+
+
+
+
+   InformacionEstablecimiento(establecimiento: number) : Observable<any>{
+    return this.httpClient.post(this.API_RentOutfit + '/Cliente/InformacionEstablecimiento', establecimiento);
+   }
+
+   VestimentasEstablecimientos(data: VestimentaEstablecimientos) : Observable<ListaVestimenta[]> {
+     return this.httpClient.post<TiendasCercanas[]>(this.API_RentOutfit + '/Cliente/VestimentasDeEstablecimientos', data);
+   }
+   
+   MisEstablecimientos(data: RequerimientosDeMisEstablecimientos) : Observable<MisEstablecimientos[]> {
+    return this.httpClient.post<MisEstablecimientos[]>(this.API_RentOutfit + '/Vendedor/MisEstablecimientos', data);
+   }
+
 
 }

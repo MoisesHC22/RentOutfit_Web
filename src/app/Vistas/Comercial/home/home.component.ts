@@ -24,8 +24,7 @@ import { Router } from '@angular/router';
     FontAwesomeModule,
     LottieComponent,
     CommonModule,
-    ReactiveFormsModule,
-    CommonModule
+    ReactiveFormsModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
@@ -43,7 +42,7 @@ export class HomeComponent implements OnInit {
   faInstagram = faInstagram;
   faWhatsapp = faWhatsapp;
 
-  constructor(private rutas: Router, private Funciones: FuncionesService, private sanitizer: DomSanitizer, private cookie: CookieService){}
+  constructor(private Rutas: Router, private Funciones: FuncionesService, private sanitizer: DomSanitizer, private cookie: CookieService){}
 
   token: string | null = null;
   estado: string | null = null;
@@ -220,7 +219,7 @@ export class HomeComponent implements OnInit {
     this.Funciones.DarDeAltaUnVendedor(usuario).subscribe({
       next: (result) => {
         this.OpcionDarDeAlta = false;
-        this.rutas.navigate(['/Cliente/NuevoVendedor']);
+        this.Rutas.navigate(['/Cliente/NuevoVendedor']);
       },
       error: (err) =>{
         console.log("Ocurrio un error.");
@@ -230,6 +229,13 @@ export class HomeComponent implements OnInit {
 
 
 
+  MasInformacionEstablecimiento(establecimiento?: number): void {
+    if(establecimiento){
+      this.Rutas.navigate(['/Cliente/masInformacionEstablecimiento', establecimiento]);
+    } else {
+      console.error('No se encontro la vestimenta.');
+    }
+  }
 
 }
  

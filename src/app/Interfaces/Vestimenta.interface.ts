@@ -30,3 +30,9 @@ export interface RequerimientosVestimentas {
     municipio?: string;
     pagina?: number;
 }
+
+export interface VestimentaEstablecimientos {
+    establecimiento?: number;
+    usuario?: number;
+    pagina?: number;
+}

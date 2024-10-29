@@ -63,9 +63,9 @@ export class ListaVestimentasComponent implements OnInit{
 
    MasInformacion(vestimenta?: number): void{
     if(vestimenta){
-      this.Rutas.navigate(['/Cliente/masInformacion', vestimenta]);
+      this.Rutas.navigate(['/Cliente/masInformacionVestimenta', vestimenta]);
     } else {
-      console.error('No se encontro el libro');
+      console.error('No se encontro la vestimenta.');
     }
    }
 

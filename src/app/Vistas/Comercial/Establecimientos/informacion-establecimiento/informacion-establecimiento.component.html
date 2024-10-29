@@ -1,0 +1,39 @@
+
+<h2>Inf Establecimiento</h2>
+<p>{{ informacion?.nombreEstablecimiento}}</p>
+<img [src]="informacion?.linkImagenEstablecimiento" alt="Imagen del establecimiento {{ informacion?.nombreEstablecimiento}}">
+<p>{{ informacion?.nombreEstado}}</p>
+<p>{{ informacion?.municipio}}</p>
+<p>{{ informacion?.colonia}}</p>
+<p>{{ informacion?.calle}}</p>
+<p>{{ informacion?.noInt}}</p>
+<p>{{ informacion?.noExt}}</p>
+<p>{{ informacion?.codigoPostal}}</p>
+
+<h2>Vendedor</h2>
+<img [src]="informacion?.linkImagenPerfil" alt="Imagen del vendedor {{ informacion?.nombreCliente}}">
+<p>{{ informacion?.nombreCliente}} {{informacion?.apellidoPaterno}} {{ informacion?.apellidoMaterno}}</p>
+
+
+<div class="centrar" *ngIf="!AnuncionAunNoTieneVestimentas">
+    <div class="contenedor">
+      @for (item of VestimentasList; track $index) 
+      {
+          <div class="vestimenta">
+               
+                  <img id="img" [src]="item.imagen1">
+  
+                  <h5>{{item.nombrePrenda}}</h5>
+                  <p>{{item.nombreTalla}}</p>
+                  <p>$ {{item.precioPorDia}}</p>
+                  <p>{{item.nombreEstablecimiento}}</p>
+          </div>
+      }
+    </div>
+  </div>
+
+
+  <!--Anuncio de que aún no tiene vestimentas disponibles-->
+  <div *ngIf="AnuncionAunNoTieneVestimentas">
+    <h4>Aún no tiene vestimentas disponibles</h4>
+  </div>

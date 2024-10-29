@@ -6,10 +6,12 @@ import { RegisterComponent } from './Vistas/Comercial/register/register.componen
 import { InformacionUsuarioComponent } from './Vistas/Comercial/informacion-usuario/informacion-usuario.component';
 import { ListaVestimentasComponent } from './Vistas/Comercial/Vestimenta/lista-vestimentas/lista-vestimentas.component';
 import { InformacionVestimentaComponent } from './Vistas/Comercial/Vestimenta/informacion-vestimenta/informacion-vestimenta.component';
-import { HomeVestimentasComponent } from './Vistas/Vendedor/Vestimentas/home-vestimentas/home-vestimentas.component';
-import { AgregarVestimentaComponent } from './Vistas/Vendedor/Vestimentas/agregar-vestimenta/agregar-vestimenta.component';
-import { DestalleVestimentaComponent } from './Vistas/Vendedor/Vestimentas/destalle-vestimenta/destalle-vestimenta.component';
+import { HomeVestimentasComponent } from './Vistas/Vendedor/VestimentasVen/home-vestimentas/home-vestimentas.component';
+import { AgregarVestimentaComponent } from './Vistas/Vendedor/VestimentasVen/agregar-vestimenta/agregar-vestimenta.component';
+import { DestalleVestimentaComponent } from './Vistas/Vendedor/VestimentasVen/destalle-vestimenta/destalle-vestimenta.component';
 import { AddRentadorComponent } from './Vistas/Adminstrador/add-rentador/add-rentador.component';
+import { InformacionEstablecimientoComponent } from './Vistas/Comercial/Establecimientos/informacion-establecimiento/informacion-establecimiento.component';
+import { HomeEstablecimientosComponent } from './Vistas/Vendedor/EstablecimientosVen/home-establecimientos/home-establecimientos.component';
 
 export const routes: Routes = [
 
@@ -22,15 +24,17 @@ export const routes: Routes = [
         {path: 'home', component: HomeComponent},
         {path: 'informacion', component: InformacionUsuarioComponent} ,
         {path: 'vestimentas', component: ListaVestimentasComponent},
-        {path: 'masInformacion/:vestimenta', component: InformacionVestimentaComponent},
-        {path: 'NuevoVendedor', component: AddRentadorComponent}
+        {path: 'masInformacionVestimenta/:vestimenta', component: InformacionVestimentaComponent},
+        {path: 'NuevoVendedor', component: AddRentadorComponent},
+        {path: 'masInformacionEstablecimiento/:establecimiento', component: InformacionEstablecimientoComponent}
      ],
     }, 
     {
         path: 'Vendedor',
         component: MenuComponent,
         children: [
-            {path: 'vestimenta', component: HomeVestimentasComponent},
+            {path: 'misEstablecimientos', component:HomeEstablecimientosComponent},
+            {path: 'misVestimenta', component: HomeVestimentasComponent},
             {path: 'agregarVestimenta', component: AgregarVestimentaComponent},
             {path: 'detalleVestimenta', component: DestalleVestimentaComponent}
         ]

@@ -51,3 +51,16 @@
 
 </div>
 </ng-template>
+
+
+
+<!-- Modal de error -->
+<div class="modal" *ngIf="anuncioError">
+  <div class="modal-content">
+      <h2>Revisa tus datos</h2>
+      <fa-icon id="Icono" [icon]="Advertencia"></fa-icon>
+      <div class="centrar">
+        <button id="btnOK" (click)="cerrarModal()">OK</button>
+      </div>
+  </div>
+</div>

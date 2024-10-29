@@ -63,7 +63,8 @@
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
                 
                 <li> <a routerLink="informacion">Mi información</a> </li>
-                <li> <a>Adminstrar mi negocio</a> </li>
+                <li *ngIf="vendedor"> <a>Adminstrar mi negocio</a> </li>
+                <li *ngIf="Admin"> <a>Super Usuario</a></li>
                 <li> 
                   <button id="CerrarSesion" type="button" (click)="CerrarSesion()">
                     <fa-icon id="Icono" [icon]="faDoorOpen"></fa-icon>

@@ -20,7 +20,7 @@
   <div class="tienda-galeria">
    @for (item of TiendaList; track $index) 
    {
-      <div class="tarjeta-tienda">
+      <div class="tarjeta-tienda" (click)="MasInformacionEstablecimiento(item.establecimientosID)">
         <img id="img" [src]="item.linkImagenEstablecimiento">
           <div class="info-tienda">
              <p>{{item.calle}}, {{item.codigoPostal}}, {{item.nombreMunicipio}}, {{item.nombreEstado}}</p>
@@ -57,11 +57,7 @@
               Con nuestra app, alquila trajes, disfraces y vestimenta para cualquier ocasión 
               especial. Encuentra lo que necesitas con nuestra amplia variedad de opciones, 
               filtra por categoría, talla y disponibilidad, y realiza tu reserva en minutos.<br><br>
-              <li>Registrate</li>
-							<li>Descubre</li>
-              <li>Y Renta</li>
             </p><br>
-
             <div class="contenedorBtnDescargar">
               <a href="#" class="download-btn">Descarga! <i class="fa fa-download"></i></a>
           </div>

@@ -7,6 +7,8 @@ import { RequerimientosIniciarSesion } from '../../../Interfaces/iniciarSesion.i
 import { FuncionesService } from '../../../Services/funciones.service';
 import { CommonModule } from '@angular/common';
 import { CookieService} from 'ngx-cookie-service';
+import {faTriangleExclamation} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +18,7 @@ import { CookieService} from 'ngx-cookie-service';
     RouterLink,
     RouterModule,
     CommonModule,
+    FontAwesomeModule,
     ReactiveFormsModule,
     LottieComponent
   ],
@@ -24,8 +27,12 @@ import { CookieService} from 'ngx-cookie-service';
 })
 export class LoginComponent implements OnInit{
   
+
+  Advertencia = faTriangleExclamation;
+
   datos: any;
   mensajeError: string | null = null;
+  anuncioError = false;
 
   mostrarAnimacionExito = false;
 
@@ -65,6 +72,7 @@ export class LoginComponent implements OnInit{
       },
       error: (err) => {
         console.log('Ocurrio algo inesperado.');
+        this.anuncioError = true;
       }
     });
   }
@@ -89,5 +97,8 @@ export class LoginComponent implements OnInit{
     input.value = input.value.trim();
   }
 
-
+  
+  cerrarModal() : void {
+    this.anuncioError = false;
+  }
 }

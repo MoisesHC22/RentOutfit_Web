@@ -5,6 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
 import { FuncionesService } from '../../Services/funciones.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-menu',
@@ -14,6 +15,7 @@ import { FuncionesService } from '../../Services/funciones.service';
     RouterLink,
     RouterModule,
     FontAwesomeModule,
+    ReactiveFormsModule,
     CommonModule
   ],
   templateUrl: './menu.component.html',
@@ -35,7 +37,11 @@ export class MenuComponent implements OnInit {
   usuarioID: number | null = null
   img: string | null = null;
   nombre: string | null = null;
-  rol: string | null = null;
+
+  rol: number | null = null;
+  vendedor = false;
+  Admin = false;
+
   
   ngOnInit(): void {
     
@@ -47,22 +53,30 @@ export class MenuComponent implements OnInit {
 
         if(!tokenValido){
           this.CerrarSesion();
-          window.location.reload();
         }
         else {
           const obtener = this.DecodificarToken(this.token);
           
           this.img = obtener?.imagen || null;
           this.nombre = obtener?.nombre || null;
+          this.rol = obtener?.role || null;
+          
+          if(this.rol == 2) {
+            this.vendedor = true;
+          } else if (this.rol == 3) {
+            this.Admin = true;
+          }
 
           this.usuarioID = obtener?.usuario ? Number(obtener.usuario) : null;
-          
+
           if(this.usuarioID != null){
             this.ObtenerMiInformacion(this.usuarioID);
           }
         }
       }
   }
+
+
 
   ObtenerMiInformacion(usuarioID: number){
     this.Funciones.ObtenerCliente(usuarioID).subscribe({
@@ -113,6 +127,7 @@ export class MenuComponent implements OnInit {
     if(descodificar && descodificar.exp) {
       const tiempoActual = Math.floor(Date.now() / 1000);
       return descodificar.exp > tiempoActual;
+      window.location.reload();
     }
     return false;
   }
