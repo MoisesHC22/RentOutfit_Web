@@ -1,66 +1,57 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink, RouterModule, RouterOutlet, Router } from '@angular/router';
 import { FuncionesService } from '../../../Services/funciones.service';
-import { MunicipioInterface } from '../../../Interfaces/municipios.interfaces';
-import { EstadoInterface } from '../../../Interfaces/estado.interface';
 import { CookieService } from 'ngx-cookie-service';
-
-export function SoloLetras(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const value = control.value;
-    const soloLetrasRagExp = /^[a-zA-ZÁ-ÿ\s]+$/;
-
-    if(!value || soloLetrasRagExp.test(value)) {
-      return null;
-    }
-    return { SoloLetras: true}
-  }
-}
-
+import { EstadoInterface } from '../../../Interfaces/estado.interface';
+import { MunicipioInterface } from '../../../Interfaces/municipios.interfaces';
 
 @Component({
-  selector: 'app-add-rentador',
+  selector: 'app-menu-ven',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
+    RouterOutlet,
     RouterLink,
+    RouterModule,
+    ReactiveFormsModule,
+    CommonModule
   ],
-  templateUrl: './add-rentador.component.html',
-  styleUrl: './add-rentador.component.css'
+  templateUrl: './menu-ven.component.html',
+  styleUrl: './menu-ven.component.css'
 })
-export class AddRentadorComponent implements OnInit {
+export class MenuVenComponent implements OnInit{
+
+  token: string | null = null;
+  usuarioID: number | null = null
+  img: string | null = null;
+  nombre: string | null = null;
 
   datos: any;
-
-  constructor(private Funciones: FuncionesService, private form: FormBuilder, private rutas: Router, private cookie: CookieService) {}
+  imagenPerfil: File | null = null;
+  imagenPrevisualizacion: string | ArrayBuffer | null = null;
+  statusImg = false;
 
   EstadosList: EstadoInterface[]=[];
   MunicipioList: MunicipioInterface[]=[];
 
-  token: string | null = null;
-  usuario: number | null = null;
+  constructor(private Funciones: FuncionesService, private cookie: CookieService, private readonly Rutas: Router, private form: FormBuilder){}
+
 
   ngOnInit(): void {
-    
     this.ListaEstados();
 
-    
-    this.token = this.cookie.get('token');
-    
-    if(this.token) {
-      
-      const obtener = this.Funciones.DecodificarToken(this.token);
-      this.usuario = obtener?.usuario ? Number(obtener.usuario) : null;
-     
-    }
-    else{
-      this.rutas.navigate(['/Login']);
-    }
+    this.token  = this.cookie.get('token');
 
+    if(this.token)
+    {
+      const obtener = this.Funciones.DecodificarToken(this.token);
+
+      this.img = obtener?.imagen || null;
+      this.nombre = obtener?.nombre || null;
+
+      this.usuarioID = obtener?.usuario ? Number(obtener.usuario) : null;
+    }
 
 
     this.datos = this.form.group({
@@ -75,12 +66,6 @@ export class AddRentadorComponent implements OnInit {
       imagen: [null, [Validators.required]]
     });
   }
-
-
-  
-  imagenPerfil: File | null = null;
-  imagenPrevisualizacion: string | ArrayBuffer | null = null;
-  statusImg = false;
 
 
   ListaEstados(){
@@ -118,8 +103,7 @@ export class AddRentadorComponent implements OnInit {
   }
   
 
-
-
+  
   cargarImagen() {
     const file = document.getElementById('imageUpload') as HTMLInputElement;
     file.click();
@@ -159,78 +143,9 @@ export class AddRentadorComponent implements OnInit {
   }
 
 
-
-  
-
-  ValidarSoloLetras(event: KeyboardEvent){
-    const charCode = event.charCode;
-    const charStr = String.fromCharCode(charCode);
- 
-    const regex = /^[a-zA-ZÁ-ÿ\s]+$/;
- 
-    if (!regex.test(charStr)) {
-     event.preventDefault();
-    }
-   }
- 
-   ValidarInputLetras(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const valor = input.value;
- 
-    input.value = valor.replace(/[^a-zA-ZÁ-ÿ\s]/g, '');
-   }
- 
-   ValidarNumerosIyE(event: KeyboardEvent): void {
-     const charCode = event.charCode;
-     const charStr = String.fromCharCode(charCode);
-   
-     const regex = /^[0-9sSnN\/]$/;
-   
-     if (!regex.test(charStr)) {
-       event.preventDefault();
-     }
-   }
- 
-   ValidarInputNumerosIyE(event: Event): void {
-     const input = event.target as HTMLInputElement;
-     let valor = input.value;
-   
-     const regex = /^[0-9]{0,3}$|^[sS]$|^[sS][\/]$|^[sS][\/][nN]$/;
-   
-     if (!regex.test(valor)) {
- 
-       valor = valor.replace(/[^0-9sSnN\/]/g, '');
- 
-       if (!regex.test(valor)){
-         valor = ''
-       }
-     }
-     input.value = valor;
-   }
- 
-   ValidarSoloNumero(event: KeyboardEvent){
-    const charCode = event.charCode;
-    const charStr = String.fromCharCode(charCode);
- 
-    const regex = /^[0-9]$/;
- 
-    if (!regex.test(charStr)) {
-     event.preventDefault();
-    }
-   }
-   
-   ValidarInputNumero(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    const valor = input.value;
-     
-    input.value = valor.replace(/[^0-9\/]/g, '');
-   }
-
-
-
-
-
-
+  regresarCliente(): void {
+    this.Rutas.navigate(['/Cliente/home'])
+  }
 
 
   darDeAlta(usuario: number): void
@@ -254,7 +169,6 @@ export class AddRentadorComponent implements OnInit {
     this.Funciones.DarDeAltaEstablecimiento(formData).subscribe({
       next: (response) => {
         console.log("Se dio de alta tu establecimiento ", response);
-        this.rutas.navigate(['/Cliente/home']);
       },
       error: (err) => {
         console.log('Ocurrio un error.');
@@ -262,6 +176,7 @@ export class AddRentadorComponent implements OnInit {
     });
 
   }
-  
+
+
 
 }

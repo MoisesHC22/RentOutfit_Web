@@ -12,6 +12,8 @@ import { DestalleVestimentaComponent } from './Vistas/Vendedor/VestimentasVen/de
 import { AddRentadorComponent } from './Vistas/Adminstrador/add-rentador/add-rentador.component';
 import { InformacionEstablecimientoComponent } from './Vistas/Comercial/Establecimientos/informacion-establecimiento/informacion-establecimiento.component';
 import { HomeEstablecimientosComponent } from './Vistas/Vendedor/EstablecimientosVen/home-establecimientos/home-establecimientos.component';
+import { MenuVenComponent } from './Vistas/Vendedor/menu-ven/menu-ven.component';
+import { HomeVentasComponent } from './Vistas/Vendedor/VentasVen/home-ventas/home-ventas.component';
 
 export const routes: Routes = [
 
@@ -31,9 +33,10 @@ export const routes: Routes = [
     }, 
     {
         path: 'Vendedor',
-        component: MenuComponent,
+        component: MenuVenComponent,
         children: [
-            {path: 'misEstablecimientos', component:HomeEstablecimientosComponent},
+            {path: 'misEstablecimientos/:usuario', component:HomeEstablecimientosComponent},
+            {path: 'ventas', component: HomeVentasComponent},
             {path: 'misVestimenta', component: HomeVestimentasComponent},
             {path: 'agregarVestimenta', component: AgregarVestimentaComponent},
             {path: 'detalleVestimenta', component: DestalleVestimentaComponent}

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" >
     <div class="container-fluid">
        <a class="navbar-brand" href="#">
            <img src="RentOutfitLogo.png" alt="RentOutfit" width="50" height="50">
@@ -10,7 +10,7 @@
   
   
         <li class="nav-item">
-          <a routerLink="home" class="nav-link">
+          <a routerLink="/Cliente/home" class="nav-link">
             <fa-icon id="Icono" [icon]="faHouse"></fa-icon>
             Home
           </a>
@@ -38,16 +38,6 @@
           <button id="btnBuscar" class="btn btn-outline-dark" type="submit"><fa-icon id="Icono" [icon]="faSearch"></fa-icon></button>
        </form>
   
-       <!--
-       <ul class="navbar-nav" >
-        <li>
-          <a class="nav-link">
-            <fa-icon id="Icono" [icon]="faBell"></fa-icon>
-            Notificaciones
-          </a>
-        </li>
-       </ul>
-       -->
   
        <ul class="navbar-nav ms-auto">
          <li *ngIf="token">
@@ -63,7 +53,7 @@
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
                 
                 <li> <a routerLink="informacion">Mi información</a> </li>
-                <li *ngIf="vendedor"> <a>Adminstrar mi negocio</a> </li>
+                <li *ngIf="vendedor"><a (click)="MisEstablecimientos(this.usuarioID!)">Adminstrar mi negocio</a> </li>
                 <li *ngIf="Admin"> <a>Super Usuario</a></li>
                 <li> 
                   <button id="CerrarSesion" type="button" (click)="CerrarSesion()">
@@ -86,5 +76,6 @@
      </div>
     </div>
   </nav>
-  
+
+
   <router-outlet></router-outlet>

@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
     this.token = this.cookie.get('token');
 
     if(this.token){
-      const obtener = this.DecodificarToken(this.token);
+      const obtener = this.Funciones.DecodificarToken(this.token);
 
       this.rol = obtener?.role || null;
       this.usuario = obtener?.usuario ? Number(obtener.usuario) : null;
@@ -181,35 +181,6 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-  
-
-
-
-  DecodificarToken(token: string): any {
-    try 
-    {
-      const payload = token.split('.')[1];
-      const descodificacionPayload = this.base64UrlCode(payload);
-    return JSON.parse(decodeURIComponent(escape(descodificacionPayload)));
-    }
-    catch(error) {
-      console.error('Error al decodificar el token:', error);
-      return null;
-    }
-  }
-
-  base64UrlCode(str: string): string {
-    let base64 = str.replace(/-/g, '+').replace(/_/g, '/');
-    
-    switch (base64.length % 4) {
-    case 2: base64 += '=='; break;
-    case 3: base64 += '='; break;
-  }
-  return atob(base64);
-  }
-
-
-
 
 
 

@@ -15,12 +15,37 @@ import { MisEstablecimientos, RequerimientosDeMisEstablecimientos, Requerimiento
 export class FuncionesService {
 
 
-  private API_RentOutfit: string = 'http://moiseshc-001-site1.ktempurl.com';
+  private API_RentOutfit: string = 'https://localhost:7110';
 
 
   constructor(private httpClient: HttpClient) { }
 
-   
+  DecodificarToken(token: string): any {
+    try 
+    {
+      const payload = token.split('.')[1];
+      const descodificacionPayload = this.base64UrlCode(payload);
+    return JSON.parse(decodeURIComponent(escape(descodificacionPayload)));
+    }
+    catch(error) {
+      console.error('Error al decodificar el token:', error);
+      return null;
+    }
+  }
+
+  base64UrlCode(str: string): string {
+    let base64 = str.replace(/-/g, '+').replace(/_/g, '/');
+    
+    switch (base64.length % 4) {
+    case 2: base64 += '=='; break;
+    case 3: base64 += '='; break;
+  }
+  return atob(base64);
+  }
+
+
+  
+
   ObtenerClientes(usuarioID: string): Observable<any>{
     return this.httpClient.post(this.API_RentOutfit + '/Cliente/ObtenerCliente?usuarioID=', usuarioID);
   }
@@ -103,6 +128,8 @@ export class FuncionesService {
    MisEstablecimientos(data: RequerimientosDeMisEstablecimientos) : Observable<MisEstablecimientos[]> {
     return this.httpClient.post<MisEstablecimientos[]>(this.API_RentOutfit + '/Vendedor/MisEstablecimientos', data);
    }
+
+
 
 
 }

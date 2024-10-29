@@ -1,1 +1,14 @@
-<p>home-establecimientos works!</p>
+<h5>Bienvenido</h5>
+
+<div class="centrar">
+    <div class="contenedor">
+      @for (item of Establecimientos; track $index) 
+      {
+          <div class="Establecimiento">
+               
+                  <img [src]="item.linkImagenEstablecimiento">
+                  <p>{{item.nombreEstablecimiento}}</p>
+          </div>
+      }
+    </div>
+  </div>

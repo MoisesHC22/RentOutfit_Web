@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterOutlet, RouterModule, RouterLink, Router } from '@angular/router';
 import { faHouse, faBagShopping, faShirt, faMagnifyingGlass, faBell, faGear, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -41,7 +41,6 @@ export class MenuComponent implements OnInit {
   rol: number | null = null;
   vendedor = false;
   Admin = false;
-
   
   ngOnInit(): void {
     
@@ -55,7 +54,8 @@ export class MenuComponent implements OnInit {
           this.CerrarSesion();
         }
         else {
-          const obtener = this.DecodificarToken(this.token);
+
+          const obtener = this.Funciones.DecodificarToken(this.token);
           
           this.img = obtener?.imagen || null;
           this.nombre = obtener?.nombre || null;
@@ -89,30 +89,6 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  DecodificarToken(token: string): any {
-    try 
-    {
-      const payload = token.split('.')[1];
-      const descodificacionPayload = this.base64UrlCode(payload);
-    return JSON.parse(decodeURIComponent(escape(descodificacionPayload)));
-    }
-    catch(error) {
-      console.error('Error al decodificar el token:', error);
-      return null;
-    }
-  }
-
-  base64UrlCode(str: string): string {
-    let base64 = str.replace(/-/g, '+').replace(/_/g, '/');
-    
-    switch (base64.length % 4) {
-    case 2: base64 += '=='; break;
-    case 3: base64 += '='; break;
-  }
-  return atob(base64);
-  }
-
-
   CerrarSesion(): void {
     this.cookie.delete('token', '/');
     this.cookie.delete('info', '/');
@@ -122,7 +98,7 @@ export class MenuComponent implements OnInit {
   }
 
   VerificaExpiracion(token: string): boolean {
-    const descodificar = this.DecodificarToken(token);
+    const descodificar = this.Funciones.DecodificarToken(token);
     
     if(descodificar && descodificar.exp) {
       const tiempoActual = Math.floor(Date.now() / 1000);
@@ -130,6 +106,14 @@ export class MenuComponent implements OnInit {
       window.location.reload();
     }
     return false;
+  }
+
+  MisEstablecimientos(usuario?: number) : void {
+    if(usuario) {
+      this.Rutas.navigate(['/Vendedor/misEstablecimientos', usuario]);
+    } else {
+      console.error('No se encontro tus establecimientos.');
+    }
   }
 
 }
