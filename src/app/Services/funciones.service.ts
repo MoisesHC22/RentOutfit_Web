@@ -5,9 +5,10 @@ import { EstadoInterface } from '../Interfaces/estado.interface';
 import { MunicipioInterface } from '../Interfaces/municipios.interfaces';
 import { GeneroInterface } from '../Interfaces/genero.interfaces';
 import { RequerimientosIniciarSesion, RequerimientosUsuario } from '../Interfaces/iniciarSesion.interface';
-import { InformacionVestimenta, ListaVestimenta, RequerimientosVestimentas, VestimentaEstablecimientos } from '../Interfaces/Vestimenta.interface';
+import { ListaVestimenta, RequerimientosVestimentas, VestimentaEstablecimientos } from '../Interfaces/Vestimenta.interface';
 import { MisEstablecimientos, RequerimientosDeMisEstablecimientos, RequerimientosTiendasCercanas, TiendasCercanas } from '../Interfaces/tienda.interface';
 import { ActualizarContrasena, RequerimientoCorreo, ValidarToken } from '../Interfaces/contrasena.interface';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -16,8 +17,7 @@ import { ActualizarContrasena, RequerimientoCorreo, ValidarToken } from '../Inte
 export class FuncionesService {
 
 
-  private API_RentOutfit: string = 'https://localhost:7110';
-
+  private API_RentOutfit: string = environment.apiUrl;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -48,7 +48,6 @@ export class FuncionesService {
     return this.httpClient.get(url);
   }
   
-
 
   
 

@@ -16,7 +16,8 @@ import { HomeVentasComponent } from './Vistas/Vendedor/VentasVen/home-ventas/hom
 import { NuevoVendedorComponent } from './Vistas/Vendedor/nuevo-vendedor/nuevo-vendedor.component';
 import { MenuAdmComponent } from './Vistas/Adminstrador/menu-adm/menu-adm.component';
 import { TodosLosEstablecimientosComponent } from './Vistas/Adminstrador/todos-los-establecimientos/todos-los-establecimientos.component';
-import { RecuperarContrasenaComponent } from './Vistas/Comercial/recuperar-contrasena/recuperar-contrasena.component';
+import { RecuperarContrasenaComponent } from './Vistas/Comercial/OlvideMiContrasena/recuperar-contrasena/recuperar-contrasena.component';
+import { AvisoEmailComponent } from './Vistas/Comercial/OlvideMiContrasena/aviso-email/aviso-email.component';
 
 export const routes: Routes = [
 
@@ -55,6 +56,7 @@ export const routes: Routes = [
 
     {path: 'Login', component: LoginComponent},
     {path: 'Register', component: RegisterComponent},
-    {path: 'OlvideMiContrasena', component: RecuperarContrasenaComponent }
+    {path: 'OlvideMiContrasena', component: AvisoEmailComponent},
+    {path: 'OlvideMiContrasena/:email', component: RecuperarContrasenaComponent }
 
 ];

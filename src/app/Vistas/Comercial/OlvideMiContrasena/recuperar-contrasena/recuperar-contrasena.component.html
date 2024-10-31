@@ -1,0 +1,9 @@
+
+<div *ngIf="formContrasena">
+  <form [formGroup]="nuevosDatos" (ngSubmit)="NuevaContra()">
+    <label>Ingresa la nueva contraseña</label>
+    <input type="text" id="contrasena" name="contrasena" form="contrasena" formControlName="contrasena"  placeholder="************">
+
+    <button type="submit">Validar</button>
+  </form>
+</div>
