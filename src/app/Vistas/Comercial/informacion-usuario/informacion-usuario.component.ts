@@ -19,6 +19,8 @@ export class InformacionUsuarioComponent implements OnInit {
   constructor(private Funciones: FuncionesService ,private cookie: CookieService){}
 
   token: string | null = null;
+  infRol: string | null = null;
+
   usuarioID: number | null = null
 
   nombre: string | null = null;
@@ -30,12 +32,20 @@ export class InformacionUsuarioComponent implements OnInit {
   codigoPostal: string | null = null;
   genero:string | null = null;
 
+  rol: number | null = null;
+  nombreRol: string | null = null;
+
   ngOnInit(): void {
     this.token = this.cookie.get('info');
+
+    this.infRol = this.cookie.get('token');
 
     if(this.token)
     {
       const obtener = this.Funciones.DecodificarToken(this.token);
+      const obtenerRol = this.Funciones.DecodificarToken(this.infRol);
+
+      this.rol = obtenerRol?.role || null;
 
       if (obtener?.Clientes) {
       const clienteData = JSON.parse(obtener.Clientes)[0];
@@ -47,7 +57,18 @@ export class InformacionUsuarioComponent implements OnInit {
       this.email = clienteData?.email || null;
       this.telefono = clienteData?.telefono || null;
       this.genero = clienteData?.genero || null;
+
+      if(this.rol == 1)
+        {
+          this.nombreRol = 'Cliente';
+        } else if(this.rol == 2) {
+          this.nombreRol = 'Vendedor';
+        } else if (this.rol == 3) {
+          this.nombreRol = 'Administrador';
+        }
      }
+
+     
     }
   }
 

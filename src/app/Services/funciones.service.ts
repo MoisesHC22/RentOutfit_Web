@@ -4,9 +4,10 @@ import { Observable } from 'rxjs';
 import { EstadoInterface } from '../Interfaces/estado.interface';
 import { MunicipioInterface } from '../Interfaces/municipios.interfaces';
 import { GeneroInterface } from '../Interfaces/genero.interfaces';
-import { RequerimientosIniciarSesion } from '../Interfaces/iniciarSesion.interface';
+import { RequerimientosIniciarSesion, RequerimientosUsuario } from '../Interfaces/iniciarSesion.interface';
 import { InformacionVestimenta, ListaVestimenta, RequerimientosVestimentas, VestimentaEstablecimientos } from '../Interfaces/Vestimenta.interface';
 import { MisEstablecimientos, RequerimientosDeMisEstablecimientos, RequerimientosTiendasCercanas, TiendasCercanas } from '../Interfaces/tienda.interface';
+import { ActualizarContrasena, RequerimientoCorreo, ValidarToken } from '../Interfaces/contrasena.interface';
 
 
 @Injectable({
@@ -42,6 +43,11 @@ export class FuncionesService {
   }
   return atob(base64);
   }
+  
+  obtenerDatosDesdeGeocoding(url: string): Observable<any> {
+    return this.httpClient.get(url);
+  }
+  
 
 
   
@@ -49,7 +55,6 @@ export class FuncionesService {
   ObtenerClientes(usuarioID: string): Observable<any>{
     return this.httpClient.post(this.API_RentOutfit + '/Cliente/ObtenerCliente?usuarioID=', usuarioID);
   }
-
 
   ObtenerEstados() : Observable<EstadoInterface[]> {
     return this.httpClient.post<EstadoInterface[]>(this.API_RentOutfit + '/Listas/ObtenerEstados', {});
@@ -63,6 +68,10 @@ export class FuncionesService {
     return this.httpClient.post<GeneroInterface[]>(this.API_RentOutfit + '/Listas/ObtenerGeneros', {})
   }
 
+
+
+  //Funciones para Cliente
+
   IniciarSesion(data: RequerimientosIniciarSesion) : Observable<any> 
   {
     return this.httpClient.post(this.API_RentOutfit + '/Cliente/IniciarSesion', data);
@@ -73,61 +82,72 @@ export class FuncionesService {
     return this.httpClient.post(this.API_RentOutfit + '/Cliente/RegistrarCliente', formData);
   }
 
-  ObtenerCliente(usuarioID: number) : Observable<any>
-  {
-    return this.httpClient.post(this.API_RentOutfit + '/Cliente/ObtenerCliente', usuarioID)
-  }
-
-
-
-  
   MostrarVestimentas(data: RequerimientosVestimentas): Observable<ListaVestimenta[]> {
     return this.httpClient.post<ListaVestimenta[]>(this.API_RentOutfit + '/Cliente/MostrarVestimentas', data);
+  }
+
+  InformacionVestimenta(vestimenta: number): Observable<any> {
+    return this.httpClient.post(this.API_RentOutfit + '/Cliente/InformacionVestimenta', vestimenta);
   }
 
   EstablecimientosCercanos(data: RequerimientosTiendasCercanas): Observable<TiendasCercanas[]> {
     return this.httpClient.post<TiendasCercanas[]>(this.API_RentOutfit + '/Cliente/EstablecimientosCercanos', data);
   }
 
-  InformacionVestimenta(vestimenta: number): Observable<any> {
-    return this.httpClient.post(this.API_RentOutfit + '/Cliente/InformacionVestimenta', vestimenta);
+  ObtenerCliente(data: RequerimientosUsuario) : Observable<any>
+  {
+    return this.httpClient.post(this.API_RentOutfit + '/Cliente/ObtenerCliente', data)
   }
-  
-  obtenerDatosDesdeGeocoding(url: string): Observable<any> {
-    return this.httpClient.get(url);
-  }
-  
 
-
-    
-  DarDeAltaUnVendedor(usuario: number): Observable<any>{
-    return this.httpClient.post(this.API_RentOutfit + '/Vendedor/DarDeAltaUnVendedor', usuario);
-   }
-   
-   DarDeAltaEstablecimiento(formData: FormData) : Observable<any>
-   {
-     return this.httpClient.post(this.API_RentOutfit + '/Vendedor/DarDeAltaEstablecimiento', formData);
-   }
-
-   RegistrarVestimenta(formData: FormData) : Observable<any>
-   {
-     return this.httpClient.post(this.API_RentOutfit + '/Vendedor/RegistrarVestimenta', formData);
-   }
-
-
-
-
-   InformacionEstablecimiento(establecimiento: number) : Observable<any>{
+  InformacionEstablecimiento(establecimiento: number) : Observable<any>{
     return this.httpClient.post(this.API_RentOutfit + '/Cliente/InformacionEstablecimiento', establecimiento);
-   }
+  }
 
-   VestimentasEstablecimientos(data: VestimentaEstablecimientos) : Observable<ListaVestimenta[]> {
-     return this.httpClient.post<TiendasCercanas[]>(this.API_RentOutfit + '/Cliente/VestimentasDeEstablecimientos', data);
-   }
+  VestimentasEstablecimientos(data: VestimentaEstablecimientos) : Observable<ListaVestimenta[]> {
+    return this.httpClient.post<TiendasCercanas[]>(this.API_RentOutfit + '/Cliente/VestimentasDeEstablecimientos', data);
+  }
+
+
+
+
+  //Funciones para vendedor
+
+  DarDeAltaUnVendedor(usuario: number): Observable<any> {
+    return this.httpClient.post(this.API_RentOutfit + '/Vendedor/DarDeAltaUnVendedor', usuario);
+  }
    
-   MisEstablecimientos(data: RequerimientosDeMisEstablecimientos) : Observable<MisEstablecimientos[]> {
+  DarDeAltaEstablecimiento(formData: FormData) : Observable<any>
+  {
+    return this.httpClient.post(this.API_RentOutfit + '/Vendedor/DarDeAltaEstablecimiento', formData);
+  }
+
+  RegistrarVestimenta(formData: FormData) : Observable<any>
+  {
+    return this.httpClient.post(this.API_RentOutfit + '/Vendedor/RegistrarVestimenta', formData);
+  }
+
+  MisEstablecimientos(data: RequerimientosDeMisEstablecimientos) : Observable<MisEstablecimientos[]> {
     return this.httpClient.post<MisEstablecimientos[]>(this.API_RentOutfit + '/Vendedor/MisEstablecimientos', data);
-   }
+  }
+
+
+
+
+
+
+  //Funciones para recuperar contraseña
+
+  EnviarCorreo(data: RequerimientoCorreo): Observable<any> {
+    return this.httpClient.post(this.API_RentOutfit + '/RecuperarContrasena/ObtenerToken', data);
+  }
+  
+  ValidarToken(data: ValidarToken): Observable<any> {
+    return this.httpClient.post(this.API_RentOutfit + '/RecuperarContrasena/validarToken', data);
+  }
+
+  ActualizarContrasena(data: ActualizarContrasena): Observable<any> {
+    return this.httpClient.post(this.API_RentOutfit + '/RecuperarContrasena/ActualizarContrasena', data);
+  }
 
 
 

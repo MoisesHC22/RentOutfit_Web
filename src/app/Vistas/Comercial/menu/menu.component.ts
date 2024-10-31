@@ -6,6 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
 import { FuncionesService } from '../../../Services/funciones.service'; 
 import { ReactiveFormsModule } from '@angular/forms';
+import { RequerimientosUsuario } from '../../../Interfaces/iniciarSesion.interface';
 
 @Component({
   selector: 'app-menu',
@@ -34,7 +35,8 @@ export class MenuComponent implements OnInit {
   constructor(private Funciones: FuncionesService, private cookie: CookieService, private Rutas: Router){}
 
   token: string | null = null;
-  usuarioID: number | null = null
+  usuarioID: number | null = null;
+  pagina: number | null = 1;
   img: string | null = null;
   nombre: string | null = null;
 
@@ -70,7 +72,7 @@ export class MenuComponent implements OnInit {
           this.usuarioID = obtener?.usuario ? Number(obtener.usuario) : null;
 
           if(this.usuarioID != null){
-            this.ObtenerMiInformacion(this.usuarioID);
+            this.ObtenerMiInformacion(this.usuarioID, this.pagina!);
           }
         }
       }
@@ -78,8 +80,16 @@ export class MenuComponent implements OnInit {
 
 
 
-  ObtenerMiInformacion(usuarioID: number){
-    this.Funciones.ObtenerCliente(usuarioID).subscribe({
+  ObtenerMiInformacion(usuarioID: number, pagina: number){
+
+    const data : RequerimientosUsuario =
+    {
+      usuarioID: this.usuarioID!,
+      pagina: this.pagina!,
+      activar: false
+    }
+
+    this.Funciones.ObtenerCliente(data).subscribe({
       next: (response) => {
         this.cookie.set('info', response.token, { path: '/', secure: true})
       },

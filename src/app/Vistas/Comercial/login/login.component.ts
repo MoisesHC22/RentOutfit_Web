@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { CookieService} from 'ngx-cookie-service';
 import {faTriangleExclamation} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RequerimientoCorreo } from '../../../Interfaces/contrasena.interface';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 })
 export class LoginComponent implements OnInit{
   
-
   Advertencia = faTriangleExclamation;
 
   datos: any;
@@ -101,4 +101,30 @@ export class LoginComponent implements OnInit{
   cerrarModal() : void {
     this.anuncioError = false;
   }
+
+  RecuperarContrasena(email: string) {
+    
+    if(email){
+
+      const data: RequerimientoCorreo = {
+        email: email!
+      }
+      console.log(email);
+
+      this.funciones.EnviarCorreo(data).subscribe({
+        next: (response) => {
+          this.rutas.navigate(['/OlvideMiContrasena']);
+        },
+        error: (err) => {
+          console.log('Ocurrio algo inesperado.', err);
+        }
+      });
+    } else {
+      console.log('Por favor, ingrese un correo valido.');
+    }
+  }
+  
+
+
+
 }
