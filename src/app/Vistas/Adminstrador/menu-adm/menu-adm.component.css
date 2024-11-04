@@ -1,5 +1,12 @@
+
+.Unir{
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
 .menu-lateral {
-    position: fixed;
+
     top: 0;
     left: 0;
     width: 260px;
@@ -39,6 +46,7 @@
     border: none;
     padding: 10px;
     cursor: pointer;
+    margin-top: auto; 
   }
   
   .menu-lateral ul {
@@ -57,4 +65,15 @@
   
   .menu-lateral a:hover {
     color: #007bff;
+  }
+
+  .main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f5f6fa;
+    max-width: 100%;
   }

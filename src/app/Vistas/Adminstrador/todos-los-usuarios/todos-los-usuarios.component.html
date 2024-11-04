@@ -1,0 +1,25 @@
+<div *ngIf="clientes.length > 0;">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+              <th></th>
+              <th>Nombre</th>
+              <th>Genero</th>
+              <th>Telefono</th>
+              <th>Email</th>
+              <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cliente of clientes">
+                <td><img [src]="cliente.linkImagenPerfil" id="img"></td>
+                <td> {{ cliente.nombreCliente }} {{cliente.apellidoMaterno}} {{cliente.apellidoPaterno}}</td>
+                <td>{{cliente.genero}}</td>
+                <td>{{cliente.telefono}}</td>
+                <td>{{cliente.email}}</td>
+                <td>
+                    <button class="banear">Banear cuenta</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>

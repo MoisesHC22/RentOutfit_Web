@@ -54,7 +54,7 @@
                 
                 <li> <a routerLink="informacion">Mi información</a> </li>
                 <li *ngIf="vendedor"><a (click)="MisEstablecimientos(this.usuarioID!)">Adminstrar mi negocio</a> </li>
-                <li > <a routerLink="/Administrador/TodosEstablecimientos">Super Usuario</a></li>
+                <li > <a (click)="TodosLosEstablecimientos(this.usuarioID!)">Super Usuario</a></li>
                 <li> 
                   <button id="CerrarSesion" type="button" (click)="CerrarSesion()">
                     <fa-icon id="Icono" [icon]="faDoorOpen"></fa-icon>

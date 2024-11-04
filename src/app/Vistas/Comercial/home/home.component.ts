@@ -204,7 +204,7 @@ export class HomeComponent implements OnInit {
     if(establecimiento){
       this.Rutas.navigate(['/Cliente/masInformacionEstablecimiento', establecimiento]);
     } else {
-      console.error('No se encontro la vestimenta.');
+      console.error('No se obtuvo la informacion del establecimiento.');
     }
   }
 

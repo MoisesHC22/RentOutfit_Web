@@ -1,0 +1,80 @@
+
+.centrar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .contenedor {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 0px 70px;
+
+
+        .Establecimiento {
+            position: relative;
+            background-color: #5c6576;
+            margin: 15px;
+            border-radius: 10px;
+            color: white;
+
+            img{
+                width: 220px;
+                height: 130px;
+                border-radius: 10px 10px 0 0;
+            }
+
+            p{
+                margin: 7px 0;
+                text-align: center;
+                font-size: 20px;
+            }
+
+            #nombre {
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            #fecha {
+                font-size: 13px;
+            }
+
+            .btnAprobar{
+                width: 180px;
+                height: 30px;
+                border-radius: 5px;
+                margin-bottom: 7px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+            }
+
+            .btnAprobar:hover {
+                background-color: #025ec0;
+            }
+        }
+
+
+    }
+
+    .btnCerrar {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #ff4d4d;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .btnCerrar:hover {
+        background: #e60000;
+    }
+}

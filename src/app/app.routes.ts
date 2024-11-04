@@ -18,6 +18,8 @@ import { MenuAdmComponent } from './Vistas/Adminstrador/menu-adm/menu-adm.compon
 import { TodosLosEstablecimientosComponent } from './Vistas/Adminstrador/todos-los-establecimientos/todos-los-establecimientos.component';
 import { RecuperarContrasenaComponent } from './Vistas/Comercial/OlvideMiContrasena/recuperar-contrasena/recuperar-contrasena.component';
 import { AvisoEmailComponent } from './Vistas/Comercial/OlvideMiContrasena/aviso-email/aviso-email.component';
+import { TodosLosUsuariosComponent } from './Vistas/Adminstrador/todos-los-usuarios/todos-los-usuarios.component';
+import { PeticionesDisponiblesComponent } from './Vistas/Adminstrador/peticiones-disponibles/peticiones-disponibles.component';
 
 export const routes: Routes = [
 
@@ -50,7 +52,9 @@ export const routes: Routes = [
         path: 'Administrador',
         component: MenuAdmComponent,
         children: [
-            {path: 'TodosEstablecimientos', component: TodosLosEstablecimientosComponent}
+            {path: 'TodosEstablecimientos/:usuario', component: TodosLosEstablecimientosComponent},
+            {path: 'TodosLosUsaurios/:usuario', component: TodosLosUsuariosComponent},
+            {path: 'Peticiones/:usuario', component: PeticionesDisponiblesComponent}
         ]
     },
 

@@ -1,4 +1,6 @@
-<div class="menu-lateral">
+<div class="Unir">
+
+  <div class="menu-lateral">
 
     <h6>Panel de Administrador</h6>
   
@@ -8,12 +10,16 @@
     </div>
 
     <ul>
-      <li><a>Nuevas peticiones</a></li>
-      <li><a routerLink="">Establecimientos</a></li>
-      <li><a routerLink="">Vendedores</a></li>
+      <li><a (click)="TodasLasPeticiones(this.usuarioID!)">Nuevas peticiones</a></li>
+      <li><a (click)="TodosLosEstablecimientos(this.usuarioID!)">Establecimientos</a></li>
+      <li><a (click)="TodosLosUsuarios(this.usuarioID!)">Usuarios</a></li>
     </ul>
 
     <button (click)="regresarCliente()">Regresar</button>
    </div>
   
+   <div class="main-content">
     <router-outlet></router-outlet>
+   </div>
+
+</div>

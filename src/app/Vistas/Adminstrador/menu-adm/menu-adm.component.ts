@@ -47,5 +47,35 @@ export class MenuAdmComponent implements OnInit{
   regresarCliente(): void {
     this.Rutas.navigate(['/Cliente/home'])
   }
+  
+  TodosLosEstablecimientos(usuario?: number) : void {
+    if(usuario) {
+      this.Rutas.navigate(['/Administrador/TodosEstablecimientos', this.usuarioID]);
+    }
+    else
+    {
+      console.error('Ocurrio un error!.');
+    }
+  }
+
+  TodosLosUsuarios(usuario?: number) : void {
+    if(usuario) {
+      this.Rutas.navigate(['/Administrador/TodosLosUsaurios', this.usuarioID]);
+    }
+    else
+    {
+      console.error('Ocurrio un error!.');
+    }
+  }
+
+  TodasLasPeticiones(usuario?: number) : void {
+    if(usuario) {
+      this.Rutas.navigate(['/Administrador/Peticiones', this.usuarioID]);
+    }
+    else
+    {
+      console.error('Ocurrio un error!.');
+    }
+  }
 
 }

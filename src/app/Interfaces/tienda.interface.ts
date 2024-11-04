@@ -57,8 +57,9 @@ export interface DarDeAltaUnaTienda{
  }
 
 
- export interface MisEstablecimientos{
+ export interface MisEstablecimientos {
     establecimientosID?: number;
     nombreEstablecimiento?: string;
     linkImagenEstablecimiento?: string;
+    ultimaModificacionEstablecimiento?: string | Date;
  }

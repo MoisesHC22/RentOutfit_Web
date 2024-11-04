@@ -80,7 +80,7 @@ export class MenuComponent implements OnInit {
 
 
 
-  ObtenerMiInformacion(usuarioID: number, pagina: number){
+  ObtenerMiInformacion(usuarioID: number, pagina: number) {
 
     const data : RequerimientosUsuario =
     {
@@ -123,6 +123,17 @@ export class MenuComponent implements OnInit {
       this.Rutas.navigate(['/Vendedor/misEstablecimientos', usuario]);
     } else {
       console.error('No se encontro tus establecimientos.');
+    }
+  }
+
+  
+  TodosLosEstablecimientos(usuario?: number) :void {
+    if(usuario) {
+      this.Rutas.navigate(['/Administrador/TodosEstablecimientos', this.usuarioID]);
+    }
+    else
+    {
+      console.error('Ocurrio un error!.');
     }
   }
 

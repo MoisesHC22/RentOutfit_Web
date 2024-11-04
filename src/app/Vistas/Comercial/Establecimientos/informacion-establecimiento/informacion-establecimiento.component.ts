@@ -33,7 +33,7 @@ export class InformacionEstablecimientoComponent implements OnInit{
         this.establecimiento = +establecimientoID;
         this.InformacionEstablecimiento(this.establecimiento);
       }
-    })
+    });
   }
 
   constructor(private Funciones: FuncionesService, private Rutas: ActivatedRoute){}

@@ -1,0 +1,16 @@
+<div class="centrar">
+   <div class="contenedor">
+      @for (item of TiendasList; track $index)
+      {
+        <div class="Establecimiento">
+           <button class="btnCerrar">&times;</button>
+            <img [src]="item.linkImagenEstablecimiento">
+            <p id="nombre">{{item.nombreEstablecimiento}}</p>
+            <p id="fecha">{{item.ultimaModificacionEstablecimiento?.toString()| slice:0:10 }} | {{item.ultimaModificacionEstablecimiento?.toString()| slice:11:19 }} </p>
+            <div class="centrar">
+               <button (click)="aprobar(item.establecimientosID!)" class="btnAprobar">Aprobar</button>
+            </div>
+        </div>
+      }
+   </div>
+</div>

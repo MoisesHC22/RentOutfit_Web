@@ -1,1 +1,30 @@
-<p>todos-los-establecimientos works!</p>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Direccion</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (item of TiendasList; track $index)
+        {
+           <tr>
+              <td>
+                <p>{{item.nombreEstablecimiento}}</p>
+                <img id="img" [src]="item.linkImagenEstablecimiento">
+              </td>
+              <td>
+                <p>{{item.calle}}, {{item.codigoPostal}}, {{item.nombreMunicipio}}, {{item.nombreEstado}}</p>
+              </td>
+              <td class="acciones">
+                <div class="btn">
+                  <button class="alertar">Alertar</button>
+                  <button class="banear">Banear</button>
+                </div>
+              </td>
+           </tr>
+        }
+    </tbody>
+</table>

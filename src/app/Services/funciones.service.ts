@@ -43,7 +43,7 @@ export class FuncionesService {
   }
   return atob(base64);
   }
-  
+
   obtenerDatosDesdeGeocoding(url: string): Observable<any> {
     return this.httpClient.get(url);
   }
@@ -128,7 +128,7 @@ export class FuncionesService {
   MisEstablecimientos(data: RequerimientosDeMisEstablecimientos) : Observable<MisEstablecimientos[]> {
     return this.httpClient.post<MisEstablecimientos[]>(this.API_RentOutfit + '/Vendedor/MisEstablecimientos', data);
   }
-
+  
 
 
 
@@ -148,6 +148,27 @@ export class FuncionesService {
     return this.httpClient.post(this.API_RentOutfit + '/RecuperarContrasena/ActualizarContrasena', data);
   }
 
+
+
+
+
+
+  //Funciones para administrador
+  TodosLosEstablecimientos(data: RequerimientosDeMisEstablecimientos) : Observable<TiendasCercanas[]> {
+    return this.httpClient.post<TiendasCercanas[]>(this.API_RentOutfit + '/Administrador/TodosLosEstablecimientos', data);
+  }
+
+  ListaDeEstablecimientosParaAprobar(data: RequerimientosDeMisEstablecimientos): Observable<MisEstablecimientos[]> {
+    return this.httpClient.post<MisEstablecimientos[]>(this.API_RentOutfit + '/Administrador/EstablecimientosParaAprobacion', data);
+  }
+
+  AprobarEstablecimiento(establecimiento: number): Observable<any> {
+    return this.httpClient.post(this.API_RentOutfit + '/Administrador/AprobarEstablecimiento', establecimiento);
+  }
+
+  DenegarEstablecimiento(establecimiento: number): Observable<any> {
+    return this.httpClient.post(this.API_RentOutfit + '/Administrador/DenegarEstablecimiento', establecimiento);
+  }
 
 
 
