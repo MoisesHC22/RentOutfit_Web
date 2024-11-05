@@ -77,7 +77,36 @@ export class LoginComponent implements OnInit{
     });
   }
   
- 
+  RecuperarContrasena(email: string) {
+    
+    if(email){
+
+      const data: RequerimientoCorreo = {
+        email: email!
+      }
+      console.log(email);
+
+      this.funciones.EnviarCorreo(data).subscribe({
+        next: (response) => {
+          this.rutas.navigate(['/SeEnvioCorreo', email]);
+        },
+        error: (err) => {
+          console.log('Ocurrio algo inesperado.', err);
+        }
+      });
+    } else {
+      console.log('Por favor, ingrese un correo valido.');
+    }
+  }
+
+
+
+
+  
+  cerrarModal() : void {
+    this.anuncioError = false;
+  }
+  
   ValidarCorreo(event: KeyboardEvent){
     const charCode = event.charCode || event.keyCode;
     const charStr = String.fromCharCode(charCode);
@@ -96,34 +125,6 @@ export class LoginComponent implements OnInit{
     input.value = valor.replace(/[^a-zA-Z0-9@._-]/g, '');
     input.value = input.value.trim();
   }
-
-  
-  cerrarModal() : void {
-    this.anuncioError = false;
-  }
-
-  RecuperarContrasena(email: string) {
-    
-    if(email){
-
-      const data: RequerimientoCorreo = {
-        email: email!
-      }
-      console.log(email);
-
-      this.funciones.EnviarCorreo(data).subscribe({
-        next: (response) => {
-          this.rutas.navigate(['/SeEnvioCorreo']);
-        },
-        error: (err) => {
-          console.log('Ocurrio algo inesperado.', err);
-        }
-      });
-    } else {
-      console.log('Por favor, ingrese un correo valido.');
-    }
-  }
-  
 
 
 
