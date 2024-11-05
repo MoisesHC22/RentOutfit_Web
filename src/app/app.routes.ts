@@ -60,7 +60,7 @@ export const routes: Routes = [
 
     {path: 'Login', component: LoginComponent},
     {path: 'Register', component: RegisterComponent},
-    {path: 'OlvideMiContrasena', component: AvisoEmailComponent},
-    {path: 'OlvideMiContrasena/:email', component: RecuperarContrasenaComponent }
+    {path: 'SeEnvioCorreo', component: AvisoEmailComponent},
+    {path: 'OlvideMiContrasena', component: RecuperarContrasenaComponent }
 
 ];

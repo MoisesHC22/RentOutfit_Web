@@ -1,51 +1,69 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FuncionesService } from '../../../../Services/funciones.service';
 import { InformacionVestimenta } from '../../../../Interfaces/Vestimenta.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-informacion-vestimenta',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule
+  ],
   templateUrl: './informacion-vestimenta.component.html',
   styleUrl: './informacion-vestimenta.component.css'
 })
-export class InformacionVestimentaComponent implements OnInit {
+export class InformacionVestimentaComponent implements OnInit, OnDestroy {
 
   vestimenta: number = 0;
   informacion: InformacionVestimenta | null = null;
+  private routeSub: Subscription = new Subscription();
+
+  // Variables para el modal
+  showModal: boolean = false;
+  imagenSeleccionada: string | null = null;
+
+  constructor(private funciones: FuncionesService, private rutas: ActivatedRoute) {}
 
   ngOnInit(): void {
-
-    this.Rutas.paramMap.subscribe(params => {
+    this.routeSub = this.rutas.paramMap.subscribe((params: ParamMap) => {
       const vestimentaID = params.get('vestimenta');
       
-      if(vestimentaID) {
+      if (vestimentaID) {
         this.vestimenta = +vestimentaID;
-        console.log(this.vestimenta);
-        this.InformacionVestimenta(this.vestimenta);
+        this.obtenerInformacionVestimenta(this.vestimenta);
       }
-    })
+    });
   }
 
-  constructor(private Funciones: FuncionesService, private Rutas: ActivatedRoute){}
-
-  InformacionVestimenta(Vestimenta: number): void {
-    console.log(Vestimenta);
-    
-    if(Vestimenta) {
-      this.Funciones.InformacionVestimenta(Vestimenta).subscribe({
+  obtenerInformacionVestimenta(vestimentaID: number): void {
+    if (vestimentaID) {
+      this.funciones.InformacionVestimenta(vestimentaID).subscribe({
         next: (result: InformacionVestimenta) => {
-            this.informacion = result;
-            console.log(this.vestimenta);
+          this.informacion = result;
+          console.log('Información de vestimenta:', this.informacion);
         },
         error: (err) => {
-         console.log('Error al obtener la vestimenta.');
+          console.error('Error al obtener la vestimenta:', err);
         }
       });
     }
   }
 
+  // Método para abrir el modal
+  abrirModal(imagen: string | null | undefined): void {
+    this.imagenSeleccionada = imagen || null;
+    this.showModal = true;
+  }
 
+  // Método para cerrar el modal
+  cerrarModal(): void {
+    this.showModal = false;
+    this.imagenSeleccionada = null;
+  }
 
+  ngOnDestroy(): void {
+    this.routeSub.unsubscribe();
+  }
 }

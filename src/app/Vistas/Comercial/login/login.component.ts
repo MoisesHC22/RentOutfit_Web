@@ -113,7 +113,7 @@ export class LoginComponent implements OnInit{
 
       this.funciones.EnviarCorreo(data).subscribe({
         next: (response) => {
-          this.rutas.navigate(['/OlvideMiContrasena']);
+          this.rutas.navigate(['/SeEnvioCorreo']);
         },
         error: (err) => {
           console.log('Ocurrio algo inesperado.', err);

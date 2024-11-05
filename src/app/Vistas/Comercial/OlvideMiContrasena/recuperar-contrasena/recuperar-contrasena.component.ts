@@ -12,7 +12,6 @@ import { ActualizarContrasena, ValidarToken } from '../../../../Interfaces/contr
     CommonModule, 
     ReactiveFormsModule, 
     RouterModule, 
-    RouterModule, 
     RouterLink, 
     RouterOutlet
   ],
@@ -29,23 +28,19 @@ export class RecuperarContrasenaComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.Rutas.paramMap.subscribe(params => {
-      this.email = params.get('email');
-      console.log("El correo es:", this.email);
-    });
+    this.email = this.Rutas.snapshot.queryParamMap.get('email');
+    this.token = this.Rutas.snapshot.queryParamMap.get('token');
 
-    this.Rutas.queryParamMap.subscribe(params => {
-      this.token = params.get('token');
-      console.log("El token es:", this.token);
+    console.log("El correo es:", this.email);
+    console.log("El token es:", this.token);   
 
-      if(this.email && this.token){
-        this.Validar(this.email!, this.token!);
-      }
-    });
+    if(this.email && this.token) {
+      this.Validar(this.email, this.token);
+    }
 
     this.nuevosDatos = this.form.group({
       contrasena: ['', [Validators.required]]
-    })
+    });
   }
 
   constructor(private form: FormBuilder, private Funciones: FuncionesService, private Rutas: ActivatedRoute, private redireccion: Router){}
