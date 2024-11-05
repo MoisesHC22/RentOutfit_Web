@@ -4,6 +4,48 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FuncionesService } from '../../../../Services/funciones.service';
 import { ActivatedRoute, Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { ActualizarContrasena, ValidarToken } from '../../../../Interfaces/contrasena.interface';
+import { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
+
+
+export function CaracteresContrasenaValidacion(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
+  
+    if(!value){
+      return null;
+    }
+
+    const MayusculaEnCualquierParte = /[A-Z]/.test(value);
+    const AlmenosDosNumeros = /\d.*\d/.test(value);
+    const Caracteres = value.length >= 8;
+
+    const valid = MayusculaEnCualquierParte  && AlmenosDosNumeros && Caracteres;
+
+    if(!valid) {
+      return {
+        contrasenaVal: {
+          MayusculaEnCualquierParte : MayusculaEnCualquierParte,
+          AlmenosDosNumeros: AlmenosDosNumeros,
+          Caracteres: Caracteres
+        }
+      };
+    }
+     return null;
+  };
+}
+
+export function MatchContrasenaValidacion(contrasena: string, contrasenaConfirmar: string): ValidatorFn 
+{
+  return (formGroup: AbstractControl): {[key: string]: any } | null => {
+      const contrasenaControl = formGroup.get(contrasena);
+      const contrasenaConfirmarControl = formGroup.get(contrasenaConfirmar);
+
+      if (contrasenaControl && contrasenaConfirmarControl && contrasenaControl.value !== contrasenaConfirmarControl.value) {
+        return { contrasenaNoMatch: true };
+      }
+      return null;
+    };
+}
 
 @Component({
   selector: 'app-recuperar-contrasena',
@@ -31,15 +73,15 @@ export class RecuperarContrasenaComponent implements OnInit {
     this.email = this.Rutas.snapshot.queryParamMap.get('email');
     this.token = this.Rutas.snapshot.queryParamMap.get('token');
 
-    console.log("El correo es:", this.email);
-    console.log("El token es:", this.token);   
-
     if(this.email && this.token) {
       this.Validar(this.email, this.token);
     }
 
     this.nuevosDatos = this.form.group({
-      contrasena: ['', [Validators.required]]
+      contrasena: ['', [Validators.required, CaracteresContrasenaValidacion()]],
+      contrasenaValidar: ['',Validators.required]
+    },{
+      validator: MatchContrasenaValidacion('contrasena','contrasenaValidar')
     });
   }
 
