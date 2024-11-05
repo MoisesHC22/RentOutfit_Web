@@ -5,11 +5,32 @@
   <p>Fecha de publicación: {{informacion?.fechaPublicacion}}</p>
   <p>{{informacion?.descripcion}}</p>
 
+  <!-- Galería de imágenes -->
   <div class="vestimenta-gallery">
-    <img [src]="informacion?.imagen1" alt="Imagen 1 de {{informacion?.nombrePrenda}}">
-    <img [src]="informacion?.imagen2" alt="Imagen 2 de {{informacion?.nombrePrenda}}">
-    <img [src]="informacion?.imagen3" alt="Imagen 3 de {{informacion?.nombrePrenda}}">
-    <img [src]="informacion?.imagen4" alt="Imagen 4 de {{informacion?.nombrePrenda}}">
+    <img
+      *ngIf="informacion?.imagen1"
+      [src]="informacion?.imagen1"
+      alt="Imagen 1 de {{informacion?.nombrePrenda}}"
+      (click)="abrirModal(informacion?.imagen1 || null)"
+    />
+    <img
+      *ngIf="informacion?.imagen2"
+      [src]="informacion?.imagen2"
+      alt="Imagen 2 de {{informacion?.nombrePrenda}}"
+      (click)="abrirModal(informacion?.imagen2 || null)"
+    />
+    <img
+      *ngIf="informacion?.imagen3"
+      [src]="informacion?.imagen3"
+      alt="Imagen 3 de {{informacion?.nombrePrenda}}"
+      (click)="abrirModal(informacion?.imagen3 || null)"
+    />
+    <img
+      *ngIf="informacion?.imagen4"
+      [src]="informacion?.imagen4"
+      alt="Imagen 4 de {{informacion?.nombrePrenda}}"
+      (click)="abrirModal(informacion?.imagen4 || null)"
+    />
   </div>
 
   <div class="vestimenta-details">
@@ -18,5 +39,13 @@
     <p>Stock disponible: {{informacion?.stock}}</p>
     <p>Talla: {{informacion?.nombreTalla}}</p>
     <p>Estatus: {{informacion?.vestimentaEstatus}}</p>
+  </div>
+</div>
+
+<!-- Modal para visualizar la imagen en detalle -->
+<div class="modal-overlay" *ngIf="showModal" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <img [src]="imagenSeleccionada" alt="Imagen en detalle" />
+    <button class="close-button" (click)="cerrarModal()">X</button>
   </div>
 </div>
