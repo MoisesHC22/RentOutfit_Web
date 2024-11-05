@@ -20,16 +20,16 @@ export function CaracteresContrasenaValidacion(): ValidatorFn {
       return null;
     }
 
-    const PrimeraLetraMayuscula = /^[A-Z]/.test(value);
+    const MayusculaEnCualquierParte = /[A-Z]/.test(value);
     const AlmenosDosNumeros = /\d.*\d/.test(value);
     const Caracteres = value.length >= 8;
 
-    const valid = PrimeraLetraMayuscula && AlmenosDosNumeros && Caracteres;
+    const valid = MayusculaEnCualquierParte && AlmenosDosNumeros && Caracteres;
 
     if(!valid) {
       return {
         contrasenaVal: {
-          PrimeraLetraMayuscula: PrimeraLetraMayuscula,
+          MayusculaEnCualquierParte: MayusculaEnCualquierParte,
           AlmenosDosNumeros: AlmenosDosNumeros,
           Caracteres: Caracteres
         }

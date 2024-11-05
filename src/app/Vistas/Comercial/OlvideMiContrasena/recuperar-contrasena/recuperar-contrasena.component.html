@@ -1,9 +1,33 @@
 
-<div *ngIf="formContrasena">
-  <form [formGroup]="nuevosDatos" (ngSubmit)="NuevaContra()">
-    <label>Ingresa la nueva contraseña</label>
-    <input type="text" id="contrasena" name="contrasena" form="contrasena" formControlName="contrasena"  placeholder="************">
+<div class="formulario" *ngIf="formContrasena">
+  <form [formGroup]="nuevosDatos" (ngSubmit)="NuevaContra()" class="NuevaContrasena">
+    
+    <h4>Restablecer contraseña</h4>
+   
+    <div>
+      <label>Ingresa tu nueva contraseña</label>
 
-    <button type="submit">Validar</button>
+      <input type="password" id="contrasena" name="contrasena" form="contrasena" formControlName="contrasena"  placeholder="************" maxlength="15" autocomplete="new-password">
+
+      <div class="ContValidaciones" *ngIf="nuevosDatos.get('contrasena')?.errors?.contrasenaVal && nuevosDatos.get('contrasena')?.invalid && (nuevosDatos.get('contrasena')?.touched || nuevosDatos.get('contrasena')?.dirty)">
+        <small class="Mensaje-Error" *ngIf="nuevosDatos.get('contrasena')?.errors?.['required']">Este campo es obligatorio!</small>
+        <small class="Mensaje-Error" *ngIf="!nuevosDatos.get('contrasena')?.errors?.contrasenaVal?.MayusculaEnCualquierParte">Debe de contener almenos una mayúscula. </small>
+        <small class="Mensaje-Error" *ngIf="!nuevosDatos.get('contrasena')?.errors?.contrasenaVal?.AlmenosDosNumeros">Debe tener al menos dos números. </small>
+        <small class="Mensaje-Error" *ngIf="!nuevosDatos.get('contrasena')?.errors?.contrasenaVal?.Caracteres">Debe tener al menos 8 caracteres.</small>
+      </div>
+    </div>
+    
+    <div> 
+      <label for="confirmPassword">Confirma la contraseña</label>
+      <input type="password" id="confirmPassword" formControlName="contrasenaValidar" name="confirmPassword" placeholder="**********" maxlength="15" autocomplete="new-password" />
+              
+      <div class="ContValidaciones" *ngIf="nuevosDatos.errors?.contrasenaNoMatch && nuevosDatos.get('contrasenaValidar')?.touched">
+        <small class="Mensaje-Error">Las contraseñas no coinciden.</small>
+      </div>
+
+    </div>
+
+
+    <button type="submit" [disabled]="!nuevosDatos.valid">Validar</button>
   </form>
 </div>
