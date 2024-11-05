@@ -5,7 +5,7 @@ import { FuncionesService } from '../../../../Services/funciones.service';
 import { ActivatedRoute, Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { ActualizarContrasena, ValidarToken } from '../../../../Interfaces/contrasena.interface';
 import { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
-
+import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 
 export function CaracteresContrasenaValidacion(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -55,7 +55,8 @@ export function MatchContrasenaValidacion(contrasena: string, contrasenaConfirma
     ReactiveFormsModule, 
     RouterModule, 
     RouterLink, 
-    RouterOutlet
+    RouterOutlet,
+    LottieComponent
   ],
   templateUrl: './recuperar-contrasena.component.html',
   styleUrl: './recuperar-contrasena.component.css'
@@ -67,6 +68,8 @@ export class RecuperarContrasenaComponent implements OnInit {
   formContrasena = false;
   email: string | null= null;
   token: string | null = null;
+  imagenPerfil: string | null = null;
+  mostrarAnimacionExito = false;
 
   ngOnInit(): void {
 
@@ -85,6 +88,14 @@ export class RecuperarContrasenaComponent implements OnInit {
     });
   }
 
+  animacionError: AnimationOptions = {
+    path: '/Animaciones/Error.json'
+  }
+
+  animationExito: AnimationOptions = {
+    path: '/Animaciones/Correcto.json'
+  }
+
   constructor(private form: FormBuilder, private Funciones: FuncionesService, private Rutas: ActivatedRoute, private redireccion: Router){}
 
   Validar(email: string, token: string) : void {
@@ -101,13 +112,14 @@ export class RecuperarContrasenaComponent implements OnInit {
         
         if(result.tipoError === 2 || result.tipoError === 1 || result.tipoError === 3) {
           this.formContrasena = false;
-          console.log("Error", result);
         }
         else {
         this.formContrasena = true;
+        this.imagenPerfil = result.imagen;
         }
       },
       error: (err) => {
+        this.formContrasena = false;
         console.log("Ocurrio un error.", err);
       }
     });
@@ -124,7 +136,12 @@ export class RecuperarContrasenaComponent implements OnInit {
 
     this.Funciones.ActualizarContrasena(data).subscribe({
       next: (result) => {
-        this.redireccion.navigate(['/Login']);
+
+        this.mostrarAnimacionExito = true;
+
+        setTimeout(() => {
+          this.redireccion.navigate(['/Login']);
+        }, 1800);
       },
       error: (err) => {
         console.log("Ocurrio un error.", err);
