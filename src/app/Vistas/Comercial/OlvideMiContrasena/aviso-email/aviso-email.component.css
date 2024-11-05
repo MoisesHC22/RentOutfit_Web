@@ -1,0 +1,61 @@
+.fondo {
+    background: linear-gradient(to bottom, #b5d5e7, #ffffff);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  .animacion {
+    margin-top: -130px;
+    width: 700px;
+    height: 700px;
+  }
+
+  h4 {
+    font-weight: bold;
+    margin-top: -150px;
+    text-align: center;
+  }
+
+  .centrar {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .btnReenviar {
+        width: 200px;
+        height: 35px;
+        border-radius: 8px;
+        color: #ffffff;
+        border: none;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+        will-change: transform, background-color;
+    }
+    
+    .btnReenviar-activo:hover {
+        background-color: #0c709e;
+        transform: scale(1.1);
+    }
+
+    .btnReenviar-activo {
+        background-color: #094e6d;
+    }
+
+    .btnReenviar-desactivado {
+        background-color: #b0b0b0;
+        cursor: not-allowed;
+    }
+  }
+
+  .timer {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+
