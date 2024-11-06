@@ -35,6 +35,7 @@ export class InformacionEstablecimientoComponent implements OnInit{
       }
     });
   }
+  
 
   constructor(private Funciones: FuncionesService, private Rutas: ActivatedRoute){}
 
