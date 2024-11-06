@@ -1,61 +1,75 @@
 .contenedorIframe {
-  width: 100%; /* Ocupa todo el ancho de la pantalla */
-  height: 65%; /* Ocupa el 65% de la altura de la pantalla */
+  width: 100%;
+  height: 65%; 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  #map {
+    height: 600px;
+    width: 100%;
+   }
+
 }
 
-iframe {
-  width: 100%; /* Ocupa todo el ancho del contenedor */
-  height: 100%; /* Ocupa todo el alto del contenedor */
-  border: none; /* Elimina el borde */
-}
 
-/* Cards de las tiendas disponibles */
+
 .contenedor-tienda {
   text-align: center;
-  margin: 20px 0 40px 0;
-}
+  margin: 40px 0 40px 0;
 
-.tienda-galeria {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-}
 
-.tarjeta-tienda {
-  width: 250px;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s;
-}
+  h5{
+    font-weight: bold;
+  }
 
-.tarjeta-tienda:hover {
-  transform: scale(1.05);
-}
+  .centrar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.tarjeta-tienda img {
-  width: 100%;
-  height: auto;
-}
+    .tienda-galeria {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 40px 25px;
+      margin-top: 20px;
 
-.info-tienda {
-  padding: 10px;
-}
+      .tarjeta-tienda {
+        width: 250px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s;
 
-.info-tienda p {
-  font-size: 14px;
-  color: gray;
-  margin: 0;
-}
+        img {
+          width: 100%;
+          height: 150px;
+        }
 
-.info-tienda h4 {
-  font-size: 18px;
-  margin: 5px 0 0 0;
+        .info-tienda {
+          padding: 10px;
+        
+          p {
+            font-size: 14px;
+            color: gray;
+            margin: 0;
+          }
+          
+          h4 {
+            font-size: 18px;
+            margin: 5px 0 0 0;
+          }
+
+        }
+
+      }      
+
+      .tarjeta-tienda:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
 }
 
 /*Color de los iconos*/
@@ -66,138 +80,6 @@ iframe {
 
 
 
-.contenedorAnuncio{
-    
-  
-  #TituloAnuncio{
-    font-size: 50px;
-    text-align: center;
-  }
-
-  #TextoAnuncio{
-    font-size: 22px;
-    text-align: justify;
-  }
-
-  .contenedorBtnDescargar{
-    margin-top: -20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-}
-
-
-
-
-
-.showcase {
-  background: url('/Recursos/fondoPublicidad.jpg') no-repeat center center fixed;
-  background-size: cover;
-}
-
-.showcase h1 {
-  margin-bottom: 20px;
-  color: #fff;
-  font-weight: 400;
-  font-size: 22px;
-}
-
-.showcase h3 {
-  margin-bottom: 20px;
-  color: #fff;
-  font-weight: 400;
-  font-size: 25px;
-}
-
-.showcase li {
-  margin-bottom: 20px;
-  color: #fff;
-  font-weight: 400;
-  font-size: 23px;
-}
-
-
-.showcase p {
-  margin-bottom: 25px;
-  color: #fff;
-}
-
-.device {
-  position: relative;
-  height: 676px;
-  width: 359px;
-  background: url('/Recursos/iphone.png') no-repeat center center;
-  margin: 0 auto;
-}
-
-.device-content {
-  position: absolute;
-  top: 115px;
-  left: 56px;
-  width: 247px;
-  height: 445px;
-}
-
-.device-content img {
-  width: 247px;
-  height: 445px;
-}
-.showcase-wrap {
-  position: relative;
-  padding: 100px 0;
-  min-height: 600px;
-}
-.showcase-slider ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-
-.slides {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.showcase .download-btn {
-  margin-top: 20px;
-  background-color: #007bff;
-  color: #fff;
-  padding: 12px 25px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.download-btn:hover {
-  background-color: #0056b3;
-}
-
-.team-quote {
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #fff;
-  color: #000;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.avatar img {
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  margin-right: 15px;
-}
-
-.logo-quote img {
-  max-width: 80px;
-}
 
 @media (max-width: 768px) {
   .row {

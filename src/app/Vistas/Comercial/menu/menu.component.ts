@@ -104,7 +104,11 @@ export class MenuComponent implements OnInit {
     this.cookie.delete('info', '/');
     this.token = null;
     this.img = null;
-    this.nombre =null;
+    this.nombre = null;
+    console.log('Se cerro sesión');
+
+    this.Funciones.cambiarDeStatus();
+    this.Rutas.navigate(['/Cliente/home']);
   }
 
   VerificaExpiracion(token: string): boolean {
@@ -113,7 +117,6 @@ export class MenuComponent implements OnInit {
     if(descodificar && descodificar.exp) {
       const tiempoActual = Math.floor(Date.now() / 1000);
       return descodificar.exp > tiempoActual;
-      window.location.reload();
     }
     return false;
   }

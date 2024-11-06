@@ -9,13 +9,15 @@ import { ListaVestimenta, RequerimientosVestimentas, VestimentaEstablecimientos 
 import { MisEstablecimientos, RequerimientosDeMisEstablecimientos, RequerimientosTiendasCercanas, TiendasCercanas } from '../Interfaces/tienda.interface';
 import { ActualizarContrasena, RequerimientoCorreo, ValidarToken } from '../Interfaces/contrasena.interface';
 import { environment } from '../../environments/environment';
-
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FuncionesService {
 
+  private opcionesDarAltaSunject = new BehaviorSubject<boolean>(false);
+  opcionesDarDeAlta$ = this.opcionesDarAltaSunject.asObservable();
 
   private API_RentOutfit: string = environment.apiUrl;
 
@@ -48,6 +50,13 @@ export class FuncionesService {
     return this.httpClient.get(url);
   }
   
+  setOpcionDarDeAlta(value: boolean): void {
+    this.opcionesDarAltaSunject.next(value);
+  }
+
+  cambiarDeStatus(): void {
+    this.opcionesDarAltaSunject.next(false);
+  }
 
   
 
