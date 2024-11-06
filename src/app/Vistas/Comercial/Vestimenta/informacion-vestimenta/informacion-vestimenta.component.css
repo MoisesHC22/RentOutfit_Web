@@ -1,3 +1,11 @@
+.column{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+  grid-template-rows: auto;
+  column-gap: 30px; /* Espacio entre columnas */
+  row-gap: 20px; /* Espacio entre filas */
+}
+
 /* Título principal */
 .vestimenta-title {
   text-align: center;
@@ -9,7 +17,7 @@
 
 /* Contenedor de la información de la vestimenta */
 .vestimenta-info {
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f8f9fa;
@@ -34,43 +42,51 @@
 
 /* Galería de imágenes */
 .vestimenta-gallery {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+  grid-template-rows: auto;
+  gap: 15px; /* Espacio entre imágenes */
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto 30px auto;
   justify-content: center;
-  gap: 15px;
-  margin-bottom: 30px;
 }
 
 .vestimenta-gallery img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
+  width: 100%;
+  height: auto;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease;
+  object-fit: cover;
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .vestimenta-gallery img:hover {
-  transform: scale(1.1);
+  transform: scale(1.05); /* Efecto de zoom en hover */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Detalles de la vestimenta */
 .vestimenta-details {
-  display: flex;
-  flex-wrap: wrap;
+  display: block;
+  flex-direction: column; /* Coloca los elementos en una sola columna */
   gap: 20px;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
 }
 
 .vestimenta-details p {
   font-size: 16px;
   color: #34495e;
-  margin: 5px 0;
-  flex: 1 1 45%;
+  margin: 25px 0;
+  width: 100%; /* Ancho completo de la fila */
+  max-width: 500px; /* Ancho máximo para limitar la extensión en pantallas grandes */
   padding: 12px;
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0);
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 /* Estilos del modal */
@@ -85,23 +101,43 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .modal-content {
   position: relative;
-  max-width: 80%;
+  max-width: 30%;
   max-height: 80%;
   background-color: #fff;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: scale(0.9);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
 }
 
+/* Estilo para que el modal se muestre con animación */
+.modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-overlay.show .modal-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Imagen dentro del modal */
 .modal-content img {
   width: 100%;
   height: auto;
   display: block;
 }
 
+/* Botón de cierre */
 .close-button {
   position: absolute;
   top: 10px;
@@ -110,26 +146,59 @@
   color: #fff;
   border: none;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  font-size: 16px;
+  width: 35px;
+  height: 35px;
+  font-size: 20px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-
+  transition: 0.3s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .close-button:hover {
   background: #ff0000;
+  transform: scale(1.1);
 }
+
+/* Animaciones del modal al cerrar */
+@keyframes zoomIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+}
+
 
 
 /* Responsividad para pantallas pequeñas */
 @media (max-width: 768px) {
   .vestimenta-gallery {
     flex-direction: column;
+    display: grid;
     align-items: center;
+    grid-template-columns: 2fr;
+  }
+
+  .vestimenta-gallery img {
+    width: 200px;
+    height: 200px;
   }
 
   .vestimenta-details {
@@ -137,7 +206,13 @@
   }
 
   .vestimenta-details p {
-    flex: 1 1 100%;
+    flex: 1 1 90%;
     text-align: center;
+  }
+
+  .modal-content {
+    max-width: 80%;
+    max-height: 80%;
+    align-items: center;
   }
 }

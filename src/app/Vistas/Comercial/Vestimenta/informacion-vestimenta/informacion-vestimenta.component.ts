@@ -57,11 +57,10 @@ export class InformacionVestimentaComponent implements OnInit, OnDestroy {
     this.showModal = true;
   }
 
-  // Método para cerrar el modal
+  // Método para cerrar el modal con animación
   cerrarModal(): void {
-    this.showModal = false;
-    this.imagenSeleccionada = null;
-  }
+  this.showModal = false;
+}
 
   ngOnDestroy(): void {
     this.routeSub.unsubscribe();
