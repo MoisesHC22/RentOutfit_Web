@@ -2,70 +2,34 @@
 <!-- Mapa -->
 
 <div class="contenedorIframe">
-  <iframe *ngIf="latitud && longitud" [attr.src]="mapaSafeUrl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-  
-  <iframe *ngIf="!latitud || !longitud" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14991.679986089333!2d-99.34277175833029!3d20.05379348983999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d22d5c4921c57d%3A0x8c4bd5d305605fc6!2sCuidado%20Con%20el%20Perro%20Centro%20Hidalgo!5e0!3m2!1ses!2smx!4v1728955948414!5m2!1ses!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <div id="map"></div>
 </div>
 
-<!-- Mapa End -->
 
-
-
-
+<!-- Tiendas cercanas -->
 <div class="contenedor-tienda">
-  <h5>Cerca de ti</h5>
+  <h5>Tiendas cerca de ti</h5>
   <p>Encuentra todo lo que estás buscando a la medida</p>
   <hr />
-  <h6>Tiendas</h6>
-  <div class="tienda-galeria">
-   @for (item of TiendaList; track $index) 
-   {
-      <div class="tarjeta-tienda" (click)="MasInformacionEstablecimiento(item.establecimientosID)">
-        <img id="img" [src]="item.linkImagenEstablecimiento">
-          <div class="info-tienda">
-             <p>{{item.calle}}, {{item.codigoPostal}}, {{item.nombreMunicipio}}, {{item.nombreEstado}}</p>
-             <h4>{{item.nombreEstablecimiento}}</h4>
-          </div>
-      </div>
-   }
+  
+  <div class="centrar">
+    <div class="tienda-galeria">
+      @for (item of TiendaList; track $index) 
+      {
+        <div class="tarjeta-tienda" (click)="MasInformacionEstablecimiento(item.establecimientosID)">
+          <img id="img" [src]="item.linkImagenEstablecimiento">
+            <div class="info-tienda">
+               <h4>{{item.nombreEstablecimiento}}</h4>
+               <p>{{item.calle}}, {{item.codigoPostal}}, {{item.nombreMunicipio}}, {{item.nombreEstado}}</p>
+            </div>
+        </div>
+      }
+    </div>
   </div>
 </div>
 
 
 
-<!-- Footer -->
-<section class="showcase">
-  <div class="showcase-wrap">
-    <div class="texture-overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="device">
-            <div class="device-content">
-              <ul class="slides" id="showcaseSlider">
-                <li>
-                  <img src="/Recursos/publiRO.png" alt="Rent Outfit Logo" />
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-5 contenedorAnuncio">
-          <h3 id="TituloAnuncio">Descarga nuestra App Móvil</h3><br>
-            <p id="TextoAnuncio">
-              ¡Descubre la forma más fácil de lucir espectacular sin gastar de más! 🎉 
-              Con nuestra app, alquila trajes, disfraces y vestimenta para cualquier ocasión 
-              especial. Encuentra lo que necesitas con nuestra amplia variedad de opciones, 
-              filtra por categoría, talla y disponibilidad, y realiza tu reserva en minutos.<br><br>
-            </p><br>
-            <div class="contenedorBtnDescargar">
-              <a href="#" class="download-btn">Descarga! <i class="fa fa-download"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 
 
@@ -87,6 +51,7 @@
               <a href="#"><fa-icon id="Whatsapp" [icon]="faWhatsapp" class="icon-custom"></fa-icon></a>
           </div>
       </div>
+
       <div class="footer-section">
           <h3>Nosotros</h3>
           <ul>
@@ -95,23 +60,26 @@
               <li><a href="#">Servicio personalizado</a></li>
           </ul>
       </div>
+      
       <div class="footer-section">
           <h3>Mi cuenta</h3>
           <ul>
-              <li *ngIf="!OpcionDarDeAlta">
+              <li *ngIf="OpcionDarDeAlta">
                 <a [routerLink]="'/Login'">Ingresar</a>
               </li>
 
-              <li *ngIf="OpcionDarDeAlta">
+              <li *ngIf="!OpcionDarDeAlta">
                 <a (click)="darDeAltaVendedor(usuario!)">Quiero vender!</a>
               </li>
           </ul>
       </div>
+      
       <div class="footer-section">
           <h3>Suscríbete y entérate de las novedades de Rent Outfit</h3>
           <input type="email" placeholder="Escribe tu correo">
           <button>Registrarse</button>
       </div>
+
   </div>
 </footer>
 <!-- Footer End -->
