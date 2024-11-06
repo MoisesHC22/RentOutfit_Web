@@ -5,13 +5,15 @@ import { AppComponent } from '../../../app.component';
 import { faHouse, faBagShopping, faShirt, faMagnifyingGlass, faBell,} from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faInstagram, faWhatsapp} from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { LottieComponent, AnimationOptions } from 'ngx-lottie';
+import { LottieComponent } from 'ngx-lottie';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FuncionesService } from '../../../Services/funciones.service';
 import { CookieService } from 'ngx-cookie-service';
-import { BrowserModule, DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { RouterOutlet, RouterModule, RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
+
+declare var google: any;
 
 @Component({
   selector: 'app-home',
@@ -64,8 +66,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.cookie.delete('ubicacion', '/');
 
-    this.obtenerUbicacion();
 
+    this.obtenerUbicacion();
 
     this.token = this.cookie.get('token');
 
@@ -79,6 +81,7 @@ export class HomeComponent implements OnInit {
       if(this.rol == 1){
         this.OpcionDarDeAlta = true;
       }
+
       
 
     }
@@ -109,7 +112,7 @@ export class HomeComponent implements OnInit {
       (position) => {
         this.latitud = position.coords.latitude;
         this.longitud = position.coords.longitude;
-        this.generarMapaConMarcador();
+        this.cargarGoogleMaps();
         this.obtenerEstadoMunicipio(this.latitud, this.longitud);
       },
       (error) => {
@@ -122,11 +125,43 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  generarMapaConMarcador(): void {
-    const url = `https://www.google.com/maps/embed/v1/view?key=AIzaSyCDTIozOvb6f5hDCDyvkWziUMrfQzDjQQk&center=${this.latitud},${this.longitud}&zoom=14`;
-    
-    this.mapaSafeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  cargarGoogleMaps(): void {
+    if(typeof (window as any).google === 'undefined' || typeof (window as any).google.maps === 'undefined') {
+      const script = document.createElement('script');
+      script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCDTIozOvb6f5hDCDyvkWziUMrfQzDjQQk&callback=initMap';
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+
+      (window as any).initMap = () => {
+        this.generarMapaConMarcador();
+      };
+    } else {
+      this.generarMapaConMarcador();
+    }
   }
+
+  generarMapaConMarcador(): void {
+    const userLocation = { lat: this.latitud, lng: this.longitud };
+    const map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
+      center: userLocation,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      streetViewControl: true,
+      fullscreenControl: true
+    });
+
+    new google.maps.Marker({
+      position: userLocation,
+      map: map,
+      icon: {
+        url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png" // Punto rojo
+      },
+      title: "Tu ubicación",
+    });
+  }
+
+
 
   obtenerEstadoMunicipio(latitud: number, longitud: number): void {
     const apiKey = 'AIzaSyCDTIozOvb6f5hDCDyvkWziUMrfQzDjQQk';
@@ -181,8 +216,6 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-
-
 
 
 
