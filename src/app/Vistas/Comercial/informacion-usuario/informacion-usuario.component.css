@@ -1,146 +1,81 @@
-/* Estructura base */
-.container {
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  align-items: flex-start; /* Alineamos al inicio superior */
-  padding-top: 60px; /* Espacio para el topbar */
+body {
+  background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+  font-family: 'Open Sans', sans-serif;
 }
 
-/* Card de información personal */
-.card {
-  padding: 20px;
-  background: #b9c8d8;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  max-width: 700px; /* Ajustar el ancho del card */
-  width: 100%;
-  margin-top: 20px; /* Espacio suficiente debajo del topbar */
-  position: relative;
-  z-index: 1;
+.emp-profile {
+  padding: 3%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  border-radius: 0.5rem;
+  background: #fff;
+  box-shadow: 0px 4px 10px rgba(70, 127, 180, 0.4);
 }
 
-h2 {
+.profile-img {
   text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 10px;
 }
 
-/* Botón "Editar" ajustado */
-#editButton {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 8px 16px;
-  background-color: #1e4e7e;
-  color: white;
-  font-size: 0.9rem;
+.profile-img img {
+  width: 50%;
+  border-radius: 30%;
+}
+
+.profile-head h5 {
+  color: #333;
+  font-weight: 600;
+}
+
+.profile-head h6 {
+  color: #467FB4;
+  font-weight: 500;
+}
+
+.profile-edit-btn {
   border: none;
-  border-radius: 8px;
+  background-color: #6099ce;
+  border-radius: 1.5rem;
+  width: 70%;
+  padding: 2%;
+  font-weight: 500;
+  color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-#editButton:disabled {
-  background-color: #d6d6d6;
-  cursor: not-allowed;
+.profile-edit-btn:hover {
+  background-color: #467FB4;
 }
 
-/* Contenedor de la imagen de perfil y la información */
-.profile-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
+.profile-head .nav-tabs {
+  margin-bottom: 5%;
 }
 
-/* Imagen de perfil */
-#imgPerfil {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #ddd;
-  margin-bottom: 20px;
+.profile-head .nav-tabs .nav-link {
+  font-weight: 600;
+  border: none;
 }
 
-/* Columna de información personal */
-.profile-info-column {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
+.profile-head .nav-tabs .nav-link.active {
+  border: none;
+  border-bottom: 2px solid #467FB4;
 }
 
-/* Campos de información */
-.field {
-  background-color: #dee3e7;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-  width: 100%;
+.profile-tab label {
+  font-weight: 500;
+  color: #467FB4; /* Cambia el color del texto a un azul acorde */
+  font-size: 1rem; /* Ajusta el tamaño de fuente */
 }
 
-.field p {
-  padding: 8px;
-  font-size: 0.9rem;
-  background-color: #f9f9f9;
-  border: 1px solid black;
-  border-radius: 8px;
-  margin: 0 auto;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+.profile-tab p {
+  font-weight: 500;
+  color: #333; /* Ajusta el color del texto de los datos personales */
+  font-size: 1rem; /* Ajusta el tamaño de fuente */
+  margin-bottom: 0;
 }
 
-/* Responsividad */
 
-/* Dispositivos más pequeños */
-@media (max-width: 768px) {
-  .container {
-      flex-direction: column;
-      align-items: center;
-      padding-top: 60px;
-  }
-
-  .card {
-      margin: 20px;
-      width: 90%;
-      max-width: none;
-  }
-
-  #editButton {
-      right: 10px;
-      top: 10px;
-  }
-
-  #imgPerfil {
-      width: 120px;
-      height: 120px;
-  }
-}
-
-/* Dispositivos muy pequeños */
-@media (max-width: 480px) {
-  .card {
-      width: 95%;
-      margin-left: 0;
-  }
-
-  #editButton {
-      right: 10px;
-  }
-
-  #imgPerfil {
-      width: 100px;
-      height: 100px;
-  }
-
-  .field p {
-      font-size: 0.8rem;
-      padding: 6px;
-  }
-}
-
-/* Ajustes para la etiqueta label */
-label {
-  color: black;
+.profile-tab .row {
+  padding: 10px 0;
+  border-bottom: 1px solid #e9ecef;
 }
