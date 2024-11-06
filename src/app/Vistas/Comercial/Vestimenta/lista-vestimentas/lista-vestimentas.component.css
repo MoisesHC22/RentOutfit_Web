@@ -1,65 +1,89 @@
-.centrar{
-  margin-top: 30px;
+/* Centrado general */
+.centrar {
   display: flex;
-  align-items: center;
   justify-content: center;
-
-  .contenedor{
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      max-width: 1200px;
-      width: 100%;
-
-      .vestimenta{
-
-          background-color: #fff;
-          border: 1px solid #ddd;
-          border-radius: 10px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-          cursor: pointer;
-          max-width: 250px;
-          margin: 0 auto;
-
-          p {
-              text-align: center;
-              font-size: 14px;
-              color: #777;
-              margin: 5px 0;
-          }
-
-          h5 {
-              text-align: center;
-              font-size: 18px;
-              font-weight: 600;
-              color: #333;
-              margin: 15px 0;
-          }
-
-          img {
-              object-fit: cover;
-              object-position: top;
-              width: 250px;
-              height: 250px;
-              object-fit: cover;
-              border-bottom: 1px solid #ddd;
-          }
-
-      }
-
-      .vestimenta:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      }
-
-  }
-
+  padding: 20px;
 }
 
+/* Contenedor con diseño de tres columnas */
+.contenedor {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 artículos por fila */
+  gap: 20px;
+  width: 100%;
+  max-width: 950px;
+}
 
+/* Estilos para cada elemento de vestimenta */
+.vestimenta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  text-align: center;
+  padding: 15px;
+}
 
+.vestimenta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
 
+/* Imagen dentro de la tarjeta */
+#img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
+}
 
+.vestimenta:hover #img {
+  transform: scale(1.05);
+}
 
+/* Títulos y textos */
+.vestimenta h5 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 10px 0 5px 0;
+}
 
+.vestimenta p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 5px 0;
+}
+
+.vestimenta p:nth-child(3) {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.vestimenta p:nth-child(4) {
+  color: #888;
+}
+
+/* Responsividad */
+@media (max-width: 852px) {
+  .contenedor {
+    grid-template-columns: repeat(2, 1fr); /* 2 artículos por fila en pantallas medianas */
+  }
+}
+
+@media (max-width: 468px) {
+  .contenedor {
+    grid-template-columns: repeat(1, 1fr); /* 1 artículo por fila en pantallas pequeñas */
+  }
+
+  #img {
+    height: 150px;
+  }
+}
