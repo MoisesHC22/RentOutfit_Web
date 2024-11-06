@@ -17,7 +17,7 @@
       @for (item of TiendaList; track $index) 
       {
         <div class="tarjeta-tienda" (click)="MasInformacionEstablecimiento(item.establecimientosID)">
-          <img id="img" [src]="item.linkImagenEstablecimiento">
+          <img id="img" [src]="item.linkImagenEstablecimiento" loading="lazy">
             <div class="info-tienda">
                <h4>{{item.nombreEstablecimiento}}</h4>
                <p>{{item.calle}}, {{item.codigoPostal}}, {{item.nombreMunicipio}}, {{item.nombreEstado}}</p>
@@ -29,21 +29,38 @@
 </div>
 
 
-
-
-
-
-
+<!-- Anuncio -->
+<section class="showcase">
+  <div class="showcase-wrap">
+    <div class="texture-overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-device">
+           <img id="device" src="/Recursos/Publicidad1.png">
+        </div>
+        <div class="col-md-5 contenedorAnuncio">
+          <h3 id="TituloAnuncio">Descarga nuestra App Móvil</h3><br>
+            <p id="TextoAnuncio">
+              ¡Descubre la forma más fácil de lucir espectacular sin gastar de más! 🎉 
+              Con nuestra app, alquila trajes, disfraces y vestimenta para cualquier ocasión 
+              especial. Encuentra lo que necesitas con nuestra amplia variedad de opciones, 
+              filtra por categoría, talla y disponibilidad, y realiza tu reserva en minutos.<br><br>
+            </p><br>
+            <div class="contenedorBtnDescargar">
+              <a href="#" class="download-btn">Descarga! <i class="fa fa-download"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <br>
-
-
-
 <!-- Footer -->
 <footer class="footer">
   <div class="footer-container">
       <div class="footer-section">
-          <h3>Rent Outfit</h3>
+          <h3>RentOutfit</h3>
           <p>Fácil de usar, accesible y flexible, Rent Outfit te permite alquilar con comodidad y seguridad, brindándote una experiencia sin complicaciones desde la búsqueda hasta la devolución. ¡Haz de tu evento algo especial sin esfuerzo!</p>
           <div class="social-icons">
               <a href="#"><fa-icon id="Facebook" [icon]="faFacebook" class="icon-custom"></fa-icon></a>
@@ -82,4 +99,3 @@
 
   </div>
 </footer>
-<!-- Footer End -->
