@@ -3,13 +3,22 @@ import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
 import { FuncionesService } from '../../../Services/funciones.service';
 import { response } from 'express';
+import { Router, RouterLink } from '@angular/router';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LottieComponent, AnimationOptions } from 'ngx-lottie';
 
 
 @Component({
   selector: 'app-informacion-usuario',
   standalone: true,
   imports: [
-    CommonModule
+    ReactiveFormsModule,
+    RouterLink,
+    FormsModule,
+    CommonModule,
+    FontAwesomeModule,
+    LottieComponent,
   ],
   templateUrl: './informacion-usuario.component.html',
   styleUrl: './informacion-usuario.component.css'
