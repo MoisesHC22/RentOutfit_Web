@@ -1,11 +1,15 @@
-<p class="vestimenta-title">Información de la Vestimenta</p>
+<br><p class="vestimenta-title">Información de la Vestimenta</p>
+
 
 <div class="vestimenta-info">
   <h4>{{informacion?.nombrePrenda}}</h4>
   <p>Fecha de publicación: {{informacion?.fechaPublicacion}}</p>
   <p>{{informacion?.descripcion}}</p>
 
+
+  <div class="column">
   <!-- Galería de imágenes -->
+
   <div class="vestimenta-gallery">
     <img
       *ngIf="informacion?.imagen1"
@@ -41,11 +45,12 @@
     <p>Estatus: {{informacion?.vestimentaEstatus}}</p>
   </div>
 </div>
+</div>
 
 <!-- Modal para visualizar la imagen en detalle -->
-<div class="modal-overlay" *ngIf="showModal" (click)="cerrarModal()">
+<div class="modal-overlay" [class.show]="showModal" (click)="cerrarModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <img [src]="imagenSeleccionada" alt="Imagen en detalle" />
-    <button class="close-button" (click)="cerrarModal()">X</button>
+    <button class="close-button" (click)="cerrarModal()">✕</button>
   </div>
 </div>
