@@ -21,6 +21,7 @@ export class InformacionVestimentaComponent implements OnInit, OnDestroy {
   private routeSub: Subscription = new Subscription();
 
   imagenSeleccionada: string | null = null;
+  estatus: string | null = null;
 
   constructor(private funciones: FuncionesService, private rutas: ActivatedRoute) {}
 
@@ -41,7 +42,14 @@ export class InformacionVestimentaComponent implements OnInit, OnDestroy {
         next: (result: InformacionVestimenta) => {
           this.informacion = result;
           this.imagenSeleccionada = this.informacion?.imagen1 || null;
-          console.log('Información de vestimenta:', this.informacion);
+          
+          if(this.informacion.vestimentaEstatus == true){
+            this.estatus = 'Disponible';
+          } 
+          else{
+            this.estatus = 'Ocupado';
+          }
+
         },
         error: (err) => {
           console.error('Error al obtener la vestimenta:', err);

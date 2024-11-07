@@ -1,54 +1,74 @@
 <div class="vestimenta-info">
-  <h4>{{informacion?.nombrePrenda}}</h4>
-  <p>Fecha de publicación: {{informacion?.fechaPublicacion}}</p>
-  <p>{{informacion?.descripcion}}</p>
+
+  <div class="centrar">
+    <div class="unir">
+      <div class="column">
+         
+        <img *ngIf="informacion?.imagen1"
+          [src]="informacion?.imagen1"
+          alt="Imagen 1 de {{informacion?.nombrePrenda}}"
+          (click)="cambiarImagenSeleccionada(informacion?.imagen1 || null)"
+          [class.selected]="imagenSeleccionada === informacion?.imagen1"
+        />
+  
+        <img
+          *ngIf="informacion?.imagen2"
+          [src]="informacion?.imagen2"
+          alt="Imagen 2 de {{informacion?.nombrePrenda}}"
+          (click)="cambiarImagenSeleccionada(informacion?.imagen2 || null)"
+          [class.selected]="imagenSeleccionada === informacion?.imagen2"
+        />
+  
+        <img
+          *ngIf="informacion?.imagen3"
+          [src]="informacion?.imagen3"
+          alt="Imagen 3 de {{informacion?.nombrePrenda}}"
+          (click)="cambiarImagenSeleccionada(informacion?.imagen3 || null)"
+          [class.selected]="imagenSeleccionada === informacion?.imagen3"
+        />
+        
+        <img
+          *ngIf="informacion?.imagen4"
+          [src]="informacion?.imagen4"
+          alt="Imagen 4 de {{informacion?.nombrePrenda}}"
+          (click)="cambiarImagenSeleccionada(informacion?.imagen4 || null)"
+          [class.selected]="imagenSeleccionada === informacion?.imagen4"
+        />
+  
+      </div>
+  
+      <div class="vestimenta-preview">
+        <img id="imagenSeleccionada" 
+        [src]="imagenSeleccionada" 
+        alt="Imagen en detalle" 
+        *ngIf="imagenSeleccionada"
+        />
+      </div>
+  
+      <div class="informacion">
+        <div class="contInformacion">
+          <h4>{{informacion?.nombrePrenda}}</h4>
+          <p id="estatus">{{this.estatus}}</p>
+
+
+          <div class="contPrecio">
+             <h5>MX ${{informacion?.precioPorDia}}</h5>
+             <p>Precio por dia.</p>
+          </div>
+
+          <div class="contInformacion">
+             <p>{{informacion?.descripcion}}</p>
+             <p>Fecha de publicación: {{informacion?.fechaDePublicacion!.toString() | slice: 0:10}}</p>
+          </div>
+
+          <div class="contBotonAgregar">
+            <button id="btnAgregar">Agregar al carrito</button>
+          </div>
+
+        </div> 
+      </div>
+      
+    </div>
+  </div>
 
 </div>
-
-  <div class="unir">
-
-    <div class="column">
-       
-      <img *ngIf="informacion?.imagen1"
-        [src]="informacion?.imagen1"
-        alt="Imagen 1 de {{informacion?.nombrePrenda}}"
-        (click)="cambiarImagenSeleccionada(informacion?.imagen1 || null)"
-        [class.selected]="imagenSeleccionada === informacion?.imagen1"
-      />
-
-      <img
-        *ngIf="informacion?.imagen2"
-        [src]="informacion?.imagen2"
-        alt="Imagen 2 de {{informacion?.nombrePrenda}}"
-        (click)="cambiarImagenSeleccionada(informacion?.imagen2 || null)"
-        [class.selected]="imagenSeleccionada === informacion?.imagen2"
-      />
-
-      <img
-        *ngIf="informacion?.imagen3"
-        [src]="informacion?.imagen3"
-        alt="Imagen 3 de {{informacion?.nombrePrenda}}"
-        (click)="cambiarImagenSeleccionada(informacion?.imagen3 || null)"
-        [class.selected]="imagenSeleccionada === informacion?.imagen3"
-      />
-      
-      <img
-        *ngIf="informacion?.imagen4"
-        [src]="informacion?.imagen4"
-        alt="Imagen 4 de {{informacion?.nombrePrenda}}"
-        (click)="cambiarImagenSeleccionada(informacion?.imagen4 || null)"
-        [class.selected]="imagenSeleccionada === informacion?.imagen4"
-      />
-
-    </div>
-
-    <div class="vestimenta-preview">
-      <img id="imagenSeleccionada" 
-      [src]="imagenSeleccionada" 
-      alt="Imagen en detalle" 
-      *ngIf="imagenSeleccionada"
-      />
-    </div>
-    
-  </div>
-    
