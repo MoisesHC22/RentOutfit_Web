@@ -1,5 +1,5 @@
 export interface ValidarToken {
-    email?: string;
+    email?: string;///
     token?: string;
 }
 
