@@ -20,8 +20,6 @@ export class InformacionVestimentaComponent implements OnInit, OnDestroy {
   informacion: InformacionVestimenta | null = null;
   private routeSub: Subscription = new Subscription();
 
-  // Variables para el modal
-  showModal: boolean = false;
   imagenSeleccionada: string | null = null;
 
   constructor(private funciones: FuncionesService, private rutas: ActivatedRoute) {}
@@ -42,6 +40,7 @@ export class InformacionVestimentaComponent implements OnInit, OnDestroy {
       this.funciones.InformacionVestimenta(vestimentaID).subscribe({
         next: (result: InformacionVestimenta) => {
           this.informacion = result;
+          this.imagenSeleccionada = this.informacion?.imagen1 || null;
           console.log('Información de vestimenta:', this.informacion);
         },
         error: (err) => {
@@ -51,16 +50,10 @@ export class InformacionVestimentaComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Método para abrir el modal
-  abrirModal(imagen: string | null | undefined): void {
-    this.imagenSeleccionada = imagen || null;
-    this.showModal = true;
-  }
 
-  // Método para cerrar el modal con animación
-  cerrarModal(): void {
-  this.showModal = false;
-}
+  cambiarImagenSeleccionada(imagen: string | null): void {
+    this.imagenSeleccionada = imagen;
+  }
 
   ngOnDestroy(): void {
     this.routeSub.unsubscribe();
