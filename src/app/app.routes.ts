@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './Vistas/Comercial/home/home.component';
-import { LoginComponent } from './Vistas/Comercial/login/login.component';
 import { MenuComponent } from './Vistas/Comercial/menu/menu.component';
 import { RegisterComponent } from './Vistas/Comercial/register/register.component';
 import { InformacionUsuarioComponent } from './Vistas/Comercial/informacion-usuario/informacion-usuario.component';
@@ -29,8 +28,12 @@ export const routes: Routes = [
      path: 'Cliente',
      component: MenuComponent,
      children: [
-        {path: 'home', component: HomeComponent},
-        {path: 'informacion', component: InformacionUsuarioComponent} ,
+        {path: 'home',
+            loadComponent: () => import('./Vistas/Comercial/home/home.component').then(m => m.HomeComponent)
+        },
+        {path: 'informacion', 
+            loadComponent: () => import('./Vistas/Comercial/informacion-usuario/informacion-usuario.component').then(m => m.InformacionUsuarioComponent)
+        } ,
         {path: 'vestimentas', component: ListaVestimentasComponent},
         {path: 'masInformacionVestimenta/:vestimenta', component: InformacionVestimentaComponent},
         {path: 'NuevoVendedor', component: NuevoVendedorComponent},
@@ -58,9 +61,17 @@ export const routes: Routes = [
         ]
     },
 
-    {path: 'Login', component: LoginComponent},
-    {path: 'Register', component: RegisterComponent},
-    {path: 'SeEnvioCorreo/:email', component: AvisoEmailComponent},
-    {path: 'OlvideMiContrasena', component: RecuperarContrasenaComponent }
+    {path: 'Login',
+        loadComponent: () => import('./Vistas/Comercial/login/login.component').then(m => m.LoginComponent)
+    },
+    {path: 'Register',
+        loadComponent: () => import('./Vistas/Comercial/register/register.component').then(m => m.RegisterComponent)
+    },
+    {path: 'SeEnvioCorreo/:email',
+        loadComponent: () => import('./Vistas/Comercial/OlvideMiContrasena/aviso-email/aviso-email.component').then(m => m.AvisoEmailComponent)
+    },
+    {path: 'OlvideMiContrasena', 
+        loadComponent: () => import('./Vistas/Comercial/OlvideMiContrasena/recuperar-contrasena/recuperar-contrasena.component').then(m => m.RecuperarContrasenaComponent)
+    }
 
 ];
