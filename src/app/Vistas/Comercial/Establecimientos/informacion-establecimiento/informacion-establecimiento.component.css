@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Edu+VIC+WA+NT+Beginner:wght@400..700&family=Platypi:ital,wght@0,300..800;1,300..800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+.main-container {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr; /* Dos columnas, la segunda más ancha */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .establecimiento-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .vestimenta-column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .imagen-establecimiento {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .establecimiento-img {
+    width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+  }
+  
+  .imagen-vendedor {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .vendedor-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .detalles-establecimiento h2 {
+    text-align: center;
+    font-family: "Barlow", sans-serif;
+    font-style: normal;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 40px;
+    color: #2c5696;
+  }
+  
+  .detalles-establecimiento p {
+    text-align: center;
+    font-size: 16px;
+    color: #1f1f1f;
+    margin: 5px 0;
+  }
+
+  .detalles-vendedor p {
+    text-align: center;
+    font-size: 16px;
+    color: #1f1f1f;
+    margin: 5px 0;
+    font-weight: bold;
+  }
+
+  .detalles-vendedor h2 {
+    text-align: center;
+    font-family: "Barlow", sans-serif;
+    font-style: normal;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 40px;
+    color: #2c5696;
+  }
+
+  
+  .vestimenta-lista h3 {
+    text-align: center;
+    margin-top: 10px;
+    font-family: "Barlow", sans-serif;
+    font-style: normal;
+    font-size: 28px;
+  }
+  
+  .contenedor {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    padding: 20px;
+  }
+  
+  .vestimenta-item {
+    width: 100%;
+    max-width: 250px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .vestimenta-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .vestimenta-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    object-position: top;
+    margin-bottom: 10px;
+  }
+  
+  .vestimenta-item h5 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  
+  .vestimenta-item p {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+  }
+  
+  .no-vestimentas h4 {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    color: #d15761;
+  }
+  
+  /* Responsividad para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .main-container {
+      grid-template-columns: 1fr;
+    }
+   
+    .establecimiento-img {
+      max-height: 300px;
+    }
+  }
+
+  /* Estilos responsivos */
+  @media (max-width: 768px) {
+    .contenedor {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .contenedor {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+  
+    .vestimenta-item {
+      max-width: 100%;
+    }
+  }
+  
