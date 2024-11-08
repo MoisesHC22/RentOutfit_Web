@@ -1,81 +1,74 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light" >
-    <div class="container-fluid">
-       <a class="navbar-brand" href="#">
-           <img src="RentOutfitLogo.png" alt="RentOutfit" width="50" height="50">
-       </a>
-  
-  
-    <div class="collapse navbar-collapse">
-       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-  
-  
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="RentOutfitLogo.png" alt="RentOutfit" width="50" height="50">
+    </a>
+
+    <!-- Botón de colapso -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-left">
         <li class="nav-item">
           <a routerLink="/Cliente/home" class="nav-link">
             <fa-icon id="Icono" [icon]="faHouse"></fa-icon>
             Home
           </a>
+          <div class="separator"></div>
         </li>
-  
+
         <li class="nav-item">
           <a routerLink="vestimentas" class="nav-link">
             <fa-icon id="Icono" [icon]="faBag"></fa-icon>
-             Vestimentas
+            Vestimentas
           </a>
+          <div class="separator"></div>
         </li>
-  
+
         <li class="nav-item">
           <a class="nav-link">
             <fa-icon id="Icono" [icon]="faShirt"></fa-icon>
             Mis Alquileres
           </a>
+          <div class="separator"></div>
         </li>
-  
-       </ul>
-  
-  
-       <form class="d-flex">
-          <input id="contBuscar" class="form-control me-1" type="search" placeholder="Buscar..." aria-label="Search">
-          <button id="btnBuscar" class="btn btn-outline-dark" type="submit"><fa-icon id="Icono" [icon]="faSearch"></fa-icon></button>
-       </form>
-  
-  
-       <ul class="navbar-nav ms-auto">
-         <li *ngIf="token">
-            <div class="d-flex">
-              <img [src]="img" *ngIf="img" id="imgPerfil" alt="Profile">
-              <p id="nombreUsuario">{{nombre}}</p>
-
-
-              <a class="nav-link dropdown-menu-toggle" id="dropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <fa-icon id="Icono" [icon]="faGear"></fa-icon>
-              </a>
-
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                
-                <li> <a routerLink="informacion">Mi información</a> </li>
-                <li *ngIf="vendedor"><a (click)="MisEstablecimientos(this.usuarioID!)">Adminstrar mi negocio</a> </li>
-                <li > <a (click)="TodosLosEstablecimientos(this.usuarioID!)">Super Usuario</a></li>
-                <li> 
-                  <button id="CerrarSesion" type="button" (click)="CerrarSesion()">
-                    <fa-icon id="Icono" [icon]="faDoorOpen"></fa-icon>
-                    Cerrar sesion
-                  </button> 
-                </li>
-             </ul>
-   
-            </div>  
-          </li>
-
-        
-        <li class="nav-item dropdown" *ngIf="!token">
-          <button id="btnIniciarSesion" routerLink="/Login">Iniciar sesión</button>
-        </li>
-
       </ul>
-  
-     </div>
+
+      <!-- Formulario de búsqueda -->
+      <form class="d-flex ms-auto mb-2 mb-lg-0">
+        <input id="contBuscar" class="form-control me-1" type="search" placeholder="Buscar..." aria-label="Search">
+        <button id="btnBuscar" class="btn btn-outline-dark" type="submit"><fa-icon id="Icono" [icon]="faSearch"></fa-icon></button>
+      </form>
+
+      <!-- Perfil y sesión -->
+      <ul class="navbar-nav ms-auto align-left">
+        <li *ngIf="token">
+          <div class="d-flex align-items-center">
+            <img [src]="img" *ngIf="img" id="imgPerfil" alt="Profile">
+            <p id="nombreUsuario" class="mb-0">{{nombre}}</p>
+            <a class="nav-link dropdown-toggle" id="dropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <fa-icon id="Icono" [icon]="faGear"></fa-icon>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+              <li><a routerLink="informacion" class="dropdown-item">Mi información</a></li>
+              <li *ngIf="vendedor"><a (click)="MisEstablecimientos(this.usuarioID!)" class="dropdown-item">Adminstrar mi negocio</a></li>
+              <li><a (click)="TodosLosEstablecimientos(this.usuarioID!)" class="dropdown-item">Super Usuario</a></li>
+              <li>
+                <button id="CerrarSesion" type="button" (click)="CerrarSesion()" class="dropdown-item">
+                  <fa-icon id="Icono" [icon]="faDoorOpen"></fa-icon> Cerrar sesión
+                </button>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item" *ngIf="!token">
+          <button id="btnIniciarSesion" routerLink="/Login" class="btn">Iniciar sesión</button>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 
-
-  <router-outlet></router-outlet>
+<router-outlet></router-outlet>
