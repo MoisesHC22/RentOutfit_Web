@@ -1,25 +1,51 @@
 <div class="Unir">
-
-  <div class="menu-lateral">
-
+  <!-- Topbar -->
+  <div class="topbar">
+    <!-- Logo en la topbar -->
+    <img src="RentOutfitLogo.png" alt="Logo" class="logo">
     <h6>Panel de Administrador</h6>
-  
-    <div class="InfVendedor">
-      <img [src]="img" *ngIf="img" id="ImgVendedor">
-      <p id="NomVendedor">{{nombre}}</p>
+
+  </div>
+
+  <!-- Checkbox oculto para controlar el sidebar -->
+  <input type="checkbox" id="menu-toggle" class="menu-toggle-checkbox">
+
+  <!-- Contenedor principal -->
+  <div class="main-container">
+    <!-- Sidebar -->
+    <div class="menu-lateral">
+      <!-- Imagen del vendedor -->
+      <div class="logo-container">
+        <img [src]="img" *ngIf="img" id="ImgVendedor">
+      </div>
+
+      <!-- Nombre del vendedor -->
+      <div class="InfVendedor">
+        <p id="NomVendedor">{{nombre}}</p>
+      </div>
+
+      <!-- Elementos del menú lateral -->
+      <ul>
+        <li><a (click)="TodasLasPeticiones(this.usuarioID!)">
+          <fa-icon [icon]="faEnvelope"></fa-icon> Nuevas peticiones <!-- Icono de sobre -->
+        </a></li>
+        <li><a (click)="TodosLosEstablecimientos(this.usuarioID!)">
+          <fa-icon [icon]="faStore"></fa-icon> Establecimientos <!-- Icono de tienda -->
+        </a></li>
+        <li><a (click)="TodosLosUsuarios(this.usuarioID!)">
+          <fa-icon [icon]="faUsers"></fa-icon> Usuarios <!-- Icono de usuarios -->
+        </a></li>
+      </ul>
+
+      <!-- Botón de regreso -->
+      <button (click)="regresarCliente()">
+        <fa-icon [icon]="faArrowLeft"></fa-icon> Regresar <!-- Icono de flecha hacia atrás -->
+      </button>
     </div>
 
-    <ul>
-      <li><a (click)="TodasLasPeticiones(this.usuarioID!)">Nuevas peticiones</a></li>
-      <li><a (click)="TodosLosEstablecimientos(this.usuarioID!)">Establecimientos</a></li>
-      <li><a (click)="TodosLosUsuarios(this.usuarioID!)">Usuarios</a></li>
-    </ul>
-
-    <button (click)="regresarCliente()">Regresar</button>
-   </div>
-  
-   <div class="main-content">
-    <router-outlet></router-outlet>
-   </div>
-
+    <!-- Contenido principal -->
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>
