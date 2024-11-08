@@ -9,7 +9,7 @@
 
     th{
         text-align: center;
-        background-color: black;
+        background-color: #7292cc;
         color: white;
         font-size: 14px;
     }
@@ -54,12 +54,12 @@
                 height: 35px;
                 border-radius: 10px;
                 color: white;
-                background-color: #FF0000;
+                background-color: #e04444;
                 border: none;
             }
 
             .banear:hover {
-                background-color: #CC0000;
+                background-color: #de5959;
             }
         }
     }

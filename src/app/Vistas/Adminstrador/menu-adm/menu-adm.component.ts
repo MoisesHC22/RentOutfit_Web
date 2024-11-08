@@ -4,6 +4,8 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { FuncionesService } from '../../../Services/funciones.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faBars, faEnvelope, faStore, faUsers, faArrowLeft, faBell, faUserCircle, faX } from '@fortawesome/free-solid-svg-icons'; 
 
 @Component({
   selector: 'app-menu-adm',
@@ -11,6 +13,7 @@ import { FuncionesService } from '../../../Services/funciones.service';
   imports: [
     RouterOutlet,
     RouterLink,
+    FontAwesomeModule,
     RouterModule,
     ReactiveFormsModule,
     CommonModule
@@ -19,6 +22,15 @@ import { FuncionesService } from '../../../Services/funciones.service';
   styleUrl: './menu-adm.component.css'
 })
 export class MenuAdmComponent implements OnInit{
+
+  faBars = faBars;
+  faEnvelope = faEnvelope;
+  faStore = faStore;
+  faUsers = faUsers;
+  faArrowLeft = faArrowLeft;
+  faBell = faBell;
+  faUserCircle = faUserCircle;
+  faX = faX;
 
   token: string | null = null;
   usuarioID: number | null = null
