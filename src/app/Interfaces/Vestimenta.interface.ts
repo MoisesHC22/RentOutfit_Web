@@ -13,7 +13,7 @@ export interface InformacionVestimenta {
     nombrePrenda?: string;
     precioPorDia?: string;
     stock?: number;
-    fechaPublicacion?: Date;
+    fechaDePublicacion?: Date;
     vestimentaEstatus?: boolean;
     descripcion?: string;
     imagen1?: string;
