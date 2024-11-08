@@ -1,76 +1,163 @@
-
+/* Ajuste general de la barra de navegación */
 .navbar {
     background: linear-gradient(to bottom, #D3E4EE, #ffffff);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.navbar-brand{
-    margin-right: 10px;
+/* Contenedor de la búsqueda centrado */
+.search-container {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
 }
 
-.nav-link{
-    margin-left: 30px;
+.form-busqueda {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.d-flex{
-
-  #contBuscar {
-     width: 300px;
-     height: 40px;
-     border-radius: 20px;
-  }
-
-  #btnBuscar {
-     border-radius: 50px;
-     width: 38px;
-     height: 38px;
-
-     #Icono{
-        margin-left: -2px;
-     }
-  }
+#contBuscar {
+    width: 100%;
+    max-width: 180px;
+    height: 35px;
+    border-radius: 20px;
 }
 
-#ContContrato {
-    margin-left: 28px;
+#btnBuscar {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
 }
 
+/* Estilo de los elementos de navegación */
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
 
+.nav-link {
+    display: left;
+    align-items: left;
+    text-align: left;
+    flex-direction: column;
+    color: #333;
+}
+
+.nav-item {
+    position: left;
+}
+
+/* Estilo del separador */
+.separator {
+    width: 80%;
+    height: 3px;
+    background-color: #ccc;
+    margin: 5px auto 0;
+}
+
+/* Ajustes de la imagen de perfil */
 #imgPerfil {
-    height: 38px;
-    width: 38px;
-    border-radius: 5px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
     margin-right: 10px;
+    object-fit: cover;
 }
 
+/* Nombre del usuario */
+#nombreUsuario {
+    margin: 0 10px;
+    color: #333;
+    white-space: nowrap;
+    font-weight: bold;
+}
 
+/* Estilización del menú desplegable */
+.dropdown-menu {
+    min-width: 200px;
+    max-width: 250px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+}
+
+/* Estilo de cada elemento del menú */
+.dropdown-item {
+    font-size: 14px;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+/* Efecto hover para cada item */
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+    color: #000;
+}
+
+/* Estilo del botón de cerrar sesión */
+#CerrarSesion {
+    background-color: #333;
+    color: #ffffff;
+    width: 100%;
+    height: 40px;
+    border-radius: 7px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    margin-top: 10px;
+}
+
+#CerrarSesion:hover {
+    background-color: #555;
+}
+
+/* Botón de inicio de sesión */
 #btnIniciarSesion {
     background-color: #467FB4;
     color: #F0F3F5;
-    border:none;
-    width: 130px;
-    height: 38px;
-    border-radius: 10px;
+    border: none;
+    width: 120px;
+    height: 35px;
+    border-radius: 8px;
 }
 
-
-#nombreUsuario {
-    margin-top: 7px;
+/* Espaciado y alineación del engranaje */
+#dropdownMenuLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin-left: 5px;
 }
 
-.dropdown-menu {
-    min-width: 210px;
-    padding: 10px;
-    
-    li{
-        margin: 7px 3px;
+/* Asegura que el navbar colapse en pantallas pequeñas */
+@media (max-width: 991px) {
+    .navbar-nav {
+        flex-direction: column;
+        gap: 10px;
     }
 
-    #CerrarSesion {
-        background-color: rgb(41, 39, 39);
+    .search-container {
+        order: 2;
+        display: flex;
         width: 100%;
-        height: 35px;
-        border-radius: 7px;
-        color: #ffffff;
+        justify-content: center;
     }
 }
-

@@ -13,7 +13,7 @@
 
         .Establecimiento {
             position: relative;
-            background-color: #5c6576;
+            background-color: #83a6e8;
             margin: 15px;
             border-radius: 10px;
             color: white;
@@ -44,13 +44,13 @@
                 height: 30px;
                 border-radius: 5px;
                 margin-bottom: 7px;
-                background-color: #007bff;
+                background-color: #7292cc;
                 color: white;
                 border: none;
             }
 
             .btnAprobar:hover {
-                background-color: #025ec0;
+                background-color: #7292cc;
             }
         }
 
@@ -75,6 +75,6 @@
     }
 
     .btnCerrar:hover {
-        background: #e60000;
+        background: #ff4d4d;
     }
 }
