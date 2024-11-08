@@ -1,79 +1,185 @@
-
-.Unir{
+.Unir {
   display: flex;
+  flex-direction: column;
   height: 100vh;
   overflow: hidden;
 }
 
-.menu-lateral {
+/* Topbar */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #535353;
+  color: #fff; /* Color de texto más oscuro para mejor contraste */
+  padding: 10px 20px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
 
+/* Contenedor principal debajo de la topbar */
+.main-container {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 50px); /* Restar la altura de la topbar */
+  overflow: hidden;
+}
+
+/* Sidebar */
+.menu-lateral {
+  width: 260px;
+  background-color: #0c5679;
+  color: #333; /* Color de texto más oscuro para mejor contraste */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 60px;
+  height: auto;
+}
+
+.menu-lateral .InfVendedor {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  color: #fff;
+  font-weight: bold;
+
+}
+
+#ImgVendedor {
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+#NomVendedor {
+  font-size: 18px;
+}
+
+.menu-lateral ul {
+  font-weight: inherit;
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+}
+
+.menu-lateral li {
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(51, 51, 51, 0.2);
+  padding-bottom: 5px;
+}
+
+.menu-lateral a {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  transition: background-color 0.2s;
+}
+
+.menu-lateral a:hover {
+  background-color: #0c648d;
+}
+
+.menu-lateral button {
+  width: 100%;
+  background-color: #535353;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.menu-lateral button:hover {
+  background-color: #7c7c7c;; /* Tonalidad más oscura en hover */
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #e7e9f0;
+}
+
+/* Iconos de la topbar */
+.topbar-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.icon-button {
+  background: transparent;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  font-size: 20px;
+  transition: color 0.3s;
+}
+
+.icon-button:hover {
+  color: #8b4513; /* Color marrón suave */
+}
+
+/* Checkbox oculto */
+.menu-toggle-checkbox {
+  display: none;
+}
+
+/* Botón de menú hamburguesa */
+.menu-toggle {
+  display: none;
+  background-color: transparent;
+  color: #333; /* Color de botón acorde al tema beige */
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Estilos móviles para el sidebar */
+@media (max-width: 768px) {
+  .menu-lateral {
+    position: fixed;
     top: 0;
     left: 0;
-    width: 260px;
     height: 100%;
-    background-color: #467FB4;
-    color: white;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-
-
-    h6{
-        text-align: center;
-    }
-    
-
-    .InfVendedor{
-        display: flex;
-
-        #ImgVendedor {
-            width: 45px;
-            height: 45px;
-            border-radius: 5px;
-            margin-right: 7px;
-        }
-
-        #NomVendedor {
-            font-size: 15px;
-        }
-
-    }
+    transform: translateX(-100%);
+    z-index: 1001;
   }
 
-  .menu-lateral button {
-    margin-bottom: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    margin-top: auto; 
+  .menu-toggle-checkbox:checked ~ .menu-lateral {
+    transform: translateX(0);
   }
-  
-  .menu-lateral ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .menu-lateral li {
-    margin-bottom: 10px;
-  }
-  
-  .menu-lateral a {
-    color: #333;
-    text-decoration: none;
-  }
-  
-  .menu-lateral a:hover {
-    color: #007bff;
+
+  .menu-toggle {
+    display: block;
   }
 
   .main-content {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
     padding: 20px;
-    overflow-y: auto;
-    background-color: #f5f6fa;
-    max-width: 100%;
+    width: 100%;
   }
+
+  .topbar {
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

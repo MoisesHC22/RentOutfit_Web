@@ -1,39 +1,57 @@
+<div class="main-container">
+  <!-- Columna de Información del Establecimiento -->
+  <div class="establecimiento-column">
+    <div class="establecimiento-info">
+      <!-- Imagen Principal del Establecimiento -->
+      <div class="imagen-establecimiento">
+        <img class="establecimiento-img" [src]="informacion?.linkImagenEstablecimiento" alt="Imagen del establecimiento {{ informacion?.nombreEstablecimiento }}" />
+        
+        <!-- Imagen Circular del Vendedor -->
+        <div class="imagen-vendedor">
+          <img class="vendedor-img" [src]="informacion?.linkImagenPerfil" alt="Imagen del vendedor {{ informacion?.nombreCliente }}" />
+        </div>
+      </div>
 
-<h2>Inf Establecimiento</h2>
-<p>{{ informacion?.nombreEstablecimiento}}</p>
-<img [src]="informacion?.linkImagenEstablecimiento" alt="Imagen del establecimiento {{ informacion?.nombreEstablecimiento}}">
-<p>{{ informacion?.nombreEstado}}</p>
-<p>{{ informacion?.municipio}}</p>
-<p>{{ informacion?.colonia}}</p>
-<p>{{ informacion?.calle}}</p>
-<p>{{ informacion?.noInt}}</p>
-<p>{{ informacion?.noExt}}</p>
-<p>{{ informacion?.codigoPostal}}</p>
+      <!-- Información del Establecimiento -->
+      <div class="detalles-establecimiento">
+        <h2>{{ informacion?.nombreEstablecimiento }}</h2>
+        <p><strong>Estado:</strong> {{ informacion?.nombreEstado }}</p>
+        <p><strong>Municipio:</strong> {{ informacion?.municipio }}</p>
+        <p><strong>Colonia:</strong> {{ informacion?.colonia }}</p>
+        <p><strong>Calle:</strong> {{ informacion?.calle }}</p>
+        <p><strong>No. Int:</strong> {{ informacion?.noInt }}</p>
+        <p><strong>No. Ext:</strong> {{ informacion?.noExt }}</p>
+        <p><strong>Código Postal:</strong> {{ informacion?.codigoPostal }}</p>
+      </div>
 
-<h2>Vendedor</h2>
-<img [src]="informacion?.linkImagenPerfil" alt="Imagen del vendedor {{ informacion?.nombreCliente}}">
-<p>{{ informacion?.nombreCliente}} {{informacion?.apellidoPaterno}} {{ informacion?.apellidoMaterno}}</p>
-
-
-<div class="centrar" *ngIf="!AnuncionAunNoTieneVestimentas">
-    <div class="contenedor">
-      @for (item of VestimentasList; track $index) 
-      {
-          <div class="vestimenta">
-               
-                  <img id="img" [src]="item.imagen1">
-  
-                  <h5>{{item.nombrePrenda}}</h5>
-                  <p>{{item.nombreTalla}}</p>
-                  <p>$ {{item.precioPorDia}}</p>
-                  <p>{{item.nombreEstablecimiento}}</p>
-          </div>
-      }
+      <!-- Información del Vendedor -->
+      <div class="detalles-vendedor">
+        <h2>Vendedor</h2>
+        <p>{{ informacion?.nombreCliente }} {{ informacion?.apellidoPaterno }} {{ informacion?.apellidoMaterno }}</p>
+      </div>
     </div>
   </div>
 
+  <!-- Columna de Vestimentas -->
+  <div class="vestimenta-column">
+    <div class="vestimenta-lista" *ngIf="!AnuncionAunNoTieneVestimentas">
+      <h3>Vestimentas Disponibles</h3>
+      <div class="contenedor">
+        @for (item of VestimentasList; track $index) {
+          <div class="vestimenta-item">
+            <img class="vestimenta-img" [src]="item.imagen1" alt="Imagen de {{item.nombrePrenda}}" />
+            <h5>{{ item.nombrePrenda }}</h5>
+            <p><strong>Talla:</strong> {{ item.nombreTalla }}</p>
+            <p><strong>Precio por día:</strong> ${{ item.precioPorDia }}</p>
+            <!-- <p><strong>Establecimiento:</strong> {{ item.nombreEstablecimiento }}</p> -->
+          </div>
+        }
+      </div>
+    </div>
 
-  <!--Anuncio de que aún no tiene vestimentas disponibles-->
-  <div *ngIf="AnuncionAunNoTieneVestimentas">
-    <h4>Aún no tiene vestimentas disponibles</h4>
+    <!-- Mensaje si no hay vestimentas -->
+    <div class="no-vestimentas" *ngIf="AnuncionAunNoTieneVestimentas">
+      <h4>Aún no tiene vestimentas disponibles</h4>
+    </div>
   </div>
+</div>

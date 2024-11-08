@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RequerimientosTiendasCercanas, TiendaInterface, TiendasCercanas } from '../../../Interfaces/tienda.interface';
 import { CommonModule } from '@angular/common';
 import { AppComponent } from '../../../app.component';
-import { faHouse, faBagShopping, faShirt, faMagnifyingGlass, faBell,} from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faBagShopping, faShirt, faMagnifyingGlass, faBell, faDownload,} from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faInstagram, faWhatsapp} from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LottieComponent } from 'ngx-lottie';
@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
   faFacebook = faFacebook;
   faInstagram = faInstagram;
   faWhatsapp = faWhatsapp;
+  faDownload = faDownload;
 
   constructor(private Rutas: Router, private Funciones: FuncionesService, private sanitizer: DomSanitizer, private cookie: CookieService){}
 
