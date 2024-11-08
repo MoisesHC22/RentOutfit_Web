@@ -1,22 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { AbstractControl, FormBuilder, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FuncionesService } from '../../../Services/funciones.service';
-import { EstadoInterface } from '../../../Interfaces/estado.interface';
-import { MunicipioInterface } from '../../../Interfaces/municipios.interfaces';
 import { CookieService } from 'ngx-cookie-service';
+
 
 export function SoloLetras(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
     const soloLetrasRagExp = /^[a-zA-ZÁ-ÿ\s]+$/;
-
-    if(!value || soloLetrasRagExp.test(value)) {
-      return null;
-    }
-    return { SoloLetras: true}
-  }
+    return !value || soloLetrasRagExp.test(value) ? null : { SoloLetras: true };
+  };
 }
 
 @Component({
@@ -26,48 +21,32 @@ export function SoloLetras(): ValidatorFn {
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    RouterLink
   ],
   templateUrl: './nuevo-vendedor.component.html',
-  styleUrl: './nuevo-vendedor.component.css'
+  styleUrls: ['./nuevo-vendedor.component.css']
 })
 export class NuevoVendedorComponent implements OnInit {
-
-  datos: any;
-
-  constructor(private Funciones: FuncionesService, private form: FormBuilder, private rutas: Router, private cookie: CookieService) {}
-
-  EstadosList: EstadoInterface[]=[];
-  MunicipioList: MunicipioInterface[]=[];
-
+  datos: FormGroup;  // Cambiado de 'datos!' a 'datos: FormGroup'
   token: string | null = null;
   usuario: number | null = null;
+  imagenPerfil: File | null = null;
+  imagenPrevisualizacion: string | ArrayBuffer | null = null;
+  statusImg = false;
 
-  ngOnInit(): void {
+  constructor(
+    private funciones: FuncionesService,
+    private form: FormBuilder,
+    private router: Router,
+    private cookie: CookieService,
     
-    this.ListaEstados();
-
-    
-    this.token = this.cookie.get('token');
-    
-    if(this.token) {
-      
-      const obtener = this.Funciones.DecodificarToken(this.token);
-      this.usuario = obtener?.usuario ? Number(obtener.usuario) : null;
-     
-    }
-    else{
-      this.rutas.navigate(['/Login']);
-    }
-
-
-
+  ) {
+    // Inicializa datos aquí
     this.datos = this.form.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       codigoPostal: ['', [Validators.required, Validators.pattern('^[0-9]{5}$')]],
-      colonia: ['', Validators.required],
-      estado: ['', Validators.required],
-      municipio: ['', Validators.required],
+      asentamiento: ['', Validators.required],
+      estado: [{ value: '', disabled: true }, Validators.required],
+      municipio: [{ value: '', disabled: true }, Validators.required],
       calle: ['', Validators.required],
       noInt: ['', Validators.required],
       noExt: ['', Validators.required],
@@ -75,170 +54,107 @@ export class NuevoVendedorComponent implements OnInit {
     });
   }
 
-
-  
-  imagenPerfil: File | null = null;
-  imagenPrevisualizacion: string | ArrayBuffer | null = null;
-  statusImg = false;
-
-
-  ListaEstados(){
-    this.Funciones.ObtenerEstados().subscribe({
-      next: (result) => {
-        this.EstadosList = result;
-      },
-      error: (err) => {
-        console.log(err)
-      }
-    })
-  }
-
-  ListaMunicipios(estadoID: number){
-    this.Funciones.ObtenerMunicipios(estadoID).subscribe({
-      next: (result) => {
-        this.MunicipioList = result;
-      },
-      error: (err) => {
-        console.log(err)
-      }
-    })
-  }
-
-  EstadoSeleccionado(event: Event)
-  {
-    const seleccion = event.target as HTMLSelectElement;
-    const estadoID = seleccion.value;
-    if(estadoID) {
-      const id = Number(estadoID);
-      if(!isNaN(id)){
-        this.ListaMunicipios(id);
-      }
+  ngOnInit(): void {
+    this.token = this.cookie.get('token');
+    if (this.token) {
+      const obtener = this.funciones.DecodificarToken(this.token);
+      this.usuario = obtener?.usuario ? Number(obtener.usuario) : null;
+    } else {
+      this.router.navigate(['/Login']);
+      return;
     }
   }
-  
 
-
-
-  cargarImagen() {
-    const file = document.getElementById('imageUpload') as HTMLInputElement;
-    file.click();
+  onCodigoPostalChange(): void {
+    const codigoPostal = this.datos.get('codigoPostal')?.value;
+    if (codigoPostal && codigoPostal.length === 5) {
+      this.funciones.obtenerDatosPorCodigoPostal(codigoPostal).subscribe(
+        (response) => {
+          console.log('Respuesta del servicio para código postal:', response);
+          if (response && response.estado && response.municipio && response.asentamiento) {
+            this.datos.patchValue({
+              estado: response.estado,
+              municipio: response.municipio,
+              asentamiento: response.asentamiento
+            });
+          } else {
+            console.warn('No se encontraron datos para el código postal ingresado.');
+            this.limpiarCampos();
+          }
+        },
+        (error) => {
+          console.error('Error al obtener datos del código postal:', error);
+          this.limpiarCampos();
+        }
+      );
+    } else {
+      this.limpiarCampos();
+    }
   }
-  
-  imagenSeleccionada(event: Event): void{
+
+  limpiarCampos(): void {
+    this.datos.patchValue({
+      estado: '',
+      municipio: '',
+      asentamiento: ''
+    });
+  }
+
+  cargarImagen(): void {
+    const fileInput = document.getElementById('imageUpload') as HTMLInputElement;
+    fileInput.click();
+  }
+
+  imagenSeleccionada(event: Event): void {
     const input = event.target as HTMLInputElement;
-  
-    if(input.files && input.files.length > 0)
-      {
-         const file = input.files[0];
-         const tamanoMaximoMB = 2;
-         const tamanoMaximoBytes = tamanoMaximoMB * 1024 * 1024;
-  
-         if(file.size > tamanoMaximoBytes){
-          this.datos.get('imagen')?.setErrors({maxSize: true});
-          this.imagenPerfil = null;
-          this.imagenPrevisualizacion = null;
-          this.statusImg = false;
-          return;
-         }
-  
-         this.imagenPerfil = file;
-         const reader = new FileReader();
-  
-         reader.onload = () => {
-            this.imagenPrevisualizacion = reader.result;
-         };
-        
-         this.datos.get('imagen')?.setValue(file);
-         this.statusImg = true;
-         reader.readAsDataURL(this.imagenPerfil);
-      }else {
-        this.datos.get('imagen')?.setValue(null);
-        this.statusImg = false;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      if (this.isImageSizeValid(file)) {
+        this.setImagePreview(file);
+      } else {
+        this.datos.get('imagen')?.setErrors({ maxSize: true });
+        this.limpiarImagen();
       }
+    } else {
+      this.limpiarImagen();
+    }
   }
 
+  isImageSizeValid(file: File): boolean {
+    const tamanoMaximoMB = 2;
+    const tamanoMaximoBytes = tamanoMaximoMB * 1024 * 1024;
+    return file.size <= tamanoMaximoBytes;
+  }
 
+  setImagePreview(file: File): void {
+    this.imagenPerfil = file;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagenPrevisualizacion = reader.result;
+    };
+    this.datos.get('imagen')?.setValue(file);
+    this.statusImg = true;
+    reader.readAsDataURL(file);
+  }
 
-  
+  limpiarImagen(): void {
+    this.imagenPerfil = null;
+    this.imagenPrevisualizacion = null;
+    this.statusImg = false;
+    this.datos.get('imagen')?.setValue(null);
+  }
 
-  ValidarSoloLetras(event: KeyboardEvent){
-    const charCode = event.charCode;
-    const charStr = String.fromCharCode(charCode);
- 
-    const regex = /^[a-zA-ZÁ-ÿ\s]+$/;
- 
-    if (!regex.test(charStr)) {
-     event.preventDefault();
-    }
-   }
- 
-   ValidarInputLetras(event: Event) {
+  ValidarInputNumerosIyE(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const valor = input.value;
- 
-    input.value = valor.replace(/[^a-zA-ZÁ-ÿ\s]/g, '');
-   }
- 
-   ValidarNumerosIyE(event: KeyboardEvent): void {
-     const charCode = event.charCode;
-     const charStr = String.fromCharCode(charCode);
-   
-     const regex = /^[0-9sSnN\/]$/;
-   
-     if (!regex.test(charStr)) {
-       event.preventDefault();
-     }
-   }
- 
-   ValidarInputNumerosIyE(event: Event): void {
-     const input = event.target as HTMLInputElement;
-     let valor = input.value;
-   
-     const regex = /^[0-9]{0,3}$|^[sS]$|^[sS][\/]$|^[sS][\/][nN]$/;
-   
-     if (!regex.test(valor)) {
- 
-       valor = valor.replace(/[^0-9sSnN\/]/g, '');
- 
-       if (!regex.test(valor)){
-         valor = ''
-       }
-     }
-     input.value = valor;
-   }
- 
-   ValidarSoloNumero(event: KeyboardEvent){
-    const charCode = event.charCode;
-    const charStr = String.fromCharCode(charCode);
- 
-    const regex = /^[0-9]$/;
- 
-    if (!regex.test(charStr)) {
-     event.preventDefault();
-    }
-   }
-   
-   ValidarInputNumero(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    const valor = input.value;
-     
-    input.value = valor.replace(/[^0-9\/]/g, '');
-   }
+    const valor = input.value.replace(/[^0-9sSnN\/]/g, ''); 
+    input.value = valor.match(/^[0-9]{0,3}$|^[sS][\/][nN]$/) ? valor : ''; 
+  }
 
-
-
-
-
-
-
-
-  darDeAlta(usuario: number): void
-  {
+  darDeAlta(usuario: number): void {
     const formData = new FormData();
+    const noInt = this.datos.value.noInt === '0' ? 'S/N' : this.datos.value.noInt;
+    const noExt = this.datos.value.noExt === '0' ? 'S/N' : this.datos.value.noExt;
 
-    const noInt = this.datos.value.noInt === "0" ? "S/N" : this.datos.value.noInt;
-    const noExt = this.datos.value.noExt === "0" ? "S/N" : this.datos.value.noExt;
-  
     formData.append('usuarioID', usuario.toString());
     formData.append('nombreEstablecimiento', this.datos.value.nombre);
     formData.append('codigoPostal', this.datos.value.codigoPostal);
@@ -246,20 +162,22 @@ export class NuevoVendedorComponent implements OnInit {
     formData.append('calle', this.datos.value.calle);
     formData.append('noInt', noInt);
     formData.append('noExt', noExt);
-    formData.append('estadoID', this.datos.value.estado);
+    formData.append('estado', this.datos.value.estado);
     formData.append('municipio', this.datos.value.municipio);
     formData.append('imagen', this.imagenPerfil!);
-    
-    this.Funciones.DarDeAltaEstablecimiento(formData).subscribe({
+
+    this.funciones.DarDeAltaEstablecimiento(formData).subscribe({
       next: (response) => {
-        console.log("Se dio de alta tu establecimiento ", response);
-        this.rutas.navigate(['/Cliente/home']);
+        console.log('Establecimiento registrado con éxito', response);
+        this.router.navigate(['/Cliente/home']);
       },
       error: (err) => {
-        console.log('Ocurrio un error.');
+        console.error('Ocurrió un error al dar de alta el establecimiento.', err);
       }
     });
-
   }
-  
+
+  cancelar(): void {
+    this.router.navigate(['/']);
+  }
 }

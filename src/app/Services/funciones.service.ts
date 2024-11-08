@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { EstadoInterface } from '../Interfaces/estado.interface';
 import { MunicipioInterface } from '../Interfaces/municipios.interfaces';
 import { GeneroInterface } from '../Interfaces/genero.interfaces';
@@ -170,6 +170,18 @@ export class FuncionesService {
     return this.httpClient.post(this.API_RentOutfit + '/Administrador/DenegarEstablecimiento', establecimiento);
   }
 
+  obtenerDatosPorCodigoPostal(codigoPostal: string): Observable<{ municipio: string, estado: string, asentamiento:string  } | null> {
+    return this.httpClient.post<{ municipio: string, estado: string , asentamiento:string}>(this.API_RentOutfit + '/vendedor/CodigoPostalProxy', { codigoPostal }).pipe(
+      map(response => {
+        console.log('Respuesta cruda de la API:', response); // Comprobar la respuesta
+        if (response && response.municipio && response.estado && response.asentamiento) {
+          return { municipio: response.municipio, estado: response.estado, asentamiento:response.asentamiento};
+        }
+        console.warn('No se encontraron los campos esperados en la respuesta de la API.');
+        return null;
+      })
+    );
+  }
 
 
 }
