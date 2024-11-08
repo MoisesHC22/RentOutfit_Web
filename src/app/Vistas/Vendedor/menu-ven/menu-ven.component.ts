@@ -6,6 +6,8 @@ import { FuncionesService } from '../../../Services/funciones.service';
 import { CookieService } from 'ngx-cookie-service';
 import { EstadoInterface } from '../../../Interfaces/estado.interface';
 import { MunicipioInterface } from '../../../Interfaces/municipios.interfaces';
+import { faBars, faEnvelope, faStore, faUsers, faArrowLeft, faBell, faUserCircle, faX, faShoppingCart } from '@fortawesome/free-solid-svg-icons'; 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-menu-ven',
@@ -15,12 +17,23 @@ import { MunicipioInterface } from '../../../Interfaces/municipios.interfaces';
     RouterLink,
     RouterModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
     CommonModule
   ],
   templateUrl: './menu-ven.component.html',
   styleUrl: './menu-ven.component.css'
 })
 export class MenuVenComponent implements OnInit{
+
+  faBars = faBars;
+  faEnvelope = faEnvelope;
+  faStore = faStore;
+  faUsers = faUsers;
+  faArrowLeft = faArrowLeft;
+  faBell = faBell;
+  faUserCircle = faUserCircle;
+  faX = faX;
+  faShoppingCart = faShoppingCart;
 
   token: string | null = null;
   usuarioID: number | null = null
