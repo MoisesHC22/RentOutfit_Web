@@ -68,7 +68,7 @@ export class PeticionesDisponiblesComponent implements OnInit{
   aprobar(establecimientosID: number) {
       this.Funciones.AprobarEstablecimiento(establecimientosID).subscribe({
         next: (result) => {
-          console.log(result);
+          this.Peticiones(this.usuario!, this.pagina!);
         },
         error: (err) => {
           console.log('Ocurrio algo inesperado.', err);
