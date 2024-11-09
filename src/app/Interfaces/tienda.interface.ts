@@ -63,3 +63,8 @@ export interface DarDeAltaUnaTienda{
     linkImagenEstablecimiento?: string;
     ultimaModificacionEstablecimiento?: string | Date;
  }
+
+ export interface RequerimientosDenegarEstablecimientos {
+    establecimientoID?: number;
+    motivo?: string;
+ }
