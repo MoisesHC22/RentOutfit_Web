@@ -183,5 +183,8 @@ export class FuncionesService {
     );
   }
 
+  generarPdfEstablecimientos(usuarioID: number): Observable<Blob> {
+    return this.httpClient.post(this.API_RentOutfit + '/Vendedor/GenerarPdfEstablecimientos', usuarioID, { responseType: 'blob'});
+  }
 
 }
