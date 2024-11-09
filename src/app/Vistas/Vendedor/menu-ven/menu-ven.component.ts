@@ -190,6 +190,25 @@ export class MenuVenComponent implements OnInit{
 
   }
 
+  generarPDf(usuarioID: number) {
+    this.Funciones.generarPdfEstablecimientos(usuarioID).subscribe({
+      next: (response: Blob) => {
+        const blob = new Blob([response], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'establecimientos.pdf';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        console.error('Error al generar el PDF:', err);
+      }
+    });
+  }
+
 
 
 }

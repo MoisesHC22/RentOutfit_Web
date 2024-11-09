@@ -153,6 +153,15 @@
   font-size: 20px;
 }
 
+#pdfEstablecimiento{
+  border-radius: 10px;
+  background-color: #3974c7;
+}
+
+#pdfEstablecimiento:hover{
+  background-color: #3170af; 
+}
+
 /* Estilos móviles para el sidebar */
 @media (max-width: 768px) {
   .menu-lateral {
