@@ -3,7 +3,8 @@
   <div class="topbar">
     <!-- Logo en la topbar -->
     <img src="RentOutfitLogo.png" alt="Logo" class="logo">
-    <h6>Panel de Administrador</h6>
+  
+    <h6>Panel de Vendedor</h6>
   </div>
 
   <!-- Checkbox oculto para controlar el sidebar -->
@@ -31,12 +32,16 @@
           </a>
         </li>
         <li>
+          <button id="pdfEstablecimiento" (click)="generarPDf(this.usuarioID!)">Descargar Pdf</button>
+        </li>
+        <li>
           <a routerLink="ventas">
             <fa-icon [icon]="faShoppingCart"></fa-icon> Mis ventas
           </a>
         </li>
       </ul>
 
+    
       <!-- Botón de regreso -->
       <button (click)="regresarCliente()">
         <fa-icon [icon]="faArrowLeft"></fa-icon> Regresar <!-- Icono de flecha hacia atrás -->
