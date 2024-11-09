@@ -6,6 +6,8 @@ import { FuncionesService } from '../../../Services/funciones.service';
 import { CookieService } from 'ngx-cookie-service';
 import { EstadoInterface } from '../../../Interfaces/estado.interface';
 import { MunicipioInterface } from '../../../Interfaces/municipios.interfaces';
+import { faBars, faEnvelope, faStore, faUsers, faArrowLeft, faBell, faUserCircle, faX, faShoppingCart } from '@fortawesome/free-solid-svg-icons'; 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-menu-ven',
@@ -15,12 +17,23 @@ import { MunicipioInterface } from '../../../Interfaces/municipios.interfaces';
     RouterLink,
     RouterModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
     CommonModule
   ],
   templateUrl: './menu-ven.component.html',
   styleUrl: './menu-ven.component.css'
 })
 export class MenuVenComponent implements OnInit{
+
+  faBars = faBars;
+  faEnvelope = faEnvelope;
+  faStore = faStore;
+  faUsers = faUsers;
+  faArrowLeft = faArrowLeft;
+  faBell = faBell;
+  faUserCircle = faUserCircle;
+  faX = faX;
+  faShoppingCart = faShoppingCart;
 
   token: string | null = null;
   usuarioID: number | null = null
@@ -175,6 +188,25 @@ export class MenuVenComponent implements OnInit{
       }
     });
 
+  }
+
+  generarPDf(usuarioID: number) {
+    this.Funciones.generarPdfEstablecimientos(usuarioID).subscribe({
+      next: (response: Blob) => {
+        const blob = new Blob([response], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'establecimientos.pdf';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        console.error('Error al generar el PDF:', err);
+      }
+    });
   }
 
 

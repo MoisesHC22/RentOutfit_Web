@@ -56,13 +56,7 @@
     position: left;
 }
 
-/* Estilo del separador */
-.separator {
-    width: 80%;
-    height: 3px;
-    background-color: #ccc;
-    margin: 5px auto 0;
-}
+
 
 /* Ajustes de la imagen de perfil */
 #imgPerfil {
@@ -149,15 +143,52 @@
 
 /* Asegura que el navbar colapse en pantallas pequeñas */
 @media (max-width: 991px) {
-    .navbar-nav {
-        flex-direction: column;
-        gap: 10px;
-    }
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .search-container {
-        order: 2;
-        display: flex;
-        width: 100%;
-        justify-content: center;
-    }
+  .navbar-nav {
+    flex-direction: column;
+    gap: 10px;
+    order: 2;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Estilo del separador */
+.separator {
+    width: 80%;
+    height: 3px;
+    background-color: #ccc;
+    margin: 5px auto 0;
+}
+  
+
+  .search-container {
+    order: 3;
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  #btnIniciarSesion {
+    width: 100%;
+    margin: 10px auto;
+  }
+
+  #CerrarSesion {
+    width: 80%;
+  }
+
+  .dropdown-menu {
+    width: 100%;
+  }
+
+  .d-flex{
+    order: 3;
+    width: 100%;
+    padding: 10px 0;
+    align-items: center;
+    justify-content: center;
+  }
 }
