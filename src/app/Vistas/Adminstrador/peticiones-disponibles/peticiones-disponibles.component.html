@@ -3,7 +3,7 @@
       @for (item of TiendasList; track $index)
       {
         <div class="Establecimiento">
-           <button class="btnCerrar">&times;</button>
+           <button class="btnCerrar" (click)="abrirModal(item.establecimientosID!, item.nombreEstablecimiento!)">&times;</button>
             <img [src]="item.linkImagenEstablecimiento">
             <p id="nombre">{{item.nombreEstablecimiento}}</p>
             <p id="fecha">{{item.ultimaModificacionEstablecimiento?.toString()| slice:0:10 }} | {{item.ultimaModificacionEstablecimiento?.toString()| slice:11:19 }} </p>
@@ -13,4 +13,27 @@
         </div>
       }
    </div>
+</div>
+
+<div class="modal" *ngIf="MostrarModal">
+    <div class="modal-content">
+        <h5>Denegar el Establecimiento: {{this.nombreEstablecimiento}}</h5>
+        <form [formGroup]="datos" (ngSubmit)="denegar()">
+
+         <div class="form-group">
+            <label for="motivo">Ingresa una breve descripción del motivo: </label>
+            <textarea id="motivo" formControlName="motivo" placeholder="Ingresa el motivo" rows="4"></textarea>
+            <div *ngIf="datos.get('motivo')?.invalid && datos.get('motivo')?.touched" class="error">
+              El motivo es obligatorio
+            </div>
+         </div>
+           
+
+
+           <div class="contBotones">
+            <button id="aprobar" type="submit" [disabled]="datos.invalid" [ngClass]="{'button-valid': datos.valid, 'button-invalid': !datos.valid}">Confirmar</button>
+            <button id="cerrar" type="button" (click)="cerrarModal()">Cancelar</button>
+           </div>
+        </form>
+    </div>
 </div>

@@ -10,8 +10,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #ebebc9; /* Color beige */
-  color: #333; /* Color de texto más oscuro para mejor contraste */
+  background-color: #535353;
+  color: #fff; /* Color de texto más oscuro para mejor contraste */
   padding: 10px 20px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 1000;
@@ -28,7 +28,7 @@
 /* Sidebar */
 .menu-lateral {
   width: 260px;
-  background-color: #ebebc9; /* Color beige */
+  background-color: #0c5679;
   color: #333; /* Color de texto más oscuro para mejor contraste */
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -52,6 +52,9 @@
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  color: #fff;
+  font-weight: bold;
+
 }
 
 #ImgVendedor {
@@ -79,7 +82,7 @@
 }
 
 .menu-lateral a {
-  color: #333;
+  color: #fff;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -88,12 +91,12 @@
 }
 
 .menu-lateral a:hover {
-  background-color: #d3d3ae; /* Tonalidad más clara de beige */
+  background-color: #0c648d;
 }
 
 .menu-lateral button {
   width: 100%;
-  background-color: #d2b48c; /* Tonalidad de beige más oscuro */
+  background-color: #535353;
   color: white;
   border: none;
   padding: 10px;
@@ -106,7 +109,7 @@
 }
 
 .menu-lateral button:hover {
-  background-color: #c0a080; /* Tonalidad más oscura en hover */
+  background-color: #7c7c7c;; /* Tonalidad más oscura en hover */
 }
 
 .main-content {

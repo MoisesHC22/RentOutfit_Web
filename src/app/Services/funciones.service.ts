@@ -6,7 +6,7 @@ import { MunicipioInterface } from '../Interfaces/municipios.interfaces';
 import { GeneroInterface } from '../Interfaces/genero.interfaces';
 import { RequerimientosIniciarSesion, RequerimientosUsuario } from '../Interfaces/iniciarSesion.interface';
 import { ListaVestimenta, RequerimientosVestimentas, VestimentaEstablecimientos } from '../Interfaces/Vestimenta.interface';
-import { MisEstablecimientos, RequerimientosDeMisEstablecimientos, RequerimientosTiendasCercanas, TiendasCercanas } from '../Interfaces/tienda.interface';
+import { MisEstablecimientos, RequerimientosDeMisEstablecimientos, RequerimientosDenegarEstablecimientos, RequerimientosTiendasCercanas, TiendasCercanas } from '../Interfaces/tienda.interface';
 import { ActualizarContrasena, RequerimientoCorreo, ValidarToken } from '../Interfaces/contrasena.interface';
 import { environment } from '../../environments/environment';
 
@@ -166,12 +166,12 @@ export class FuncionesService {
     return this.httpClient.post(this.API_RentOutfit + '/Administrador/AprobarEstablecimiento', establecimiento);
   }
 
-  DenegarEstablecimiento(establecimiento: number): Observable<any> {
-    return this.httpClient.post(this.API_RentOutfit + '/Administrador/DenegarEstablecimiento', establecimiento);
+  DenegarEstablecimiento(data: RequerimientosDenegarEstablecimientos): Observable<any> {
+    return this.httpClient.post(this.API_RentOutfit + '/Administrador/DenegarEstablecimiento', data);
   }
 
   obtenerDatosPorCodigoPostal(codigoPostal: string): Observable<{ municipio: string, estado: string, asentamiento:string  } | null> {
-    return this.httpClient.post<{ municipio: string, estado: string , asentamiento:string}>(this.API_RentOutfit + '/vendedor/CodigoPostalProxy', { codigoPostal }).pipe(
+    return this.httpClient.post<{ municipio: string, estado: string , asentamiento:string}>(this.API_RentOutfit + '/CodigoPostalProxy/ObtenerDireccion', { codigoPostal }).pipe(
       map(response => {
         console.log('Respuesta cruda de la API:', response); // Comprobar la respuesta
         if (response && response.municipio && response.estado && response.asentamiento) {
