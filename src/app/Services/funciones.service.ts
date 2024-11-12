@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { EstadoInterface } from '../Interfaces/estado.interface';
 import { MunicipioInterface } from '../Interfaces/municipios.interfaces';
 import { GeneroInterface } from '../Interfaces/genero.interfaces';
@@ -9,18 +9,19 @@ import { ListaVestimenta, RequerimientosVestimentas, VestimentaEstablecimientos 
 import { MisEstablecimientos, RequerimientosDeMisEstablecimientos, RequerimientosDenegarEstablecimientos, RequerimientosTiendasCercanas, TiendasCercanas } from '../Interfaces/tienda.interface';
 import { ActualizarContrasena, RequerimientoCorreo, ValidarToken } from '../Interfaces/contrasena.interface';
 import { environment } from '../../environments/environment';
-
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FuncionesService {
 
-
   private API_RentOutfit: string = environment.apiUrl;
 
   constructor(private httpClient: HttpClient) { }
 
+// #region Funciones para descodificar
   DecodificarToken(token: string): any {
     try 
     {
@@ -47,10 +48,10 @@ export class FuncionesService {
   obtenerDatosDesdeGeocoding(url: string): Observable<any> {
     return this.httpClient.get(url);
   }
-  
+// #endregion 
 
   
-
+// #region Funciones para obtener listas
   ObtenerClientes(usuarioID: string): Observable<any>{
     return this.httpClient.post(this.API_RentOutfit + '/Cliente/ObtenerCliente?usuarioID=', usuarioID);
   }
@@ -66,11 +67,10 @@ export class FuncionesService {
   ObtenerGeneros() : Observable<GeneroInterface[]> {
     return this.httpClient.post<GeneroInterface[]>(this.API_RentOutfit + '/Listas/ObtenerGeneros', {})
   }
+// #endregion 
 
 
-
-  //Funciones para Cliente
-
+// #region Funciones para cliente
   IniciarSesion(data: RequerimientosIniciarSesion) : Observable<any> 
   {
     return this.httpClient.post(this.API_RentOutfit + '/Cliente/IniciarSesion', data);
@@ -105,12 +105,10 @@ export class FuncionesService {
   VestimentasEstablecimientos(data: VestimentaEstablecimientos) : Observable<ListaVestimenta[]> {
     return this.httpClient.post<TiendasCercanas[]>(this.API_RentOutfit + '/Cliente/VestimentasDeEstablecimientos', data);
   }
+// #endregion 
 
 
-
-
-  //Funciones para vendedor
-
+// #region Funciones para vendedor
   DarDeAltaUnVendedor(usuario: number): Observable<any> {
     return this.httpClient.post(this.API_RentOutfit + '/Vendedor/DarDeAltaUnVendedor', usuario);
   }
@@ -128,14 +126,14 @@ export class FuncionesService {
   MisEstablecimientos(data: RequerimientosDeMisEstablecimientos) : Observable<MisEstablecimientos[]> {
     return this.httpClient.post<MisEstablecimientos[]>(this.API_RentOutfit + '/Vendedor/MisEstablecimientos', data);
   }
-  
+
+  generarPdfEstablecimientos(usuarioID: number): Observable<Blob> {
+    return this.httpClient.post(this.API_RentOutfit + '/Vendedor/GenerarPdfEstablecimientos', usuarioID, { responseType: 'blob'});
+  }
+// #endregion   
 
 
-
-
-
-  //Funciones para recuperar contraseña
-
+// #region Funciones para recuperar la contraseña
   EnviarCorreo(data: RequerimientoCorreo): Observable<any> {
     return this.httpClient.post(this.API_RentOutfit + '/RecuperarContrasena/ObtenerToken', data);
   }
@@ -147,19 +145,16 @@ export class FuncionesService {
   ActualizarContrasena(data: ActualizarContrasena): Observable<any> {
     return this.httpClient.post(this.API_RentOutfit + '/RecuperarContrasena/ActualizarContrasena', data);
   }
+// #endregion 
 
 
-
-
-
-
-  //Funciones para administrador
+// #region Funciones para administrador
   TodosLosEstablecimientos(data: RequerimientosDeMisEstablecimientos) : Observable<TiendasCercanas[]> {
     return this.httpClient.post<TiendasCercanas[]>(this.API_RentOutfit + '/Administrador/TodosLosEstablecimientos', data);
   }
 
-  ListaDeEstablecimientosParaAprobar(data: RequerimientosDeMisEstablecimientos): Observable<MisEstablecimientos[]> {
-    return this.httpClient.post<MisEstablecimientos[]>(this.API_RentOutfit + '/Administrador/EstablecimientosParaAprobacion', data);
+  ListaDeEstablecimientosParaAprobar(data: RequerimientosDeMisEstablecimientos): Observable<{ establecimientos: MisEstablecimientos[], totalRegistros: number }> {
+    return this.httpClient.post<{ establecimientos: MisEstablecimientos[], totalRegistros: number }>(this.API_RentOutfit + '/Administrador/EstablecimientosParaAprobacion', data);
   }
 
   AprobarEstablecimiento(establecimiento: number): Observable<any> {
@@ -170,21 +165,76 @@ export class FuncionesService {
     return this.httpClient.post(this.API_RentOutfit + '/Administrador/DenegarEstablecimiento', data);
   }
 
-  obtenerDatosPorCodigoPostal(codigoPostal: string): Observable<{ municipio: string, estado: string, asentamiento:string  } | null> {
-    return this.httpClient.post<{ municipio: string, estado: string , asentamiento:string}>(this.API_RentOutfit + '/CodigoPostalProxy/ObtenerDireccion', { codigoPostal }).pipe(
-      map(response => {
-        console.log('Respuesta cruda de la API:', response); // Comprobar la respuesta
-        if (response && response.municipio && response.estado && response.asentamiento) {
-          return { municipio: response.municipio, estado: response.estado, asentamiento:response.asentamiento};
-        }
-        console.warn('No se encontraron los campos esperados en la respuesta de la API.');
-        return null;
-      })
-    );
+  
+// #endregion 
+
+
+// #region Funciones para obtener direccion
+obtenerDatosPorCodigoPostal(codigoPostal: string): Observable<{ municipio: string, estado: string, asentamiento:string  } | null> {
+  return this.httpClient.post<{ municipio: string, estado: string , asentamiento:string}>(this.API_RentOutfit + '/CodigoPostalProxy/ObtenerDireccion', { codigoPostal }).pipe(
+    map(response => {
+      console.log('Respuesta cruda de la API:', response); // Comprobar la respuesta
+      if (response && response.municipio && response.estado && response.asentamiento) {
+        return { municipio: response.municipio, estado: response.estado, asentamiento:response.asentamiento};
+      }
+      console.warn('No se encontraron los campos esperados en la respuesta de la API.');
+      return null;
+    })
+  );
+}
+// #endregion 
+
+
+// #region Funciones para capturar login
+   private cookie = inject(CookieService);
+   private Rutas = inject(Router);
+   private estadoSesion = new BehaviorSubject<{ logeo: boolean, darDeAlta: boolean }>({ logeo: true, darDeAlta: false });
+   estadoSesion$ = this.estadoSesion.asObservable();
+
+   private validar = new BehaviorSubject<boolean>(this.hasToken());
+   validar$ = this.validar.asObservable();
+   
+   iniciarlizarEstadoSesion(): void {
+    const token = this.obtenerToken();
+    if(token) {
+      const usuario = this.DecodificarToken(token);
+      if(usuario && (usuario.role == 1 || usuario.role == 2 || usuario.role == 3)){
+        this.actualizarEstadoSesion(false, true);
+      } else {
+        this.actualizarEstadoSesion(true, false);
+      }
+    } else {
+      this.actualizarEstadoSesion(true, false);
+    }
+   }
+
+   private hasToken(): boolean {
+    return !!this.cookie.get('token');
+   }
+
+   actualizarEstadoSesion(logeo: boolean, darDeAlta: boolean) {
+    this.estadoSesion.next({ logeo, darDeAlta});
+   }
+
+   Login(token: string): void {
+    this.cookie.set('token', token, {path: '/', secure: true});
+    this.validar.next(true);
+    this.actualizarEstadoSesion(false, true);
   }
 
-  generarPdfEstablecimientos(usuarioID: number): Observable<Blob> {
-    return this.httpClient.post(this.API_RentOutfit + '/Vendedor/GenerarPdfEstablecimientos', usuarioID, { responseType: 'blob'});
+  CerrarSesion(): void {
+    this.cookie.delete('token', '/');
+    this.cookie.delete('info', '/');
+    this.validar.next(false);
+    this.actualizarEstadoSesion(true, false);
+    this.Rutas.navigate(['/Cliente/home']).then(() => {
+      window.location.reload();
+    });
   }
+
+  obtenerToken(): string | null {
+    return this.cookie.get('token');
+  }
+// #endregion 
 
 }

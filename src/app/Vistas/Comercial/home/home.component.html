@@ -17,7 +17,7 @@
       @for (item of TiendaList; track $index) 
       {
         <div class="tarjeta-tienda" (click)="MasInformacionEstablecimiento(item.establecimientosID)">
-          <img id="img" [src]="item.linkImagenEstablecimiento" loading="lazy">
+          <img id="img" alt="item.nombreEstablecimiento" [src]="item.linkImagenEstablecimiento"  loading="lazy">
             <div class="info-tienda">
                <h4>{{item.nombreEstablecimiento}}</h4>
                <p>{{item.calle}}, {{item.codigoPostal}}, {{item.nombreMunicipio}}, {{item.nombreEstado}}</p>
@@ -36,7 +36,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-device">
-           <img id="device" src="/Recursos/Publicidad1.png">
+           <img id="device" alt="Publicidad" src="/Recursos/Publicidad1.png">
         </div>
         <div class="col-md-5 contenedorAnuncio">
           <h3 id="TituloAnuncio">Descarga nuestra App Móvil</h3><br>
@@ -81,11 +81,11 @@
       <div class="footer-section">
           <h3>Mi cuenta</h3>
           <ul>
-              <li *ngIf="OpcionDarDeAlta">
+              <li *ngIf="OpcionLogeo">
                 <a [routerLink]="'/Login'">Ingresar</a>
               </li>
 
-              <li *ngIf="!OpcionDarDeAlta">
+              <li *ngIf="OpcionDarDeAlta">
                 <a (click)="darDeAltaVendedor(usuario!)"><fa-icon id="store" [icon]="faStore" class="icon-custom"></fa-icon>&nbsp;&nbsp;Quiero vender!</a>
               </li>
           </ul>

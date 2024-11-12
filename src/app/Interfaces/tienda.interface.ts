@@ -54,6 +54,8 @@ export interface DarDeAltaUnaTienda{
  export interface RequerimientosDeMisEstablecimientos {
     usuario?: number;
     pagina?: number;
+    filtro?: string;
+    orden?: string;
  }
 
 

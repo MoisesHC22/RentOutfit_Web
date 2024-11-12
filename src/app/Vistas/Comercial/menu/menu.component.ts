@@ -24,6 +24,7 @@ import { RequerimientosUsuario } from '../../../Interfaces/iniciarSesion.interfa
 })
 export class MenuComponent implements OnInit {
 
+  // #region Iconos
   faHouse = faHouse;
   faBag = faBagShopping;
   faShirt = faShirt;
@@ -31,6 +32,7 @@ export class MenuComponent implements OnInit {
   faBell = faBell;
   faGear = faGear;
   faDoorOpen = faDoorOpen;
+  // #endregion 
 
   constructor(private Funciones: FuncionesService, private cookie: CookieService, private Rutas: Router){}
 
@@ -45,39 +47,35 @@ export class MenuComponent implements OnInit {
   Admin = false;
   
   ngOnInit(): void {
-    
-    this.token = this.cookie.get('token');
-    
-    if (this.token)
-      {
-        const tokenValido = this.VerificaExpiracion(this.token);
 
-        if(!tokenValido){
-          this.CerrarSesion();
-        }
-        else {
+     this.token = this.Funciones.obtenerToken();
+     if (this.token) {
+       const obtener = this.Funciones.DecodificarToken(this.token);
 
-          const obtener = this.Funciones.DecodificarToken(this.token);
-          
-          this.img = obtener?.imagen || null;
-          this.nombre = obtener?.nombre || null;
-          this.rol = obtener?.role || null;
-          
-          if(this.rol == 2) {
-            this.vendedor = true;
-          } else if (this.rol == 3) {
-            this.Admin = true;
-          }
+       this.img = obtener?.imagen || null;
+       this.nombre = obtener?.nombre || null;
+       this.rol = obtener?.role || null;
 
-          this.usuarioID = obtener?.usuario ? Number(obtener.usuario) : null;
+       if(this.rol == 2)
+       {
+         this.vendedor = true;
+       }
+       else if(this.rol == 3) {
+         this.Admin = true;
+       }
 
-          if(this.usuarioID != null){
-            this.ObtenerMiInformacion(this.usuarioID, this.pagina!);
-          }
-        }
+      this.usuarioID = obtener?.usuario ? Number(obtener.usuario) : null;
+
+      if(this.usuarioID != null){
+        this.ObtenerMiInformacion(this.usuarioID, this.pagina!);
       }
+
+     }
   }
 
+  CerrarSesion(): void {
+   this.Funciones.CerrarSesion();
+  }
 
 
   ObtenerMiInformacion(usuarioID: number, pagina: number) {
@@ -99,14 +97,6 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  CerrarSesion(): void {
-    this.cookie.delete('token', '/');
-    this.cookie.delete('info', '/');
-    this.token = null;
-    this.img = null;
-    this.nombre =null;
-  }
-
   VerificaExpiracion(token: string): boolean {
     const descodificar = this.Funciones.DecodificarToken(token);
     
@@ -125,7 +115,6 @@ export class MenuComponent implements OnInit {
       console.error('No se encontro tus establecimientos.');
     }
   }
-
   
   TodosLosEstablecimientos(usuario?: number) :void {
     if(usuario) {
