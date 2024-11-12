@@ -63,34 +63,31 @@ export class HomeComponent implements OnInit {
 
   usuario: number | null = null;
   rol: number | null = null;
-  OpcionDarDeAlta = false;
-  
 
+  OpcionLogeo: Boolean | null = null;
+  OpcionDarDeAlta: Boolean | null = null;
+  
   ngOnInit(): void {
     this.cookie.delete('ubicacion', '/');
 
-
     this.obtenerUbicacion();
 
-    this.token = this.cookie.get('token');
+    this.Funciones.iniciarlizarEstadoSesion();
+    this.Funciones.estadoSesion$.subscribe(({logeo, darDeAlta}) => {
+      this.OpcionLogeo = logeo;
+      this.OpcionDarDeAlta = darDeAlta;
+    });
 
-    if(this.token){
+    this.token = this.Funciones.obtenerToken();
+    if(this.token) {
       const obtener = this.Funciones.DecodificarToken(this.token);
-
       this.rol = obtener?.role || null;
       this.usuario = obtener?.usuario ? Number(obtener.usuario) : null;
-
-
-      if(this.rol == 1){
-        this.OpcionDarDeAlta = true;
-      }
-
-      
-
     }
 
   }
   
+// #region Funciones para obtener los establecimientos cercanos
   ListaTiendas(estado: string, municipio: string){
     
     const data: RequerimientosTiendasCercanas = {
@@ -164,8 +161,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-
-
   obtenerEstadoMunicipio(latitud: number, longitud: number): void {
     const apiKey = 'AIzaSyCDTIozOvb6f5hDCDyvkWziUMrfQzDjQQk';
     const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitud},${longitud}&key=${apiKey}`;
@@ -219,14 +214,21 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+// #endregion 
 
-
-
+// #region Funciones para habilitar las opciones del menu segun su rol 
   darDeAltaVendedor(usuario : number){
     this.Funciones.DarDeAltaUnVendedor(usuario).subscribe({
       next: (result) => {
-        this.OpcionDarDeAlta = false;
-        this.Rutas.navigate(['/Cliente/NuevoVendedor']);
+
+        if(result.tipoError === 0 || result.tipoError === 3) 
+        {
+          this.Rutas.navigate(['/Cliente/NuevoVendedor']);
+          this.OpcionDarDeAlta = false;
+        } else {
+          console.error('Ocurrio un error.');
+        }
+
       },
       error: (err) =>{
         console.log("Ocurrio un error.");
@@ -243,6 +245,7 @@ export class HomeComponent implements OnInit {
       console.error('No se obtuvo la informacion del establecimiento.');
     }
   }
+  // #endregion 
 
 }
  

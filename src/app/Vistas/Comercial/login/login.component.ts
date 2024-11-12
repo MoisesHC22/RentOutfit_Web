@@ -62,8 +62,8 @@ export class LoginComponent implements OnInit{
 
     this.funciones.IniciarSesion(data).subscribe({
       next: (response) => {
-        this.cookie.set('token', response.token, { path: '/', secure: true });
-
+        this.funciones.Login(response.token);
+        this.funciones.iniciarlizarEstadoSesion();
         this.mostrarAnimacionExito = true;
 
         setTimeout(() => {
