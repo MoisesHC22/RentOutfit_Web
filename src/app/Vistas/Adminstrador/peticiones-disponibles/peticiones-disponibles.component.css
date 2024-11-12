@@ -1,10 +1,16 @@
 
-.centrar {
+.unir {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    .contenedor {
+  .centrar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+       .contenedor {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -40,7 +46,8 @@
             }
 
             .btnAprobar{
-                width: 180px;
+                margin-right: 5px;
+                width: 90px;
                 height: 30px;
                 border-radius: 5px;
                 margin-bottom: 7px;
@@ -50,33 +57,157 @@
             }
 
             .btnAprobar:hover {
-                background-color: #7292cc;
+                background-color: #4575ce;
+            }
+
+            .btnEliminar {
+                width: 90px;
+                height: 30px;
+                border-radius: 5px;
+                margin-bottom: 7px;
+                background-color: #cc7272;
+                color: white;
+                border: none;
+            }
+
+            .btnEliminar:hover {
+                background-color: #ce4545;     
             }
         }
 
+        .Establecimiento:hover {
+          border: 3px solid #007bff;
+          box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); 
+          transform: scale(1.05);
+          transition: transform 0.2s, border-color 0.2s;
+
+        }
+
+        .Establecimiento.selected {
+          border: 3px solid #007bff;
+          box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); 
+          transform: scale(1.05);
+          transition: transform 0.2s, border-color 0.2s;
+        }
 
     }
 
-    .btnCerrar {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: #ff4d4d;
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 25px;
-        height: 25px;
-        font-size: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
+    .contPaginas {
+
+        button {
+            border: none;
+            background-color: #535353;
+            color: #fff;
+            margin: 0 10px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50px;
+        }
     }
 
-    .btnCerrar:hover {
-        background: #ff4d4d;
+
+  }
+
+  .contInformacionEstablecimiento{
+    width: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    .margin {
+        margin: 30px;
+        position: relative;
+        
+        .btnCerrar {
+            position: absolute;
+            top: -35px;
+            right: -15px;
+            background: #cc7272;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .btnCerrar:hover{
+            background-color: #ce4545;    
+        }
+
+        #titulo {
+            margin-top: 50px;
+            font-weight: bold;
+            text-align: center;
+        }            
+
+        .contUbicacion {
+            margin-top: 40px;
+            width: 500px;
+            color: #000000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+
+            h6 {
+                font-weight: bold;
+            }
+
+            .imgEstablecimiento {
+                margin-top: 10px;
+                width: 500px;
+                height: 300px;
+                border-radius: 10px;
+            }
+
+            p {
+                text-align: justify;
+            }
+
+            #Resaltar {
+                font-weight: bold;
+            }
+        }
+
+        #subTitulo {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .contVendedor{
+            margin-top: -10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 70px;
+            background-color: #535353;
+            border-radius: 10px;
+
+
+            .imgVendedor{
+                width: 40px;
+                height: 40px;
+                border-radius: 50px;
+            }
+
+            p {
+                color: #fff;
+                margin: 6px 7px;
+                text-align: center;
+                font-size: 18px;
+            
+            }
+        }
     }
+   
+  }
+
 }
 
 
