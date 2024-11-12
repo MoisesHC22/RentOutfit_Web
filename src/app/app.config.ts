@@ -19,6 +19,6 @@ export const appConfig: ApplicationConfig = {
     provideLottieOptions({
        player: () => import('lottie-web')
       }),
-    CookieService
+    CookieService,
   ]
 };
