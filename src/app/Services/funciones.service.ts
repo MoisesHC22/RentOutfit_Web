@@ -5,7 +5,7 @@ import { EstadoInterface } from '../Interfaces/estado.interface';
 import { MunicipioInterface } from '../Interfaces/municipios.interfaces';
 import { GeneroInterface } from '../Interfaces/genero.interfaces';
 import { RequerimientosIniciarSesion, RequerimientosUsuario } from '../Interfaces/iniciarSesion.interface';
-import { ListaVestimenta, RequerimientosVestimentas, VestimentaEstablecimientos } from '../Interfaces/Vestimenta.interface';
+import { CarritoDeCompra, ListaVestimenta, RequerimientosVestimentas, VestimentaEstablecimientos } from '../Interfaces/Vestimenta.interface';
 import { MisEstablecimientos, RequerimientosDeMisEstablecimientos, RequerimientosDenegarEstablecimientos, RequerimientosTiendasCercanas, TiendasCercanas } from '../Interfaces/tienda.interface';
 import { ActualizarContrasena, RequerimientoCorreo, ValidarToken } from '../Interfaces/contrasena.interface';
 import { environment } from '../../environments/environment';
@@ -235,6 +235,19 @@ obtenerDatosPorCodigoPostal(codigoPostal: string): Observable<{ municipio: strin
   obtenerToken(): string | null {
     return this.cookie.get('token');
   }
+// #endregion 
+
+
+// #region Funciones para carrito de compras
+ModificarCarrito(data: CarritoDeCompra) : Observable<any> 
+{
+  return this.httpClient.post(this.API_RentOutfit + '/Cliente/ModificarCarrito', data);
+}
+
+CargarCarrito(usuarioID: number) : Observable<any>
+{
+  return this.httpClient.post(this.API_RentOutfit + '/Cliente/CargarCarrito', usuarioID);
+}
 // #endregion 
 
 }

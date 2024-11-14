@@ -19,6 +19,7 @@ import { RecuperarContrasenaComponent } from './Vistas/Comercial/OlvideMiContras
 import { AvisoEmailComponent } from './Vistas/Comercial/OlvideMiContrasena/aviso-email/aviso-email.component';
 import { TodosLosUsuariosComponent } from './Vistas/Adminstrador/todos-los-usuarios/todos-los-usuarios.component';
 import { PeticionesDisponiblesComponent } from './Vistas/Adminstrador/peticiones-disponibles/peticiones-disponibles.component';
+import { CarritoComprasComponent } from './Vistas/Comercial/carrito-compras/carrito-compras.component';
 
 export const routes: Routes = [
 
@@ -37,7 +38,8 @@ export const routes: Routes = [
         {path: 'vestimentas', component: ListaVestimentasComponent},
         {path: 'masInformacionVestimenta/:vestimenta', component: InformacionVestimentaComponent},
         {path: 'NuevoVendedor', component: NuevoVendedorComponent},
-        {path: 'masInformacionEstablecimiento/:establecimiento', component: InformacionEstablecimientoComponent}
+        {path: 'masInformacionEstablecimiento/:establecimiento', component: InformacionEstablecimientoComponent},
+        {path: 'carritoDeCompras', component: CarritoComprasComponent}
      ],
     }, 
     {
