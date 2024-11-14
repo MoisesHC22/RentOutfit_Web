@@ -23,6 +23,9 @@ export interface InformacionVestimenta {
 
     nombreTalla?: string;
     nombreEstilo?: string;
+
+    precioTotal?: number;
+    stockSeleccionado?: number;
 }
 
 export interface RequerimientosVestimentas {
@@ -35,4 +38,17 @@ export interface VestimentaEstablecimientos {
     establecimiento?: number;
     usuario?: number;
     pagina?: number;
+}
+
+
+
+
+export interface CarritoDeCompra {
+    usuarioID?: number;
+    itemsCarrito?: ItemsCarrito[];
+}
+
+export interface ItemsCarrito {
+    vestimentaID?: number;
+    stock?:number;
 }
