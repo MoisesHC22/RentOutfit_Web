@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterOutlet, RouterModule, RouterLink, Router } from '@angular/router';
-import { faHouse, faBagShopping, faShirt, faMagnifyingGlass, faBell, faGear, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faBagShopping, faShirt, faMagnifyingGlass, faBell, faGear, faDoorOpen, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
@@ -32,6 +32,7 @@ export class MenuComponent implements OnInit {
   faBell = faBell;
   faGear = faGear;
   faDoorOpen = faDoorOpen;
+  faCartShopping = faCartShopping;
   // #endregion 
 
   constructor(private Funciones: FuncionesService, private cookie: CookieService, private Rutas: Router){}

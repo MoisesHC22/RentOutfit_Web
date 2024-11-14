@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FuncionesService } from '../../../../Services/funciones.service';
-import { InformacionVestimenta } from '../../../../Interfaces/Vestimenta.interface';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { CarritoDeCompra, InformacionVestimenta, ItemsCarrito } from '../../../../Interfaces/Vestimenta.interface';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { CookieService } from 'ngx-cookie-service';
+import { Console } from 'node:console';
 
 @Component({
   selector: 'app-informacion-vestimenta',
@@ -22,8 +24,12 @@ export class InformacionVestimentaComponent implements OnInit, OnDestroy {
 
   imagenSeleccionada: string | null = null;
   estatus: string | null = null;
+  usuarioID: number | null = null;
+  token: string | null = null;
 
-  constructor(private funciones: FuncionesService, private rutas: ActivatedRoute) {}
+  stock: number = 1;
+
+  constructor(private funciones: FuncionesService, private rutas: ActivatedRoute, private cookie: CookieService, private Ruta: Router) {}
 
   ngOnInit(): void {
     this.routeSub = this.rutas.paramMap.subscribe((params: ParamMap) => {
@@ -33,6 +39,13 @@ export class InformacionVestimentaComponent implements OnInit, OnDestroy {
         this.vestimenta = +vestimentaID;
         this.obtenerInformacionVestimenta(this.vestimenta);
       }
+
+      this.token = this.funciones.obtenerToken();
+      if(this.token){
+        const obtener = this.funciones.DecodificarToken(this.token);
+        this.usuarioID = obtener?.usuario ? Number(obtener.usuario) : null;
+      }
+
     });
   }
 
@@ -42,7 +55,8 @@ export class InformacionVestimentaComponent implements OnInit, OnDestroy {
         next: (result: InformacionVestimenta) => {
           this.informacion = result;
           this.imagenSeleccionada = this.informacion?.imagen1 || null;
-          
+          this.stock = 1;
+
           if(this.informacion.vestimentaEstatus == true){
             this.estatus = 'Disponible';
           } 
@@ -66,4 +80,65 @@ export class InformacionVestimentaComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.routeSub.unsubscribe();
   }
+
+  AgregarAlCarrito(vestimentaID: number): void 
+  {
+    if(!this.token || !this.usuarioID)
+    {
+      this.Ruta.navigate(['/Login']);
+      return;
+    }
+
+    const nuevoItem: ItemsCarrito = {
+      vestimentaID: vestimentaID,
+      stock: this.stock 
+    };
+
+    this.funciones.CargarCarrito(this.usuarioID).subscribe({
+      next: (carritoExistente) => {
+
+        const carritoActualizado: CarritoDeCompra = {
+          usuarioID: this.usuarioID!,
+          itemsCarrito: carritoExistente.itemsCarrito || []
+        };
+
+        const itemExistente = carritoActualizado.itemsCarrito?.find(item => item.vestimentaID === vestimentaID);
+
+        if(itemExistente){
+          itemExistente.stock! += this.stock;
+        } else {
+          carritoActualizado.itemsCarrito?.push(nuevoItem);
+        }
+
+        this.funciones.ModificarCarrito(carritoActualizado).subscribe({
+          next: () => {
+              console.log("Carrito actualizado correctamente.");
+            },
+            error: (err) => {
+              console.error("Error al actualizar el carrito:", err);
+            }
+          });
+        },
+        error: (err) => {
+          console.error("Error al cargar el carrito:", err);
+        }
+    });
+
+  }
+
+
+  
+  aumentarStock(): void {
+    if(this.stock < (this.informacion?.stock || 0)) {
+      this.stock += 1;
+    }
+  }
+
+  disminuirStock(): void {
+    if(this.stock > 1) {
+      this.stock -= 1;
+    }
+  }
+
+
 }

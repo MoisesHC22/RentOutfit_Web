@@ -26,35 +26,32 @@
           </a>
           <div class="separator"></div>
         </li>
-
-        <li class="nav-item">
-          <a class="nav-link">
-            <fa-icon id="Icono" [icon]="faShirt"></fa-icon>
-            Mis Alquileres
-          </a>
-          <div class="separator"></div>
-        </li>
       </ul>
 
       <!-- Formulario de búsqueda -->
      
-      <form class="d-flex ms-auto mb-2 mb-lg-0">
+      <form class="form-busqueda">
         <input id="contBuscar" class="form-control me-1" type="search" placeholder="Buscar..." aria-label="Search">
         <button id="btnBuscar" class="btn btn-outline-dark" type="submit"><fa-icon id="Icono" [icon]="faSearch"></fa-icon></button>
       </form>
+      
       <div class="separator"></div>
 
       <!-- Perfil y sesión -->
       <ul class="navbar-nav ms-auto align-left">
         <li *ngIf="token">
           <div class="d-flex align-items-center">
-            <img [src]="img" *ngIf="img" id="imgPerfil" alt="Profile">
-            <p id="nombreUsuario" class="mb-0">{{nombre}}</p>
-            <a class="nav-link dropdown-toggle" id="dropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <fa-icon id="Icono" [icon]="faGear"></fa-icon>
-            </a>
+ 
+            <div class="unir dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              <img [src]="img" *ngIf="img" id="imgPerfil" alt="Profile">
+              <p id="nombreUsuario" class="mb-0">{{nombre}}</p>
+              <a role="button"></a>
+            </div>
+            
+
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-              <li><a routerLink="informacion" class="dropdown-item">Mi información</a></li>
+              <li><a routerLink="informacion" class="dropdown-item"><fa-icon id="Icono" [icon]="faGear"></fa-icon> Mi información</a></li>
+              <li><a class="nav-link"><fa-icon id="Icono" [icon]="faShirt"></fa-icon> Mis Alquileres</a></li>
               <li *ngIf="vendedor"><a (click)="MisEstablecimientos(this.usuarioID!)" class="dropdown-item">Adminstrar mi negocio</a></li>
               <li *ngIf="Admin"><a (click)="TodosLosEstablecimientos(this.usuarioID!)" class="dropdown-item">Super Usuario</a></li>
               <li>
@@ -64,6 +61,9 @@
               </li>
             </ul>
           </div>
+        </li>
+        <li *ngIf="token">
+          <a routerLink="carritoDeCompras"><fa-icon id="Icono" [icon]="faCartShopping"></fa-icon></a>
         </li>
         <li class="nav-item" *ngIf="!token">
           <button id="btnIniciarSesion" routerLink="/Login" class="btn">Iniciar sesión</button>
