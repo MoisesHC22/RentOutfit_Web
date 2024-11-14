@@ -61,8 +61,14 @@
              <p>Fecha de publicación: {{informacion?.fechaDePublicacion!.toString() | slice: 0:10}}</p>
           </div>
 
+          <div>
+            <button (click)="disminuirStock()">-</button>
+            <input type="number" [value]="stock" readonly>
+            <button (click)="aumentarStock()">+</button>
+          </div>
+
           <div class="contBotonAgregar">
-            <button id="btnAgregar">Agregar al carrito</button>
+            <button id="btnAgregar" (click)="AgregarAlCarrito(informacion?.vestimentaID!)">Agregar al carrito</button>
           </div>
 
         </div> 
