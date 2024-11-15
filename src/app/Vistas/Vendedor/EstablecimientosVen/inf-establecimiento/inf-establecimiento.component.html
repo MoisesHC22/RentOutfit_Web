@@ -1,0 +1,152 @@
+
+<div class="unir">
+    <div style="position: relative;">
+        <img class="banner" [src]="informacion?.linkImagenEstablecimiento" alt="Imagen del establecimiento {{ informacion?.nombreEstablecimiento }}" />
+        <div class="banner-fade"></div>
+    
+    </div>
+    
+    <div class="detalles-establecimiento">
+        <h2>{{ informacion?.nombreEstablecimiento }}</h2>
+        <p><span id="negrita">Ubicación:</span> {{informacion?.calle}} {{informacion?.noExt}}, Int. {{informacion?.noInt}}, C.P. {{informacion?.codigoPostal}},  {{ informacion?.municipio}}, {{informacion?.nombreEstado}}, México</p>
+    </div>
+
+
+    <div class="contFiltro">
+        <form [formGroup]="filtro" class="form-busqueda">
+            <input formControlName="busqueda" id="contBuscar" class="form-control me-1" type="search" placeholder="Buscar..." aria-label="Search" name="searchQuery">
+            <button (click)=" buscarEstablecimientos()" id="btnBuscar" class="btn btn-outline-dark" type="submit"><fa-icon id="Icono" [icon]="faSearch"></fa-icon></button>
+        </form>
+
+        <button id="btnAgregar" (click)="mostrarModal()">Agregar vestimenta</button>
+    </div>
+
+
+    <div class="vestimenta-lista" *ngIf="!AnuncionAunNoTieneVestimentas">
+        <div class="contenedor">
+          @for (item of VestimentasList; track $index) {
+            <div class="vestimenta-item">
+              <img class="vestimenta-img" [src]="item.imagen1" alt="Imagen de {{item.nombrePrenda}}" />
+              <p id="tituloVes">{{ item.nombrePrenda }}</p>
+              <p id="InfTalla"><strong>Talla:</strong> {{ item.nombreTalla }}</p>
+              <p id="InfPrecio"><strong>Precio por día:</strong> ${{ item.precioPorDia }}</p>
+            </div>
+          }
+        </div>
+    </div>
+
+    <div class="contPagina">
+        <button (click)="paginaAnterior()" [disabled]="pagina === 1"><fa-icon [icon]="faArrowLeft"></fa-icon></button>
+        <span>Página {{pagina}} de {{totalPaginas}}</span>
+        <button (click)="paginaSiguiente()" [disabled]="pagina === totalPaginas"><fa-icon [icon]="faArrowRight"></fa-icon></button>
+    </div>
+
+    <br>
+</div>
+
+
+
+   
+
+
+    <div class="modal" *ngIf="MostrarModal">
+        <div class="modal-content">
+            <button class="close-button" (click)="cerrarModal()">x</button>
+          
+            <h5>Agregar vestimenta</h5>
+
+           <form [formGroup]="datos" (ngSubmit)="Registrar()">
+            
+
+           <div class="columna">
+              <div class="form-row">
+                 <label for="nombre">Nombre: </label>
+                 <input id="nombre" formControlName="nombre">
+              </div>
+           
+              <div class="form-row">
+                <label for="estilo">Categoria: </label>
+                <select id="estilo" name="estilo" formControlName="estilo">
+                   <option value="" disabled selected>Selecciona la Categoria/option>
+                   <option *ngFor="let estilo of CategoriasList" [value]="estilo.estiloID">{{estilo.nombreEstilo}}</option>
+                </select>
+              </div>
+           </div>
+           
+            
+           <div class="columna">
+             <div class="form-row">
+                <label for="talla">Talla: </label>
+                <select id="talla" name="talla" formControlName="talla">
+                   <option value="" disabled selected>Selecciona la talla</option>
+                   <option *ngFor="let talla of TallasList" [value]="talla.tallaId">{{talla.nombreTalla}}</option>
+                </select>
+              </div>
+
+              <div class="form-row">
+                <label for="stock">Stock: </label>
+                <input type="number" id="stock" formControlName="stock" min="1">
+              </div>
+
+              <div class="form-row">
+                 <label for="precio">Precio por dia: </label>
+                 <input type="number" id="precio" formControlName="precio" min="1">
+               </div>  
+                
+           </div>
+            
+           <div class="columna">
+            <div class="form-row">
+                <label for="descripcion">descripcion: </label>
+                <input id="descripcion" type="text" formControlName="descripcion">
+             </div>
+           </div>
+           
+
+
+           <p id="tituloImg">Selecciona imagenes de 2MB:</p>
+
+            <div class="image-grid">
+                <div class="image-banner" (click)="cargarImagen(0)">
+                    <img [src]="imagenesPrevisualizacion[0]" *ngIf="imagenesPrevisualizacion[0]" alt="Previsualización de la imagen 1" />
+                    <span *ngIf="!imagenesPrevisualizacion[0]" class="upload-label">Imagen obligatoria</span>
+                    <input type="file" id="fileInput1" (change)="imagenSeleccionada($event, 0)" accept="image/*" style="display: none;" />
+                    <div *ngIf="datos.controls['img1'].touched && datos.controls['img1'].invalid" class="error">
+                        La primera imagen es obligatoria y no debe exceder los 2 MB
+                    </div>
+                </div>
+    
+                <div class="image-banner" (click)="cargarImagen(1)">
+                    <img [src]="imagenesPrevisualizacion[1]" *ngIf="imagenesPrevisualizacion[1]" alt="Previsualización de la imagen 2" />
+                    <span *ngIf="!imagenesPrevisualizacion[1]" class="upload-label">Imagen opcional</span>
+                    <input type="file" id="fileInput2" (change)="imagenSeleccionada($event, 1)" accept="image/*" style="display: none;" />
+                    <div style="color: red;" *ngIf="datos.controls['img2'].touched && datos.controls['img2'].hasError('maxSize')" class="error">La imagen excede el tamaño máximo permitido de 2 MB</div>
+                </div>
+    
+                <!-- Tercer cuadro de imagen -->
+                <div class="image-banner" (click)="cargarImagen(2)">
+                    <img [src]="imagenesPrevisualizacion[2]" *ngIf="imagenesPrevisualizacion[2]" alt="Previsualización de la imagen 3" />
+                    <span *ngIf="!imagenesPrevisualizacion[2]" class="upload-label">Imagen opcional</span>
+                    <input type="file" id="fileInput3" (change)="imagenSeleccionada($event, 2)" accept="image/*" style="display: none;" />
+                    <div style="color: red;" *ngIf="datos.controls['img3'].touched && datos.controls['img3'].hasError('maxSize')" class="error">La imagen excede el tamaño máximo permitido de 2 MB</div>
+                </div>
+    
+                <!-- Cuarto cuadro de imagen -->
+                <div class="image-banner" (click)="cargarImagen(3)">
+                    <img [src]="imagenesPrevisualizacion[3]" *ngIf="imagenesPrevisualizacion[3]" alt="Previsualización de la imagen 4" />
+                    <span *ngIf="!imagenesPrevisualizacion[3]" class="upload-label">Imagen opcional</span>
+                    <input type="file" id="fileInput4" (change)="imagenSeleccionada($event, 3)" accept="image/*" style="display: none;" />
+                    <div style="color: red;" *ngIf="datos.controls['img4'].touched && datos.controls['img4'].hasError('maxSize')" class="error">La imagen excede el tamaño máximo permitido de 2 MB</div>
+                </div>
+    
+            </div>
+ 
+            <div class="contBoton">
+                <button class="btnAgregar" [disabled]="!datos.valid" [ngClass]="{'button-valid': datos.valid, 'button-invalid':!datos.valid}">
+                    Guardar
+                </button>
+            </div>
+
+        </form>
+        </div>
+    </div>

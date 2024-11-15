@@ -1,5 +1,50 @@
 
 <div class="centrar">
+
+  <div class="contFiltros">
+    <div class="ajustar">
+
+      <p id="titulo">{{ConteoDeVestimentas()}} Opciones disponibles</p>
+
+      <div>
+
+      </div>
+
+      <div class="contCategorias">
+        <p id="subtitulo">Categorias</p>
+        <hr>
+        @for(categoria of CategoriasList; track $index )
+        {
+          <label>
+            <input
+            type="radio"
+            name="categoria"
+            [value]="categoria.estiloID"
+            (change)="seleccionarCategoria(categoria.estiloID!)"
+            [checked]="categoriaSeleccionada === categoria.estiloID">
+            {{categoria.nombreEstilo}}
+          </label>
+        }
+      </div>
+
+      <div class="contTallas">
+        <p id="subtitulo">Tallas</p>
+        <hr>
+        <div class="listTallas">
+          @for(tallas of TallasList; track $index )
+          {
+            <a (click)="seleccionarTalla(tallas.tallaId!)" class="talla">{{tallas.nombreTalla}}</a>
+          }
+        </div>
+
+      </div>
+
+      
+
+    </div>
+  </div>
+ 
+
     <div class="contenedor">
       @for (item of VestimentasList; track $index) 
       {

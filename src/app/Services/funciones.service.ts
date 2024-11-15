@@ -5,7 +5,7 @@ import { EstadoInterface } from '../Interfaces/estado.interface';
 import { MunicipioInterface } from '../Interfaces/municipios.interfaces';
 import { GeneroInterface } from '../Interfaces/genero.interfaces';
 import { RequerimientosIniciarSesion, RequerimientosUsuario } from '../Interfaces/iniciarSesion.interface';
-import { CarritoDeCompra, ListaVestimenta, RequerimientosVestimentas, VestimentaEstablecimientos } from '../Interfaces/Vestimenta.interface';
+import { CarritoDeCompra, EstilosInterfaces, ListaVestimenta, RequerimientosVestimentas, TallasInterfaces, VestimentaEstablecimientos } from '../Interfaces/Vestimenta.interface';
 import { MisEstablecimientos, RequerimientosDeMisEstablecimientos, RequerimientosDenegarEstablecimientos, RequerimientosTiendasCercanas, TiendasCercanas } from '../Interfaces/tienda.interface';
 import { ActualizarContrasena, RequerimientoCorreo, ValidarToken } from '../Interfaces/contrasena.interface';
 import { environment } from '../../environments/environment';
@@ -66,6 +66,14 @@ export class FuncionesService {
 
   ObtenerGeneros() : Observable<GeneroInterface[]> {
     return this.httpClient.post<GeneroInterface[]>(this.API_RentOutfit + '/Listas/ObtenerGeneros', {})
+  }
+
+  ObtenerEstilos() : Observable<EstilosInterfaces[]> {
+    return this.httpClient.post<EstilosInterfaces[]>(this.API_RentOutfit + '/Listas/ObtenerEstilos', {})
+  }
+
+  ObtenerTallas() : Observable<TallasInterfaces[]>{
+    return this.httpClient.post<TallasInterfaces[]>(this.API_RentOutfit + '/Listas/ObtenerTallas', {})
   }
 // #endregion 
 

@@ -6,6 +6,7 @@ export interface ListaVestimenta {
     nombreTalla?: string;
     nombreEstilo?: string;
     nombreEstablecimiento?: string;
+    totalRegistros?: number;
 }
 
 export interface InformacionVestimenta {
@@ -21,6 +22,7 @@ export interface InformacionVestimenta {
     imagen3?: string;
     imagen4?: string;
 
+
     nombreTalla?: string;
     nombreEstilo?: string;
 
@@ -32,12 +34,16 @@ export interface RequerimientosVestimentas {
     estado?: string;
     municipio?: string;
     pagina?: number;
+    filtro?: string;
+    categoria?: number;
+    talla?: number;
 }
 
 export interface VestimentaEstablecimientos {
     establecimiento?: number;
     usuario?: number;
     pagina?: number;
+    filtro?: string;
 }
 
 
@@ -51,4 +57,14 @@ export interface CarritoDeCompra {
 export interface ItemsCarrito {
     vestimentaID?: number;
     stock?:number;
+}
+
+export interface EstilosInterfaces {
+    estiloID?: number;
+    nombreEstilo?: string;
+}
+
+export interface TallasInterfaces {
+    tallaId?: number;
+    nombreTalla?: string;
 }
