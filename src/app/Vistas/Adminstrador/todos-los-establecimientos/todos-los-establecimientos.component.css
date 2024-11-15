@@ -65,3 +65,39 @@
     }
 
 }
+
+/* Estilo para centrar horizontalmente y colocar en la parte superior */
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: #f0f8ff;
+    border-radius: 25px;
+    padding: 5px 10px;
+    width: 300px;
+    margin: 20px auto; /* Centrado horizontal con espacio desde arriba */
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 10px;
+    font-size: 16px;
+    flex: 1;
+}
+
+.search-input::placeholder {
+    color: #aaa;
+}
+
+.search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.search-button img {
+    width: 20px;
+    height: 20px;
+}
