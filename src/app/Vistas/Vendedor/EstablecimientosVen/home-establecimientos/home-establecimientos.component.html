@@ -5,7 +5,7 @@
     <div class="contenedor">
       @for (item of Establecimientos; track $index) 
       {
-          <div class="Establecimiento">
+          <div class="Establecimiento" (click)="MasInformacionEstablecimiento(item.establecimientosID)">
                
                   <img [src]="item.linkImagenEstablecimiento">
                   <p>{{item.nombreEstablecimiento}}</p>

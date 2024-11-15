@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FuncionesService } from '../../../../Services/funciones.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MisEstablecimientos, RequerimientosDeMisEstablecimientos } from '../../../../Interfaces/tienda.interface';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home-establecimientos',
@@ -12,13 +13,16 @@ import { MisEstablecimientos, RequerimientosDeMisEstablecimientos } from '../../
 })
 export class HomeEstablecimientosComponent implements OnInit{
 
+  datos: any;
   usuario: number = 0;
   pagina: number | null = null;
 
   Establecimientos: MisEstablecimientos[]=[];
 
+  constructor(private Funciones: FuncionesService, private Rutas: ActivatedRoute, private Ruta: Router){}
+
   ngOnInit(): void {
-  
+
     this.Rutas.paramMap.subscribe(params => {
       const usuario = params.get('usuario');
 
@@ -28,10 +32,8 @@ export class HomeEstablecimientosComponent implements OnInit{
         this.MisEstablecimientos(this.usuario, this.pagina!);
       }
     });
-  }
 
-  
-  constructor(private Funciones: FuncionesService, private Rutas: ActivatedRoute){}
+  }
 
 
   MisEstablecimientos(usuario: number, pagina: number): void {
@@ -54,9 +56,13 @@ export class HomeEstablecimientosComponent implements OnInit{
   }
 
 
-
-
+  MasInformacionEstablecimiento(establecimiento?: number): void {
+    if(establecimiento){
+      this.Ruta.navigate(['/Vendedor/miEstablecimiento', establecimiento]);
+    } else {
+      console.error('No se obtuvo la informacion del establecimiento.');
+    }
+  }
   
-
 
 }
