@@ -1,0 +1,337 @@
+
+
+.unir {
+ background-color: #ffffff;
+ border-radius: 10px;
+ 
+    .banner {
+        border-radius: 10px;
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        overflow: hidden;
+    }
+
+    .banner-fade {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 40%, #ffffff 100%);
+        pointer-events: none; /* Para que no bloquee la interacción */
+        border-radius: 10px;
+    }
+
+    .detalles-establecimiento {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        h2 {
+            font-weight: bold;
+        }
+
+        p {
+            margin-top: -15px;
+        }
+
+        #negrita {
+            font-weight: bold;
+        }
+    }
+
+    .contFiltro {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        .form-busqueda {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+
+            #contBuscar {
+                height: 40px;
+                width: 500px;
+            }
+
+            
+            #btnBuscar {
+               border-radius: 50%;
+               width: 40px;
+               height: 40px;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               padding: 0; 
+            }
+        }
+
+        #btnAgregar {
+            width: 200px;
+            margin-left: 20px;
+            height: 40px;
+            border-radius: 10px;
+            background-color: #4a90e2;
+            color: #ffffff;
+            border: none;
+        }
+
+        #btnAgregar:hover {
+            background-color: #357abd;
+        }
+    }
+
+    .vestimenta-lista {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+
+        .contenedor {
+            display: grid;
+            height: 900px;
+            grid-template-columns: repeat(5, 1fr);
+            margin-bottom: 20px;
+        
+            .vestimenta-item{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                width: 210px;
+                height: 380px;
+                margin: 10px;
+                border-radius: 5px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+                .vestimenta-img {
+                    width: 190px;
+                    height: 259px;
+                    border-radius: 5px;
+                    object-fit: cover;
+                }
+
+                #tituloVes {
+                    font-size: 18px;
+                    text-align: center;
+                    margin: 8px 10px;
+                    font-weight: bold;
+                }
+
+                #InfTalla {
+                    color: #777;        
+                }
+
+                #InfPrecio {
+                    color: #777;
+                    margin-top: -15px;
+                }
+            }
+
+        }
+    }
+
+    .contPagina {
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        span {
+           margin: 0 20px;
+        }
+    }
+
+}
+
+
+  
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 600px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+        h5{
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    }
+
+    .close-button {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+
+    .columna {
+        display: flex;
+
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            margin: 10px;
+            width: 100%;
+           
+
+            label {
+                font-size: 16px;
+                margin-bottom: 5px;
+                color: #555;
+            }
+
+            select {
+                padding: 7px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;
+                background-color: #fff;
+                color: #555;
+            }
+
+            #nombre {
+                padding: 7px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;
+            }
+            
+            #stock {
+                padding: 7px;
+                width: 135px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;
+            }
+
+            #precio {
+                padding: 7px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;     
+            }
+
+            #descripcion {
+                padding: 7px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;              
+            }
+
+        }
+    }
+
+    #tituloImg {
+        margin: 20px 0;
+        font-size: 16px;
+        text-align: center;
+        color: #555;
+    }
+
+    .contBoton {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+
+       .btnAgregar {
+          width: 100%;
+          height: 40px;
+          border-radius: 10px;
+          color: #ffffff;
+          border: none;
+       }
+
+       .btnAgregar.button-invalid{
+        background-color: #b3b3b3;
+       }
+
+       .btnAgregar.button-valid {
+        background-color: #4a90e2;
+       }
+
+       .btnAgregar.button-valid:hover {
+          background-color: #357abd;
+       }
+
+    }
+   
+}
+
+
+
+
+
+.image-banner {
+    width: 50%; 
+    height: 220px;
+    margin-bottom: 30px; /* Aumentado para agregar espacio con el formulario */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: #e0e0e0;
+    margin: 0 auto; /* Mantener centrado */
+  }
+
+.image-banner img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+  
+  .image-banner .upload-label {
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+  } 
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; /* Dos columnas */
+    gap: 20px; /* Espacio entre los elementos */
+  }
+  
+  .image-banner {
+    width: 100px; 
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: #e0e0e0;
+  }
