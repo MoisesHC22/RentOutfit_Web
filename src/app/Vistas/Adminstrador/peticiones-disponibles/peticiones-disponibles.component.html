@@ -1,21 +1,28 @@
+<div>
+   <div class="form-container">
+      <form [formGroup]="filtro" (ngSubmit)="buscarEstablecimientos()" class="search-form">
+          <!-- Barra de búsqueda -->
+          <div class="input-group">
+              <input formControlName="busqueda" placeholder="Buscar por nombre" class="search-input">
+              <button type="submit" class="search-button">
+                  <img src="https://img.icons8.com/ios-glyphs/30/ffffff/search--v1.png" alt="Buscar">
+              </button>
+          </div>
+          <!-- Filtro de ordenación -->
+          <select formControlName="orden" id="Ordenar" (change)="ordenarEstablecimientos()" class="select-order">
+              <option value="reciente" selected>Más reciente</option>
+              <option value="antiguo">Más antiguo</option>
+          </select>
+      </form>
+  </div>  
+  
+
+</div>
 <div class="unir">
+
+   
    
    <div class="centrar">
-
-      <div>
-         <form [formGroup]="filtro" (ngSubmit)="buscarEstablecimientos()">
-            <input formControlName="busqueda" placeholder="Buscar por nombre">
-            <button type="submit">Buscar</button>
-
-            <select formControlName="orden" id="Ordenar" (change)="ordenarEstablecimientos()">
-               <option value="reciente" selected>Más reciente</option>
-               <option value="antiguo">Más antiguo</option>
-             </select>
-         </form>
-
-        
-
-      </div>
       
       <div class="contenedor">
          @for (item of TiendasList; track $index)
