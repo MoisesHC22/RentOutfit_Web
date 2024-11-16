@@ -38,11 +38,31 @@
       </div>
   
       <div class="vestimenta-preview">
-        <img id="imagenSeleccionada" 
-        [src]="imagenSeleccionada" 
-        alt="Imagen en detalle" 
-        *ngIf="imagenSeleccionada"
-        />
+        <div class="zoom-controls">
+          <button (click)="zoomIn()">+</button>
+          <button (click)="zoomOut()">-</button>
+          <button (click)="resetZoom()">Restablecer</button>
+        </div>
+      
+        <div 
+          class="zoom-container" 
+          [class.grabbing]="isDragging"
+          (mousedown)="startDragging($event)" 
+          (mouseup)="stopDragging()"
+          (mouseleave)="stopDragging()"
+          (mousemove)="onMouseMove($event)"
+        >
+          <img 
+            id="imagenSeleccionada" 
+            [src]="imagenSeleccionada" 
+            alt="Imagen en detalle" 
+            *ngIf="imagenSeleccionada"
+            [style.transform]="'scale(' + zoomLevel + ')'"
+            [class.zoomed]="zoomLevel > 1"
+            draggable="false"
+            (dragstart)="preventDrag($event)"
+          />
+        </div>
       </div>
   
       <div class="informacion">
