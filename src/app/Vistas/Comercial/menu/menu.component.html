@@ -30,7 +30,7 @@
 
       <!-- Formulario de búsqueda -->
      
-      <form class="form-busqueda" (ngSubmit)="buscarVestimenta()">
+      <form class="d-flex ms-auto mb-2 mb-lg-0 form-busqueda" (ngSubmit)="buscarVestimenta()">
         <input id="contBuscar" class="form-control me-1" type="search" placeholder="Buscar..." aria-label="Search" [(ngModel)]="searchQuery" name="searchQuery">
         <button id="btnBuscar" class="btn btn-outline-dark" type="submit"><fa-icon id="Icono" [icon]="faSearch"></fa-icon></button>
       </form>

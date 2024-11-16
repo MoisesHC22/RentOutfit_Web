@@ -1,121 +1,233 @@
-
-.vestimenta-info{
+.vestimenta-info {
   display: flex;
   align-items: center;
   justify-content: center;
-
-
-  .centrar{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fafafa;
-    width: 1290px;
-    height: 650px;
-    border-radius: 10px;
-
-
-    .unir{
-      display: flex;
-  
-  
-      .column {
-    
-        margin: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-    
-        img {
-          margin: 10px;
-          width: 110px;
-          height: 110px;
-          border-radius: 10px;
-          object-fit: cover;
-          object-position: top;
-        }
-    
-        img.selected {
-          border: 3px solid #007bff;
-          box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); 
-          transform: scale(1.05);
-          transition: transform 0.2s, border-color 0.2s;
-        }
-      }
-    
-      .vestimenta-preview{
-        
-        img{
-          width: 600px;
-          height: 600px;
-          border-radius: 10px;
-          object-fit: cover;
-          object-position: top;
-        }
-      }
-    
-      .informacion{
-        width: 500px;
-        height: 400px;
-        margin: 10px;
-        
-        .contInformacion{
-  
-          h4{
-            font-weight: bold;
-            margin-top: 40px;
-            text-align: center;
-          }
-          
-          #estatus {
-            margin-top: -10px;
-            text-align: center;
-          }
-
-          .contPrecio {
-            margin: 60px 40px;
-
-            p {
-              margin-top: -10px;
-            }
-          }
-
-          .contInformacion{
-            margin: 0px 40px;
-
-            p {
-              text-align: justify;
-            }
-          }
-
-          .contBotonAgregar{
-            margin-top: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          
-            #btnAgregar {
-              width: 300px;
-              height: 40px;
-              border-radius: 10px;
-              color: white;
-              border: none;
-              background-color: #0056b3;
-            }
-
-            #btnAgregar:hover {
-              background-color: #0165d1;
-            }
-          }
-          
-        }
-      }
-    
-    }
-  }
-
-  
-
+  flex-wrap: wrap;
+  padding: 20px;
 }
 
+
+.vestimenta-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.zoom-controls {
+  margin-bottom: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.zoom-controls button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.zoom-controls button:hover {
+  background-color: #0056b3;
+}
+
+.zoom-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 10px;
+  position: relative;
+  cursor: grab;
+  user-select: none; /* Evita la selección de texto e imágenes */
+}
+
+.zoom-container.grabbing {
+  cursor: grabbing; /* Cambio de cursor al arrastrar */
+}
+
+.zoom-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.3s ease;
+  cursor: zoom-in; /* Manita cuando no está ampliado */
+  user-select: none; /* Evita la selección de la imagen */
+  pointer-events: none; /* Bloquea la interacción con la imagen */
+}
+
+.zoom-container img.zoomed {
+  cursor: grab; /* Manita para la imagen ampliada */
+}
+
+/* Contenedor principal centrado */
+.centrar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fafafa;
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  padding: 20px;
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+
+/* Contenedor que une las columnas e imágenes */
+.unir {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Contenedor para las miniaturas */
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.column img {
+  margin: 10px;
+  width: 115px;
+  height: 115px;
+  border-radius: 10px;
+  object-fit: cover;
+  object-position: top;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.column img.selected {
+  border: 3px solid #007bff;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+  transform: scale(1.05);
+}
+
+/* Contenedor de la imagen de vista previa */
+.vestimenta-preview img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.3s ease;
+}
+
+/* Información de la vestimenta */
+.informacion {
+  max-width: 400px;
+  width: 100%;
+  margin: 20px;
+}
+
+.informacion .contInformacion {
+  padding: 10px;
+}
+
+.informacion h4 {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#estatus {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.contPrecio {
+  margin: 20px;
+}
+
+.contPrecio p {
+  margin-top: -10px;
+}
+
+.contInformacion p {
+  text-align: justify;
+  margin: 10px 0;
+}
+
+.contBotonAgregar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+#btnAgregar {
+  width: 100%;
+  max-width: 300px;
+  height: 45px;
+  border-radius: 10px;
+  color: white;
+  border: none;
+  background-color: #0056b3;
+  transition: background-color 0.3s ease, transform 0.2s;
+  cursor: pointer;
+}
+
+#btnAgregar:hover {
+  background-color: #0165d1;
+  transform: scale(1.05);
+}
+
+
+@media (max-width: 768px) {
+  .unir {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .column {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .vestimenta-preview img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .informacion {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .centrar {
+    width: 100%;
+    padding: 10px;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  #btnAgregar {
+    max-width: 90%;
+    height: 40px;
+  }
+
+  .vestimenta-preview img {
+    width: 100%;
+    height: auto;
+  }
+
+  .informacion h4 {
+    font-size: 18px;
+  }
+
+  .contPrecio, .contInformacion {
+    margin: 10px;
+  }
+}
