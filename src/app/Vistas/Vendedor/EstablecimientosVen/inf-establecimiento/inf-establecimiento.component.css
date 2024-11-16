@@ -114,6 +114,7 @@
                     height: 259px;
                     border-radius: 5px;
                     object-fit: cover;
+                    object-position: top;
                 }
 
                 #tituloVes {

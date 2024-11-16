@@ -222,6 +222,11 @@ export class InfEstablecimientoComponent implements OnInit {
       next: (response) => {
         console.log("Se registro la vestimenta ", response);
         this.ListaVestimentas(this.establecimiento!, this.usuario!);
+        this.MostrarModal = false;
+
+        this.datos.reset();
+        this.imagenesPerfil = [null, null, null, null];
+        this.imagenesPrevisualizacion = [null, null, null, null];
       },
       error: (err) => {
         console.log('Ocurrio un error.');

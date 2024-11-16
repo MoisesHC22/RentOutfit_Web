@@ -3,7 +3,7 @@ import { FuncionesService } from '../../../../Services/funciones.service';
 import { CookieService } from 'ngx-cookie-service';
 import { EstilosInterfaces, ListaVestimenta, RequerimientosVestimentas, TallasInterfaces } from '../../../../Interfaces/Vestimenta.interface';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EstadoInterface } from '../../../../Interfaces/estado.interface';
 import { MunicipioInterface } from '../../../../Interfaces/municipios.interfaces';
@@ -26,9 +26,12 @@ export class ListaVestimentasComponent implements OnInit{
   token: string | null = null;
   estado: string | null = null;
   municipio: string | null = null;
-  pagina: number | null = null;
+  
+
 
   VestimentasList: ListaVestimenta[]=[];
+  NoHayVestimentas = false;
+  pagina: number | null = null;
 
   ngOnInit(): void {
 
@@ -48,6 +51,14 @@ export class ListaVestimentasComponent implements OnInit{
       const obtener = JSON.parse(ubicacion);
         this.estado = obtener?.estado || null;
         this.municipio = obtener?.municipio || null
+
+        console.log(this.estado +", " + this.municipio);
+
+        const estadoEncontrado = this.EstadosList.find(e => e.nombreEstado === this.estado);
+        this.estadoSeleccionado = estadoEncontrado?.estadoID ?? null;
+        
+        const municipioEncontrado = this.MunicipioList.find(m => m.nombreMunicipio === this.municipio);
+        this.municipioSeleccionado = municipioEncontrado?.municipioID ?? null;
 
         if(this.estado != null && this.municipio != null){
           this.ListaVestimentas();
@@ -69,10 +80,14 @@ export class ListaVestimentasComponent implements OnInit{
 
     this.Funciones.MostrarVestimentas(data).subscribe({
       next: (result) => {
-        this.VestimentasList = result;
+        this.VestimentasList = result ?? [];
+
+        this.NoHayVestimentas = this.VestimentasList.length === 0;
       },
       error: (err) =>{
         console.log("Ocurrio un error.");
+        this.VestimentasList = [];
+        this.NoHayVestimentas = true;
       }
     });
   }
@@ -118,17 +133,39 @@ tallaSeleccionada: number | null = null;
 
   seleccionarCategoria(estiloID: number): void {
     this.categoriaSeleccionada = estiloID;
+    console.log(this.categoriaSeleccionada);
     this.ListaVestimentas();
   }
 
   ConteoDeVestimentas(): number {
-    return this.VestimentasList.length;
+    return this.VestimentasList.length ?? 0;
   }
 
   seleccionarTalla(tallaID: number) : void {
-   this.tallaSeleccionada = tallaID;
-   this.ListaVestimentas();
+    if(this.tallaSeleccionada === tallaID){
+      this.deseleccionarTalla();
+    } else {
+      this.tallaSeleccionada = tallaID;
+      this.ListaVestimentas();
+    }
   }
+
+  deseleccionarTalla(): void {
+    this.tallaSeleccionada = null;
+    this.ListaVestimentas();
+    console.log('Talla deseleccionada'); 
+  }
+
+  toggleCategoria(estiloID: number ): void {
+    if(this.categoriaSeleccionada === estiloID){
+       this.categoriaSeleccionada = null
+    } else {
+      this.categoriaSeleccionada = estiloID;
+    }
+    console.log('Categoría seleccionada:', this.categoriaSeleccionada);
+    this.ListaVestimentas();
+  }
+
 // #endregion 
   
 
@@ -150,17 +187,31 @@ ListaEstados(){
       }
     });
   }
+  
+  SeleccionEstado(event: Event): void{
+    const selectElement = event.target as HTMLSelectElement;
+    const estado = Number(selectElement.value);
+
+    if(estado){
+      this.estadoSeleccionado = estado;
+      this.ListaMunicipios(estado);
+    }
+  }
+
 
   ListaMunicipios(estadoID: number){
     this.Funciones.ObtenerMunicipios(estadoID).subscribe({
       next: (result) => {
-        this.MunicipioList = result;
+        this.MunicipioList = result ?? [];
       },
       error: (err) => {
         console.log(err)
       }
     });
   }
+
+
+
 // #endregion 
 
 
