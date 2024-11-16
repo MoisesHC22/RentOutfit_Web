@@ -126,7 +126,7 @@
   
   .submit-button {
     width: 100%;
-    background-color: #4a90e2;
+    background-color: #357abd;
     color: #fff;
     padding: 15px;
     border: none;
@@ -137,7 +137,7 @@
   }
   
   .submit-button:hover {
-    background-color: #357abd;
+    background-color: #22507e;
   }
   
   .row {
@@ -281,4 +281,148 @@ img {
 
 .btnAgregar.button-valid:hover{
   background-color: #0c709e;
+}
+
+
+
+
+/* Estilo del label con resaltado */
+.highlight-label {
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  color: #007bff;
+  transition: color 0.3s ease, box-shadow 0.3s ease;
+  padding: 5px 10px;
+  border-radius: 5px;
+  position: relative;
+}
+
+/* Efecto al pasar el cursor */
+.highlight-label:hover {
+  color: #0056b3;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  background-color: #e8f4ff;
+}
+
+/* Efecto de animación para llamar la atención */
+.highlight-label::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  background-color: #007bff;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.highlight-label:hover::after {
+  transform: scaleX(1);
+}
+
+/* Fondo del modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 10px; /* Asegura que haya espacio en los bordes en pantallas pequeñas */
+}
+
+/* Contenedor del modal */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 80%;
+  max-height: 80vh; /* Limita la altura del modal */
+  overflow-y: auto; /* Activa el scroll si el contenido excede la altura */
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.3s ease;
+  text-align: justify;
+}
+
+/* Animación de entrada */
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Título del modal */
+.modal-content h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Párrafo del modal */
+.modal-content p {
+  margin-bottom: 30px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* Botón dentro del modal */
+.modal-content button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+  .modal-content {
+    width: 100%;
+    max-width: 90%;
+    max-height: 70vh; /* Reduce la altura en pantallas pequeñas */
+    text-align: center;
+  }
+
+  .modal-content h2 {
+    font-size: 20px;
+  }
+
+  .modal-content p {
+    font-size: 14px;
+  }
+
+  .modal-content button {
+    width: 100%;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 800px) {
+  .modal-content {
+    width: 100%;
+    max-width: 90%;
+    max-height: 70vh; /* Reduce la altura en pantallas pequeñas */
+    text-align: center;
+  }
 }

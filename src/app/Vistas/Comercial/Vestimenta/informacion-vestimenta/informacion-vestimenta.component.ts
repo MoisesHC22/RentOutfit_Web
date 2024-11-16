@@ -18,6 +18,21 @@ import { Console } from 'node:console';
 })
 export class InformacionVestimentaComponent implements OnInit, OnDestroy {
 
+  zoomLevel: number = 1;
+  zoomStep: number = 0.2;
+  maxZoom: number = 3;
+  minZoom: number = 1;
+
+
+   // Variables para el arrastre
+   isDragging: boolean = false;
+   startX: number = 0;
+   startY: number = 0;
+   scrollLeft: number = 0;
+   scrollTop: number = 0;
+
+
+
   vestimenta: number = 0;
   informacion: InformacionVestimenta | null = null;
   private routeSub: Subscription = new Subscription();
@@ -75,6 +90,59 @@ export class InformacionVestimentaComponent implements OnInit, OnDestroy {
 
   cambiarImagenSeleccionada(imagen: string | null): void {
     this.imagenSeleccionada = imagen;
+  }
+
+
+  zoomIn(): void {
+    if (this.zoomLevel < this.maxZoom) {
+      this.zoomLevel += this.zoomStep;
+    }
+  }
+
+  zoomOut(): void {
+    if (this.zoomLevel > this.minZoom) {
+      this.zoomLevel -= this.zoomStep;
+    }
+  }
+
+  resetZoom(): void {
+    this.zoomLevel = 1;
+  }
+
+  preventDrag(event: DragEvent): void {
+    event.preventDefault();
+  }
+
+  startDragging(event: MouseEvent): void {
+    const container = (event.target as HTMLElement).parentElement!;
+    if (this.zoomLevel > 1) {
+      this.isDragging = true;
+      this.startX = event.pageX - container.offsetLeft;
+      this.startY = event.pageY - container.offsetTop;
+      this.scrollLeft = container.scrollLeft;
+      this.scrollTop = container.scrollTop;
+      container.style.cursor = 'grabbing';
+    }
+  }
+
+  stopDragging(): void {
+    this.isDragging = false;
+    const container = document.querySelector('.zoom-container') as HTMLElement;
+    if (container) {
+      container.style.cursor = 'grab';
+    }
+  }
+
+  onMouseMove(event: MouseEvent): void {
+    if (!this.isDragging) return;
+    event.preventDefault();
+    const container = document.querySelector('.zoom-container') as HTMLElement;
+    const x = event.pageX - container.offsetLeft;
+    const y = event.pageY - container.offsetTop;
+    const walkX = (x - this.startX) * 1.5;
+    const walkY = (y - this.startY) * 1.5;
+    container.scrollLeft = this.scrollLeft - walkX;
+    container.scrollTop = this.scrollTop - walkY;
   }
 
   ngOnDestroy(): void {

@@ -5,9 +5,6 @@ import { RegisterComponent } from './Vistas/Comercial/register/register.componen
 import { InformacionUsuarioComponent } from './Vistas/Comercial/informacion-usuario/informacion-usuario.component';
 import { ListaVestimentasComponent } from './Vistas/Comercial/Vestimenta/lista-vestimentas/lista-vestimentas.component';
 import { InformacionVestimentaComponent } from './Vistas/Comercial/Vestimenta/informacion-vestimenta/informacion-vestimenta.component';
-import { HomeVestimentasComponent } from './Vistas/Vendedor/VestimentasVen/home-vestimentas/home-vestimentas.component';
-import { AgregarVestimentaComponent } from './Vistas/Vendedor/VestimentasVen/agregar-vestimenta/agregar-vestimenta.component';
-import { DestalleVestimentaComponent } from './Vistas/Vendedor/VestimentasVen/destalle-vestimenta/destalle-vestimenta.component';
 import { InformacionEstablecimientoComponent } from './Vistas/Comercial/Establecimientos/informacion-establecimiento/informacion-establecimiento.component';
 import { HomeEstablecimientosComponent } from './Vistas/Vendedor/EstablecimientosVen/home-establecimientos/home-establecimientos.component';
 import { MenuVenComponent } from './Vistas/Vendedor/menu-ven/menu-ven.component';
@@ -20,6 +17,7 @@ import { AvisoEmailComponent } from './Vistas/Comercial/OlvideMiContrasena/aviso
 import { TodosLosUsuariosComponent } from './Vistas/Adminstrador/todos-los-usuarios/todos-los-usuarios.component';
 import { PeticionesDisponiblesComponent } from './Vistas/Adminstrador/peticiones-disponibles/peticiones-disponibles.component';
 import { CarritoComprasComponent } from './Vistas/Comercial/carrito-compras/carrito-compras.component';
+import { InfEstablecimientoComponent } from './Vistas/Vendedor/EstablecimientosVen/inf-establecimiento/inf-establecimiento.component';
 
 export const routes: Routes = [
 
@@ -48,9 +46,7 @@ export const routes: Routes = [
         children: [
             {path: 'misEstablecimientos/:usuario', component:HomeEstablecimientosComponent},
             {path: 'ventas', component: HomeVentasComponent},
-            {path: 'misVestimenta', component: HomeVestimentasComponent},
-            {path: 'agregarVestimenta', component: AgregarVestimentaComponent},
-            {path: 'detalleVestimenta', component: DestalleVestimentaComponent}
+            {path: 'miEstablecimiento/:establecimiento', component: InfEstablecimientoComponent}
         ]
     },
     {

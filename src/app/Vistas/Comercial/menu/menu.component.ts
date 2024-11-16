@@ -5,7 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
 import { FuncionesService } from '../../../Services/funciones.service'; 
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RequerimientosUsuario } from '../../../Interfaces/iniciarSesion.interface';
 
 @Component({
@@ -15,6 +15,7 @@ import { RequerimientosUsuario } from '../../../Interfaces/iniciarSesion.interfa
     RouterOutlet,
     RouterLink,
     RouterModule,
+    FormsModule,
     FontAwesomeModule,
     ReactiveFormsModule,
     CommonModule
@@ -46,6 +47,9 @@ export class MenuComponent implements OnInit {
   rol: number | null = null;
   vendedor = false;
   Admin = false;
+
+  searchQuery: string = '';
+
   
   ngOnInit(): void {
 
@@ -126,5 +130,13 @@ export class MenuComponent implements OnInit {
       console.error('Ocurrio un error!.');
     }
   }
+
+
+  buscarVestimenta(): void {
+    if(this.searchQuery.trim()) {
+      this.Rutas.navigate(['/Cliente/vestimentas'], { queryParams: { q: this.searchQuery } });
+    }
+  }
+
 
 }
