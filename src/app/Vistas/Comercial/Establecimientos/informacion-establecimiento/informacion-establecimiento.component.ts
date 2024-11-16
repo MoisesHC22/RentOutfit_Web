@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FuncionesService } from '../../../../Services/funciones.service';
 import { InformacionTienda } from '../../../../Interfaces/tienda.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { error } from 'console';
 import { ListaVestimenta, VestimentaEstablecimientos } from '../../../../Interfaces/Vestimenta.interface';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-informacion-establecimiento',
@@ -16,7 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class InformacionEstablecimientoComponent implements OnInit{
 
- 
+  datos: any;
   establecimiento: number = 0;
   usuario: number | null = null;
   pagina: number | null = null;
@@ -85,5 +85,8 @@ export class InformacionEstablecimientoComponent implements OnInit{
     });
   }
   
+
+
+
 
 }

@@ -122,15 +122,32 @@
         </div>
        
     
-            <div class="checkbox-group">
-              <input type="checkbox" id="terms" name="terms"  formControlName="terminos"/>
-              <label for="terms">Acepto los términos y condiciones</label>
-
-              <div class="ContValidaciones" *ngIf="datos.get('terms')?.invalid && (datos.get('terms')?.touched || datos.get('terms')?.dirty)">
-                <small class="Mensaje-Error">Debes aceptar los términos y condiciones.</small>
-              </div>
-            </div>
+        <div class="checkbox-group">
+          <!-- Checkbox para Términos y Condiciones -->
+          <input type="checkbox" id="terms" name="terms" formControlName="terminos"/>
+          <label for="terms" class="highlight-label" (click)="abrirModal($event, 'terms')">
+            Acepto los términos y condiciones
+          </label>&nbsp;&nbsp;&nbsp;
+          
+        
+          <div class="ContValidaciones" *ngIf="datos.get('terminos')?.invalid && (datos.get('terminos')?.touched || datos.get('terminos')?.dirty)">
+            <small class="Mensaje-Error">Debes aceptar los términos y condiciones</small>
+          </div>
+        
+          <!-- Checkbox para Políticas de Privacidad -->
+          <input type="checkbox" id="polit" name="polit" formControlName="politicas"/>
+          <label for="polit" class="highlight-label" (click)="abrirModal($event, 'privacy')">
+            Acepto las políticas de privacidad
+          </label>&nbsp;&nbsp;&nbsp;
+          
+        
+          <div class="ContValidaciones" *ngIf="datos.get('politicas')?.invalid && (datos.get('politicas')?.touched || datos.get('politicas')?.dirty)">
+            <small class="Mensaje-Error">Debes aceptar las políticas de privacidad</small>
+          </div>
+        </div>
     
+
+        
             <div class="ContBtn">
                <button type="button" (click)="AnteriorPaso()" class="btnRegresar"><fa-icon id="Icono" [icon]="faArrow"></fa-icon></button>
                
@@ -144,4 +161,190 @@
       </form>
     </div>
   </div>
+</div>
+
+
+
+
+ <!-- Modal para Términos y Condiciones -->
+ <div class="modal-overlay" *ngIf="showTermsModal" (click)="cerrarModal('terms')">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <strong><h2>Términos y Condiciones de RentOutfit</h2></strong>
+
+<h2>1. Introducción</h2>
+<p>
+    Bienvenido a RentOutfit, una plataforma en línea que permite a los usuarios alquilar 
+    trajes y disfraces para eventos especiales. Al utilizar nuestro sitio web o aplicación 
+    móvil, usted acepta y se compromete a cumplir con estos Términos y Condiciones. Por 
+    favor, léalos detenidamente antes de utilizar nuestros servicios.
+</p>
+
+<h2>2. Registro y Elegibilidad</h2>
+<ul>
+    <strong>Requisitos de registro:</strong> Para usar RentOutfit, debe crear una cuenta 
+    proporcionando información veraz, precisa y completa. Debe mantener la 
+    confidencialidad de su cuenta y notificar de inmediato cualquier uso no autorizado.
+    <br><br><strong>Edad mínima:</strong> Debe ser mayor de 18 años para registrarse y utilizar nuestros 
+    servicios.
+</ul>
+
+<h2>3. Permisos Solicitados</h2>
+<p>
+    Al instalar y utilizar nuestra aplicación móvil, RentOutfit podrá solicitar los siguientes 
+    permisos, los cuales son necesarios para garantizar el correcto funcionamiento de los 
+    servicios:
+</p>
+<ul>
+    <strong>Ubicación precisa:</strong> (ACCESS_FINE_LOCATION y ACCESS_COARSE_LOCATION): Para ofrecerle recomendaciones de 
+    proveedores cercanos y calcular rutas de entrega.
+    <br><br><strong>Acceso a la red:</strong> (ACCESS_NETWORK_STATE e INTERNET): Para permitir la 
+    conexión a internet necesaria para el funcionamiento de la aplicación.
+    <br><br><strong>Almacenamiento:</strong> (READ_EXTERNAL_STORAGE y WRITE_EXTERNAL_STORAGE): Para cargar y guardar imágenes de artículos o 
+    documentos relacionados con su reserva.
+    <br><br><strong>Notificaciones y alertas:</strong> (RECEIVE_BOOT_COMPLETED, SYSTEM_ALERT_WINDOW, y VIBRATE): Para enviar recordatorios, 
+    notificaciones de estado de reservas y alertas importantes.
+    <br><br><strong>Grabación de audio:</strong> (RECORD_AUDIO): Para funciones específicas como grabaciones de voz en soporte al cliente.
+    <br><br><strong>Bloqueo de pantalla:</strong> (WAKE_LOCK): Para garantizar la continuidad de 
+    procesos críticos durante el uso de la aplicación.
+</ul>
+
+<h2>4. Descripción del Servicio</h2>
+<p>
+    RentOutfit permite a los usuarios buscar, reservar y alquilar trajes y disfraces de una 
+    variedad de estilos y tallas. Los proveedores ofrecen los artículos a través de nuestra 
+    plataforma, y los usuarios pueden seleccionarlos según sus necesidades.
+</p>
+
+<h2>5. Reservas y Pagos</h2>
+<ul>
+    <strong>Reservas:</strong> Las reservas de artículos deben realizarse a través de la plataforma. 
+    Una vez confirmada, la reserva es vinculante y sujeta a las políticas de 
+    cancelación.
+    <br><br><strong>Métodos de pago:</strong> RentOutfit acepta métodos de pago seguros y reconocidos. 
+    Los detalles de pago se procesan de manera encriptada y no son retenidos por 
+    RentOutfit.
+</ul>
+
+<h2>6. Cancelaciones y Modificaciones</h2>
+<ul>
+    <strong>Política de cancelación:</strong> Las cancelaciones deben realizarse dentro del 
+    período permitido para recibir un reembolso completo. Las cancelaciones fuera 
+    de este período pueden estar sujetas a cargos.
+    <br><br><strong>Modificaciones de reserva:</strong> Los usuarios pueden solicitar cambios en sus 
+    reservas, sujetos a disponibilidad.
+</ul>
+
+<h2>7. Uso y Devolución de los Artículos</h2>
+<ul>
+    <strong>Uso adecuado:</strong> Los artículos alquilados deben utilizarse de manera 
+    responsable y de acuerdo con las instrucciones proporcionadas. Cualquier 
+    daño o pérdida resultará en cargos adicionales.
+    <br><br><strong>Devolución:</strong> Los artículos deben devolverse en las condiciones estipuladas y 
+    en la fecha acordada.
+</ul>
+
+<h2>8. Propiedad Intelectual</h2>
+<p>
+    Todo el contenido presente en la plataforma es propiedad de RentOutfit o sus 
+    licenciantes y está protegido por leyes de propiedad intelectual. Está prohibido 
+    reproducir, modificar o distribuir dicho contenido sin autorización.
+</p>
+
+<h2>9. Modificaciones</h2>
+<p>
+    RentOutfit se reserva el derecho de modificar estos Términos y Condiciones en 
+    cualquier momento, notificándolo a los usuarios mediante la plataforma.
+</p>
+
+<h2>10. Jurisdicción y Ley Aplicable</h2>
+<p>
+    Estos términos y condiciones se rigen por las leyes de México, y cualquier disputa será 
+    resuelta ante los tribunales competentes de la Ciudad de México.
+</p>
+
+
+    <button (click)="cerrarModal('terms')">Cerrar</button>
+  </div>
+</div>
+
+<!-- Modal para Políticas de Privacidad -->
+<div class="modal-overlay" *ngIf="showPrivacyModal" (click)="cerrarModal('privacy')">
+<div class="modal-content" (click)="$event.stopPropagation()">
+<strong><h2>Políticas de Privacidad de RentOutfit</h2></strong>
+
+<h2>1. Introducción</h2>
+<p>
+    RentOutfit respeta su privacidad y se compromete a proteger los datos personales de 
+    los usuarios. Esta política describe qué información recopilamos, cómo la utilizamos 
+    y cómo la protegemos.
+</p>
+
+<h2>2. Información que Recopilamos</h2>
+<ul>
+    <strong>Datos personales:</strong> Incluye nombre, correo electrónico, número de teléfono, 
+    dirección y datos de pago.
+    <br><br><strong>Datos de ubicación:</strong> La aplicación puede recopilar datos de ubicación para 
+    personalizar la experiencia del usuario, como mostrar proveedores cercanos.
+    <br><br><strong>Datos técnicos:</strong> Incluye la dirección IP, tipo de dispositivo, y versión del sistema 
+    operativo.
+    <br><br><strong>Cookies:</strong> Utilizamos cookies para mejorar la experiencia del usuario.
+</ul>
+
+<h2>3. Uso de los Permisos</h2>
+<ul>
+    <strong>Ubicación:</strong> Se utiliza para sugerir proveedores cercanos y calcular rutas de 
+    entrega.
+    <br><br><strong>Red:</strong> Permite a la aplicación mantenerse conectada a los servidores y ofrecer 
+    actualizaciones en tiempo real.
+    <br><br><strong>Almacenamiento:</strong> Necesario para manejar archivos como imágenes de 
+    artículos o recibos.
+    <br><br><strong>Audio:</strong> Usado en funciones específicas como grabación de voz para soporte al 
+    cliente.
+    <br><br><strong>Alertas y vibración:</strong> Para enviar notificaciones relevantes relacionadas con su 
+    cuenta o reservas.
+</ul>
+
+<h2>4. Protección de los Datos</h2>
+<p>
+    RentOutfit implementa medidas técnicas y organizativas para proteger los 
+    datos contra accesos no autorizados. Los datos se almacenan de forma segura 
+    utilizando cifrado y acceso controlado.
+</p>
+
+<h2>5. Compartir Información</h2>
+<ul>
+    <strong>Proveedores de servicios:</strong> RentOutfit puede compartir datos con terceros que 
+    ayudan en el procesamiento de pagos o la logística.
+    <br><br><strong>Cumplimiento legal:</strong> Podremos compartir información si es requerida por la 
+    ley.
+</ul>
+
+<h2>6. Retención de Datos</h2>
+<p>
+    Los datos se conservarán mientras sea necesario para cumplir con los fines descritos, 
+    salvo que la ley exija un período mayor.
+</p>
+
+<h2>7. Derechos del Usuario</h2>
+<ul>
+    <strong>Acceso y corrección:</strong> Puede solicitar acceso a sus datos o corregir información 
+    inexacta.
+    <br><br><strong>Retiro de consentimiento:</strong> Puede retirar su consentimiento para el tratamiento 
+    de datos personales, aunque esto podría limitar ciertas funcionalidades.
+</ul>
+
+<h2>8. Jurisdicción y Ley Aplicable</h2>
+<p>
+    Esta política de privacidad se rige por las leyes de México, y cualquier controversia será 
+    resuelta ante los tribunales de la Ciudad de México.
+</p>
+
+<h2>9. Contacto</h2>
+<p>
+    Para cualquier duda sobre estas políticas, contacte a RentOutfit en 
+    <a href="mailto:rentoutfit.soportexd@gmail.com">rentoutfit.soportexd&#64;gmail.com</a>
+    o al teléfono <a href="tel:+527731571119">(+52) 7731571119</a>.
+</p>
+<button (click)="cerrarModal('privacy')">Cerrar</button>
+</div>
 </div>

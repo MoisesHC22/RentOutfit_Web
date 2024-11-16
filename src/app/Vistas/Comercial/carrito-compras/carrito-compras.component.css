@@ -1,148 +1,107 @@
-body{
-    background: #ddd;
+body {
+    background: #f0f0f0;
     min-height: 100vh;
-    vertical-align: middle;
     display: flex;
-    font-family: sans-serif;
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-.title{
-    margin-bottom: 5vh;
-}
-.card{
-    margin: auto;
-    max-width: 950px;
-    width: 90%;
-    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 1rem;
-    border: transparent;
-}
-@media(max-width:767px){
-    .card{
-        margin: 3vh auto;
-    }
-}
-.cart{
-    background-color: #fff;
-    padding: 4vh 5vh;
-    border-bottom-left-radius: 1rem;
-    border-top-left-radius: 1rem;
-}
-@media(max-width:767px){
-    .cart{
-        padding: 4vh;
-        border-bottom-left-radius: unset;
-        border-top-right-radius: 1rem;
-    }
-}
-.summary{
-    background-color: #ddd;
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    padding: 4vh;
-    color: rgb(65, 65, 65);
-}
-@media(max-width:767px){
-    .summary{
-    border-top-right-radius: unset;
-    border-bottom-left-radius: 1rem;
-    }
-}
-.summary .col-2{
-    padding: 0;
-}
-.summary .col-10
-{
-    padding: 0;
-}.row{
+    justify-content: center;
+    align-items: flex-start; /* Centrado hacia arriba */
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
     margin: 0;
+    padding-top: 2rem; /* Espacio adicional en la parte superior */
 }
-.title b{
+
+.container-fluid {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 90vh; /* Ocupar el 90% de la altura de la pantalla */
+}
+
+.card {
+    width: 90%;
+    max-width: 1200px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 1rem;
+    border: none;
+    padding: 2rem;
+    margin-top: 1rem; /* Reducido para estar más arriba */
+    margin-bottom: 2rem;
+    height: 100%; /* Ocupa toda la altura disponible */
+}
+
+.cart {
+    background-color: #ffffff;
+    padding: 3rem;
+    border-radius: 1rem 0 0 1rem;
+    height: 100%; /* Extiende la altura de la sección del carrito */
+}
+
+.summary {
+    background-color: #f8f8f8;
+    padding: 3rem;
+    border-radius: 0 1rem 1rem 0;
+    height: 100%; /* Extiende la altura de la sección de resumen */
+}
+
+.title h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+h4, h2 {
     font-size: 1.5rem;
 }
-.main{
-    margin: 0;
-    padding: 2vh 0;
-    width: 100%;
+
+img {
+    width: 6rem;
+    height: auto;
 }
-.col-2, .col{
-    padding: 0 1vh;
+
+input {
+    width: 4rem;
+    text-align: center;
+    border: 1px solid #ddd;
+    margin: 0 0.5rem;
+    font-size: 1.2rem;
 }
-a{
-    padding: 0 1vh;
-}
-.close{
-    margin-left: auto;
-    font-size: 0.7rem;
-}
-img{
-    width: 3.5rem;
-}
-.back-to-shop{
-    margin-top: 4.5rem;
-}
-h5{
-    margin-top: 4vh;
-}
-hr{
-    margin-top: 1.25rem;
-}
-form{
-    padding: 2vh 0;
-}
-select{
-    border: 1px solid rgba(0, 0, 0, 0.137);
-    padding: 1.5vh 1vh;
-    margin-bottom: 4vh;
-    outline: none;
-    width: 100%;
-    background-color: rgb(247, 247, 247);
-}
-input{
-    border: 1px solid rgba(0, 0, 0, 0.137);
-    padding: 1vh;
-    margin-bottom: 4vh;
-    outline: none;
-    width: 100%;
-    background-color: rgb(247, 247, 247);
-}
-input:focus::-webkit-input-placeholder
-{
-      color:transparent;
-}
-.btn{
+
+.btn-quantity {
     background-color: #000;
-    border-color: #000;
-    color: white;
-    width: 100%;
-    font-size: 0.7rem;
-    margin-top: 4vh;
-    padding: 1vh;
-    border-radius: 0;
+    color: #fff;
+    border: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
 }
-.btn:focus{
-    box-shadow: none;
-    outline: none;
-    box-shadow: none;
-    color: white;
-    -webkit-box-shadow: none;
-    -webkit-user-select: none;
-    transition: none; 
+
+.btn-quantity:hover {
+    background-color: #444;
 }
-.btn:hover{
-    color: white;
+
+.back-to-shop {
+    margin-top: 4rem;
 }
-a{
-    color: black; 
-}
-a:hover{
-    color: black;
+
+.back-to-shop a {
+    color: #333;
     text-decoration: none;
+    font-size: 1rem;
 }
- #code{
-    background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253) , rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
-    background-repeat: no-repeat;
-    background-position-x: 95%;
-    background-position-y: center;
+
+.btn {
+    background-color: #000;
+    color: #fff;
+    padding: 1rem;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
 }
+
+.btn:hover {
+    background-color: #444;
+}
+
