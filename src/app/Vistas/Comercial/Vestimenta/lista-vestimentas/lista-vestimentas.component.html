@@ -6,7 +6,26 @@
 
       <p id="titulo">{{ConteoDeVestimentas()}} Opciones disponibles</p>
 
-      <div>
+      <div class="contUbicacion">
+
+        <div>
+          <label for="estado">Estado</label>
+          <select id="estado" name="estado" (change)="SeleccionEstado($event)" >
+             <option value="" disabled selected>Selecciona aqui</option>
+             <option *ngFor="let estado of EstadosList" [value]="estado.estadoID">{{estado.nombreEstado}}</option>
+          </select>
+        </div>
+
+        <div>
+          <div class="form-group">
+            <label for="municipio">Municipio</label>
+            <select id="municipio" name="municipio" >
+              <option value="" disabled selected>Selecciona aqui</option>
+              <option *ngFor="let municipio of MunicipioList" [value]="municipio.nombreMunicipio" [selected]="municipio.nombreMunicipio === municipio">{{municipio.nombreMunicipio}}</option>
+            </select>
+          </div>
+        </div>
+
 
       </div>
 
@@ -21,7 +40,8 @@
             name="categoria"
             [value]="categoria.estiloID"
             (change)="seleccionarCategoria(categoria.estiloID!)"
-            [checked]="categoriaSeleccionada === categoria.estiloID">
+            [checked]="categoriaSeleccionada === categoria.estiloID"
+            (click)="toggleCategoria(categoria.estiloID!)">
             {{categoria.nombreEstilo}}
           </label>
         }
@@ -33,7 +53,13 @@
         <div class="listTallas">
           @for(tallas of TallasList; track $index )
           {
-            <a (click)="seleccionarTalla(tallas.tallaId!)" class="talla">{{tallas.nombreTalla}}</a>
+            <a
+             (click)="seleccionarTalla(tallas.tallaId!)" 
+             (dblclick)="deseleccionarTalla()"
+             [class.selected]="tallaSeleccionada === tallas.tallaId" 
+             class="talla">
+             {{tallas.nombreTalla}}
+            </a>
           }
         </div>
 
@@ -45,7 +71,8 @@
   </div>
  
 
-    <div class="contenedor">
+  <div class="contResultados">
+    <div class="contenedor" *ngIf="!NoHayVestimentas">
       @for (item of VestimentasList; track $index) 
       {
           <div class="vestimenta" (click)="MasInformacion(item.vestimentaID)">
@@ -59,5 +86,13 @@
           </div>
       }
     </div>
+    
+    <div class="NoResultados" *ngIf="NoHayVestimentas">
+       <h6>No se encontraron vestimentas</h6>
+    </div>
+  </div>
+
+   
+
   </div>
   
