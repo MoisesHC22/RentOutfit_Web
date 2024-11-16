@@ -47,6 +47,40 @@ body {
   background-color: #467FB4;
 }
 
+
+.profile-change-btn {
+  border: none;
+  background-color: #e34646;
+  border-radius: 1.5rem;
+  width: 40%;
+  padding: 1%;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.profile-change-btn:hover {
+  background-color: #bc2f2f;
+}
+
+.profile-delete-btn {
+  border: none;
+  background-color: #e34646;
+  border-radius: 1.5rem;
+  width: 40%;
+  padding: 1%;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.profile-delete-btn:hover {
+  background-color: #bc2f2f;
+}
+
+
 .profile-head .nav-tabs {
   margin-bottom: 5%;
 }

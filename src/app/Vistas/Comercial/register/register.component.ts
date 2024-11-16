@@ -82,6 +82,33 @@ export class RegisterComponent implements OnInit {
   
   datos: any;
 
+
+
+  showTermsModal: boolean = false;
+  showPrivacyModal: boolean = false;
+  
+  abrirModal(event: Event, tipo: string): void {
+    //event.preventDefault(); // Evitar que el checkbox se desmarque
+  
+    if (tipo === 'terms') {
+      this.showTermsModal = true;
+      this.showPrivacyModal = false;
+    } else if (tipo === 'privacy') {
+      this.showPrivacyModal = true;
+      this.showTermsModal = false;
+    }
+  }
+  
+  cerrarModal(tipo: string): void {
+    if (tipo === 'terms') {
+      this.showTermsModal = false;
+    } else if (tipo === 'privacy') {
+      this.showPrivacyModal = false;
+    }
+  }
+
+  
+
   constructor(private Funciones: FuncionesService, private form: FormBuilder, private rutas : Router){}
   
   EstadosList: EstadoInterface[]=[];
