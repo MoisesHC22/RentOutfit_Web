@@ -159,7 +159,8 @@ export class InformacionVestimentaComponent implements OnInit, OnDestroy {
 
     const nuevoItem: ItemsCarrito = {
       vestimentaID: vestimentaID,
-      stock: this.stock 
+      stock: this.stock,
+      fechaPrestamo: null
     };
 
     this.funciones.CargarCarrito(this.usuarioID).subscribe({
