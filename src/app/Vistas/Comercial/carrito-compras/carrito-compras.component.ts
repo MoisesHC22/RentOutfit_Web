@@ -5,11 +5,16 @@ import { CarritoDeCompra, InformacionVestimenta, ItemsCarrito } from '../../../I
 import { error } from 'console';
 import { forkJoin, map } from 'rxjs';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
+declare const MercadoPago: any;
 
 @Component({
   selector: 'app-carrito-compras',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './carrito-compras.component.html',
   styleUrl: './carrito-compras.component.css'
 })
@@ -19,6 +24,7 @@ export class CarritoComprasComponent implements OnInit{
   token: string | null = null;
   ListaCarritoBack: ItemsCarrito[]=[];
   ListaVestimentas: InformacionVestimenta[] = [];
+
 
   constructor(private funciones: FuncionesService, private cookie: CookieService, private Rutas: Router){}
 
@@ -31,15 +37,16 @@ export class CarritoComprasComponent implements OnInit{
 
       this.cargarCarrito();
     }
-
   }
 
   cargarCarrito(): void {
     if(this.usuarioID) {
-      
       this.funciones.CargarCarrito(this.usuarioID!).subscribe({
-        next: (result) => {
-          this.ListaCarritoBack = result
+        next: (result: ItemsCarrito[]) => {
+          this.ListaCarritoBack = result.map(item => ({
+            ...item,
+            fechaPrestamo: item.fechaPrestamo ? new Date(item.fechaPrestamo) : null
+          }));
           this.ObtenerVestimentas();
         },
         error: (err) => {
@@ -72,6 +79,42 @@ export class CarritoComprasComponent implements OnInit{
   }
 
 
+  fechaPrestamo: Date | null = null;
+  
+
+  actualizarCarrito(vestimenta: InformacionVestimenta): void {
+    const carritoActualizado: CarritoDeCompra = {
+      usuarioID: this.usuarioID!,
+      itemsCarrito: this.ListaCarritoBack.map(item => ({
+        vestimentaID: item.vestimentaID,
+        stock: vestimenta.vestimentaID === item.vestimentaID ? vestimenta.stockSeleccionado : item.stock,
+        fechaPrestamo: vestimenta.vestimentaID === item.vestimentaID ? vestimenta.fechaPrestamo : item.fechaPrestamo
+      }))
+    };
+
+    this.funciones.ModificarCarrito(carritoActualizado).subscribe({
+      next: () => {
+
+          this.Rutas.navigate(['/Cliente/carritoDeCompras']).then(() => {
+          window.location.reload();
+        });
+      },
+      error: (err) => {
+        console.error("Error al actualizar el carrito en Firebase:", err);
+      }
+    });
+  }
+
+
+  cambiarFecha( vestimenta: InformacionVestimenta): void {
+      if(vestimenta.fechaPrestamo){
+        this.fechaPrestamo = vestimenta.fechaPrestamo;
+        this.actualizarCarrito(vestimenta);
+      }
+  }
+
+
+// #region Funciones para modificar el stock
   aumentarStock(vestimenta: InformacionVestimenta): void { 
     if(vestimenta.stockSeleccionado! < (vestimenta.stock || 0)) {
       vestimenta.stockSeleccionado! += 1;
@@ -91,30 +134,9 @@ export class CarritoComprasComponent implements OnInit{
       }
     }
   }
+// #endregion 
 
-  actualizarCarrito(vestimenta: InformacionVestimenta): void {
-    const carritoActualizado: CarritoDeCompra = {
-      usuarioID: this.usuarioID!,
-      itemsCarrito: this.ListaCarritoBack.map(item => ({
-        vestimentaID: item.vestimentaID,
-        stock: vestimenta.vestimentaID === item.vestimentaID ? vestimenta.stockSeleccionado : item.stock
-      }))
-    };
-
-    this.funciones.ModificarCarrito(carritoActualizado).subscribe({
-      next: () => {
-        console.log("Carrito actualizado en Firebase");
-      },
-      error: (err) => {
-        console.error("Error al actualizar el carrito en Firebase:", err);
-      }
-    });
-  }
-
-
-
-
-
+// #region Funciones para Calcular
   calcularTotal(): number {
     return this.ListaVestimentas.reduce((total, item) => {
       return total + (item.precioTotal || 0);
@@ -124,6 +146,36 @@ export class CarritoComprasComponent implements OnInit{
   ConteoDeVestimentas(): number {
     return this.ListaCarritoBack.length;
   }
+// #endregion 
+
+// #region Funciones para realizar pago
+  iniciarPago(usuario: number): void {
+    this.funciones.GenerarToken(usuario).subscribe({
+      next: (response) => {
+        const preferenceId = response.preferenceId;
+        this.redirigirMercadoPago(preferenceId);
+      },
+      error: (err) => {
+        console.error('Error al generar la preferencia de Mercado Pago:', err);
+      }
+    });
+  }
+
+  redirigirMercadoPago(preferenceId: string): void {
+    const mp = new MercadoPago('TEST-1226a121-de91-46b7-a16d-ce3dc0eaff06', { locale: 'es-MX' });
+
+    if (mp && mp.checkout) {
+      mp.checkout({
+        preference: {
+          id: preferenceId
+        },
+        autoOpen: true // Abre automáticamente el checkout
+      });
+    } else {
+      console.error('Error al inicializar el SDK de Mercado Pago');
+    }
+  }
+// #endregion 
 
 
 }

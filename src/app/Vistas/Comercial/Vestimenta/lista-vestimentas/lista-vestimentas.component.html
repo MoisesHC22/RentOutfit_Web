@@ -10,7 +10,7 @@
 
         <div>
           <label for="estado">Estado</label>
-          <select id="estado" name="estado" (change)="SeleccionEstado($event)" >
+          <select id="estado" name="estado" (change)="SeleccionEstado($event)"  [(ngModel)]="estadoSeleccionado">
              <option value="" disabled selected>Selecciona aqui</option>
              <option *ngFor="let estado of EstadosList" [value]="estado.estadoID">{{estado.nombreEstado}}</option>
           </select>
@@ -19,13 +19,14 @@
         <div>
           <div class="form-group">
             <label for="municipio">Municipio</label>
-            <select id="municipio" name="municipio" >
+            <select id="municipio" name="municipio" [(ngModel)]="municipioSeleccionado" (change)="SeleccionMunicipio($event)">
               <option value="" disabled selected>Selecciona aqui</option>
               <option *ngFor="let municipio of MunicipioList" [value]="municipio.nombreMunicipio" [selected]="municipio.nombreMunicipio === municipio">{{municipio.nombreMunicipio}}</option>
             </select>
           </div>
         </div>
-
+        
+        <button (click)="usarUbicacion()">Usar mi ubicacion</button>
 
       </div>
 
