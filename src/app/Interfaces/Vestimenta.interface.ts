@@ -28,6 +28,7 @@ export interface InformacionVestimenta {
 
     precioTotal?: number;
     stockSeleccionado?: number;
+    fechaPrestamo?: Date;
 }
 
 export interface RequerimientosVestimentas {
@@ -57,6 +58,7 @@ export interface CarritoDeCompra {
 export interface ItemsCarrito {
     vestimentaID?: number;
     stock?:number;
+    fechaPrestamo?: Date | null;
 }
 
 export interface EstilosInterfaces {

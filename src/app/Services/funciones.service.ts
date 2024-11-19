@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, retry } from 'rxjs';
 import { EstadoInterface } from '../Interfaces/estado.interface';
 import { MunicipioInterface } from '../Interfaces/municipios.interfaces';
 import { GeneroInterface } from '../Interfaces/genero.interfaces';
@@ -257,5 +257,13 @@ CargarCarrito(usuarioID: number) : Observable<any>
   return this.httpClient.post(this.API_RentOutfit + '/Cliente/CargarCarrito', usuarioID);
 }
 // #endregion 
+
+
+
+
+GenerarToken(usuarioID: number): Observable<any>
+{
+  return this.httpClient.post(this.API_RentOutfit + '/Cliente/GenerarTokenMercadoPago', usuarioID);
+}
 
 }
