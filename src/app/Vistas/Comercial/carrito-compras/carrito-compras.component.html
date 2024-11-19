@@ -27,6 +27,11 @@
                         <div class="col">
                             <h4>$ {{ item.precioPorDia }} | {{ item.precioTotal }}</h4>
                         </div>
+
+                        <div class="col">
+                            <input type="date" id="calendario" [(ngModel)]="item.fechaPrestamo" (change)="cambiarFecha(item)">
+                        </div>
+                       
                     </div>
                 }
 
@@ -46,7 +51,11 @@
                     <div class="col">PRECIO TOTAL</div>
                     <div class="col text-right"><h2>$ {{ calcularTotal() }}</h2></div>
                 </div>
-                <button class="btn btn-lg btn-dark">PAGAR</button>
+                
+                <button class="btn btn-lg btn-dark" (click)="iniciarPago(this.usuarioID!)">PAGAR</button>
+               
+               
+                <div id="wallet_container"></div>
             </div>
         </div>
     </div>
