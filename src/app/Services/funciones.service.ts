@@ -247,6 +247,13 @@ obtenerDatosPorCodigoPostal(codigoPostal: string): Observable<{ municipio: strin
 
 
 // #region Funciones para carrito de compras
+private CarritoActualizado = new BehaviorSubject<boolean>(false);
+carritoCambiado$ = this.CarritoActualizado.asObservable();
+
+notificarCambio(estado: boolean): void {
+  this.CarritoActualizado.next(estado);
+}
+
 ModificarCarrito(data: CarritoDeCompra) : Observable<any> 
 {
   return this.httpClient.post(this.API_RentOutfit + '/Cliente/ModificarCarrito', data);
@@ -256,14 +263,12 @@ CargarCarrito(usuarioID: number) : Observable<any>
 {
   return this.httpClient.post(this.API_RentOutfit + '/Cliente/CargarCarrito', usuarioID);
 }
-// #endregion 
-
-
-
 
 GenerarToken(usuarioID: number): Observable<any>
 {
   return this.httpClient.post(this.API_RentOutfit + '/Cliente/GenerarTokenMercadoPago', usuarioID);
 }
+// #endregion 
+
 
 }
