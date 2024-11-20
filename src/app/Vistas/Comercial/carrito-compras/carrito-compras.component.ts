@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FuncionesService } from '../../../Services/funciones.service';
 import { CookieService } from 'ngx-cookie-service';
 import { CarritoDeCompra, InformacionVestimenta, ItemsCarrito } from '../../../Interfaces/Vestimenta.interface';
-import { error } from 'console';
 import { forkJoin, map } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -58,6 +57,7 @@ export class CarritoComprasComponent implements OnInit{
 
   ObtenerVestimentas(): void {
     const peticiones = this.ListaCarritoBack.map((item) =>
+
       this.funciones.InformacionVestimenta(item.vestimentaID!).pipe(
         map((detalles: InformacionVestimenta) => {
           detalles.stockSeleccionado = item.stock;
@@ -67,10 +67,15 @@ export class CarritoComprasComponent implements OnInit{
       )
     );
 
+    if(peticiones.length === 0)
+      {
+        this.Rutas.navigate(['/Cliente/vestimentas']);
+        return;
+      }
+
     forkJoin(peticiones).subscribe({
       next: (detalles: InformacionVestimenta[]) => {
         this.ListaVestimentas = detalles;
-        console.log('Detalles de vestimentas:', this.ListaVestimentas);
       },
       error: (err) => {
         console.error('Error al obtener detalles de vestimentas:', err);
@@ -98,6 +103,7 @@ export class CarritoComprasComponent implements OnInit{
           this.Rutas.navigate(['/Cliente/carritoDeCompras']).then(() => {
           window.location.reload();
         });
+        
       },
       error: (err) => {
         console.error("Error al actualizar el carrito en Firebase:", err);
