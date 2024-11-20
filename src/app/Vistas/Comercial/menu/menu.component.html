@@ -62,8 +62,8 @@
             </ul>
           </div>
         </li>
-        <li *ngIf="token">
-          <a routerLink="carritoDeCompras"><fa-icon id="Icono" [icon]="faCartShopping"></fa-icon></a>
+        <li *ngIf="ActivarCarrito">
+          <a class="btnCarrito" routerLink="carritoDeCompras"><fa-icon id="Icono" [icon]="faCartShopping"></fa-icon></a>
         </li>
         <li class="nav-item" *ngIf="!token">
           <button id="btnIniciarSesion" routerLink="/Login" class="btn">Iniciar sesión</button>

@@ -7,7 +7,6 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EstadoInterface } from '../../../../Interfaces/estado.interface';
 import { MunicipioInterface } from '../../../../Interfaces/municipios.interfaces';
-import { resolve } from 'node:path';
 
 @Component({
   selector: 'app-lista-vestimentas',

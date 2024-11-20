@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FuncionesService } from '../../../Services/funciones.service'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RequerimientosUsuario } from '../../../Interfaces/iniciarSesion.interface';
+import { ItemsCarrito } from '../../../Interfaces/Vestimenta.interface';
 
 @Component({
   selector: 'app-menu',
@@ -50,6 +51,8 @@ export class MenuComponent implements OnInit {
 
   searchQuery: string = '';
 
+  ListaCarritoBack: ItemsCarrito[]=[];
+  ActivarCarrito = false;
   
   ngOnInit(): void {
 
@@ -71,7 +74,20 @@ export class MenuComponent implements OnInit {
 
       this.usuarioID = obtener?.usuario ? Number(obtener.usuario) : null;
 
-      if(this.usuarioID != null){
+      if (this.usuarioID) {
+        this.Funciones.CargarCarrito(this.usuarioID).subscribe({
+          next: (result: ItemsCarrito[]) => {
+              this.ActivarCarrito = result.length > 0;
+          },
+          error: (err) => {
+            console.error("Error al cargar el carrito:", err);
+          },
+        });
+  
+        this.Funciones.carritoCambiado$.subscribe((estado) => {
+          this.ActivarCarrito = estado;
+        });
+
         this.ObtenerMiInformacion(this.usuarioID, this.pagina!);
       }
 
