@@ -140,6 +140,21 @@
     margin-left: 5px;
 }
 
+.btnCarrito {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.btnCarrito:hover {
+  background-color: #467FB4;
+}
+
 /* Asegura que el navbar colapse en pantallas pequeñas */
 @media (max-width: 991px) {
   .navbar {
