@@ -181,7 +181,10 @@ export class InformacionVestimentaComponent implements OnInit, OnDestroy {
 
         this.funciones.ModificarCarrito(carritoActualizado).subscribe({
           next: () => {
-              console.log("Carrito actualizado correctamente.");
+                           
+             this.funciones.notificarCambio(true);
+
+             this.Ruta.navigate(['/Cliente/carritoDeCompras']);
             },
             error: (err) => {
               console.error("Error al actualizar el carrito:", err);
