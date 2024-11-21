@@ -55,6 +55,20 @@
   </div>
 </section>
 
+<div class="modal" *ngIf="modalExito">
+  <div class="modal-content">
+    <h4> ¡Gracias por alquilar!</h4>
+
+    <div class="contAnimacion">
+      <ng-lottie [options]="animationExito"></ng-lottie>
+    </div>
+
+    <div class="contBoton">
+      <button id="btnCerrar" (click)="cerrarModal()">OK</button>
+    </div>
+  </div>
+</div>
+
 
 <!-- Footer -->
 <footer class="footer">
