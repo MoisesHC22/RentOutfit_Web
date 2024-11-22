@@ -61,6 +61,12 @@ export interface ItemsCarrito {
     fechaPrestamo?: Date | null;
 }
 
+export interface PagoCarrito {
+    usuarioId?: number;
+    paymentId?: string;
+
+}
+
 export interface EstilosInterfaces {
     estiloID?: number;
     nombreEstilo?: string;
