@@ -5,7 +5,7 @@ import { EstadoInterface } from '../Interfaces/estado.interface';
 import { MunicipioInterface } from '../Interfaces/municipios.interfaces';
 import { GeneroInterface } from '../Interfaces/genero.interfaces';
 import { RequerimientosIniciarSesion, RequerimientosUsuario } from '../Interfaces/iniciarSesion.interface';
-import { CarritoDeCompra, EstilosInterfaces, ListaVestimenta, RequerimientosVestimentas, TallasInterfaces, VestimentaEstablecimientos } from '../Interfaces/Vestimenta.interface';
+import { CarritoDeCompra, EstilosInterfaces, ListaVestimenta, PagoCarrito, RequerimientosVestimentas, TallasInterfaces, VestimentaEstablecimientos } from '../Interfaces/Vestimenta.interface';
 import { MisEstablecimientos, RequerimientosDeMisEstablecimientos, RequerimientosDenegarEstablecimientos, RequerimientosTiendasCercanas, TiendasCercanas } from '../Interfaces/tienda.interface';
 import { ActualizarContrasena, RequerimientoCorreo, ValidarToken } from '../Interfaces/contrasena.interface';
 import { environment } from '../../environments/environment';
@@ -267,6 +267,11 @@ CargarCarrito(usuarioID: number) : Observable<any>
 GenerarToken(usuarioID: number): Observable<any>
 {
   return this.httpClient.post(this.API_RentOutfit + '/Cliente/GenerarTokenMercadoPago', usuarioID);
+}
+
+GuadarPago(data: PagoCarrito): Observable<any>
+{
+  return this.httpClient.post(this.API_RentOutfit + '/Cliente/GuardarPago', data);
 }
 // #endregion 
 

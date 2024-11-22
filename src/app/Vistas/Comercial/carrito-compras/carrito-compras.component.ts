@@ -170,6 +170,8 @@ export class CarritoComprasComponent implements OnInit{
   redirigirMercadoPago(preferenceId: string): void {
     const mp = new MercadoPago('TEST-1226a121-de91-46b7-a16d-ce3dc0eaff06', { locale: 'es-MX' });
 
+    console.log(preferenceId);
+    
     if (mp && mp.checkout) {
       mp.checkout({
         preference: {
