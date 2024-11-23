@@ -70,3 +70,18 @@ export interface DarDeAltaUnaTienda{
     establecimientoID?: number;
     motivo?: string;
  }
+
+ export interface RequerimientosConsultarPedidos {
+   usuarioID?: number;
+   pagina?: number;
+   orden?: string;
+ }
+
+ export interface ConsultarPedidos {
+   pedidoID?: number;
+   nombreEstablecimiento?: string;
+   ultimaModifiacionPedido?: Date;
+   total?: number;
+   pedidosEstatus?: boolean;
+   totalRegistros?: number;
+ }

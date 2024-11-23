@@ -155,4 +155,14 @@ export class MenuComponent implements OnInit {
   }
 
 
+  misRentas(usuario?: number) : void {
+    if(usuario) {
+      this.Rutas.navigate(['/Cliente/misRentas', this.usuarioID]);
+    } else {
+      console.error('Ocurrio un error!.');     
+    }
+  }
+
+
+
 }

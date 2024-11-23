@@ -18,6 +18,7 @@ import { TodosLosUsuariosComponent } from './Vistas/Adminstrador/todos-los-usuar
 import { PeticionesDisponiblesComponent } from './Vistas/Adminstrador/peticiones-disponibles/peticiones-disponibles.component';
 import { CarritoComprasComponent } from './Vistas/Comercial/carrito-compras/carrito-compras.component';
 import { InfEstablecimientoComponent } from './Vistas/Vendedor/EstablecimientosVen/inf-establecimiento/inf-establecimiento.component';
+import { MisRentasComponent } from './Vistas/Comercial/mis-rentas/mis-rentas.component';
 
 export const routes: Routes = [
 
@@ -37,7 +38,8 @@ export const routes: Routes = [
         {path: 'masInformacionVestimenta/:vestimenta', component: InformacionVestimentaComponent},
         {path: 'NuevoVendedor', component: NuevoVendedorComponent},
         {path: 'masInformacionEstablecimiento/:establecimiento', component: InformacionEstablecimientoComponent},
-        {path: 'carritoDeCompras', component: CarritoComprasComponent}
+        {path: 'carritoDeCompras', component: CarritoComprasComponent},
+        {path: 'misRentas/:usuario', component: MisRentasComponent}
      ],
     }, 
     {
@@ -45,7 +47,7 @@ export const routes: Routes = [
         component: MenuVenComponent,
         children: [
             {path: 'misEstablecimientos/:usuario', component:HomeEstablecimientosComponent},
-            {path: 'ventas', component: HomeVentasComponent},
+            {path: 'ventas/:usuario', component: HomeVentasComponent},
             {path: 'miEstablecimiento/:establecimiento', component: InfEstablecimientoComponent}
         ]
     },

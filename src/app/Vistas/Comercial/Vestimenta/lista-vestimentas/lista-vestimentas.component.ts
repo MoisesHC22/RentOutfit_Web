@@ -21,7 +21,7 @@ import { MunicipioInterface } from '../../../../Interfaces/municipios.interfaces
 })
 export class ListaVestimentasComponent implements OnInit{
 
-  constructor(private ruta: ActivatedRoute ,private Funciones: FuncionesService, private cookie: CookieService, private Rutas: Router, private form: FormBuilder){}
+  constructor(private ruta: ActivatedRoute, private Funciones: FuncionesService, private cookie: CookieService, private Rutas: Router, private form: FormBuilder){}
   
   ubicacion: any;
   token: string | null = null;
