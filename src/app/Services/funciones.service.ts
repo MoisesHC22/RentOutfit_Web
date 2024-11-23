@@ -4,9 +4,9 @@ import { BehaviorSubject, map, Observable, retry } from 'rxjs';
 import { EstadoInterface } from '../Interfaces/estado.interface';
 import { MunicipioInterface } from '../Interfaces/municipios.interfaces';
 import { GeneroInterface } from '../Interfaces/genero.interfaces';
-import { RequerimientosIniciarSesion, RequerimientosUsuario } from '../Interfaces/iniciarSesion.interface';
+import { ListaDePedidoRequerimientos, ListaPedido, RequerimientosIniciarSesion, RequerimientosUsuario } from '../Interfaces/iniciarSesion.interface';
 import { CarritoDeCompra, EstilosInterfaces, ListaVestimenta, PagoCarrito, RequerimientosVestimentas, TallasInterfaces, VestimentaEstablecimientos } from '../Interfaces/Vestimenta.interface';
-import { MisEstablecimientos, RequerimientosDeMisEstablecimientos, RequerimientosDenegarEstablecimientos, RequerimientosTiendasCercanas, TiendasCercanas } from '../Interfaces/tienda.interface';
+import { ConsultarPedidos, MisEstablecimientos, RequerimientosConsultarPedidos, RequerimientosDeMisEstablecimientos, RequerimientosDenegarEstablecimientos, RequerimientosTiendasCercanas, TiendasCercanas } from '../Interfaces/tienda.interface';
 import { ActualizarContrasena, RequerimientoCorreo, ValidarToken } from '../Interfaces/contrasena.interface';
 import { environment } from '../../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
@@ -137,6 +137,10 @@ export class FuncionesService {
 
   generarPdfEstablecimientos(usuarioID: number): Observable<Blob> {
     return this.httpClient.post(this.API_RentOutfit + '/Vendedor/GenerarPdfEstablecimientos', usuarioID, { responseType: 'blob'});
+  }
+
+  ConsultarPedidos(data: RequerimientosConsultarPedidos) : Observable<ConsultarPedidos[]> {
+    return this.httpClient.post<ConsultarPedidos[]>(this.API_RentOutfit + '/Vendedor/consultarPedidos', data);
   }
 // #endregion   
 
@@ -272,6 +276,11 @@ GenerarToken(usuarioID: number): Observable<any>
 GuadarPago(data: PagoCarrito): Observable<any>
 {
   return this.httpClient.post(this.API_RentOutfit + '/Cliente/GuardarPago', data);
+}
+
+ListaDeRentas(data: ListaDePedidoRequerimientos): Observable<ListaPedido[]>
+{
+  return this.httpClient.post<ListaPedido[]>(this.API_RentOutfit + '/Cliente/ListaDeRentas', data);
 }
 // #endregion 
 
