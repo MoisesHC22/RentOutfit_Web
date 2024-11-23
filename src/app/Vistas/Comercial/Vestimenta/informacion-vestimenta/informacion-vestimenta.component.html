@@ -37,11 +37,18 @@
   
       </div>
   
+
       <div class="vestimenta-preview">
         <div class="zoom-controls">
-          <button (click)="zoomIn()">+</button>
-          <button (click)="zoomOut()">-</button>
-          <button (click)="resetZoom()">Restablecer</button>
+          <button (click)="zoomIn()" aria-label="Aumentar zoom">
+            <fa-icon id="Max" [icon]="faPlus"></fa-icon>
+          </button>
+          <button (click)="zoomOut()" aria-label="Disminuir zoom">
+            <fa-icon id="Min" [icon]="faMinus"></fa-icon>
+          </button>&nbsp;
+          <button (click)="resetZoom()" aria-label="Restablecer zoom">
+            <fa-icon id="Res" [icon]="faRotateRight"></fa-icon>
+          </button>
         </div>
       
         <div 
@@ -81,10 +88,10 @@
              <p>Fecha de publicación: {{informacion?.fechaDePublicacion!.toString() | slice: 0:10}}</p>
           </div>
 
-          <div>
-            <button (click)="disminuirStock()">-</button>
-            <input type="number" [value]="stock" readonly>
-            <button (click)="aumentarStock()">+</button>
+          <div class="stock-controls">
+            <button (click)="disminuirStock()" aria-label="Disminuir stock"><fa-icon id="MinSt" [icon]="faMinus"></fa-icon></button>
+            <input type="number" [value]="stock" readonly aria-label="Stock disponible">
+            <button (click)="aumentarStock()" aria-label="Aumentar stock"><fa-icon id="MaxSt" [icon]="faPlus"></fa-icon></button>
           </div>
 
           <div class="contBotonAgregar">

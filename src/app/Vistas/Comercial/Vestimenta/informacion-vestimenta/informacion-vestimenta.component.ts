@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FuncionesService } from '../../../../Services/funciones.service';
 import { CarritoDeCompra, InformacionVestimenta, ItemsCarrito } from '../../../../Interfaces/Vestimenta.interface';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { faPlus, faMinus, faRotateRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
@@ -11,12 +13,21 @@ import { Console } from 'node:console';
   selector: 'app-informacion-vestimenta',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    FontAwesomeModule
   ],
   templateUrl: './informacion-vestimenta.component.html',
   styleUrl: './informacion-vestimenta.component.css'
 })
 export class InformacionVestimentaComponent implements OnInit, OnDestroy {
+
+  // #region Iconos
+
+faPlus = faPlus;
+faMinus =  faMinus;
+faRotateRight = faRotateRight;
+
+// #endregion 
 
   zoomLevel: number = 1;
   zoomStep: number = 0.2;
