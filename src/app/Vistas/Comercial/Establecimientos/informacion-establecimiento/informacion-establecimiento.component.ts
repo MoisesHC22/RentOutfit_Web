@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FuncionesService } from '../../../../Services/funciones.service';
 import { InformacionTienda } from '../../../../Interfaces/tienda.interface';
 import { ActivatedRoute, Router } from '@angular/router';
-import { error } from 'console';
 import { ListaVestimenta, VestimentaEstablecimientos } from '../../../../Interfaces/Vestimenta.interface';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
