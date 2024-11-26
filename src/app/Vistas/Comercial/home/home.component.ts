@@ -5,13 +5,14 @@ import { AppComponent } from '../../../app.component';
 import { faHouse, faBagShopping, faShirt, faMagnifyingGlass, faBell, faDownload, faStore} from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faInstagram, faWhatsapp, faXTwitter} from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { LottieComponent } from 'ngx-lottie';
+import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FuncionesService } from '../../../Services/funciones.service';
 import { CookieService } from 'ngx-cookie-service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { RouterOutlet, RouterModule, RouterLink } from '@angular/router';
+import { RouterOutlet, RouterModule, RouterLink, ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { PagoCarrito } from '../../../Interfaces/Vestimenta.interface';
 
 declare var google: any;
 
@@ -35,6 +36,7 @@ declare var google: any;
 
 export class HomeComponent implements OnInit {
 
+// #region Iconos
   faHouse = faHouse;
   faBag = faBagShopping;
   faShirt = faShirt;
@@ -46,9 +48,9 @@ export class HomeComponent implements OnInit {
   faDownload = faDownload;
   faStore = faStore;
   faXTwitter = faXTwitter;
+// #endregion 
 
-
-  constructor(private Rutas: Router, private Funciones: FuncionesService, private sanitizer: DomSanitizer, private cookie: CookieService){}
+  constructor(private Rutas: Router, private Funciones: FuncionesService, private sanitizer: DomSanitizer, private cookie: CookieService, private Ruta: ActivatedRoute){}
 
   token: string | null = null;
   estado: string | null = null;
@@ -67,6 +69,7 @@ export class HomeComponent implements OnInit {
 
   OpcionLogeo: Boolean | null = null;
   OpcionDarDeAlta: Boolean | null = null;
+  paymentID: string | null = null;
   
   ngOnInit(): void {
     this.cookie.delete('ubicacion', '/');
@@ -86,8 +89,20 @@ export class HomeComponent implements OnInit {
       this.usuario = obtener?.usuario ? Number(obtener.usuario) : null;
     }
 
+    this.Ruta.queryParams.subscribe((params) => {
+      this.paymentID = params['payment_id'] || null;
+      if (this.paymentID) {
+        console.log(`Payment ID: ${this.paymentID}`);
+        this.GuardarCarrito();
+      }
+    })
   }
   
+  animationExito: AnimationOptions = {
+    path: '/Animaciones/Correcto.json'
+  }
+
+
 // #region Funciones para obtener los establecimientos cercanos
   ListaTiendas(estado: string, municipio: string){
     
@@ -237,8 +252,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-
-
   MasInformacionEstablecimiento(establecimiento?: number): void {
     if(establecimiento){
       this.Rutas.navigate(['/Cliente/masInformacionEstablecimiento', establecimiento]);
@@ -247,6 +260,43 @@ export class HomeComponent implements OnInit {
     }
   }
   // #endregion 
+
+
+  modalExito = false;
+
+  GuardarCarrito(): void {
+    if(this.paymentID)
+    {
+       const data: PagoCarrito = {
+        usuarioId: this.usuario!,
+        paymentId: this.paymentID!
+       }
+
+       this.Funciones.GuadarPago(data).subscribe({
+        next: (response) => {
+          if( response.status === 'approved')
+          {
+            this.modalExito = true;
+          } else {
+            console.log("El pago no fue aprobado. Estado:", response.status);
+          }
+        },
+        error: (err) => {
+          console.error("No se guardo el carrito", err);
+        }
+      });
+    }
+  }
+
+
+  cerrarModal() : void {
+    this.modalExito = false;
+    this.Rutas.navigate(['/Cliente/home']).then(() => {
+      window.location.reload();
+    });
+
+  }
+
 
 }
  

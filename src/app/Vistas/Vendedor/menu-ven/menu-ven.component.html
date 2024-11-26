@@ -35,7 +35,7 @@
           <button id="pdfEstablecimiento" (click)="generarPDf(this.usuarioID!)">Descargar Pdf</button>
         </li>
         <li>
-          <a routerLink="ventas">
+          <a (click)="misVentas(this.usuarioID!)">
             <fa-icon [icon]="faShoppingCart"></fa-icon> Mis ventas
           </a>
         </li>
