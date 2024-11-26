@@ -5,19 +5,89 @@
   padding: 20px;
 }
 
+/* Contenedor principal que agrupa filtros y resultados */
 .contResultados {
   display: flex;
-  height: auto;
-  width: 970px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  gap: 20px; /* Espaciado entre filtros y resultados */
 }
 
-/* Contenedor con diseño de tres columnas */
+/* Contenedor de filtros */
+.contFiltros {
+  width: 300px; /* Tamaño fijo para los filtros */
+  flex-shrink: 0; /* Evita que los filtros se redimensionen */
+  margin-right: 20px; /* Espaciado hacia la derecha */
+
+  .ajustar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+
+    #titulo {
+      font-size: 18px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .contCategorias,
+    .contTallas {
+      width: 95%;
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+
+      #subtitulo {
+        font-weight: bold;
+      }
+
+      hr {
+        margin-top: -5px;
+      }
+    }
+
+    .listTallas {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      .talla {
+        background-color: #f5f4f4;
+        color: #000000;
+        width: 90px;
+        text-align: center;
+        margin: 2px;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 12px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .talla:hover {
+        border: 3px solid #007bff;
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        transform: scale(1.05);
+      }
+
+      .talla.selected {
+        border: 3px solid #007bff;
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+/* Contenedor con diseño de artículos */
 .contenedor {
-  margin:10px;
+  margin: 10px;
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 artículos por fila */
   gap: 35px;
-
+  flex-grow: 1; /* Permite que el contenedor de resultados se ajuste al espacio disponible */
 
   .vestimenta {
     display: flex;
@@ -32,21 +102,21 @@
     text-align: center;
     padding: 15px;
     max-height: 520px;
-    width: 293px;
-
-    #img {
-      width: 100%;
-      height: 350px;
-      object-fit: cover;
-      border-radius: 4px;
-      transition: transform 0.3s ease;
-      object-position: top;
-    }
+    width: 100%;
   }
 
   .vestimenta:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .vestimenta #img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+    object-position: top;
   }
 
   .vestimenta:hover #img {
@@ -59,126 +129,74 @@
     color: #333;
     margin: 10px 0 5px 0;
   }
-  
+
   .vestimenta p {
     font-size: 0.9rem;
     color: #666;
     margin: 5px 0;
   }
-  
+
   .vestimenta p:nth-child(3) {
     font-size: 1rem;
     font-weight: bold;
     color: #007bff;
   }
-  
+
   .vestimenta p:nth-child(4) {
     color: #888;
   }
-  
-
 }
 
+/* Mensaje de "No Resultados" */
 .NoResultados {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 970px;
+  width: 100%;
   height: 100%;
 }
 
 
-
-
-.contFiltros{
-  width: 300px;
-  margin-right: 50px;
-
-  .ajustar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 5px;
-  
-    #titulo {
-      font-size: 18px;
-      margin-top: 20px;
-      font-weight: bold;
-    }
-
-    .contCategorias, .contTallas{
-      width: 95%;
-      display: flex;
-      flex-direction: column;
-      margin-top: 20px;
-
-      #subtitulo {
-        font-weight: bold;
-      }
-
-      hr{
-        margin-top: -5px;
-      }
-
-    }
-
-
-    .listTallas{
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-       
-      .talla {
-          background-color: #F5F4F4;
-          color: #000000;
-          width: 90px;
-          text-align: center;
-          margin: 2px;
-          border-radius: 5px;
-          font-weight: bold;
-          font-size: 12px;
-          text-decoration: none;
-       }
-
-       .talla:hover {
-        border: 3px solid #007bff;
-        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); 
-        transform: scale(1.05);
-        transition: transform 0.2s, border-color 0.2s;
-      }
-
-      .talla.selected {
-        border: 3px solid #007bff;
-        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); 
-        transform: scale(1.05);
-        transition: transform 0.2s, border-color 0.2s;
-      }
-
-
-    }
-
-  }
-
-}
-
-
-
-
-
-
-
 /* Responsividad */
 @media (max-width: 852px) {
+    /* Centrado general */
+  .centrar {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    flex-wrap: wrap;
+  }
+
   .contenedor {
     grid-template-columns: repeat(2, 1fr); /* 2 artículos por fila en pantallas medianas */
+  }
+
+  .contFiltros {
+    margin-right: 20px; /* Reduce el margen en pantallas medianas */
   }
 }
 
 @media (max-width: 468px) {
+
   .contenedor {
     grid-template-columns: repeat(1, 1fr); /* 1 artículo por fila en pantallas pequeñas */
   }
 
-  #img {
-    height: 150px;
+  .contFiltros {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .vestimenta #img {
+    height: 200px; /* Reduce la altura de las imágenes */
+  }
+
+  .vestimenta {
+    max-height: 420px; /* Reduce la altura total de las tarjetas */
+  }
+
+  .talla {
+    font-size: 10px; /* Ajusta el tamaño del texto de las tallas */
+    width: auto; /* Permite que las tallas se adapten */
   }
 }

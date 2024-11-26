@@ -14,23 +14,44 @@
 }
 
 .zoom-controls {
+  position: absolute;
   margin-bottom: 10px;
   display: flex;
-  gap: 10px;
+  gap: 7px;
+  z-index: 10; 
+  margin-top: 10px;
+  margin-left: -210px;
 }
 
 .zoom-controls button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 10px;
+  background-color: #5e5e5e4e; /* Color de fondo azul */
+  border: none; /* Sin bordes */
+  border-radius: 50%; /* Botones redondos */
+  width: 40px; /* Tamaño uniforme */
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white; /* Icono blanco */
+  font-size: 18px; /* Tamaño del icono */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: transform 0.2s, box-shadow 0.3s, background-color 0.3s;
 }
 
 .zoom-controls button:hover {
-  background-color: #0056b3;
+  background-color: #2d2d2d; /* Azul más oscuro al pasar el mouse */
+  transform: scale(1.1); /* Efecto de ampliación */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Aumenta la sombra */
+}
+
+.zoom-controls button:active {
+  transform: scale(0.95); /* Efecto de clic */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce la sombra */
+}
+
+.zoom-controls button fa-icon {
+  pointer-events: none; /* Evita que los clics afecten solo al icono */
 }
 
 .zoom-container {
@@ -80,10 +101,6 @@
 /* Contenedor que une las columnas e imágenes */
 .unir {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  align-items: flex-start;
 }
 
 /* Contenedor para las miniaturas */
@@ -157,6 +174,69 @@
   text-align: justify;
   margin: 10px 0;
 }
+
+
+
+.stock-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Espaciado entre los elementos */
+}
+
+.stock-controls button {
+  background-color: #007bff; /* Fondo azul */
+  color: white; /* Texto blanco */
+  border: none;
+  border-radius: 50%; /* Botones redondos */
+  width: 40px;
+  height: 40px;
+  font-size: 20px; /* Tamaño del texto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para profundidad */
+}
+
+.stock-controls button:hover {
+  background-color: #0056b3; /* Azul más oscuro en hover */
+  transform: scale(1.1); /* Efecto de ampliación */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Aumenta la sombra */
+}
+
+.stock-controls button:active {
+  transform: scale(0.95); /* Efecto de clic */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce la sombra */
+}
+
+.stock-controls input[type="number"] {
+  width: 60px; /* Ajusta el ancho del campo */
+  text-align: center; /* Centra el texto */
+  font-size: 16px; /* Tamaño de fuente más grande */
+  color: #333; /* Texto oscuro */
+  border: 1px solid #ddd; /* Borde gris claro */
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #f9f9f9; /* Fondo claro */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra interna */
+}
+
+.stock-controls input[type="number"]:focus {
+  outline: none; /* Quita el borde azul */
+  border-color: #007bff; /* Borde azul al enfocar */
+  box-shadow: inset 0 1px 3px rgba(0, 123, 255, 0.2); /* Sombra azul */
+}
+
+.stock-controls button fa-icon {
+  pointer-events: none; /* Evita que los clics afecten solo al icono */
+}
+
+
+
+
+
 
 .contBotonAgregar {
   display: flex;

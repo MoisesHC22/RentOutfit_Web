@@ -209,6 +209,13 @@ export class MenuVenComponent implements OnInit{
     });
   }
 
+  misVentas(usuarioID: number) : void {
+    if(usuarioID){
+      this.Rutas.navigate(['/Vendedor/ventas', this.usuarioID]);
+    }else {
+      console.error('Ocurrio un error!.');     
+    }
+  }
 
 
 }

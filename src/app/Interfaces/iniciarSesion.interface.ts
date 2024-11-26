@@ -16,3 +16,18 @@ export interface RequerimientosUsuario {
     pagina?: number;
     activar?: boolean;
 }
+
+export interface ListaDePedidoRequerimientos {
+    usuarioID?: number;
+    mes?: number;
+    ano?: number;
+    pagina?: number;
+}
+
+export interface ListaPedido {
+    detalleVentaID?: number;
+    imagen1?: string;
+    nombrePrenda?: string;
+    fechaPrestamo?: Date;
+    totalRegistros?: number;
+}

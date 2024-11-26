@@ -32,6 +32,61 @@ body {
 
 }
 
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border-radius: 15px;
+  width: 400px;
+  text-align: center;
+
+  h4 {
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  .contAnimacion {
+    margin-top: -35px;
+  }
+
+  .contBoton {
+    margin-top: -20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    #btnCerrar {
+      color: #fff;
+      width: 100px;
+      height: 40px;
+      border-radius: 8px;
+      background-color: #000;
+      /* margin-bottom: 10px; */
+    }
+
+    #btnCerrar:hover {
+      border: 3px solid #007bff;
+      box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); 
+      transform: scale(1.05);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+  }
+}
+
+
+
 
 /* Tiendas */
 .contenedor-tienda {
@@ -102,6 +157,7 @@ body {
     color: gray;
     margin: 5px 0;
   }
+
   
   /* Responsividad */
   @media (max-width: 768px) {
