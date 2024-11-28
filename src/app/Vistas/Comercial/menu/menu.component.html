@@ -51,7 +51,7 @@
 
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
               <li><a routerLink="informacion" class="dropdown-item"><fa-icon id="Icono" [icon]="faGear"></fa-icon> Mi información</a></li>
-              <li><a (click)="misRentas(this.usuarioID!)" class="nav-link"><fa-icon id="Icono" [icon]="faShirt"></fa-icon> Mis Alquileres</a></li>
+              <li><a (click)="misRentas(this.usuarioID!)" class="dropdown-item"><fa-icon id="Icono" [icon]="faShirt"></fa-icon> Mis Alquileres</a></li>
               <li *ngIf="vendedor"><a (click)="MisEstablecimientos(this.usuarioID!)" class="dropdown-item">Adminstrar mi negocio</a></li>
               <li *ngIf="Admin"><a (click)="TodosLosEstablecimientos(this.usuarioID!)" class="dropdown-item">Super Usuario</a></li>
               <li>

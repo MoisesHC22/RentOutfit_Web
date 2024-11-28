@@ -1,8 +1,5 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './Vistas/Comercial/home/home.component';
 import { MenuComponent } from './Vistas/Comercial/menu/menu.component';
-import { RegisterComponent } from './Vistas/Comercial/register/register.component';
-import { InformacionUsuarioComponent } from './Vistas/Comercial/informacion-usuario/informacion-usuario.component';
 import { ListaVestimentasComponent } from './Vistas/Comercial/Vestimenta/lista-vestimentas/lista-vestimentas.component';
 import { InformacionVestimentaComponent } from './Vistas/Comercial/Vestimenta/informacion-vestimenta/informacion-vestimenta.component';
 import { InformacionEstablecimientoComponent } from './Vistas/Comercial/Establecimientos/informacion-establecimiento/informacion-establecimiento.component';
@@ -12,8 +9,6 @@ import { HomeVentasComponent } from './Vistas/Vendedor/VentasVen/home-ventas/hom
 import { NuevoVendedorComponent } from './Vistas/Vendedor/nuevo-vendedor/nuevo-vendedor.component';
 import { MenuAdmComponent } from './Vistas/Adminstrador/menu-adm/menu-adm.component';
 import { TodosLosEstablecimientosComponent } from './Vistas/Adminstrador/todos-los-establecimientos/todos-los-establecimientos.component';
-import { RecuperarContrasenaComponent } from './Vistas/Comercial/OlvideMiContrasena/recuperar-contrasena/recuperar-contrasena.component';
-import { AvisoEmailComponent } from './Vistas/Comercial/OlvideMiContrasena/aviso-email/aviso-email.component';
 import { TodosLosUsuariosComponent } from './Vistas/Adminstrador/todos-los-usuarios/todos-los-usuarios.component';
 import { PeticionesDisponiblesComponent } from './Vistas/Adminstrador/peticiones-disponibles/peticiones-disponibles.component';
 import { CarritoComprasComponent } from './Vistas/Comercial/carrito-compras/carrito-compras.component';

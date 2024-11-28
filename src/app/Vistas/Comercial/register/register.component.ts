@@ -82,13 +82,10 @@ export class RegisterComponent implements OnInit {
   
   datos: any;
 
-
-
   showTermsModal: boolean = false;
   showPrivacyModal: boolean = false;
   
   abrirModal(event: Event, tipo: string): void {
-    //event.preventDefault(); // Evitar que el checkbox se desmarque
   
     if (tipo === 'terms') {
       this.showTermsModal = true;
@@ -111,14 +108,11 @@ export class RegisterComponent implements OnInit {
 
   constructor(private Funciones: FuncionesService, private form: FormBuilder, private rutas : Router){}
   
-  EstadosList: EstadoInterface[]=[];
-  MunicipioList: MunicipioInterface[]=[];
   GenerosList: GeneroInterface[]=[];
   faArrow = faArrowLeft;
 
 
   ngOnInit(): void {
-    this.ListaEstados();
     this.ListaGeneros();
     this.datos = this.form.group({
       email: ['', [Validators.required, Validators.email]],
@@ -166,27 +160,6 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  ListaEstados(){
-    this.Funciones.ObtenerEstados().subscribe({
-      next: (result) => {
-        this.EstadosList = result;
-      },
-      error: (err) => {
-        console.log(err)
-      }
-    })
-  }
-
-  ListaMunicipios(estadoID: number){
-    this.Funciones.ObtenerMunicipios(estadoID).subscribe({
-      next: (result) => {
-        this.MunicipioList = result;
-      },
-      error: (err) => {
-        console.log(err)
-      }
-    })
-  }
 
   ListaGeneros(){
     this.Funciones.ObtenerGeneros().subscribe({
@@ -199,17 +172,6 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-EstadoSeleccionado(event: Event)
-{
-  const seleccion = event.target as HTMLSelectElement;
-  const estadoID = seleccion.value;
-  if(estadoID) {
-    const id = Number(estadoID);
-    if(!isNaN(id)){
-      this.ListaMunicipios(id);
-    }
-  }
-}
 
 cargarImagen() {
   const file = document.getElementById('imageUpload') as HTMLInputElement;
