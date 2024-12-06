@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="RentOutfitLogo.png" alt="RentOutfit" width="50" height="50">
+    </a>
+
+    <!-- Botón de colapso -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-left">
+        <li class="nav-item">
+          <a routerLink="/Cliente/home" class="nav-link">
+            <fa-icon id="Icono" [icon]="faHouse"></fa-icon>
+            Home
+          </a>
+          <div class="separator"></div>
+        </li>
+
+        <li class="nav-item">
+          <a routerLink="vestimentas" class="nav-link">
+            <fa-icon id="Icono" [icon]="faBag"></fa-icon>
+            Vestimentas
+          </a>
+          <div class="separator"></div>
+        </li>
+      </ul>
+
+      <!-- Formulario de búsqueda -->
+     
+      <form class="d-flex ms-auto mb-2 mb-lg-0 form-busqueda" (ngSubmit)="buscarVestimenta()">
+        <input id="contBuscar" class="form-control me-1" type="search" placeholder="Buscar..." aria-label="Search" [(ngModel)]="searchQuery" name="searchQuery">
+        <button id="btnBuscar" class="btn btn-outline-dark" type="submit"><fa-icon id="Icono" [icon]="faSearch"></fa-icon></button>
+      </form>
+      
+      <div class="separator"></div>
+
+      <!-- Perfil y sesión -->
+      <ul class="navbar-nav ms-auto align-left">
+        <li *ngIf="token">
+          <div class="d-flex align-items-center">
+ 
+            <div class="unir dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              <img [src]="img" *ngIf="img" id="imgPerfil" alt="Profile">
+              <p id="nombreUsuario" class="mb-0">{{nombre}}</p>
+              <a role="button"></a>
+            </div>
+            
+
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+              <li><a routerLink="informacion" class="dropdown-item"><fa-icon id="Icono" [icon]="faGear"></fa-icon> Mi información</a></li>
+              <li><a (click)="misRentas(this.usuarioID!)" class="dropdown-item"><fa-icon id="Icono" [icon]="faShirt"></fa-icon> Mis Alquileres</a></li>
+              <li *ngIf="vendedor"><a (click)="MisEstablecimientos(this.usuarioID!)" class="dropdown-item">Adminstrar mi negocio</a></li>
+              <li *ngIf="Admin"><a (click)="TodosLosEstablecimientos(this.usuarioID!)" class="dropdown-item">Super Usuario</a></li>
+              <li>
+                <button id="CerrarSesion" type="button" (click)="CerrarSesion()" class="dropdown-item">
+                  <fa-icon id="Icono" [icon]="faDoorOpen"></fa-icon> Cerrar sesión
+                </button>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li *ngIf="ActivarCarrito">
+          <a class="btnCarrito" routerLink="carritoDeCompras"><fa-icon id="Icono" [icon]="faCartShopping"></fa-icon></a>
+        </li>
+        <li class="nav-item" *ngIf="!token">
+          <button id="btnIniciarSesion" routerLink="/Login" class="btn">Iniciar sesión</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

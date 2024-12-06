@@ -1,0 +1,51 @@
+<div class="Unir">
+  <!-- Topbar -->
+  <div class="topbar">
+    <!-- Logo en la topbar -->
+    <img src="RentOutfitLogo.png" alt="Logo" class="logo">
+    <h6>Panel de Administrador</h6>
+
+  </div>
+
+  <!-- Checkbox oculto para controlar el sidebar -->
+  <input type="checkbox" id="menu-toggle" class="menu-toggle-checkbox">
+
+  <!-- Contenedor principal -->
+  <div class="main-container">
+    <!-- Sidebar -->
+    <div class="menu-lateral">
+      <!-- Imagen del vendedor -->
+      <div class="logo-container">
+        <img [src]="img" *ngIf="img" id="ImgVendedor">
+      </div>
+
+      <!-- Nombre del vendedor -->
+      <div class="InfVendedor">
+        <p id="NomVendedor">{{nombre}}</p>
+      </div>
+
+      <!-- Elementos del menú lateral -->
+      <ul>
+        <li><a (click)="TodasLasPeticiones(this.usuarioID!)">
+          <fa-icon id="icono" [icon]="faEnvelope"></fa-icon>&nbsp;&nbsp;Nuevas peticiones <!-- Icono de sobre -->
+        </a></li>
+        <li><a (click)="TodosLosEstablecimientos(this.usuarioID!)">
+          <fa-icon [icon]="faStore"></fa-icon>&nbsp;&nbsp;Establecimientos <!-- Icono de tienda -->
+        </a></li>
+        <li><a (click)="TodosLosUsuarios(this.usuarioID!)">
+          <fa-icon [icon]="faUsers"></fa-icon>&nbsp;&nbsp;Usuarios <!-- Icono de usuarios -->
+        </a></li>
+      </ul>
+
+      <!-- Botón de regreso -->
+      <button (click)="regresarCliente()">
+        <fa-icon [icon]="faArrowLeft"></fa-icon> Regresar <!-- Icono de flecha hacia atrás -->
+      </button>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

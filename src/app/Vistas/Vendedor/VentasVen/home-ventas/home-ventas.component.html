@@ -1,0 +1,56 @@
+<div>
+    <div class="form-container">
+       <form [formGroup]="filtro">
+
+           <!-- Filtro de ordenación -->
+           <select formControlName="orden" id="Ordenar" (change)="ordenarEstablecimientos()" class="select-order">
+               <option value="reciente" selected>Más reciente</option>
+               <option value="antiguo">Más antiguo</option>
+           </select>
+       </form>
+   </div>  
+
+      
+   <div class="centrar">
+      
+    <div class="contenedor">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Establecimiento</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Total</th>
+                    <th>Estatus</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of PedidosList; track $index)
+                {
+                   <tr>
+                    <td>{{item.nombreEstablecimiento}}</td>
+                      <td>{{item.ultimaModifiacionPedido?.toString()| slice:0:10}}</td>
+                      <td>{{item.ultimaModifiacionPedido?.toString()| slice:11:19}}</td>
+                      <td>$ {{item.total}}</td>
+                      <td>
+                        @if(item.pedidosEstatus == true)
+                        {
+                          Pagado
+                        }
+                        @else{
+                          Rechazado
+                        }
+                   </tr>
+                }
+            </tbody>
+        </table>
+
+
+    </div>
+
+    <div class="contPaginas">
+       <button (click)="paginaAnterior()" [disabled]="pagina === 1"><fa-icon [icon]="faArrowLeft"></fa-icon></button>
+       <span>Página {{pagina}} de {{totalPaginas}}</span>
+       <button (click)="paginaSiguiente()" [disabled]="pagina === totalPaginas"><fa-icon [icon]="faArrowRight"></fa-icon></button>
+     </div>
+ </div>

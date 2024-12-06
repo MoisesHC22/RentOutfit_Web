@@ -1,0 +1,23 @@
+<div class="Fecha">
+  <button class="btnCambiar" (click)="cambiarMes(-1)"><fa-icon [icon]="faArrowLeft"></fa-icon></button>
+  <h2>{{ nombresMes[mesActual - 1] }} {{ anoActual }}</h2>
+  <button class="btnCambiar" (click)="cambiarMes(1)"><fa-icon [icon]="faArrowRight"></fa-icon></button>
+</div>
+
+
+<div class="calendario">
+  <div class="dia" *ngFor="let dia of diasDelMes">
+    <div class="numero-dia">{{ dia.dia }}</div>
+    <div *ngIf="dia.vestimentas.length === 0">Sin vestimentas</div>
+    <div *ngIf="dia.vestimentas.length > 0">
+      <div class="vestimentas" *ngFor="let vestimenta of dia.vestimentas">
+        
+        <div class="margin">
+          <img [src]="vestimenta.imagen1" alt="{{ vestimenta.nombrePrenda }}" id="imgVestimenta">
+          <p>{{ vestimenta.nombrePrenda }}</p>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+</div>

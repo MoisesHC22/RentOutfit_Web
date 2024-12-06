@@ -1,0 +1,428 @@
+/* Estructura general */
+.main-container {
+    display: flex;
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+  }
+  
+  .left-panel {
+    background-image: url('/Recursos/Fondo_Registro.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; /* Franja gris */
+    width: 35%; /* Ajustar según se desee */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Espacio adicional alrededor */
+  }
+  
+  /* Logo */
+  .logo {
+    margin-bottom: 20px; /* Ajusta el espacio entre el logo y el GIF */
+  }
+  
+  .logo img {
+    width: 120px;
+    margin-top: -30px; /* Eleva el logo hacia arriba */
+  }
+  
+  /* Contenedor del GIF */
+  .gif-container {
+    margin-top: 20px;
+  }
+  
+  .gif-container img {
+    width: 200px; /* Ajusta el tamaño del GIF según sea necesario */
+    height: auto;
+  }
+  
+  /* Formulario */
+  .right-panel {
+    width: 65%; /* Ajustar según se desee */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .form-container {
+    background-color: #ffffff;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  h2 {
+    margin-top: 0;
+    color: #333;
+    font-weight: lighter;
+    font-size: 26px;
+  }
+
+  
+  p {
+    color: #666;
+    font-size: 18px;
+    margin-top: -10px;
+    margin-bottom: 25px;
+  }
+  
+  .row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    margin-top: -10px;
+    margin-bottom: 25px;
+  }
+  
+  .form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .forgot-password {
+    text-align: right;
+    margin-bottom: 25px;
+  }
+  
+  .forgot-password a {
+    color: #4a90e2;
+    text-decoration: none;
+    font-size: 15px;
+  }
+  
+  .forgot-password a:hover {
+    text-decoration: underline;
+  }
+  
+  .checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .checkbox-group input[type="checkbox"] {
+    margin-right: 8px;
+  }
+  
+  .submit-button {
+    width: 100%;
+    background-color: #357abd;
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 25px;
+  }
+  
+  .submit-button:hover {
+    background-color: #22507e;
+  }
+  
+  .row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #555;
+}
+
+select:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+option {
+    font-size: 16px;
+    color: #555;
+}
+
+option:disabled {
+    color: #aaa;
+}
+
+.btnRegresar { 
+  background-color: black;
+  color: #fff;
+  border-radius: 50px;
+  border: none;
+  width: 50px;
+  height: 50px;
+}
+
+.btnContinuar {
+   background-color: #3170af;
+   width: 90%;
+   max-width: 500px;
+   height: 50px;
+   color: #fff;
+   text-align: center;
+   border: none;
+   border-radius: 50px;
+   font-size: 18px;
+}
+
+.btnContinuar:hover {
+  background-color: #357abd;
+  }
+
+.ContBtn{
+   display: flex;
+   justify-content: center;
+   gap: 20px;
+   margin-top: 20px;
+}  
+
+img {
+  border-radius: 20%;
+  border: 2px solid #ddd;
+  display: block;
+  margin: 20px auto;
+}
+
+.image-preview {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed #ccc;
+  border-radius: 20%;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 20%;
+  display: block;
+  object-fit: cover;
+}
+
+.ContValidaciones{
+
+  margin-top: 1px;
+
+  .Mensaje-Error{
+    font-size: 12px;
+    color: #b10202;
+  }
+  
+}
+
+.upload-label{
+  text-align: center;
+  margin: 0px 20px;
+}
+
+
+
+.btnAgregar {
+  width: 90%;
+  max-width: 500px;
+  height: 50px;
+  color: #fff;
+  text-align: center;
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
+}
+
+.btnAgregar.button-invalid {
+  background-color: #79b7f5;
+}
+
+.btnAgregar.button-valid{
+  background-color: #3170af; 
+  cursor: pointer;
+}
+
+.btnAgregar.button-valid:hover{
+  background-color: #0c709e;
+}
+
+
+
+
+/* Estilo del label con resaltado */
+.highlight-label {
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  color: #007bff;
+  transition: color 0.3s ease, box-shadow 0.3s ease;
+  padding: 5px 10px;
+  border-radius: 5px;
+  position: relative;
+}
+
+/* Efecto al pasar el cursor */
+.highlight-label:hover {
+  color: #0056b3;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  background-color: #e8f4ff;
+}
+
+/* Efecto de animación para llamar la atención */
+.highlight-label::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  background-color: #007bff;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.highlight-label:hover::after {
+  transform: scaleX(1);
+}
+
+/* Fondo del modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 10px; /* Asegura que haya espacio en los bordes en pantallas pequeñas */
+}
+
+/* Contenedor del modal */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 80%;
+  max-height: 80vh; /* Limita la altura del modal */
+  overflow-y: auto; /* Activa el scroll si el contenido excede la altura */
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.3s ease;
+  text-align: justify;
+}
+
+/* Animación de entrada */
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Título del modal */
+.modal-content h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Párrafo del modal */
+.modal-content p {
+  margin-bottom: 30px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* Botón dentro del modal */
+.modal-content button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+  .modal-content {
+    width: 100%;
+    max-width: 90%;
+    max-height: 70vh; /* Reduce la altura en pantallas pequeñas */
+    text-align: center;
+  }
+
+  .modal-content h2 {
+    font-size: 20px;
+  }
+
+  .modal-content p {
+    font-size: 14px;
+  }
+
+  .modal-content button {
+    width: 100%;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 800px) {
+  .modal-content {
+    width: 100%;
+    max-width: 90%;
+    max-height: 70vh; /* Reduce la altura en pantallas pequeñas */
+    text-align: center;
+  }
+}

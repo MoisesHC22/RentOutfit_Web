@@ -1,0 +1,73 @@
+
+.centrar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .contenedor {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+
+        .Establecimiento {
+            background-color: #5c6576;
+            margin: 15px;
+            border-radius: 10px;
+            color: white;
+
+
+            img{
+                width: 250px;
+                height: 200px;
+                border-radius: 10px 10px 0 0;
+            }
+
+            p{
+                margin: 7px 0;
+                text-align: center;
+                font-size: 20px;
+            }
+        }
+
+        .Establecimiento:hover{
+            transform: scale(1.05);      
+        }
+    }
+}
+
+/* Estilo para centrar horizontalmente y colocar en la parte superior */
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: #f0f8ff;
+    border-radius: 25px;
+    padding: 5px 10px;
+    width: 300px;
+    margin: 20px auto; /* Centrado horizontal con espacio desde arriba */
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 10px;
+    font-size: 16px;
+    flex: 1;
+}
+
+.search-input::placeholder {
+    color: #aaa;
+}
+
+.search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.search-button img {
+    width: 20px;
+    height: 20px;
+}

@@ -1,0 +1,396 @@
+
+.unir {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  .centrar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+       .contenedor {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 0px 70px;
+
+
+        .Establecimiento {
+            position: relative;
+            background-color: #83a6e8;
+            margin: 15px;
+            border-radius: 10px;
+            color: white;
+
+            img{
+                width: 220px;
+                height: 130px;
+                border-radius: 10px 10px 0 0;
+            }
+
+            p{
+                margin: 7px 0;
+                text-align: center;
+                font-size: 20px;
+            }
+
+            #nombre {
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            #fecha {
+                font-size: 13px;
+            }
+
+            .btnAprobar{
+                margin-right: 5px;
+                width: 90px;
+                height: 30px;
+                border-radius: 5px;
+                margin-bottom: 7px;
+                background-color: #7292cc;
+                color: white;
+                border: none;
+            }
+
+            .btnAprobar:hover {
+                background-color: #4575ce;
+            }
+
+            .btnEliminar {
+                width: 90px;
+                height: 30px;
+                border-radius: 5px;
+                margin-bottom: 7px;
+                background-color: #cc7272;
+                color: white;
+                border: none;
+            }
+
+            .btnEliminar:hover {
+                background-color: #ce4545;     
+            }
+        }
+
+        .Establecimiento:hover {
+          border: 3px solid #007bff;
+          box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); 
+          transform: scale(1.05);
+          transition: transform 0.2s, border-color 0.2s;
+
+        }
+
+        .Establecimiento.selected {
+          border: 3px solid #007bff;
+          box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); 
+          transform: scale(1.05);
+          transition: transform 0.2s, border-color 0.2s;
+        }
+
+    }
+
+    .contPaginas {
+
+        button {
+            border: none;
+            background-color: #535353;
+            color: #fff;
+            margin: 0 10px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50px;
+        }
+    }
+
+
+  }
+
+  .contInformacionEstablecimiento{
+    width: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    .margin {
+        margin: 30px;
+        position: relative;
+        
+        .btnCerrar {
+            position: absolute;
+            top: -35px;
+            right: -15px;
+            background: #cc7272;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .btnCerrar:hover{
+            background-color: #ce4545;    
+        }
+
+        #titulo {
+            margin-top: 50px;
+            font-weight: bold;
+            text-align: center;
+        }            
+
+        .contUbicacion {
+            margin-top: 40px;
+            width: 400px;
+            color: #000000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+
+            h6 {
+                font-weight: bold;
+            }
+
+            .imgEstablecimiento {
+                margin-top: 10px;
+                width: 425px;
+                height: 300px;
+                border-radius: 10px;
+            }
+
+            p {
+                text-align: justify;
+            }
+
+            #Resaltar {
+                font-weight: bold;
+            }
+        }
+
+        #subTitulo {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .contVendedor{
+            margin-top: -10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 70px;
+            background-color: #535353;
+            border-radius: 10px;
+
+
+            .imgVendedor{
+                width: 40px;
+                height: 40px;
+                border-radius: 50px;
+            }
+
+            p {
+                color: #fff;
+                margin: 6px 7px;
+                text-align: center;
+                font-size: 18px;
+            
+            }
+        }
+    }
+   
+  }
+
+}
+
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+        h5{
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .form-group{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+
+            label {
+                font-weight: bold;
+            }
+
+            textarea {
+                width: 100%;
+            }
+
+            .error{
+                font-size: 12px;
+                color: #b10202;
+            }
+        }
+
+        .contBotones {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            button {
+                margin: 10px;
+                width: 140px;
+                height: 45px;
+                border-radius: 10px;
+                border: none;
+                color: white;
+            }
+
+            #cerrar{
+                background-color: #535353;
+ 
+            }
+
+            #aprobar.button-valid {
+                background-color: #0c5679;
+            }
+
+            #aprobar.button-invalid {
+                background-color: #79b7f5;
+            }
+
+        }
+      }
+  }
+
+/* Contenedor principal del formulario de búsqueda */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Formulario de búsqueda estilizado */
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #f5f8ff;
+    padding: 5px 10px;
+    border-radius: 30px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Grupo de entrada de búsqueda */
+.input-group {
+    display: flex;
+    align-items: center;
+    background-color: #e0e7ff;
+    border-radius: 20px;
+    padding: 2px 8px;
+    border: 1px solid transparent;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-group:hover {
+    border-color: #007bff;
+    box-shadow: 0 2px 6px rgba(0, 123, 255, 0.1);
+}
+
+/* Input para búsqueda */
+.search-input {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 5px;
+    font-size: 14px;
+    flex: 1;
+    color: #333;
+}
+
+.search-input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* Botón de búsqueda */
+.search-button {
+    background-color: #007bff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.search-button img {
+    width: 15px;
+    height: 15px;
+}
+
+/* Select para ordenar */
+.select-order {
+    background-color: #e0e7ff;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+    height: 30px; /* Más delgado */
+}
+
+.select-order:hover {
+    border-color: #007bff;
+    box-shadow: 0 2px 6px rgba(0, 123, 255, 0.1);
+}
+
+/* Efecto de enfoque para input y select */
+.search-input:focus,
+.select-order:focus {
+    border-color: #007bff;
+    box-shadow: 0 2px 6px rgba(0, 123, 255, 0.1);
+}
+
+
+  
+  
+  

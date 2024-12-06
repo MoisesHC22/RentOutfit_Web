@@ -1,0 +1,115 @@
+
+<!-- Mapa -->
+
+<div class="contenedorIframe">
+  <div id="map"></div>
+</div>
+
+
+<!-- Tiendas cercanas -->
+<div class="contenedor-tienda">
+  <h5>Tiendas</h5>
+  <p>Encuentra todo lo que estás buscando a la medida</p>
+  <hr />
+  
+  <div class="centrar">
+    <div class="tienda-galeria">
+      @for (item of TiendaList; track $index) 
+      {
+        <div class="tarjeta-tienda" (click)="MasInformacionEstablecimiento(item.establecimientosID)">
+          <img id="img" alt="item.nombreEstablecimiento" [src]="item.linkImagenEstablecimiento"  loading="lazy">
+            <div class="info-tienda">
+               <h4>{{item.nombreEstablecimiento}}</h4>
+               <p>{{item.calle}}, {{item.codigoPostal}}, {{item.nombreMunicipio}}, {{item.nombreEstado}}</p>
+            </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+
+<!-- Anuncio -->
+<section class="showcase">
+  <div class="showcase-wrap">
+    <div class="texture-overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-device">
+           <img id="device" alt="Publicidad" src="/Recursos/Publicidad1.png">
+        </div>
+        <div class="col-md-5 contenedorAnuncio">
+          <h3 id="TituloAnuncio">Descarga nuestra App Móvil</h3><br>
+            <p id="TextoAnuncio">
+              ¡Descubre la forma más fácil de lucir espectacular sin gastar de más! 🎉 
+              Con nuestra app, alquila trajes, disfraces y vestimenta para cualquier ocasión 
+              especial. Encuentra lo que necesitas con nuestra amplia variedad de opciones, 
+              filtra por categoría, talla y disponibilidad, y realiza tu reserva en minutos.<br><br>
+            </p><br>
+            <div class="contenedorBtnDescargar">
+              <a href="https://download937.mediafire.com/8rxvg9vxjasgp3DWCNyrScvntZOLysg6nRCckG0yqVPkaV2tddpTp-uAZRB8uRZ1xgNvVjjdPJtsNx7JnFKTYHyHVQAzZHUPEfvPl-1yceceg4kP-qoMlTW4_MM5WLaeynewJk-ieT_NnYW-N443G0XCAHJ4560VWrKCo2JLtsNdsxU/npjg7ksu2dcyo6i/Rent+Outfit+v1.0.0.apk " class="download-btn">Descarga!&nbsp;&nbsp;<fa-icon id="Icono" [icon]="faDownload"></fa-icon></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal" *ngIf="modalExito">
+  <div class="modal-content">
+    <h4> ¡Gracias por alquilar!</h4>
+
+    <div class="contAnimacion">
+      <ng-lottie [options]="animationExito"></ng-lottie>
+    </div>
+
+    <div class="contBoton">
+      <button id="btnCerrar" (click)="cerrarModal()">OK</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-container">
+      <div class="footer-section">
+          <h3>RentOutfit</h3>
+          <p>Fácil de usar, accesible y flexible, Rent Outfit te permite alquilar con comodidad y seguridad, brindándote una experiencia sin complicaciones desde la búsqueda hasta la devolución. ¡Haz de tu evento algo especial sin esfuerzo!</p>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/profile.php?id=61568779437740" id="facebook"><fa-icon id="Facebook" [icon]="faFacebook" class="icon-custom"></fa-icon></a>
+            <a href=" https://www.instagram.com/rentoutfit.utt/" id="instagram"><fa-icon id="Instagram" [icon]="faInstagram" class="icon-custom"></fa-icon></a>
+            <a href="https://x.com/RentOutfit" id="xtwitter"><fa-icon id="Xtwitter" [icon]="faXTwitter" class="icon-custom"></fa-icon></a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+          <h3>Nosotros</h3>
+          <ul>
+              <li><a href="#">Sobre nosotros</a></li>
+              <li><a href="#">Contactanos</a></li>
+              <li><a href="#">Servicio personalizado</a></li>
+          </ul>
+      </div>
+      
+      <div class="footer-section">
+          <h3>Mi cuenta</h3>
+          <ul>
+              <li *ngIf="OpcionLogeo">
+                <a [routerLink]="'/Login'">Ingresar</a>
+              </li>
+
+              <li *ngIf="OpcionDarDeAlta">
+                <a (click)="darDeAltaVendedor(usuario!)"><fa-icon id="store" [icon]="faStore" class="icon-custom"></fa-icon>&nbsp;&nbsp;Quiero vender!</a>
+              </li>
+          </ul>
+      </div>
+      
+      <div class="footer-section">
+          <h3>Suscríbete y entérate de las novedades de Rent Outfit</h3>
+          <input type="email" placeholder="Escribe tu correo">
+          <button>Registrarse</button>
+      </div>
+
+  </div>
+</footer>

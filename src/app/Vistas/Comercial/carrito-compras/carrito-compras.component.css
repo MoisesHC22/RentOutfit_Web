@@ -1,0 +1,110 @@
+body {
+    background: #f0f0f0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Centrado hacia arriba */
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    margin: 0;
+    padding-top: 2rem; /* Espacio adicional en la parte superior */
+}
+
+.container-fluid {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 90vh; /* Ocupar el 90% de la altura de la pantalla */
+}
+
+.card {
+    width: 90%;
+    max-width: 1200px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 1rem;
+    border: none;
+    padding: 2rem;
+    margin-top: 1rem; /* Reducido para estar más arriba */
+    margin-bottom: 2rem;
+    height: 100%; /* Ocupa toda la altura disponible */
+}
+
+.cart {
+    background-color: #ffffff;
+    padding: 3rem;
+    border-radius: 1rem 0 0 1rem;
+    height: 100%; /* Extiende la altura de la sección del carrito */
+}
+
+.summary {
+    background-color: #f8f8f8;
+    padding: 3rem;
+    border-radius: 0 1rem 1rem 0;
+    height: 100%; /* Extiende la altura de la sección de resumen */
+}
+
+.title h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+h4, h2 {
+    font-size: 1.5rem;
+}
+
+img {
+    width: 6rem;
+    height: auto;
+}
+
+input {
+    width: 4rem;
+    text-align: center;
+    border: 1px solid #ddd;
+    margin: 0 0.5rem;
+    font-size: 1.2rem;
+}
+
+.btn-quantity {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.btn-quantity:hover {
+    background-color: #444;
+}
+
+.back-to-shop {
+    margin-top: 4rem;
+}
+
+.back-to-shop a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.btn {
+    background-color: #000;
+    color: #fff;
+    padding: 1rem;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #444;
+}
+
+#calendario {
+    width: 300px;
+}

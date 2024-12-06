@@ -1,0 +1,313 @@
+.vestimenta-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+
+.vestimenta-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.zoom-controls {
+  position: absolute;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 7px;
+  z-index: 10; 
+  margin-top: 10px;
+  margin-left: -210px;
+}
+
+.zoom-controls button {
+  background-color: #5e5e5e4e; /* Color de fondo azul */
+  border: none; /* Sin bordes */
+  border-radius: 50%; /* Botones redondos */
+  width: 40px; /* Tamaño uniforme */
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white; /* Icono blanco */
+  font-size: 18px; /* Tamaño del icono */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s, background-color 0.3s;
+}
+
+.zoom-controls button:hover {
+  background-color: #2d2d2d; /* Azul más oscuro al pasar el mouse */
+  transform: scale(1.1); /* Efecto de ampliación */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Aumenta la sombra */
+}
+
+.zoom-controls button:active {
+  transform: scale(0.95); /* Efecto de clic */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce la sombra */
+}
+
+.zoom-controls button fa-icon {
+  pointer-events: none; /* Evita que los clics afecten solo al icono */
+}
+
+.zoom-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 10px;
+  position: relative;
+  cursor: grab;
+  user-select: none; /* Evita la selección de texto e imágenes */
+}
+
+.zoom-container.grabbing {
+  cursor: grabbing; /* Cambio de cursor al arrastrar */
+}
+
+.zoom-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.3s ease;
+  cursor: zoom-in; /* Manita cuando no está ampliado */
+  user-select: none; /* Evita la selección de la imagen */
+  pointer-events: none; /* Bloquea la interacción con la imagen */
+}
+
+.zoom-container img.zoomed {
+  cursor: grab; /* Manita para la imagen ampliada */
+}
+
+/* Contenedor principal centrado */
+.centrar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fafafa;
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  padding: 20px;
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+
+/* Contenedor que une las columnas e imágenes */
+.unir {
+  display: flex;
+}
+
+/* Contenedor para las miniaturas */
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.column img {
+  margin: 10px;
+  width: 115px;
+  height: 115px;
+  border-radius: 10px;
+  object-fit: cover;
+  object-position: top;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.column img.selected {
+  border: 3px solid #007bff;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+  transform: scale(1.05);
+}
+
+/* Contenedor de la imagen de vista previa */
+.vestimenta-preview img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.3s ease;
+}
+
+/* Información de la vestimenta */
+.informacion {
+  max-width: 400px;
+  width: 100%;
+  margin: 20px;
+}
+
+.informacion .contInformacion {
+  padding: 10px;
+}
+
+.informacion h4 {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#estatus {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.contPrecio {
+  margin: 20px;
+}
+
+.contPrecio p {
+  margin-top: -10px;
+}
+
+.contInformacion p {
+  text-align: justify;
+  margin: 10px 0;
+}
+
+
+
+.stock-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Espaciado entre los elementos */
+}
+
+.stock-controls button {
+  background-color: #007bff; /* Fondo azul */
+  color: white; /* Texto blanco */
+  border: none;
+  border-radius: 50%; /* Botones redondos */
+  width: 40px;
+  height: 40px;
+  font-size: 20px; /* Tamaño del texto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para profundidad */
+}
+
+.stock-controls button:hover {
+  background-color: #0056b3; /* Azul más oscuro en hover */
+  transform: scale(1.1); /* Efecto de ampliación */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Aumenta la sombra */
+}
+
+.stock-controls button:active {
+  transform: scale(0.95); /* Efecto de clic */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce la sombra */
+}
+
+.stock-controls input[type="number"] {
+  width: 60px; /* Ajusta el ancho del campo */
+  text-align: center; /* Centra el texto */
+  font-size: 16px; /* Tamaño de fuente más grande */
+  color: #333; /* Texto oscuro */
+  border: 1px solid #ddd; /* Borde gris claro */
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #f9f9f9; /* Fondo claro */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra interna */
+}
+
+.stock-controls input[type="number"]:focus {
+  outline: none; /* Quita el borde azul */
+  border-color: #007bff; /* Borde azul al enfocar */
+  box-shadow: inset 0 1px 3px rgba(0, 123, 255, 0.2); /* Sombra azul */
+}
+
+.stock-controls button fa-icon {
+  pointer-events: none; /* Evita que los clics afecten solo al icono */
+}
+
+
+
+
+
+
+.contBotonAgregar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+#btnAgregar {
+  width: 100%;
+  max-width: 300px;
+  height: 45px;
+  border-radius: 10px;
+  color: white;
+  border: none;
+  background-color: #0056b3;
+  transition: background-color 0.3s ease, transform 0.2s;
+  cursor: pointer;
+}
+
+#btnAgregar:hover {
+  background-color: #0165d1;
+  transform: scale(1.05);
+}
+
+
+@media (max-width: 768px) {
+  .unir {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .column {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .vestimenta-preview img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .informacion {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .centrar {
+    width: 100%;
+    padding: 10px;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  #btnAgregar {
+    max-width: 90%;
+    height: 40px;
+  }
+
+  .vestimenta-preview img {
+    width: 100%;
+    height: auto;
+  }
+
+  .informacion h4 {
+    font-size: 18px;
+  }
+
+  .contPrecio, .contInformacion {
+    margin: 10px;
+  }
+}

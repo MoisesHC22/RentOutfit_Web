@@ -1,0 +1,107 @@
+<div class="vestimenta-info">
+
+  <div class="centrar">
+    <div class="unir">
+      <div class="column">
+         
+        <img *ngIf="informacion?.imagen1"
+          [src]="informacion?.imagen1"
+          alt="Imagen 1 de {{informacion?.nombrePrenda}}"
+          (click)="cambiarImagenSeleccionada(informacion?.imagen1 || null)"
+          [class.selected]="imagenSeleccionada === informacion?.imagen1"
+        />
+  
+        <img
+          *ngIf="informacion?.imagen2"
+          [src]="informacion?.imagen2"
+          alt="Imagen 2 de {{informacion?.nombrePrenda}}"
+          (click)="cambiarImagenSeleccionada(informacion?.imagen2 || null)"
+          [class.selected]="imagenSeleccionada === informacion?.imagen2"
+        />
+  
+        <img
+          *ngIf="informacion?.imagen3"
+          [src]="informacion?.imagen3"
+          alt="Imagen 3 de {{informacion?.nombrePrenda}}"
+          (click)="cambiarImagenSeleccionada(informacion?.imagen3 || null)"
+          [class.selected]="imagenSeleccionada === informacion?.imagen3"
+        />
+        
+        <img
+          *ngIf="informacion?.imagen4"
+          [src]="informacion?.imagen4"
+          alt="Imagen 4 de {{informacion?.nombrePrenda}}"
+          (click)="cambiarImagenSeleccionada(informacion?.imagen4 || null)"
+          [class.selected]="imagenSeleccionada === informacion?.imagen4"
+        />
+  
+      </div>
+  
+
+      <div class="vestimenta-preview">
+        <div class="zoom-controls">
+          <button (click)="zoomIn()" aria-label="Aumentar zoom">
+            <fa-icon id="Max" [icon]="faPlus"></fa-icon>
+          </button>
+          <button (click)="zoomOut()" aria-label="Disminuir zoom">
+            <fa-icon id="Min" [icon]="faMinus"></fa-icon>
+          </button>&nbsp;
+          <button (click)="resetZoom()" aria-label="Restablecer zoom">
+            <fa-icon id="Res" [icon]="faRotateRight"></fa-icon>
+          </button>
+        </div>
+      
+        <div 
+          class="zoom-container" 
+          [class.grabbing]="isDragging"
+          (mousedown)="startDragging($event)" 
+          (mouseup)="stopDragging()"
+          (mouseleave)="stopDragging()"
+          (mousemove)="onMouseMove($event)"
+        >
+          <img 
+            id="imagenSeleccionada" 
+            [src]="imagenSeleccionada" 
+            alt="Imagen en detalle" 
+            *ngIf="imagenSeleccionada"
+            [style.transform]="'scale(' + zoomLevel + ')'"
+            [class.zoomed]="zoomLevel > 1"
+            draggable="false"
+            (dragstart)="preventDrag($event)"
+          />
+        </div>
+      </div>
+  
+      <div class="informacion">
+        <div class="contInformacion">
+          <h4>{{informacion?.nombrePrenda}}</h4>
+          <p id="estatus">{{this.estatus}}</p>
+
+
+          <div class="contPrecio">
+             <h5>MX ${{informacion?.precioPorDia}}</h5>
+             <p>Precio por dia.</p>
+          </div>
+
+          <div class="contInformacion">
+             <p>{{informacion?.descripcion}}</p>
+             <p>Fecha de publicación: {{informacion?.fechaDePublicacion!.toString() | slice: 0:10}}</p>
+          </div>
+
+          <div class="stock-controls">
+            <button (click)="disminuirStock()" aria-label="Disminuir stock"><fa-icon id="MinSt" [icon]="faMinus"></fa-icon></button>
+            <input type="number" [value]="stock" readonly aria-label="Stock disponible">
+            <button (click)="aumentarStock()" aria-label="Aumentar stock"><fa-icon id="MaxSt" [icon]="faPlus"></fa-icon></button>
+          </div>
+
+          <div class="contBotonAgregar">
+            <button id="btnAgregar" (click)="AgregarAlCarrito(informacion?.vestimentaID!)">Agregar al carrito</button>
+          </div>
+
+        </div> 
+      </div>
+      
+    </div>
+  </div>
+
+</div>

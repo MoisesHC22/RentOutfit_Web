@@ -1,0 +1,62 @@
+<div class="container-fluid full-height">
+    <div class="card full-height">
+        <div class="row full-height">
+            <div class="col-lg-8 cart full-height">
+                <div class="title mb-5">
+                    <div class="row">
+                        <div class="col">
+                            <h1><b>Carrito de Compras</b></h1>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lista de Vestimentas -->
+                @for (item of ListaVestimentas; track $index) {
+                    <div class="row border-top border-bottom p-4 align-items-center">
+                        <div class="col-2">
+                            <img class="img-fluid" [src]="item.imagen1" alt="Imagen" />
+                        </div>
+                        <div class="col">
+                            <h4>{{ item.nombrePrenda }}</h4>
+                        </div>
+                        <div class="col d-flex align-items-center">
+                            <button class="btn-quantity" (click)="disminuirStock(item)">-</button>
+                            <input type="number" [value]="item.stockSeleccionado" readonly>
+                            <button class="btn-quantity" (click)="aumentarStock(item)">+</button>
+                        </div>
+                        <div class="col">
+                            <h4>$ {{ item.precioPorDia }} | {{ item.precioTotal }}</h4>
+                        </div>
+
+                        <div class="col">
+                            <input type="date" id="calendario" [(ngModel)]="item.fechaPrestamo" (change)="cambiarFecha(item)">
+                        </div>
+                       
+                    </div>
+                }
+
+                <div class="back-to-shop mt-5">
+                    <a href="#">&leftarrow;</a><span class="text-right"> Volver a la tienda</span>
+                </div>
+            </div>
+            
+            <!-- Resumen de compra -->
+            <div class="col-lg-4 summary full-height">
+                <div><h2><b>Resumen</b></h2></div>
+                <hr>
+                <div class="row mb-3">
+                    <div class="col">{{ ConteoDeVestimentas() }} artículos</div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col">PRECIO TOTAL</div>
+                    <div class="col text-right"><h2>$ {{ calcularTotal() }}</h2></div>
+                </div>
+                
+                <button class="btn btn-lg btn-dark" (click)="iniciarPago(this.usuarioID!)">PAGAR</button>
+               
+               
+                <div id="wallet_container"></div>
+            </div>
+        </div>
+    </div>
+</div>

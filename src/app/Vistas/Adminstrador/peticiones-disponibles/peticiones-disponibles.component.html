@@ -1,0 +1,98 @@
+<div>
+   <div class="form-container">
+      <form [formGroup]="filtro" (ngSubmit)="buscarEstablecimientos()" class="search-form">
+          <!-- Barra de búsqueda -->
+          <div class="input-group">
+              <input formControlName="busqueda" placeholder="Buscar por nombre" class="search-input">
+              <button type="submit" class="search-button">
+                  <img src="https://img.icons8.com/ios-glyphs/30/ffffff/search--v1.png" alt="Buscar">
+              </button>
+          </div>
+          <!-- Filtro de ordenación -->
+          <select formControlName="orden" id="Ordenar" (change)="ordenarEstablecimientos()" class="select-order">
+              <option value="reciente" selected>Más reciente</option>
+              <option value="antiguo">Más antiguo</option>
+          </select>
+      </form>
+  </div>  
+  
+
+</div>
+<div class="unir">
+
+   
+   
+   <div class="centrar">
+      
+      <div class="contenedor">
+         @for (item of TiendasList; track $index)
+         {
+           <div class="Establecimiento" (click)="InformacionEstablecimiento(item.establecimientosID!)" [ngClass]="{ 'selected': item.establecimientosID === EstablecimientoSeleccionado }">
+               <img [src]="item.linkImagenEstablecimiento">
+               <p id="nombre">{{item.nombreEstablecimiento}}</p>
+               <p id="fecha">{{item.ultimaModificacionEstablecimiento?.toString()| slice:0:10 }} | {{item.ultimaModificacionEstablecimiento?.toString()| slice:11:19 }} </p>
+               <div class="unir">  
+                  <button class="btnAprobar" (click)="aprobar(item.establecimientosID!)">Confirmar</button>
+                  <button class="btnEliminar" (click)="abrirModal(item.establecimientosID!, item.nombreEstablecimiento!)">Eliminar</button>
+               </div>
+           </div>
+         }
+      </div>
+
+      <div class="contPaginas">
+         <button (click)="paginaAnterior()" [disabled]="pagina === 1"><fa-icon [icon]="faArrowLeft"></fa-icon></button>
+         <span>Página {{pagina}} de {{totalPaginas}}</span>
+         <button (click)="paginaSiguiente()" [disabled]="pagina === totalPaginas"><fa-icon [icon]="faArrowRight"></fa-icon></button>
+       </div>
+   </div>
+   
+
+   <div *ngIf="MostrarInformacion" class="contInformacionEstablecimiento">
+      <div class="margin">
+         <button (click)="CerrarInfEstablecimiento()" class="btnCerrar">&times;</button>
+        <h5 id="titulo">Informacion del establecimiento</h5>
+
+        <p id="subTitulo">Vendedor:</p>
+        <div class="contVendedor">
+           <img class="imgVendedor" [src]="informacion?.linkImagenPerfil" alt="Imagen del vendedor {{ informacion?.nombreCliente }}" />
+           <p>{{ informacion?.nombreCliente }} {{ informacion?.apellidoPaterno }} {{ informacion?.apellidoMaterno }}</p>
+        </div>
+
+        <div class="contUbicacion">
+         <h6>{{informacion?.nombreEstablecimiento}}</h6>
+         
+         <p><span id="Resaltar">Ubicación:</span> 
+            {{ informacion?.codigoPostal}},
+            {{ informacion?.colonia}}, 
+            {{ informacion?.calle}}  No.Int {{ informacion?.noInt}}  No.Ext {{ informacion?.noExt}}, 
+            {{ informacion?.municipio}}, 
+            {{ informacion?.nombreEstado}}.</p>
+
+         <img class="imgEstablecimiento" [src]="informacion?.linkImagenEstablecimiento" alt="Imagen del establecimiento {{ informacion?.nombreEstablecimiento }}" />
+         
+         </div>
+        
+      </div>
+   </div>
+</div>
+
+<div class="modal" *ngIf="MostrarModal">
+    <div class="modal-content">
+        <h5>Denegar el Establecimiento: {{this.nombreEstablecimiento}}</h5>
+        <form [formGroup]="datos" (ngSubmit)="denegar()">
+
+         <div class="form-group">
+            <label for="motivo">Ingresa una breve descripción del motivo: </label>
+            <textarea id="motivo" formControlName="motivo" placeholder="Ingresa el motivo" rows="4"></textarea>
+            <div *ngIf="datos.get('motivo')?.invalid && datos.get('motivo')?.touched" class="error">
+              El motivo es obligatorio
+            </div>
+         </div>
+           
+           <div class="contBotones">
+            <button id="aprobar" type="submit" [disabled]="datos.invalid" [ngClass]="{'button-valid': datos.valid, 'button-invalid': !datos.valid}">Confirmar</button>
+            <button id="cerrar" type="button" (click)="cerrarModal()">Cancelar</button>
+           </div>
+        </form>
+    </div>
+</div>

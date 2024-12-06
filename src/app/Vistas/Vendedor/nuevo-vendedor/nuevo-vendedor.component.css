@@ -1,0 +1,239 @@
+.Panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background: linear-gradient(to bottom, #ffffff, #bfdae9);
+  flex-direction: column;
+
+  h3 {
+    font-weight: bold;
+    margin: -50px 0 40px 0;
+  }
+}
+
+
+
+.contenedorRegistro {
+  width: 100%;
+  max-width: 700px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin: 20px auto;
+}
+
+.image-banner {
+  width: 600px; 
+  height: 320px;
+  margin-bottom: 30px; /* Aumentado para agregar espacio con el formulario */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: #e0e0e0;
+  margin: 0 auto; /* Mantener centrado */
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+}
+
+.contPasos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 15px;
+  text-align: left;
+
+  h6 {
+    font-weight: bold;
+  }
+
+  .ContValidaciones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+
+    .Mensaje-Error {
+      font-size: 11px;
+      color: #cc0202;
+    }
+  }
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.unir {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.unir .form-group {
+  flex: 1;
+}
+
+.centrar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contBotones {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+
+
+  button{
+    font-size: 18px;
+    border: none;
+    color: white;
+  }
+
+  .btnContinuar, .btnCancelar {
+    border-radius: 10px;
+    width: 200px;
+    height: 50px;
+    margin: 0 20px;
+  }
+
+  .btnRegresar {
+    background-color: black;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .btnConfirmar {
+    text-align: center;
+    border-radius: 10px;
+    width: 400px;
+    height: 50px;
+  }
+}
+
+
+.btnCancelar {
+  background-color: #535353;
+  color: white;
+}
+
+.btnCancelar:hover {
+  background-color: #2c2c2c;
+}
+
+.btnContinuar {
+  background-color: #0c5679;
+  color: white;
+}
+
+.btnConfirmar.button-valid {
+  background-color: #3170af; 
+}
+
+.btnConfirmar.button-invalid {
+  background-color: #79b7f5;
+}
+
+
+.btnContinuar:hover, .btnConfirmar.button-valid:hover {
+  background-color: #0c709e;
+}
+
+.ContLosPasos{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 100%;
+  max-width: 700px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ 
+  .CentrarCont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0 -2px 0;
+
+    .ContPaso{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 40px;
+     
+  
+      p{
+        font-size: 11px;
+      }
+  
+      button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50px;
+        border: none;
+      }
+
+      button.active-step {
+        background-color: #0c5679;
+        color: white;
+      }
+  
+    }
+  }
+
+  
+}
+
+.ContAnimacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+
+  .animacion-exito{
+      
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      width: 500px;
+
+      h4 {
+          font-weight: bold;
+      }
+
+      p {
+        text-align: center;
+      }
+  
+  }
+}
+

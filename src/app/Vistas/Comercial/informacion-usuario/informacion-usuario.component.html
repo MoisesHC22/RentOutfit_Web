@@ -1,0 +1,90 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<div class="container emp-profile">
+    <form>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img [src]="img" *ngIf="img" id="imgPerfil" alt="Profile">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        {{nombre}} {{apellidoP}} {{apellidoM}}
+                    </h5>
+                    <h6>
+                        {{nombreRol}}
+                    </h6>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mis datos personales</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Editar perfil"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 offset-md-4">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-6"><label>Nombre</label></div>
+                            <div class="col-md-6"><p>{{nombre}}</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6"><label>Apellido paterno</label></div>
+                            <div class="col-md-6"><p>{{apellidoP}}</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6"><label>Apellido materno</label></div>
+                            <div class="col-md-6"><p>{{apellidoM}}</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6"><label>Correo</label></div>
+                            <div class="col-md-6"><p>{{email}}</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6"><label>Teléfono</label></div>
+                            <div class="col-md-6"><p>{{telefono}}</p></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6"><label>Género</label></div>
+                            <div class="col-md-6"><p>{{genero}}</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        
+        <br><br>
+        <div class="row">
+            <div class="col-md-8 offset-md-4">
+            <div class="profile-head">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Zona de Peligro</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 offset-md-4">
+                    <input type="submit" class="profile-change-btn" name="btnChange" value="Cambiar Contraseña"/><br><br>
+                    <input type="submit" class="profile-delete-btn" name="btnDelete" value="Borrar Cuenta"/>
+            </div>
+        </div>
+
+
+    </form>           
+</div>

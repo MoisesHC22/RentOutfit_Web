@@ -1,0 +1,155 @@
+
+.formulario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to bottom, #b5d5e7, #ffffff);
+
+
+    .NuevaContrasena {
+        background-color: #ffffff;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 350px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    
+        h4{
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        #img {
+            margin: 10px;
+            border-radius: 50px;
+            width: 80px;
+            height: 80px;
+        }
+
+    }
+
+    .ContContrasena {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #inputContrasena {
+        width: 260px;
+    }
+
+    label {
+        text-align: left;
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+      
+    input {
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .ContValidaciones{
+
+       width: 260px;
+       text-align: justify;
+
+         .Mensaje-Error {
+           font-size: 11px;
+           color: #cc0202;
+         }
+    }
+
+    .btnValidar {
+        color: #ffffff;
+        width: 260px;
+        height: 45px;
+        border-radius: 8px;
+        border: none;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+        will-change: transform, background-color;
+        margin: 10px 0 20px 0;
+    }
+
+    .btnValidar-activo {
+        background-color: #094e6d;
+    }
+
+    .btnValidar-activo:hover {
+        background-color: #0c709e;
+    }
+
+    .btnValidar-desactivado {
+        background-color: #b0b0b0;
+        cursor: not-allowed;
+    }
+}
+
+
+.Anuncio {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .animacion {
+        margin-top: -80px;
+        width: 700px;
+        height: 700px;
+    }
+     
+    .btnRegresar {
+        margin-top: -125px;
+        border-radius: 10px;
+        height: 45px;
+        width: 290px;
+        background-color: #094e6d;
+        font-size: 20px;
+        color: #ffffff;
+        border: none;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+        will-change: transform, background-color;
+    }
+
+    .btnRegresar:hover {
+        background-color: #0c709e;
+        transform: scale(1.1);
+    }
+
+}
+
+
+
+.ContAnimacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+
+    .animacion-exito{
+        
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+
+        .animacion {
+            width: 300px;
+            height: 300px;
+        }
+
+        p {
+            font-weight: bold;
+        }
+    
+    }
+  }
+  

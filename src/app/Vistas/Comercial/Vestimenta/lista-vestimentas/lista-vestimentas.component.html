@@ -1,0 +1,99 @@
+
+<div class="centrar">
+
+  <div class="contFiltros">
+    <div class="ajustar">
+
+      <p id="titulo">{{ConteoDeVestimentas()}} Opciones disponibles</p>
+
+      <div class="contUbicacion">
+
+        <div>
+          <label for="estado">Estado</label>
+          <select id="estado" name="estado" (change)="SeleccionEstado($event)"  [(ngModel)]="estadoSeleccionado">
+             <option value="" disabled selected>Selecciona aqui</option>
+             <option *ngFor="let estado of EstadosList" [value]="estado.estadoID">{{estado.nombreEstado}}</option>
+          </select>
+        </div>
+
+        <div>
+          <div class="form-group">
+            <label for="municipio">Municipio</label>
+            <select id="municipio" name="municipio" [(ngModel)]="municipioSeleccionado" (change)="SeleccionMunicipio($event)">
+              <option value="" disabled selected>Selecciona aqui</option>
+              <option *ngFor="let municipio of MunicipioList" [value]="municipio.nombreMunicipio" [selected]="municipio.nombreMunicipio === municipio">{{municipio.nombreMunicipio}}</option>
+            </select>
+          </div>
+        </div>
+        
+        <button (click)="usarUbicacion()">Usar mi ubicacion</button>
+
+      </div>
+
+      <div class="contCategorias">
+        <p id="subtitulo">Categorias</p>
+        <hr>
+        @for(categoria of CategoriasList; track $index )
+        {
+          <label>
+            <input
+            type="radio"
+            name="categoria"
+            [value]="categoria.estiloID"
+            (change)="seleccionarCategoria(categoria.estiloID!)"
+            [checked]="categoriaSeleccionada === categoria.estiloID"
+            (click)="toggleCategoria(categoria.estiloID!)">
+            {{categoria.nombreEstilo}}
+          </label>
+        }
+      </div>
+
+      <div class="contTallas">
+        <p id="subtitulo">Tallas</p>
+        <hr>
+        <div class="listTallas">
+          @for(tallas of TallasList; track $index )
+          {
+            <a
+             (click)="seleccionarTalla(tallas.tallaId!)" 
+             (dblclick)="deseleccionarTalla()"
+             [class.selected]="tallaSeleccionada === tallas.tallaId" 
+             class="talla">
+             {{tallas.nombreTalla}}
+            </a>
+          }
+        </div>
+
+      </div>
+
+      
+
+    </div>
+  </div>
+ 
+
+  <div class="contResultados">
+    <div class="contenedor" *ngIf="!NoHayVestimentas">
+      @for (item of VestimentasList; track $index) 
+      {
+          <div class="vestimenta" (click)="MasInformacion(item.vestimentaID)">
+               
+                  <img id="img" [src]="item.imagen1">
+  
+                  <h5>{{item.nombrePrenda}}</h5>
+                  <p>{{item.nombreTalla}}</p>
+                  <p>$ {{item.precioPorDia}}</p>
+                  <p>{{item.nombreEstablecimiento}}</p>
+          </div>
+      }
+    </div>
+    
+    <div class="NoResultados" *ngIf="NoHayVestimentas">
+       <h6>No se encontraron vestimentas</h6>
+    </div>
+  </div>
+
+   
+
+  </div>
+  

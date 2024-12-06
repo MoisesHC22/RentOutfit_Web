@@ -1,0 +1,56 @@
+<div class="Unir">
+  <!-- Topbar -->
+  <div class="topbar">
+    <!-- Logo en la topbar -->
+    <img src="RentOutfitLogo.png" alt="Logo" class="logo">
+  
+    <h6>Panel de Vendedor</h6>
+  </div>
+
+  <!-- Checkbox oculto para controlar el sidebar -->
+  <input type="checkbox" id="menu-toggle" class="menu-toggle-checkbox">
+
+  <!-- Contenedor principal -->
+  <div class="main-container">
+    <!-- Sidebar -->
+    <div class="menu-lateral">
+      <!-- Imagen del vendedor -->
+      <div class="logo-container">
+        <img [src]="img" *ngIf="img" id="ImgVendedor">
+      </div>
+
+      <!-- Nombre del vendedor -->
+      <div class="InfVendedor">
+        <p id="NomVendedor">{{nombre}}</p>
+      </div>
+
+      <!-- Agregamos el nuevo conjunto de enlaces -->
+      <ul>
+        <li>
+          <a routerLink="misEstablecimientos/{{usuarioID}}">
+            <fa-icon [icon]="faStore"></fa-icon> Mis Establecimientos
+          </a>
+        </li>
+        <li>
+          <button id="pdfEstablecimiento" (click)="generarPDf(this.usuarioID!)">Descargar Pdf</button>
+        </li>
+        <li>
+          <a (click)="misVentas(this.usuarioID!)">
+            <fa-icon [icon]="faShoppingCart"></fa-icon> Mis ventas
+          </a>
+        </li>
+      </ul>
+
+    
+      <!-- Botón de regreso -->
+      <button (click)="regresarCliente()">
+        <fa-icon [icon]="faArrowLeft"></fa-icon> Regresar <!-- Icono de flecha hacia atrás -->
+      </button>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

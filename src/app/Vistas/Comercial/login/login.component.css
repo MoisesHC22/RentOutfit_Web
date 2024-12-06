@@ -1,0 +1,208 @@
+
+.animacion{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.animacion-exito{
+  width: 200px;
+  height: 200px;
+  text-align: center;
+}
+
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin-left: 50px;
+  background-image: url('/Recursos/login_font.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.login-form {
+  background-color: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 400px;
+}
+
+.logo {
+  width: 70px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 1rem;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  text-align: left;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="email"],
+input[type="password"] {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.password-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -5px;
+}
+
+.password-container a {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  width: 150px;
+  padding: 15px;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button.button-invalid {
+  background-color: #7789a8;
+}
+
+button.button-valid{
+  background-color: #5c6576; 
+  cursor: pointer;
+}
+
+p {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+p a {
+  color: #333;
+  text-decoration: none;
+}
+
+.ContAnimacion {
+  height: 100%;
+  width: 40%;
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-gif {
+  /*margin-left: 300px;
+  margin-top: 150px;*/
+  height: 100%;
+  width: 100%;
+
+}
+
+
+
+.password-label-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.password-label-container label {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.password-label-container a {
+  font-size: 0.8rem;
+  color: #888;
+  text-decoration: none;
+}
+
+.password-label-container a:hover {
+  text-decoration: underline;
+}
+
+.ContValidaciones{
+  margin-top: -10px;
+
+  .Mensaje-Error{
+    font-size: 12px;
+    color: #b10202;
+  }
+  
+}
+
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border-radius: 15px;
+  width: 300px;
+  text-align: center;
+}
+
+#btnOK {
+  background-color: #5c6576;
+}
+
+#Icono {
+  font-size: 90px;
+  margin: 5px;
+  color: #467FB4;
+}
+

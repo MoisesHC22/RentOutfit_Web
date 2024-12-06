@@ -1,0 +1,213 @@
+/* Ajuste general de la barra de navegación */
+.navbar {
+    background: linear-gradient(to bottom, #D3E4EE, #ffffff);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Contenedor de la búsqueda centrado */
+.search-container {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.form-busqueda {
+  width: 40%;
+}
+
+
+#contBuscar {
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+}
+
+#btnBuscar {
+    border-radius: 50%;
+    width: 40px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+/* Estilo de los elementos de navegación */
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-link {
+    display: left;
+    align-items: left;
+    text-align: left;
+    flex-direction: column;
+    color: #333;
+}
+
+.nav-item {
+    position: left;
+}
+
+
+
+/* Ajustes de la imagen de perfil */
+#imgPerfil {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+/* Nombre del usuario */
+#nombreUsuario {
+    margin: 0 10px;
+    color: #333;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+/* Estilización del menú desplegable */
+.dropdown-menu {
+    margin-right: 100px;
+    min-width: 200px;
+    max-width: 250px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+}
+
+/* Estilo de cada elemento del menú */
+.dropdown-item {
+    font-size: 14px;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+/* Efecto hover para cada item */
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+    color: #000;
+}
+
+/* Estilo del botón de cerrar sesión */
+#CerrarSesion {
+    background-color: #333;
+    color: #ffffff;
+    width: 100%;
+    height: 40px;
+    border-radius: 7px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    margin-top: 10px;
+}
+
+#CerrarSesion:hover {
+    background-color: #555;
+}
+
+/* Botón de inicio de sesión */
+#btnIniciarSesion {
+    background-color: #467FB4;
+    color: #F0F3F5;
+    border: none;
+    width: 120px;
+    height: 35px;
+    border-radius: 8px;
+}
+
+/* Espaciado y alineación del engranaje */
+#dropdownMenuLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin-left: 5px;
+}
+
+.btnCarrito {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.btnCarrito:hover {
+  background-color: #467FB4;
+}
+
+/* Asegura que el navbar colapse en pantallas pequeñas */
+@media (max-width: 991px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    gap: 10px;
+    order: 2;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Estilo del separador */
+.separator {
+    width: 80%;
+    height: 3px;
+    background-color: #ccc;
+    margin: 5px auto 0;
+}
+  
+
+  .search-container {
+    order: 3;
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  #btnIniciarSesion {
+    width: 100%;
+    margin: 10px auto;
+  }
+
+  #CerrarSesion {
+    width: 80%;
+  }
+
+  .dropdown-menu {
+    width: 100%;
+  }
+
+  .d-flex{
+    order: 3;
+    width: 100%;
+    padding: 10px 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #btnBuscar {
+    width: 38px;
+    height: 35px;
+}
+}

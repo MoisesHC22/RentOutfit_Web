@@ -1,0 +1,191 @@
+<div class="Panel">
+
+  <div class="ContAnimacion" *ngIf="mostrarAnimacionExito; else formCont">
+ 
+    <div class="animacion-exito">   
+      <h4>¡Se registro tu establecimiento!</h4>
+      <p>
+        Un administrador de RentOutfit revisará tus datos 
+        y validará tu establecimiento en breve. Te notificaremos una vez 
+        que el proceso haya sido completado. ¡Gracias por tu paciencia!
+      </p>
+    </div>
+  </div>
+
+
+  <ng-template #formCont>
+
+    <h3>Darte de alta como vendedor</h3>
+    
+  <div class="ContLosPasos">
+
+    <div class="CentrarCont">
+    <div class="ContPaso">
+      <button type="button" [ngClass]="{'active-step': Paso1Completo()}"><fa-icon id="Icono" [icon]="faShop"></fa-icon></button>
+      <p>Paso 1: Información</p>
+    </div>
+
+    <div class="ContPaso">
+      <button type="button" [ngClass]="{'active-step': Paso2Completo()}"><fa-icon id="Icono" [icon]="faLocationDot"></fa-icon></button>
+      <p>Paso 2: Dirección</p>
+    </div>
+  </div>
+
+  </div>
+  
+  <div class="contenedorRegistro">
+    
+    <form [formGroup]="datos" (ngSubmit)="darDeAlta(usuario!)">
+
+     <div class="contPasos" *ngIf="paso === 1">
+      
+      <div class="form-columns centrar">  
+         <div class="form-group">
+             <h6 id="principal" for="nombre">¿Con qué nombre quieres registrar tu establecimiento?</h6>
+             <input type="text" id="nombre" formControlName="nombre" placeholder="Nombre completo" />
+         
+             <div class="ContValidaciones" *ngIf="datos.get('nombre')?.invalid && (datos.get('nombre')?.touched || datos.get('nombre')?.dirty)">
+              <small *ngIf="datos.get('nombre')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+              <small *ngIf="datos.get('nombre')?.errors?.['minlength']" class="Mensaje-Error">Debe tener al menos 3 caracteres!</small>
+            </div>
+          </div>
+      </div>
+  
+      <div class="image-banner" id="imageBanner" (click)="cargarImagen()">
+        <img id="previewImg" [src]="imagenPrevisualizacion" *ngIf="imagenPrevisualizacion" alt="Previsualización de la imagen" />
+        <span *ngIf="!imagenPrevisualizacion" id="uploadLabel" class="upload-label">Selecciona una foto de 2 MB</span>
+        <input type="file" id="imageUpload" (change)="imagenSeleccionada($event)" accept="image/*" style="display: none;" />
+      </div>
+  
+      <div class="ContValidaciones" *ngIf="datos.get('imagen')?.invalid && (datos.get('imagen')?.touched || datos.get('imagen')?.dirty)">
+        <small *ngIf="datos.get('imagen')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+      </div>
+
+      <div class="centrar">
+        <div class="contBotones">
+          <button type="button" class="btnCancelar" (click)="cancelar()">Cancelar</button>
+          <button type="button" class="btnContinuar" (click)="siguientePaso()" >Siguiente</button>  
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class="contPasos" *ngIf="paso === 2">
+     
+      <div class="form-group">
+        <label for="codigo-postal">Código Postal</label>
+        <input type="text" id="codigo-postal" formControlName="codigoPostal" placeholder="Código postal" maxlength="5" (input)="onCodigoPostalChange()" />
+        <div class="ContValidaciones" *ngIf="datos.get('codigoPostal')?.invalid && (datos.get('codigoPostal')?.touched || datos.get('codigoPostal')?.dirty)">
+          <small *ngIf="datos.get('codigoPostal')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+          <small *ngIf="datos.get('codigoPostal')?.errors?.['pattern']" class="Mensaje-Error">Debe contener 5 dígitos!</small>
+        </div>
+      </div>
+
+      <div *ngIf="datos.get('codigoPostal')?.touched && datos.get('codigoPostal')?.valid && (!datos.get('estado')?.value || !datos.get('municipio')?.value)">
+        <small class="Mensaje-Error">No se encontraron datos para el código postal ingresado.</small>
+      </div>
+      <!-- Campo Estado (Autocompletado) -->
+  
+  <div class="unir">
+    <div class="form-group">
+      <label for="estado">Estado</label>
+      <select id="estado" name="estado" (change)="EstadoSeleccionado($event)" formControlName="estado">
+         <option value="" disabled selected>Selecciona aqui</option>
+         <option *ngFor="let estado of EstadosList" [value]="estado.estadoID">{{estado.nombreEstado}}</option>
+      </select>
+    </div>
+
+      <div class="row">
+        <div class="form-group">
+          <label for="municipio">Municipio</label>
+          <select id="municipio" name="municipio" formControlName="municipio">
+            <option value="" disabled selected>Selecciona aqui</option>
+            <option *ngFor="let municipio of MunicipioList" [value]="municipio.nombreMunicipio" [selected]="municipio.nombreMunicipio === municipio">{{municipio.nombreMunicipio}}</option>
+          </select>
+        </div>
+      </div>
+
+  </div>
+      
+  
+
+<!-- Agregar -->
+  <div class="unir">
+
+      <div class="form-group">
+        <label for="colonia">Colonia</label>
+        <input type="text" id="colonia" formControlName="colonia" placeholder="colonia" maxlength="50" readonly class="readonly-input" />
+        
+        <div class="ContValidaciones" *ngIf="datos.get('asentamiento')?.invalid && (datos.get('asentamiento')?.touched || datos.get('asentamiento')?.dirty)">
+           <small *ngIf="datos.get('asentamiento')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="calle">Calle</label>
+        <input type="text" id="calle" formControlName="calle" placeholder="Calle" maxlength="50" />
+        
+        <div class="ContValidaciones" *ngIf="datos.get('calle')?.invalid && (datos.get('calle')?.touched || datos.get('calle')?.dirty)">
+         <small *ngIf="datos.get('calle')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+        </div>
+      </div>
+
+  </div>
+
+  
+
+  <!-- Numero interio y exterior -->
+  <div class="unir">
+
+      <div class="form-group">
+        <label for="numeroInterior">Número interior: </label>
+        <input type="text" id="noInt" formControlName="noInt" placeholder="Número interior" maxlength="3" (input)="ValidarInputNumerosIyE($event)" />
+      
+        <div class="ContValidaciones" *ngIf="datos.get('noInt')?.invalid && (datos.get('noInt')?.touched || datos.get('noInt')?.dirty)">
+          <small *ngIf="datos.get('noInt')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+       <label for="numeroExterior">Número exterior: </label>
+       <input type="text" id="noExt" formControlName="noExt" placeholder="Número exterior" maxlength="3" (input)="ValidarInputNumerosIyE($event)" />
+      
+       <div class="ContValidaciones" *ngIf="datos.get('noExt')?.invalid && (datos.get('noExt')?.touched || datos.get('noExt')?.dirty)">
+         <small *ngIf="datos.get('noExt')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+       </div>
+      </div>
+
+  </div>
+      
+
+      <div class="centrar">
+         <div class="contBotones">
+           <button type="button" class="btnRegresar" (click)="AnteriorPaso()" ><fa-icon id="Icono" [icon]="faArrow"></fa-icon></button>
+           <button type="submit" class="btnConfirmar" [disabled]="!datos.valid" [ngClass]="{'button-valid': datos.valid, 'button-invalid': !datos.valid}">Enviar</button>
+         </div>
+      </div>
+    </div>
+
+
+
+
+
+      
+    </form>
+  </div>
+
+  </ng-template>
+  
+
+</div>
+
+

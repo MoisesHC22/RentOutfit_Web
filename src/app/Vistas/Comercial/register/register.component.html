@@ -1,0 +1,350 @@
+<div class="main-container">
+  <div class="left-panel">
+    <div class="logo">
+      <img src="RentOutfitLogo.png" alt="Rent Outfit Logo" />
+    </div>
+    <div class="gif-container">
+      <ng-lottie [options]="animationOptions"></ng-lottie>
+    </div>
+  </div>
+  
+  <div class="right-panel">
+    <div class="form-container">
+      <h2 style="text-align: center; font-weight: bold;" *ngIf="paso === 1">Crea una cuenta</h2>
+      <h2 style="text-align: center; font-weight: bold;" *ngIf="paso === 2">Información personal</h2>
+      <h2 style="text-align: center; font-weight: bold;" *ngIf="paso === 3">Direccion</h2>
+
+      <p style="text-align: center;">Para eventos especiales y festivales</p>
+      
+      <form [formGroup]="datos" (ngSubmit)="Registro()">
+        <div *ngIf="paso === 1">
+           <div class="row">
+              <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" formControlName="email" placeholder="correo@example.com"  maxlength="50" (keypress)="ValidarCorreo($event)" (input)="ValidarInputCorreo($event)" autocomplete="email"/>
+               
+                <div class="ContValidaciones" *ngIf="datos.get('email')?.invalid && (datos.get('email')?.touched || datos.get('email')?.dirty)">
+                  <small *ngIf="datos.get('email')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+                  <small *ngIf="datos.get('email')?.errors?.['email']"class="Mensaje-Error">El correo debe tener un formato válido</small>
+                </div>
+
+              </div>
+           </div>
+
+           <div class="row">
+             <div class="form-group">
+               <label for="password">Contraseña</label>
+               <input type="password" id="contrasena" name="contrasena" formControlName="contrasena" placeholder="**********" maxlength="15" autocomplete="new-password"/>
+               
+               <div class="ContValidaciones" *ngIf="datos.get('contrasena')?.errors?.contrasenaVal && datos.get('contrasena')?.invalid && (datos.get('contrasena')?.touched || datos.get('contrasena')?.dirty)">
+                <small class="Mensaje-Error" *ngIf="datos.get('contrasena')?.errors?.['required']">Este campo es obligatorio!</small>
+                <small class="Mensaje-Error" *ngIf="!datos.get('contrasena')?.errors?.contrasenaVal?.MayusculaEnCualquierParte">Debe tener al menos una mayúscula. </small>
+                <small class="Mensaje-Error" *ngIf="!datos.get('contrasena')?.errors?.contrasenaVal?.AlmenosDosNumeros">Debe tener al menos dos números. </small>
+                <small class="Mensaje-Error" *ngIf="!datos.get('contrasena')?.errors?.contrasenaVal?.Caracteres">Debe tener al menos 8 caracteres.</small>
+ 
+               </div>
+             </div>
+
+             <div class="form-group">
+               <label for="confirmPassword">Confirma contraseña</label>
+               <input type="password" id="confirmPassword" formControlName="contrasenaValidar" name="confirmPassword" placeholder="**********" maxlength="15" autocomplete="new-password" />
+              
+               <div class="ContValidaciones" *ngIf="datos.errors?.contrasenaNoMatch && datos.get('contrasenaValidar')?.touched">
+                  <small class="Mensaje-Error">Las contraseñas no coinciden.</small>
+               </div>
+              </div>
+            </div>
+
+            <button type="button" (click)="siguientePaso()" class="submit-button">Siguiente</button>
+        </div>
+      
+         <div *ngIf="paso === 2">
+
+          <div class="image-preview" id="imagePreview" (click)="cargarImagen()">
+            <img id="previewImg" [src]="imagenPrevisualizacion" *ngIf="imagenPrevisualizacion" alt="Previsualización de la imagen"/>
+            <span *ngIf="!statusImg" id="uploadLabel" class="upload-label" >Selecciona una foto de 2 MB</span>
+            <input type="file" id="imageUpload" (change)="imagenSeleccionada($event)" accept="image/*" style="display: none;"/>
+          </div>
+          
+
+         <div class="row">
+          <div class="form-group">
+            <label for="firstName">Nombre del cliente</label>
+            <input type="text" id="nombre" name="nombre" formControlName="nombre" placeholder="Nombre" maxlength="50" (keypress)="ValidarSoloLetras($event)" (input)="ValidarInputLetras($event)"/>
+           
+            <div class="ContValidaciones" *ngIf="datos.get('nombre')?.invalid && (datos.get('nombre')?.touched || datos.get('nombre')?.dirty)">
+              <small *ngIf="datos.get('nombre')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+             </div>
+          </div>
+
+          <div class="form-group">
+            <label for="lastNamePaterno">Apellido paterno</label>
+            <input type="text" id="apellidoPaterno" name="apellidoPaterno" formControlName="apellidoPaterno" placeholder="Apellido paterno" maxlength="50" (keypress)="ValidarSoloLetras($event)" (input)="ValidarInputLetras($event)"/>
+
+            <div class="ContValidaciones" *ngIf="datos.get('apellidoPaterno')?.invalid && (datos.get('apellidoPaterno')?.touched || datos.get('apellidoPaterno')?.dirty)">
+              <small *ngIf="datos.get('apellidoPaterno')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+             </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label for="lastNameMaterno">Apellido materno</label>
+            <input type="text" id="apellidoMaterno" name="apellidoMaterno" formControlName="apellidoMaterno" placeholder="Apellido materno" maxlength="50" (keypress)="ValidarSoloLetras($event)" (input)="ValidarInputLetras($event)"/>
+
+            <div class="ContValidaciones" *ngIf="datos.get('apellidoMaterno')?.invalid && (datos.get('apellidoMaterno')?.touched || datos.get('apellidoMaterno')?.dirty)">
+              <small *ngIf="datos.get('apellidoMaterno')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+             </div>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Teléfono</label>
+            <input type="text" id="telefono" name="telefono" formControlName="telefono" placeholder="Teléfono" maxlength="10" (keypress)="ValidarSoloNumero($event)" (input)="ValidarInputNumero($event)"/>
+
+            <div class="ContValidaciones" *ngIf="datos.get('telefono')?.invalid && (datos.get('telefono')?.touched || datos.get('telefono')?.dirty)">
+              <small *ngIf="datos.get('telefono')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+             </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label for="genero">Genero</label>
+            <select id="genero" name="genero" formControlName="genero">
+               <option value="" disabled selected>Selecciona tu genero</option>
+               <option *ngFor="let genero of GenerosList" [value]="genero.generoID">{{genero.nombreGenero}}</option>
+            </select>
+
+            <div class="ContValidaciones" *ngIf="datos.get('genero')?.invalid && (datos.get('genero')?.touched || datos.get('genero')?.dirty)">
+              <small *ngIf="datos.get('genero')?.errors?.['required']" class="Mensaje-Error">Este campo es obligatorio!</small>
+             </div>
+          </div>
+        </div>
+       
+    
+        <div class="checkbox-group">
+          <!-- Checkbox para Términos y Condiciones -->
+          <input type="checkbox" id="terms" name="terms" formControlName="terminos"/>
+          <label for="terms" class="highlight-label" (click)="abrirModal($event, 'terms')">
+            Acepto los términos y condiciones
+          </label>&nbsp;&nbsp;&nbsp;
+          
+        
+          <div class="ContValidaciones" *ngIf="datos.get('terminos')?.invalid && (datos.get('terminos')?.touched || datos.get('terminos')?.dirty)">
+            <small class="Mensaje-Error">Debes aceptar los términos y condiciones</small>
+          </div>
+        
+          <!-- Checkbox para Políticas de Privacidad -->
+          <input type="checkbox" id="polit" name="polit" formControlName="politicas"/>
+          <label for="polit" class="highlight-label" (click)="abrirModal($event, 'privacy')">
+            Acepto las políticas de privacidad
+          </label>&nbsp;&nbsp;&nbsp;
+          
+        
+          <div class="ContValidaciones" *ngIf="datos.get('politicas')?.invalid && (datos.get('politicas')?.touched || datos.get('politicas')?.dirty)">
+            <small class="Mensaje-Error">Debes aceptar las políticas de privacidad</small>
+          </div>
+        </div>
+    
+
+        
+            <div class="ContBtn">
+               <button type="button" (click)="AnteriorPaso()" class="btnRegresar"><fa-icon id="Icono" [icon]="faArrow"></fa-icon></button>
+               
+               <button type="submit" class="btnAgregar" 
+               [disabled]="!datos.valid"
+               [ngClass]="{'button-valid': datos.valid, 'button-invalid':!datos.valid}">Crear cuenta</button>
+            
+            </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+ <!-- Modal para Términos y Condiciones -->
+ <div class="modal-overlay" *ngIf="showTermsModal" (click)="cerrarModal('terms')">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <strong><h2>Términos y Condiciones de RentOutfit</h2></strong>
+
+<h2>1. Introducción</h2>
+<p>
+    Bienvenido a RentOutfit, una plataforma en línea que permite a los usuarios alquilar 
+    trajes y disfraces para eventos especiales. Al utilizar nuestro sitio web o aplicación 
+    móvil, usted acepta y se compromete a cumplir con estos Términos y Condiciones. Por 
+    favor, léalos detenidamente antes de utilizar nuestros servicios.
+</p>
+
+<h2>2. Registro y Elegibilidad</h2>
+<ul>
+    <strong>Requisitos de registro:</strong> Para usar RentOutfit, debe crear una cuenta 
+    proporcionando información veraz, precisa y completa. Debe mantener la 
+    confidencialidad de su cuenta y notificar de inmediato cualquier uso no autorizado.
+    <br><br><strong>Edad mínima:</strong> Debe ser mayor de 18 años para registrarse y utilizar nuestros 
+    servicios.
+</ul>
+
+<h2>3. Permisos Solicitados</h2>
+<p>
+    Al instalar y utilizar nuestra aplicación móvil, RentOutfit podrá solicitar los siguientes 
+    permisos, los cuales son necesarios para garantizar el correcto funcionamiento de los 
+    servicios:
+</p>
+<ul>
+    <strong>Ubicación precisa:</strong> (ACCESS_FINE_LOCATION y ACCESS_COARSE_LOCATION): Para ofrecerle recomendaciones de 
+    proveedores cercanos y calcular rutas de entrega.
+    <br><br><strong>Acceso a la red:</strong> (ACCESS_NETWORK_STATE e INTERNET): Para permitir la 
+    conexión a internet necesaria para el funcionamiento de la aplicación.
+    <br><br><strong>Almacenamiento:</strong> (READ_EXTERNAL_STORAGE y WRITE_EXTERNAL_STORAGE): Para cargar y guardar imágenes de artículos o 
+    documentos relacionados con su reserva.
+    <br><br><strong>Notificaciones y alertas:</strong> (RECEIVE_BOOT_COMPLETED, SYSTEM_ALERT_WINDOW, y VIBRATE): Para enviar recordatorios, 
+    notificaciones de estado de reservas y alertas importantes.
+    <br><br><strong>Grabación de audio:</strong> (RECORD_AUDIO): Para funciones específicas como grabaciones de voz en soporte al cliente.
+    <br><br><strong>Bloqueo de pantalla:</strong> (WAKE_LOCK): Para garantizar la continuidad de 
+    procesos críticos durante el uso de la aplicación.
+</ul>
+
+<h2>4. Descripción del Servicio</h2>
+<p>
+    RentOutfit permite a los usuarios buscar, reservar y alquilar trajes y disfraces de una 
+    variedad de estilos y tallas. Los proveedores ofrecen los artículos a través de nuestra 
+    plataforma, y los usuarios pueden seleccionarlos según sus necesidades.
+</p>
+
+<h2>5. Reservas y Pagos</h2>
+<ul>
+    <strong>Reservas:</strong> Las reservas de artículos deben realizarse a través de la plataforma. 
+    Una vez confirmada, la reserva es vinculante y sujeta a las políticas de 
+    cancelación.
+    <br><br><strong>Métodos de pago:</strong> RentOutfit acepta métodos de pago seguros y reconocidos. 
+    Los detalles de pago se procesan de manera encriptada y no son retenidos por 
+    RentOutfit.
+</ul>
+
+<h2>6. Cancelaciones y Modificaciones</h2>
+<ul>
+    <strong>Política de cancelación:</strong> Las cancelaciones deben realizarse dentro del 
+    período permitido para recibir un reembolso completo. Las cancelaciones fuera 
+    de este período pueden estar sujetas a cargos.
+    <br><br><strong>Modificaciones de reserva:</strong> Los usuarios pueden solicitar cambios en sus 
+    reservas, sujetos a disponibilidad.
+</ul>
+
+<h2>7. Uso y Devolución de los Artículos</h2>
+<ul>
+    <strong>Uso adecuado:</strong> Los artículos alquilados deben utilizarse de manera 
+    responsable y de acuerdo con las instrucciones proporcionadas. Cualquier 
+    daño o pérdida resultará en cargos adicionales.
+    <br><br><strong>Devolución:</strong> Los artículos deben devolverse en las condiciones estipuladas y 
+    en la fecha acordada.
+</ul>
+
+<h2>8. Propiedad Intelectual</h2>
+<p>
+    Todo el contenido presente en la plataforma es propiedad de RentOutfit o sus 
+    licenciantes y está protegido por leyes de propiedad intelectual. Está prohibido 
+    reproducir, modificar o distribuir dicho contenido sin autorización.
+</p>
+
+<h2>9. Modificaciones</h2>
+<p>
+    RentOutfit se reserva el derecho de modificar estos Términos y Condiciones en 
+    cualquier momento, notificándolo a los usuarios mediante la plataforma.
+</p>
+
+<h2>10. Jurisdicción y Ley Aplicable</h2>
+<p>
+    Estos términos y condiciones se rigen por las leyes de México, y cualquier disputa será 
+    resuelta ante los tribunales competentes de la Ciudad de México.
+</p>
+
+
+    <button (click)="cerrarModal('terms')">Cerrar</button>
+  </div>
+</div>
+
+<!-- Modal para Políticas de Privacidad -->
+<div class="modal-overlay" *ngIf="showPrivacyModal" (click)="cerrarModal('privacy')">
+<div class="modal-content" (click)="$event.stopPropagation()">
+<strong><h2>Políticas de Privacidad de RentOutfit</h2></strong>
+
+<h2>1. Introducción</h2>
+<p>
+    RentOutfit respeta su privacidad y se compromete a proteger los datos personales de 
+    los usuarios. Esta política describe qué información recopilamos, cómo la utilizamos 
+    y cómo la protegemos.
+</p>
+
+<h2>2. Información que Recopilamos</h2>
+<ul>
+    <strong>Datos personales:</strong> Incluye nombre, correo electrónico, número de teléfono, 
+    dirección y datos de pago.
+    <br><br><strong>Datos de ubicación:</strong> La aplicación puede recopilar datos de ubicación para 
+    personalizar la experiencia del usuario, como mostrar proveedores cercanos.
+    <br><br><strong>Datos técnicos:</strong> Incluye la dirección IP, tipo de dispositivo, y versión del sistema 
+    operativo.
+    <br><br><strong>Cookies:</strong> Utilizamos cookies para mejorar la experiencia del usuario.
+</ul>
+
+<h2>3. Uso de los Permisos</h2>
+<ul>
+    <strong>Ubicación:</strong> Se utiliza para sugerir proveedores cercanos y calcular rutas de 
+    entrega.
+    <br><br><strong>Red:</strong> Permite a la aplicación mantenerse conectada a los servidores y ofrecer 
+    actualizaciones en tiempo real.
+    <br><br><strong>Almacenamiento:</strong> Necesario para manejar archivos como imágenes de 
+    artículos o recibos.
+    <br><br><strong>Audio:</strong> Usado en funciones específicas como grabación de voz para soporte al 
+    cliente.
+    <br><br><strong>Alertas y vibración:</strong> Para enviar notificaciones relevantes relacionadas con su 
+    cuenta o reservas.
+</ul>
+
+<h2>4. Protección de los Datos</h2>
+<p>
+    RentOutfit implementa medidas técnicas y organizativas para proteger los 
+    datos contra accesos no autorizados. Los datos se almacenan de forma segura 
+    utilizando cifrado y acceso controlado.
+</p>
+
+<h2>5. Compartir Información</h2>
+<ul>
+    <strong>Proveedores de servicios:</strong> RentOutfit puede compartir datos con terceros que 
+    ayudan en el procesamiento de pagos o la logística.
+    <br><br><strong>Cumplimiento legal:</strong> Podremos compartir información si es requerida por la 
+    ley.
+</ul>
+
+<h2>6. Retención de Datos</h2>
+<p>
+    Los datos se conservarán mientras sea necesario para cumplir con los fines descritos, 
+    salvo que la ley exija un período mayor.
+</p>
+
+<h2>7. Derechos del Usuario</h2>
+<ul>
+    <strong>Acceso y corrección:</strong> Puede solicitar acceso a sus datos o corregir información 
+    inexacta.
+    <br><br><strong>Retiro de consentimiento:</strong> Puede retirar su consentimiento para el tratamiento 
+    de datos personales, aunque esto podría limitar ciertas funcionalidades.
+</ul>
+
+<h2>8. Jurisdicción y Ley Aplicable</h2>
+<p>
+    Esta política de privacidad se rige por las leyes de México, y cualquier controversia será 
+    resuelta ante los tribunales de la Ciudad de México.
+</p>
+
+<h2>9. Contacto</h2>
+<p>
+    Para cualquier duda sobre estas políticas, contacte a RentOutfit en 
+    <a href="mailto:rentoutfit.soportexd@gmail.com">rentoutfit.soportexd&#64;gmail.com</a>
+    o al teléfono <a href="tel:+527731571119">(+52) 7731571119</a>.
+</p>
+<button (click)="cerrarModal('privacy')">Cerrar</button>
+</div>
+</div>
